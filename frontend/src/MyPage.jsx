@@ -14,7 +14,7 @@ function MyPage() {
     { id: 101, title: "도쿄 벚꽃 명소" },
     { id: 102, title: "교토의 가을" },
   ];
-
+ 
   // 탭 상태
   const [tab, setTab] = useState("posts"); // "posts" or "favorites"
 
@@ -87,5 +87,5 @@ function MyPage() {
     </div>
   );
 }
-
+// 나 김태현인데....
 export default MyPage;
