@@ -1,6 +1,6 @@
 package com.example.mbti.controller;
 
-import com.example.mbti.entity.User;
+import com.example.mbti.model.User;
 import com.example.mbti.service.MyPageService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;

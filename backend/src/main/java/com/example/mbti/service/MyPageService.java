@@ -1,8 +1,8 @@
 package com.example.mbti.service;
 
-import com.example.mbti.entity.User;
-import com.example.mbti.entity.Mbti;
 import com.example.mbti.repository.UserRepository;
+import com.example.mbti.model.Mbti;
+import com.example.mbti.model.User;
 import com.example.mbti.repository.MbtiRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.example.mbti.entity;
+package com.example.mbti.model;
 
 import lombok.*;
 import java.util.List;
