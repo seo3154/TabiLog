@@ -4,7 +4,7 @@ import MainPage from "./MainPage";
 
 function App() {
   return (
-     <BrowserRouter>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/mypage" element={<MyPage />} />
@@ -12,5 +12,5 @@ function App() {
     </BrowserRouter>
   );
 }
-
+// Commit Test SYG
 export default App;
