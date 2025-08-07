@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/NoticeDetail.css';
+import '../styles/NoticeDetail.css';  // 분리해서 관리하는게 좋습니다.
 import { useNavigate } from 'react-router-dom';
 
 function NoticeWrite({ addNotice }) {
@@ -15,33 +15,53 @@ function NoticeWrite({ addNotice }) {
   };
 
   return (
-    <div>
-      <h2>공지사항 글쓰기</h2>
-      <form onSubmit={handleSubmit}>
-        <p>제목 : <input
-          type="text"
-          placeholder="제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        /></p>
-        <p>작성자 : <input
-          type="text"
-          placeholder="작성자"
-          value={writer}
-          onChange={(e) => setWriter(e.target.value)}
-          required
-        /></p>
-        <p>내용<br/><textarea
-          placeholder="내용"s
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        /></p>
-        <button type="submit">저장</button>
-        <button className="back-button" onClick={() => navigate(-1)}>← 뒤로가기</button>
+    <div className="notice-write-container">
+      <h2 className="notice-write-title">공지사항 글쓰기</h2>
+      <form className="notice-write-form" onSubmit={handleSubmit}>
+        <label>
+          제목:
+          <input
+            type="text"
+            placeholder="제목"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          작성자:
+          <input
+            type="text"
+            placeholder="작성자"
+            value={writer}
+            onChange={(e) => setWriter(e.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          내용:
+          <textarea
+            placeholder="내용"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+        </label>
+
+        <div className="button-group">
+          <button type="submit" className="submit-button">저장</button>
+          <button
+            type="button"
+            className="back-button"
+            onClick={() => navigate(-1)}
+          >
+            목록
+          </button>
+        </div>
       </form>
-    </div>  
+    </div>
   );
 }
 
