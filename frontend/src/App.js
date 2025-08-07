@@ -1,16 +1,14 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import MyPage from "./MyPage";
-import MainPage from "./MainPage";
+import { BrowserRouter } from "react-router-dom";
+import MainPage from "./pages/MainPage";
+import './styles/NoticeDetail.css'; 
+
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-      </Routes>
+      <MainPage />
     </BrowserRouter>
   );
-} //해~~~~~~~~~~윙
-// Commit Test SYG
-export default App;//
+}
+
+export default App;
