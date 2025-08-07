@@ -1,40 +1,30 @@
-import React from 'react';
-import '../styles/header.css'
-import logo from '../assets/logo.png'
+import React from "react";
+import { Link } from "react-router-dom"; // 추가!
+import "../styles/Header.css";
+import logo from "../assets/logo.png";
 
 const Header = () => {
   return (
     <header>
       <div className="logo">
-        <a href="index.html">
+        <Link to="/">
           <img src={logo} alt="로고" />
           <h2>旅ログ</h2>
-        </a>
+        </Link>
       </div>
-      
+
       <ul className="menu">
         <li>
-          <a href="#">
-            공지사항
-          </a>
+          <Link to="/notice">공지사항</Link>
         </li>
-
         <li>
-          <a href="#">
-            추천게시판
-          </a>
-        </li>    
-
-        <li>
-          <a href="#">
-            커뮤니티
-          </a>
+          <Link to="/recommend">추천게시판</Link>
         </li>
-
         <li>
-          <a href="#">
-            문의하기
-          </a>
+          <Link to="/community">커뮤니티</Link>
+        </li>
+        <li>
+          <Link to="/contact">문의하기</Link>
         </li>
       </ul>
     </header>

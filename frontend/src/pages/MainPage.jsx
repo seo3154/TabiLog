@@ -8,12 +8,6 @@ function MainPage() {
       <h1>旅ログ 메인페이지</h1>
       <div style={{ marginTop: 32, display: "flex", gap: 16 }}>
         <button
-          onClick={() => navigate("/notice")}
-          style={{ padding: "12px 32px", fontSize: 18, cursor: "pointer" }}
-        >
-          공지사항 페이지로 이동
-        </button>
-        <button
           onClick={() => navigate("/mypage")}
           style={{ padding: "12px 32px", fontSize: 18, cursor: "pointer" }}
         >
