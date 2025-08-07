@@ -1,12 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 function NoticeList({ notices }) {
   return (
     <div>
       <h2>공지사항 목록</h2>
-
-      <table border="2" cellPadding="8" cellSpacing="0" style={{ width: '1000px', marginTop: '10px' }}>
+      <table
+        border="2"
+        cellPadding="8"
+        cellSpacing="0"
+        style={{ width: "1000px", marginTop: "10px" }}
+      >
         <thead>
           <tr>
             <th>번호</th>
@@ -18,13 +21,16 @@ function NoticeList({ notices }) {
         <tbody>
           {notices.length === 0 ? (
             <tr>
-              <td colSpan="4" style={{ textAlign: 'center' }}>공지사항이 없습니다.</td>
+              <td colSpan="4" style={{ textAlign: "center" }}>
+                공지사항이 없습니다.
+              </td>
             </tr>
           ) : (
             notices.map((notice, index) => (
               <tr key={notice.id}>
                 <td>{index + 1}</td>
                 <td>
+                  {/* 경로를 /notice/:id로 맞춰야 함 */}
                   <Link to={`/notice/${notice.id}`}>{notice.title}</Link>
                 </td>
                 <td>{notice.writer}</td>
@@ -34,12 +40,19 @@ function NoticeList({ notices }) {
           )}
         </tbody>
       </table>
-      <br></br>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-        <Link to="/write">
+      <br />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "10px",
+        }}
+      >
+        {/* 경로를 /notice/write로 맞춰야 함 */}
+        <Link to="/notice/write">
           <button>글쓰기</button>
         </Link>
-      </div>    
+      </div>
     </div>
   );
 }
