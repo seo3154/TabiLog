@@ -1,63 +1,301 @@
-.notice-detail-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
-  padding: 0 20px;
-}
+  .notice-detail-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    padding: 0 20px;
+  }
 
-.notice-card {
-  max-width: 2000px;
-  background-color: #fefefe;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
+  .notice-card {
+    max-width: 2000px;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
 
-.notice-title {
-  font-size: 26px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.notice-meta {
-  font-size: 14px;
-  color: #777;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.notice-content {
-  font-size: 16px;
-  line-height: 1.6;
-  color: #444;
-  margin-bottom: 30px;
-}
-
-.back-button {
-  padding: 10px 20px;
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.back-button:hover {
-  background-color: #357ab7;
-}
-
-.notice-not-found {
-  text-align: center;
-  font-size: 18px;
-  color: red;
-  margin-top: 50px;
-}
-
-.notice-title{
+  .notice-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
     width: 1300px;
     background-color: #f3f3f3;
-}
+  }
+
+  .notice-meta {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10;
+  }
+
+  .notice-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #444;
+    margin-bottom: 30px;
+  }
+
+  .back-button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+
+  .back-button:hover {
+    background-color: #357ab7;
+  }
+
+  .notice-not-found {
+    text-align: center;
+    font-size: 18px;
+    color: red;
+    margin-top: 50px;
+  }
+
+  .notice-list-container {
+    width: 1400px;
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+
+  .search-box {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+  }
+
+  .search-box input {
+    width: 200px;
+    padding: 6px;
+    border: 1px solid #aaa;
+    border-radius: 4px 0 0 4px;
+  }
+
+  .search-box button {
+    padding: 6px 10px;
+    border: 1px solid #aaa;
+    border-left: none;
+    background-color: white;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+  }
+
+  .notice-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .notice-table thead {
+    background-color: #f2f2f2;
+    font-weight: bold;
+  }
+
+  .notice-table th, .notice-table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .notice-table .title-cell {
+    text-align: left;
+    padding-left: 16px;
+  }
+
+  .notice-table a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .no-data {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .pagination button {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+  }
+
+  .pagination .active {
+    font-weight: bold;
+    background-color: #eee;
+  }
+
+  .write-button {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .write-button button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #222;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  .notice-table th:nth-child(2) {
+    width: 70%; /* 제목 */
+    text-align: center; /* 헤더는 가운데 정렬 */
+  }
+
+  .notice-table td:nth-child(2) {
+    width: 70%; /* 제목 */
+    text-align: left; /* 본문은 왼쪽 정렬 */
+  }
+
+  .notice-write-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fefefe;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+  }
+
+  .notice-write-title {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .notice-write-form label {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #444;
+  }
+
+  .notice-write-form input[type="text"],
+  .notice-write-form textarea {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 6px;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    resize: vertical;
+  }
+
+  .notice-write-form textarea {
+    min-height: 440px;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .submit-button {
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .submit-button:hover {
+    background-color: #357ab7;
+  }
+
+  .back-button {
+    background-color: #888;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .back-button:hover {
+    background-color: #555;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .button-container button {
+    padding: 8px 16px;       /* ← 기존보다 살짝 키움 */
+    border: none;
+    border-radius: 4px;
+    font-size: 15px;         /* ← 글자 크기도 조금 키움 */
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* 개별 버튼 색상 */
+  .edit-button {
+    background-color: #bbb;
+    color: white;
+  }
+
+  .delete-button {
+    background-color: #bbb;
+    color: white;
+  }
+
+  .back-button {
+    background-color: #bbb;
+    color: white;
+  }
+
+  .notice-edit-container,
+  .notice-delete-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+  }
+
+  .edit-form label {
+    display: block;
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+
+  .edit-form input,
+  .edit-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
