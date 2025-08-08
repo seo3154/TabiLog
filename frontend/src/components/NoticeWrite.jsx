@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import '../styles/NoticeDetail.css';  // 분리해서 관리하는게 좋습니다.
 import { useNavigate } from 'react-router-dom';
+import '../styles/NoticeDetail.css';
 
 function NoticeWrite({ addNotice }) {
   const [title, setTitle] = useState('');
