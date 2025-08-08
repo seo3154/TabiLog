@@ -62,7 +62,7 @@ function NoticeList({ notices }) {
         <tbody>
           {currentNotices.length === 0 ? (
             <tr>
-              <td colSpan="4" className="no-data">
+              <td colSpan="4" className="no-data" style={{ textAlign: "center" }}>
                 공지사항이 없습니다.
               </td>
             </tr>
@@ -82,8 +82,8 @@ function NoticeList({ notices }) {
       </table>
 
       {/* 글쓰기 버튼 */}
-      <div className="write-button" style={{ marginTop: '20px' }}>
-        <Link to="/write">
+      <div className="write-button" style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
+        <Link to="/notice/write">
           <button>글쓰기</button>
         </Link>
       </div>

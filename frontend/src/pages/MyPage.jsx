@@ -26,52 +26,6 @@ export default function MyPage() {
       }}
     >
       {/* 상단 네비 */}
-      <header
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "24px 48px 0 36px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <img
-            src="/logo192.png"
-            alt="TABiLOG"
-            style={{ width: 36, height: 36 }}
-          />
-          <span style={{ fontWeight: "bold", fontSize: 22, letterSpacing: 1 }}>
-            TABiLOG
-          </span>
-        </div>
-        <nav
-          style={{ display: "flex", gap: 54, fontWeight: 700, fontSize: 20 }}
-        >
-          <span>공지사항</span>
-          <span>커뮤니티</span>
-          <span>추천</span>
-          <span>문의</span>
-        </nav>
-        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <span style={{ fontWeight: 500, fontSize: 15 }}>
-            딧쥐님, 반갑습니다!
-          </span>
-          <button
-            style={{
-              background: "#222",
-              color: "#fff",
-              fontWeight: 700,
-              padding: "6px 18px",
-              borderRadius: 16,
-              border: "none",
-              fontSize: 15,
-              cursor: "pointer",
-            }}
-          >
-            로그아웃
-          </button>
-        </div>
-      </header>
 
       {/* 메인 컨텐츠 래퍼 */}
       <div style={{ display: "flex", alignItems: "flex-start", marginTop: 32 }}>

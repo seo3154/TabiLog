@@ -11,7 +11,8 @@ function NoticeWrite({ addNotice }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addNotice(title, writer, content);
-    navigate('/');
+    // 글 작성 후 /notice로 이동
+    navigate('/notice');
   };
 
   return (
@@ -51,7 +52,9 @@ function NoticeWrite({ addNotice }) {
         </label>
 
         <div className="button-group">
-          <button type="submit" className="submit-button">저장</button>
+          <button type="submit" className="submit-button">
+            저장
+          </button>
           <button
             type="button"
             className="back-button"
