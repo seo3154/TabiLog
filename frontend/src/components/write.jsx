@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
+import '../styles/NoticeDetail.css';  // 분리해서 관리하는게 좋습니다.
 import { useNavigate } from 'react-router-dom';
-import '../styles/NoticeDetail.css';
 
 function NoticeWrite({ addNotice }) {
   const [title, setTitle] = useState('');
@@ -11,8 +11,7 @@ function NoticeWrite({ addNotice }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addNotice(title, writer, content);
-    // 글 작성 후 /notice로 이동
-    navigate('/notice');
+    navigate('/');
   };
 
   return (
@@ -20,7 +19,7 @@ function NoticeWrite({ addNotice }) {
       <h2 className="notice-write-title">공지사항 글쓰기</h2>
       <form className="notice-write-form" onSubmit={handleSubmit}>
         <label>
-          제목:
+          제목
           <input
             type="text"
             placeholder="제목"
@@ -31,7 +30,7 @@ function NoticeWrite({ addNotice }) {
         </label>
 
         <label>
-          작성자:
+          작성자
           <input
             type="text"
             placeholder="작성자"
@@ -42,7 +41,7 @@ function NoticeWrite({ addNotice }) {
         </label>
 
         <label>
-          내용:
+          내용
           <textarea
             placeholder="내용"
             value={content}
@@ -52,9 +51,7 @@ function NoticeWrite({ addNotice }) {
         </label>
 
         <div className="button-group">
-          <button type="submit" className="submit-button">
-            저장
-          </button>
+          <button type="submit" className="submit-button">저장</button>
           <button
             type="button"
             className="back-button"
