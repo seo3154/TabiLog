@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/NoticeDetail.css';
+import '../styles/Notice.css';
 
 function NoticeWrite({ addNotice }) {
   const [title, setTitle] = useState('');

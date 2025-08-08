@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/NoticeDetail.css';
+import '../styles/Notice.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
 function NoticeDetail({ notices, onDelete, onEdit }) {

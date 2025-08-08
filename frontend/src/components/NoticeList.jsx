@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../styles/NoticeDetail.css';
+import '../styles/Notice.css';
 
 function NoticeList({ notices }) {
   const [searchTerm, setSearchTerm] = useState('');
@@ -13,7 +13,7 @@ function NoticeList({ notices }) {
   );
 
   // 2. 날짜 내림차순 정렬 (최신글이 위로)
-  const sortedNotices = [...filteredNotices].sort((a, b) => {
+  const sortedNotices = [...filteredNotgices].sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
   });
 
@@ -62,7 +62,7 @@ function NoticeList({ notices }) {
         <tbody>
           {currentNotices.length === 0 ? (
             <tr>
-              <td colSpan="4" className="no-data" style={{ textAlign: "center" }}>
+              <td colSpan="4" className="no-data">
                 공지사항이 없습니다.
               </td>
             </tr>
@@ -82,8 +82,8 @@ function NoticeList({ notices }) {
       </table>
 
       {/* 글쓰기 버튼 */}
-      <div className="write-button" style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
-        <Link to="/notice/write">
+      <div className="write-button" style={{ marginTop: '20px' }}>
+        <Link to="/write">
           <button>글쓰기</button>
         </Link>
       </div>
