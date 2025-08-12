@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom"; // 추가!
 import "../styles/Header.css";
+import "../styles/Button.css";
 import logo from "../assets/logo.png";
+import Button from "../components/Button.jsx";
 
 const Header = () => {
   return (
@@ -25,6 +27,11 @@ const Header = () => {
         </li>
         <li>
           <Link to="/contact">문의하기</Link>
+        </li>
+        <li>
+          <Button variant="white">로그인</Button>
+          &nbsp;&nbsp;&nbsp;
+          <Button variant="black">회원가입</Button>
         </li>
       </ul>
     </header>
