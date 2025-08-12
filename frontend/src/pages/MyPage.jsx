@@ -93,4 +93,4 @@ function SettingMenu() {
       <div className="setting-card">고객센터</div>
     </section>
   );
-}
+} //
