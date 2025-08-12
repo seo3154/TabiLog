@@ -1,24 +1,25 @@
+// src/components/SideBar.jsx
 import React from "react";
-import '../styles/SideBar.css'
+import "../styles/SideBar.css";
 
-const SideBar = () => {
-    return(
-        <nav className="side_bar">
-            <ul>
-                <li>
-                    <a href="#">회원 정보</a>
-                </li>
-
-                <li>
-                    <a href="#">신고 접수</a>
-                </li>
-
-                <li>
-                    <a href="#">회원 통계</a>
-                </li>
-            </ul>
-        </nav>
-    )
-}
+const SideBar = ({ menuItems = [] }) => {
+  return (
+    <nav className="side_bar">
+      <ul>
+        {menuItems.map((item, idx) => (
+          <li key={idx}>
+            {item.onClick ? (
+              <button onClick={item.onClick} className="side_bar_button">
+                {item.label}
+              </button>
+            ) : (
+              <a href={item.href || "#"}>{item.label}</a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
 export default SideBar;

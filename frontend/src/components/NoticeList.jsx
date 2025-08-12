@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../styles/Notice.css';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "../styles/Notice.css";
 
 function NoticeList({ notices }) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const noticesPerPage = 5;
 
@@ -13,14 +13,17 @@ function NoticeList({ notices }) {
   );
 
   // 2. 날짜 내림차순 정렬 (최신글이 위로)
-  const sortedNotices = [...filteredNotgices].sort((a, b) => {
+  const sortedNotices = [...filteredNotices].sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
   });
 
   // 3. 페이지네이션 처리
   const indexOfLastNotice = currentPage * noticesPerPage;
   const indexOfFirstNotice = indexOfLastNotice - noticesPerPage;
-  const currentNotices = sortedNotices.slice(indexOfFirstNotice, indexOfLastNotice);
+  const currentNotices = sortedNotices.slice(
+    indexOfFirstNotice,
+    indexOfLastNotice
+  );
 
   // 4. 총 페이지 수 계산
   const totalPages = Math.ceil(sortedNotices.length / noticesPerPage);
@@ -82,25 +85,25 @@ function NoticeList({ notices }) {
       </table>
 
       {/* 글쓰기 버튼 */}
-      <div className="write-button" style={{ marginTop: '20px' }}>
+      <div className="write-button" style={{ marginTop: "20px" }}>
         <Link to="/write">
           <button>글쓰기</button>
         </Link>
       </div>
 
       {/* 페이지네이션 */}
-      <div className="pagination" style={{ marginTop: '20px' }}>
+      <div className="pagination" style={{ marginTop: "20px" }}>
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
-          {'<'}
+          {"<"}
         </button>
 
         {pageNumbers.map((num) => (
           <button
             key={num}
-            className={num === currentPage ? 'active' : ''}
+            className={num === currentPage ? "active" : ""}
             onClick={() => setCurrentPage(num)}
           >
             {num}
@@ -108,10 +111,12 @@ function NoticeList({ notices }) {
         ))}
 
         <button
-          onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
           disabled={currentPage === totalPages}
         >
-          {'>'}
+          {">"}
         </button>
       </div>
     </div>

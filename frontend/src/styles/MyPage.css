@@ -1,0 +1,196 @@
+.mypage-container {
+  min-height: 100vh;
+  background: #fff;
+  border: 3px solid #222;
+  font-family: Pretendard, sans-serif;
+}
+
+/* 내용 래퍼 */
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 32px;
+}
+
+/* 사이드바 */
+.sidebar {
+  min-width: 100px;
+  width: 120px;
+  background: #f5f5f5;
+  border-radius: 20px 0 0 20px;
+  padding: 36px 0;
+  margin-left: 16px;
+  height: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+}
+
+.sidebar-divider {
+  width: 60%;
+  border-top: 1.5px solid #bbb;
+  margin: 20px 0;
+}
+
+/* 탭 버튼 */
+.tab-button {
+  width: 100px;
+  padding: 10px 0;
+  background: #f5f5f5;
+  border: none;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 15px;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.tab-button:hover {
+  background: #ececec;
+}
+
+.tab-button--selected {
+  background: #fff;
+  border: 2.5px solid #222;
+  font-weight: 700;
+}
+
+/* 메인 */
+.main {
+  height: 1000px;
+  flex: 1;
+  margin-left: 42px;
+  margin-right: 32px;
+}
+
+/* 프로필 */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.mbti {
+  font-weight: 700;
+  font-size: 32px;
+}
+
+.nickname {
+  font-weight: 900;
+  font-size: 36px;
+  margin-left: 16px;
+}
+
+.mbti-desc {
+  margin: 12px 0 0 0;
+  padding: 0;
+  list-style: none;
+  color: #555;
+  font-size: 16px;
+}
+
+.actions {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+}
+
+.edit-btn {
+  border: 1.5px solid #222;
+  border-radius: 8px;
+  padding: 8px 20px;
+  background: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.edit-btn:hover {
+  filter: brightness(0.98);
+}
+
+/* 구분선 */
+.divider {
+  margin: 36px 0 20px;
+  border: none;
+  border-top: 1px solid #bbb;
+}
+
+/* 리스트 */
+.board {
+  margin-top: 18px;
+}
+
+.board-box {
+  border: 2px solid #222;
+  border-radius: 13px;
+  background: #fff;
+  overflow: hidden; /* 라운드 유지 */
+}
+
+.board-item {
+  padding: 18px 28px;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  border-bottom: 1.5px solid #bbb;
+}
+
+.board-item:last-child {
+  border-bottom: none;
+}
+
+/* 페이징 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 36px 0 0 0;
+  font-size: 20px;
+}
+
+.page {
+  cursor: default;
+}
+
+.page--chevron {
+  cursor: pointer;
+}
+
+.page--active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* 설정 메뉴 */
+.setting-menu {
+  display: flex;
+  justify-content: center;
+  gap: 36px;
+  margin-top: 18px;
+}
+
+.setting-card {
+  border: 1.5px solid #bbb;
+  border-radius: 10px;
+  padding: 36px;
+  width: 150px;
+  text-align: center;
+  font-size: 18px;
+  background: #f9f9f9;
+  font-weight: 600;
+}
