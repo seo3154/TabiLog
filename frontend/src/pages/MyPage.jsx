@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// 프로필, 탭, 리스트 등 기본 더미 데이터
+// 프로필, 탭, 리스트 등 기본 더미 데이터 나 수정 할꺼 수정 완
 const profileImg = "https://placehold.co/120x120";
 const nickname = "땃 쥐";
 const mbti = "INFP";
