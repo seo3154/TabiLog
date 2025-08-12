@@ -1,68 +1,86 @@
 @charset "utf-8";
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-li{
-    list-style: none;
+li {
+  list-style: none;
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.wrap{
-    width: 1920px;
-    height: 5000px;
+.wrap {
+  width: 1920px;
+  height: 5000px;
 }
-
-
 
 /* 사이드 메뉴 */
-.side_bar{
-    width: 180px;
-    height: 450px;
-    background-color: #f0f0f0;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    position: sticky;
-    top: 300px;
+.side_bar {
+  width: 180px;
+  height: 450px;
+  background-color: #f0f0f0;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  position: sticky;
+  top: 300px;
 }
 
-.side_bar ul li{
-    width: 180px;
-    height: calc(100% / 3);
-    line-height: 150px;
-    text-align: center;
-    cursor: pointer;
+.side_bar ul li {
+  width: 180px;
+  height: calc(100% / 3);
+  line-height: 150px;
+  text-align: center;
+  cursor: pointer;
 }
 
-.side_bar ul li:first-child:hover{
-    border-top-right-radius: 50px;
-    background-color: #d7d7d7;
+/* Hover 스타일 유지 */
+.side_bar ul li:first-child:hover {
+  border-top-right-radius: 50px;
+  background-color: #d7d7d7;
 }
 
-.side_bar ul li:nth-child(2):hover{
-    background-color: #d7d7d7;
+.side_bar ul li:nth-child(2):hover {
+  background-color: #d7d7d7;
 }
 
-.side_bar ul li:last-child:hover{
-    border-bottom-right-radius: 50px;
-    background-color: #d7d7d7;
+.side_bar ul li:last-child:hover {
+  border-bottom-right-radius: 50px;
+  background-color: #d7d7d7;
 }
 
-/* .side_bar ul li:first-child, .side_bar ul li:nth-child(2){
-    display: block;
-    content: "";
-    width: 80px;
-    border-bottom: 1px solid #696969;
-    margin: 0 auto;
-} */
+/* 기존 a 전용 규칙 */
+.side_bar ul li a {
+  font-size: 18px;
+}
 
-.side_bar ul li a{
-    font-size: 18px;
+/* 버튼/링크 클릭 영역 확장 - li 전체 차지 */
+.side_bar ul li a,
+.side_bar_button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: inherit; /* li의 line-height 상속 */
+  text-align: center;
+  font-size: 18px;
+  text-decoration: none;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 포커스 시 시각적 표시 (접근성) */
+.side_bar ul li a:focus-visible,
+.side_bar_button:focus-visible {
+  outline: 2px solid #555;
+  outline-offset: 2px;
 }

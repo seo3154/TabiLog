@@ -51,7 +51,7 @@ header .logo a img {
 header .menu {
   display: flex;
   justify-content: space-evenly;
-  width: 60%;
+  width: 65%;
   line-height: 100px;
 }
 
