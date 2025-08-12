@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+.btn{
+    appearance: none;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn.white {
+    background-color: #fff;
+    color: #000;
+} 
+
+.btn.black {
+    background-color: #000;
+    color: #fff;
+}
