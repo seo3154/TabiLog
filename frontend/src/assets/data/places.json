@@ -1,0 +1,37 @@
+[
+  {
+    "id": "hiroshima-miyajima",
+    "prefecture": "히로시마현",
+    "name_ko": "미야지마",
+    "name_jp": "宮島",
+    "mbti": ["INFP", "ISFP", "ENFJ", "ISTJ"],
+    "hero": {
+      "image": "../assets/Place/32. Hiroshima_1.jpg",
+      "subtitle": "이쓰쿠시마"
+    },
+    "intro": {
+      "summary": "미야지마는 일본 혼슈 히로시마현에 위치한 아름다운 섬으로, 정식 명칭은 이쓰쿠시마입니다. 신의 섬이라 불리며 엄숙하면서도 신비로운 장소로 여겨져, 바다 위에 떠 있는 듯한 거대한 도리이와 유서 깊은 이쓰쿠시마 신사가 유명합니다.",
+      "detail": "사슴들이 자유롭게 거니는 거리, 로프웨이를 타고 올라가는 절경, 다양한 사진 명소가 매력적인 곳입니다. 특히 가을 단풍 시즌과 일몰 시간에는 관광객들에게 최고의 뷰를 제공합니다."
+    },
+    "gallery": [
+      "../assets/Place/32. Hiroshima_2.jpg",
+      "../assets/Place/32. Hiroshima_3.jpg",
+      "../assets/Place/32. Hiroshima_4.jpg"
+    ],
+    "foods": [
+      { "name": "모미지 만쥬", "image": "../assets/Place/32. Hiroshima_5.jpg" },
+      { "name": "굴 요리", "image": "../assets/Place/32. Hiroshima_6.jpg" }
+    ],
+    "map": {
+      "embedUrl": "https://www.google.com/maps/embed?pb=...이쓰쿠시마신사_임베드URL..."
+    },
+    "nearbyRestaurants": [
+      { "name": "카키야", "image": "../assets/Place/miyajima/rest-kakiya.jpg" },
+      { "name": "아키카키노 하나나", "image": "../assets/Place/miyajima/rest-hanana.jpg" }
+    ],
+    "nearbyHotels": [
+      { "name": "리브맥스리조트 아키미야지마", "image": "../assets/Place/miyajima/hotel-livemax.jpg" },
+      { "name": "미야지마 그랜드 호텔 아리모토", "image": "../assets/Place/miyajima/hotel-arimoto.jpg" }
+    ]
+  }
+]
