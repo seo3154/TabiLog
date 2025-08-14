@@ -1,5 +1,4 @@
 import React from "react";
-import "./Login.css"; // CSS 따로 분리 가능
 
 export default function Login() {
   return (
@@ -20,13 +19,18 @@ export default function Login() {
               <tr>
                 <td>아이디</td>
                 <td>
-                  <input type="text" name="userid" />
+                  <input type="text" name="userid" required style={inputStyle} />
                 </td>
               </tr>
               <tr>
                 <td>비밀번호</td>
                 <td>
-                  <input type="password" name="password" />
+                  <input
+                    type="password"
+                    name="password"
+                    required
+                    style={inputStyle}
+                  />
                 </td>
               </tr>
               <tr>
@@ -34,11 +38,12 @@ export default function Login() {
                   <input
                     type="button"
                     value="회원가입"
-                    onClick={() => (window.location.href = "signup.html")}
+                    onClick={() => (window.location.href = "/signup")}
+                    style={buttonStyle}
                   />
                 </td>
                 <td style={{ textAlign: "right" }}>
-                  <input type="submit" value="로그인" />
+                  <input type="submit" value="로그인" style={buttonStyle} />
                 </td>
               </tr>
             </tbody>
@@ -48,3 +53,18 @@ export default function Login() {
     </div>
   );
 }
+
+const inputStyle = {
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  padding: "5px",
+  width: "95%",
+};
+
+const buttonStyle = {
+  borderRadius: "5px",
+  padding: "5px 10px",
+  border: "1px solid #888",
+  backgroundColor: "#f5f5f5",
+  cursor: "pointer",
+};
