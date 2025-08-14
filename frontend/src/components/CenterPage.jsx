@@ -87,6 +87,20 @@ export default function FAQ() {
           </div>
         ))}
       </div>
+      <div style={{ textAlign: "center", marginTop: "30px" }}>
+      <button
+        onClick={() => window.location.href = "1to1.html"}
+      style={{
+      padding: "10px 20px",
+      fontSize: "16px",
+      borderRadius: "5px",
+      border: "1px solid #888",
+      backgroundColor: "#f5f5f5",
+      cursor: "pointer"
+      }}>
+    1:1 상담하기
+  </button>
+</div>
     </div>
   );
 }
