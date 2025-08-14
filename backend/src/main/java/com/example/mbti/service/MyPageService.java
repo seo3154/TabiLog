@@ -1,37 +1,38 @@
 package com.example.mbti.service;
 
-import com.example.mbti.repository.UserRepository;
-import com.example.mbti.model.Mbti;
+import com.example.mbti.dto.UserProfileDto;
 import com.example.mbti.model.User;
-import com.example.mbti.repository.MbtiRepository;
+import com.example.mbti.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class MyPageService {
 
     private final UserRepository userRepository;
-    private final MbtiRepository mbtiRepository;
 
-    public MyPageService(UserRepository userRepository, MbtiRepository mbtiRepository) {
-        this.userRepository = userRepository;
-        this.mbtiRepository = mbtiRepository;
+    public UserProfileDto getByLoginId(String loginId) {
+        User u = userRepository.findByLoginIdWithMbti(loginId)
+                .orElseThrow(() -> new IllegalArgumentException("user not found: " + loginId));
+        return toDto(u);
     }
 
-    public User getUserById(Long userId) {
-        return userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("유저 없음"));
+    public List<UserProfileDto> getAll() {
+        return userRepository.findAllWithMbti().stream().map(this::toDto)
+                .collect(Collectors.toList());
     }
 
-    public User updateMbti(Long userId, Integer mbtiId) {
-        User user = getUserById(userId);
-        Mbti mbti = mbtiRepository.findById(mbtiId)
-                .orElseThrow(() -> new IllegalArgumentException("MBTI 없음"));
-        user.setMbti(mbti);
-        return userRepository.save(user);
-    }
-
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    private UserProfileDto toDto(User u) {
+        return UserProfileDto.builder().userId(u.getId()).loginId(u.getLoginId()).name(u.getName())
+                .nickname(u.getNickname()).gender(u.getGender())
+                .mbtiId(u.getMbti() != null ? u.getMbti().getId() : null)
+                .mbtiName(u.getMbti() != null ? u.getMbti().getName() : null)
+                .mbtiUrl(u.getMbti() != null ? u.getMbti().getUrl() : null).email(u.getEmail())
+                .tel(u.getTel()).introText(u.getIntroText()).role(u.getRole())
+                .regDate(u.getRegDate()).build();
     }
 }

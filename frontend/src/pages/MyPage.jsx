@@ -1,44 +1,77 @@
-import { useState } from "react";
-import SideBar from "../components/SideBar"; // 사이드바 컴포넌트 import
-
-const profileImg = "https://placehold.co/120x120";
-const nickname = "땃 쥐";
-const mbti = "INFP";
-const mbtiDesc = [
-  "땃쥐가 좋아하는 명바지는 맨스핏지",
-  "땃쥐가 최상위에 볼치지",
-  "딧쥐가 최상단 본 것지 미",
-];
-
-const myPosts = Array(8).fill({ title: "커뮤니티" });
-const myBookmarks = Array(8).fill({ title: "북마크" });
+// src/pages/MyPage.jsx
+import { useEffect, useState } from "react";
+import SideBar from "../components/SideBar";
+import { getUserByLoginId } from "../apis/users";
+import "../styles/MyPage.css";
 
 export default function MyPage() {
+  // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
+  const [loginId] = useState("admin");
+
   const [tab, setTab] = useState("myPost");
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true);
+        const data = await getUserByLoginId(loginId);
+        setUser(data);
+      } catch (e) {
+        setErr(e?.message || "불러오기 실패");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [loginId]);
+
+  const menuItems = [
+    { key: "myPost", label: "MY POST" },
+    { key: "bookmark", label: "BOOK MARK" },
+    { key: "setting", label: "SETTING" },
+  ];
+
+  if (loading) return <div className="mypage__loading">불러오는 중…</div>;
+  if (err) return <div className="mypage__error">에러: {err}</div>;
+  if (!user) return <div className="mypage__empty">데이터 없음</div>;
+
+  const profileImg =
+    user.mbtiUrl && user.mbtiUrl.startsWith("http")
+      ? user.mbtiUrl
+      : user.mbtiUrl || "https://placehold.co/120x120"; // 백엔드가 /img/... 주면 public에 매핑해도 됨
+
+  // TODO: 실제 내 글/북마크 API 붙이기 전 임시
+  const myPosts = Array(8).fill({ title: "커뮤니티" });
+  const myBookmarks = Array(8).fill({ title: "북마크" });
 
   return (
     <div className="mypage-container">
       <div className="content-wrapper">
-        {/* 기존 aside 대신 SideBar 컴포넌트 사용 */}
+        {/* 사이드바 */}
         <SideBar
-          menuItems={[
-            { label: "MY POST", onClick: () => setTab("myPost") },
-            { label: "BOOK MARK", onClick: () => setTab("bookmark") },
-            { label: "SETTING", onClick: () => setTab("setting") },
-          ]}
+          menuItems={menuItems.map((m) => ({
+            label: m.label,
+            onClick: () => setTab(m.key),
+            className:
+              "tab-button" + (tab === m.key ? " tab-button--selected" : ""),
+          }))}
         />
 
         <main className="main">
+          {/* 프로필 */}
           <section className="profile">
             <img src={profileImg} alt="프로필" className="profile-img" />
 
             <div className="profile-info">
-              <span className="mbti">{mbti}</span>
-              <span className="nickname">{nickname}</span>
+              <span className="mbti">{user.mbtiName || "-"}</span>
+              <span className="nickname">{user.nickname}</span>
               <ul className="mbti-desc">
-                {mbtiDesc.map((desc, i) => (
-                  <li key={i}>{desc}</li>
-                ))}
+                {/* 추후 백엔드에서 MBTI 설명 내려주면 여기 바인딩 */}
+                <li>{user.introText || "소개가 없습니다."}</li>
+                <li>이메일: {user.email}</li>
+                <li>전화: {user.tel || "-"}</li>
               </ul>
             </div>
 
@@ -93,4 +126,4 @@ function SettingMenu() {
       <div className="setting-card">고객센터</div>
     </section>
   );
-} //
+}

@@ -1,32 +1,27 @@
 package com.example.mbti.controller;
 
-import com.example.mbti.model.User;
+import com.example.mbti.dto.UserProfileDto;
 import com.example.mbti.service.MyPageService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/mypage")
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
+@CrossOrigin(origins = {"http://localhost:3000"}) // 리액트 개발서버 허용
 public class MyPageController {
 
     private final MyPageService myPageService;
 
-    public MyPageController(MyPageService myPageService) {
-        this.myPageService = myPageService;
+    @GetMapping("/{loginId}")
+    public UserProfileDto getByLoginId(@PathVariable String loginId) {
+        return myPageService.getByLoginId(loginId);
     }
 
-    @GetMapping("/all")
-    public List<User> getAllUsers() {
-        return myPageService.getAllUsers();
-    }
-
-    @GetMapping("/{userId}")
-    public User getUser(@PathVariable Long userId) {
-        return myPageService.getUserById(userId);
-    }
-
-    @PatchMapping("/{userId}/mbti")
-    public User updateMbti(@PathVariable Long userId, @RequestParam Integer mbtiId) {
-        return myPageService.updateMbti(userId, mbtiId);
+    @GetMapping
+    public List<UserProfileDto> getAll() {
+        return myPageService.getAll();
     }
 }
