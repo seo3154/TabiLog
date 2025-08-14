@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
 const faqs = [
-  { question: "私は", answer: "답변 내용 1" },
-  { question: "질문2", answer: "답변 내용 2" },
-  { question: "질문3", answer: "답변 내용 3" },
-  { question: "질문4", answer: "답변 내용 4" },
-  { question: "질문5", answer: "답변 내용 5" },
-  { question: "질문6", answer: "답변 내용 6" },
-  { question: "질문7", answer: "답변 내용 7" },
-  { question: "질문8", answer: "답변 내용 8" },
-  { question: "질문9", answer: "답변 내용 9" },
-  { question: "질문10", answer: "답변 내용 10" },
+  { question: "一人でも構いませんか", answer: "一人で旅行をする方は多いので、大丈夫です。" },
+  { question: "私は老人ですけど。", answer: "旅行には年とは関係ないです。" },
+  { question: "旅行が初めてなので心配があります。", answer: "そういう方はここの方々に聞けばいいです。" },
+  { question: "話すのが怖いです。", answer: "みんな優しい方なので、大丈夫です。" },
+  { question: "I don't know Japanese.", answer: "It's OK. I don't know English." },
+  { question: "旅行以外でも、話してもいいですか？", answer: "構いません" },
+  { question: "ここの社員になりたいです。", answer: "採用情報がアップしたら確認してください。" },
+  { question: "なんで旅行について話をしますか？", answer: "旅行は楽しいものですから、みんなに共有したらいいと思います。" },
+  { question: "変な話を見つけました。", answer: "申告してください。" },
+  { question: "脱退したいです。", answer: "脱退の理由を聞いてみます。" },
 ];
 
 export default function FAQ() {
