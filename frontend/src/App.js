@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import NoticePage from "./pages/NoticePage";
@@ -6,8 +6,6 @@ import Header from "./components/Header";
 
 import RecommendPage from "./pages/RecommendPage";
 import TravelDetailPage from "./pages/TravelDetailPage";
-
-// ... 기타 페이지
 
 function App() {
   return (
@@ -20,6 +18,7 @@ function App() {
 
         <Route path="/recommend/*" element={<RecommendPage />} />
         <Route path="/place/:id" element={<TravelDetailPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
         {/* 기타 Route 추가 */}
       </Routes>
     </>

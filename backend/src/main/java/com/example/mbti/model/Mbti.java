@@ -1,31 +1,22 @@
+// model/Mbti.java
 package com.example.mbti.model;
 
-import lombok.*;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 
-
 @Entity
-@Table(name = "mbti")
+@Table(name = "MBTI")
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Mbti {
     @Id
-    @Column(name = "mbti_id")
-    private Integer mbtiId;
+    @Column(name = "MBTI_ID")
+    private Long id;
 
-    @Column(name = "mbti_name", length = 4, nullable = false)
-    private String mbtiName;
+    @Column(name = "MBTI_NAME", length = 4, nullable = false, unique = true)
+    private String name;
 
-    @Column(name = "url", nullable = false)
+    @Column(name = "URL", length = 255, nullable = false)
     private String url;
-
-    // Mbti.java
-    @OneToMany(mappedBy = "mbti")
-    @com.fasterxml.jackson.annotation.JsonIgnore // ← 이 줄 추가!!
-    private List<User> users;
-
 }
