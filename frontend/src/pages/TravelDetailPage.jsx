@@ -1,47 +1,48 @@
 import { useParams } from "react-router-dom";
 import places from "../assets/data/places.json";
+import "../styles/TravelDetailPage.css";
 
 export default function TravelDetailPage() {
   const { id } = useParams();
   const place = places.find(p => p.id === "");
 
-  if (!place) return <main style={{ padding: 24 }}>존재하지 않는 장소입니다.</main>;
+  if (!place) return <main className="travel-detail-main-not-found">존재하지 않는 장소입니다.</main>;
 
   return (
     <main>
       {/* Hero */}
-      <header style={{ position: "relative" }}>
-        <img src={place.hero.image} alt={place.name_ko} style={{ width: "100%", height: 360, objectFit: "cover" }} />
-        <div style={{ position: "absolute", left: 24, bottom: 24, color: "#fff", textShadow: "0 2px 6px rgba(0,0,0,.4)" }}>
-          <h1 style={{ margin: 0 }}>{place.name_ko}</h1>
-          <p style={{ margin: 0 }}>{place.prefecture} / {place.hero.subtitle}</p>
+      <header className="travel-detail-header">
+        <img src={place.hero.image} alt={place.name_ko} className="travel-detail-header-img" />
+        <div className="travel-detail-header-div">
+          <h1 className="travel-detail-h1">{place.name_ko}</h1>
+          <p className="travel-detail-p">{place.prefecture} / {place.hero.subtitle}</p>
         </div>
       </header>
 
       {/* 소개 */}
-      <section style={{ maxWidth: 1040, margin: "48px auto", padding: "0 16px", lineHeight: 1.8 }}>
+      <section className="travel-detail-intro-section">
         <p>{place.intro.summary}</p>
         {place.intro.detail && <p>{place.intro.detail}</p>}
       </section>
 
       {/* 갤러리 */}
       {place.gallery?.length > 0 && (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(240px,1fr))", gap: 12, maxWidth: 1200, margin: "32px auto", padding: "0 16px" }}>
+        <div className="travel-detail-gallery-div">
           {place.gallery.map((src, i) => (
-            <img key={i} src={src} alt={`${place.name_ko}-${i}`} style={{ width: "100%", height: 200, objectFit: "cover", borderRadius: 8 }} />
+            <img key={i} src={src} alt={`${place.name_ko}-${i}`} className="travel-detail-gallery-img" />
           ))}
         </div>
       )}
 
       {/* 먹거리 */}
       {place.foods?.length > 0 && (
-        <section style={{ maxWidth: 1040, margin: "48px auto", padding: "0 16px" }}>
+        <section className="travel-detail-foods-section">
           <h3>지역 먹거리</h3>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 16 }}>
+          <div className="travel-detail-foods-div">
             {place.foods.map((f, i) => (
-              <article key={i} style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}>
-                <img src={f.image} alt={f.name} style={{ width: "100%", height: 140, objectFit: "cover", borderRadius: 8 }} />
-                <div style={{ marginTop: 8, fontWeight: 600 }}>{f.name}</div>
+              <article key={i} className="travel-detail-foods-article">
+                <img src={f.image} alt={f.name} className="travel-detail-foods-img" />
+                <div className="travel-detail-foods-name">{f.name}</div>
               </article>
             ))}
           </div>
@@ -50,21 +51,21 @@ export default function TravelDetailPage() {
 
       {/* 지도 */}
       {place.map?.embedUrl && (
-        <div style={{ maxWidth: 1200, margin: "48px auto", padding: "0 16px" }}>
-          <iframe src={place.map.embedUrl} width="100%" height="420" style={{ border: 0, borderRadius: 8 }} loading="lazy" allowFullScreen title="map"></iframe>
+        <div className="travel-detail-map-div">
+          <iframe src={place.map.embedUrl} width="100%" height="420" className="travel-detail-map-iframe" loading="lazy" allowFullScreen title="map"></iframe>
         </div>
       )}
 
       {/* 주변 */}
       {[["주변 식당", place.nearbyRestaurants], ["주변 호텔", place.nearbyHotels]].map(([title, items], idx) => (
         items?.length > 0 && (
-          <section key={idx} style={{ maxWidth: 1040, margin: "48px auto", padding: "0 16px" }}>
+          <section key={idx} className="travel-detail-nearby-section">
             <h3>{title}</h3>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(220px,1fr))", gap: 16 }}>
+            <div className="travel-detail-nearby-div">
               {items.map((it, i) => (
-                <article key={i} style={{ border: "1px solid #eee", borderRadius: 12, padding: 12 }}>
-                  <img src={it.image} alt={it.name} style={{ width: "100%", height: 140, objectFit: "cover", borderRadius: 8 }} />
-                  <div style={{ marginTop: 8, fontWeight: 600 }}>{it.name}</div>
+                <article key={i} className="travel-detail-nearby-article">
+                  <img src={it.image} alt={it.name} className="travel-detail-nearby-img" />
+                  <div className="travel-detail-nearby-name">{it.name}</div>
                 </article>
               ))}
             </div>
@@ -75,7 +76,7 @@ export default function TravelDetailPage() {
       {/* TOP 버튼 */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        style={{ position: "fixed", right: 24, bottom: 24, borderRadius: "50%", width: 56, height: 56 }}
+        className="travel-detail-top-button"
       >
         TOP
       </button>

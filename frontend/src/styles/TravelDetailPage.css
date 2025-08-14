@@ -1,0 +1,132 @@
+.travel-detail-main-not-found {
+  padding: 24px;
+}
+
+.travel-detail-header {
+  position: relative;
+}
+
+.travel-detail-header-img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+}
+
+.travel-detail-header-div {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+
+.travel-detail-h1 {
+  margin: 0;
+}
+
+.travel-detail-p {
+  margin: 0;
+}
+
+.travel-detail-intro-section {
+  max-width: 1040px;
+  margin: 48px auto;
+  padding: 0 16px;
+  line-height: 1.8;
+}
+
+.travel-detail-gallery-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+  gap: 12px;
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
+.travel-detail-gallery-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.travel-detail-foods-section {
+  max-width: 1040px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+.travel-detail-foods-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 16px;
+}
+
+.travel-detail-foods-article {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.travel-detail-foods-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.travel-detail-foods-name {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.travel-detail-map-div {
+  max-width: 1200px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+.travel-detail-map-iframe {
+  border: 0;
+  border-radius: 8px;
+}
+
+.travel-detail-nearby-section {
+  max-width: 1040px;
+  margin: 48px auto;
+  padding: 0 16px;
+}
+
+.travel-detail-nearby-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  gap: 16px;
+}
+
+.travel-detail-nearby-article {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.travel-detail-nearby-img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.travel-detail-nearby-name {
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+.travel-detail-top-button {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+}
