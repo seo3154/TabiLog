@@ -2,9 +2,11 @@ import { useParams } from "react-router-dom";
 import places from "../assets/data/places.json";
 import "../styles/TravelDetailPage.css";
 
+const pub = (p) => `${process.env.PUBLIC_URL}${p}`;
+
 export default function TravelDetailPage() {
   const { id } = useParams();
-  const place = places.find(p => p.id === "");
+  const place = places.find(p => String(p.id) === String(id));
 
   if (!place) return <main className="travel-detail-main-not-found">존재하지 않는 장소입니다.</main>;
 
@@ -12,7 +14,7 @@ export default function TravelDetailPage() {
     <main>
       {/* Hero */}
       <header className="travel-detail-header">
-        <img src={place.hero.image} alt={place.name_ko} className="travel-detail-header-img" />
+        <img src={pub(place.hero.image)} alt={place.name_ko} className="travel-detail-header-img" />
         <div className="travel-detail-header-div">
           <h1 className="travel-detail-h1">{place.name_ko}</h1>
           <p className="travel-detail-p">{place.prefecture} / {place.hero.subtitle}</p>
@@ -29,7 +31,22 @@ export default function TravelDetailPage() {
       {place.gallery?.length > 0 && (
         <div className="travel-detail-gallery-div">
           {place.gallery.map((src, i) => (
-            <img key={i} src={src} alt={`${place.name_ko}-${i}`} className="travel-detail-gallery-img" />
+            <img key={i} src={pub(src)} alt={`${place.name_ko}-${i}`} className="travel-detail-gallery-img" />
+          ))}
+        </div>
+      )}
+
+      {/* 추가 소개 */}
+      <section className="travel-detail-extraintro-section">
+        <p>{place.extraintro.summary}</p>
+        {place.extraintro.detail && <p>{place.extraintro.detail}</p>}
+      </section>
+
+      {/* 추가 갤러리 */}
+      {place.extragallery?.length > 0 && (
+        <div className="travel-detail-extragallery-div">
+          {place.extragallery.map((src, i) => (
+            <img key={i} src={pub(src)} alt={`${place.name_ko}-${i}`} className="travel-detail-extragallery-img" />
           ))}
         </div>
       )}
@@ -41,7 +58,7 @@ export default function TravelDetailPage() {
           <div className="travel-detail-foods-div">
             {place.foods.map((f, i) => (
               <article key={i} className="travel-detail-foods-article">
-                <img src={f.image} alt={f.name} className="travel-detail-foods-img" />
+                <img src={pub(f.image)} alt={f.name} className="travel-detail-foods-img" />
                 <div className="travel-detail-foods-name">{f.name}</div>
               </article>
             ))}
@@ -64,7 +81,7 @@ export default function TravelDetailPage() {
             <div className="travel-detail-nearby-div">
               {items.map((it, i) => (
                 <article key={i} className="travel-detail-nearby-article">
-                  <img src={it.image} alt={it.name} className="travel-detail-nearby-img" />
+                  <img src={pub(it.image)} alt={it.name} className="travel-detail-nearby-img" />
                   <div className="travel-detail-nearby-name">{it.name}</div>
                 </article>
               ))}
