@@ -1,148 +1,158 @@
+/* 페이지 공통 */
+body {
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* 전역 main 폭 제한*/
+main { max-width: 2000px; margin: 0 auto; }
+
+/* 404 */
 .travel-detail-main-not-found {
-  padding: 24px;
+  display: flex; justify-content: center; align-items: center;
+  height: 100vh; font-size: 2rem; color: #777; text-align: center;
 }
 
-.travel-detail-header {
-  position: relative;
+/* ===== Hero ===== */
+.travel-hero {
+  max-width: 2000px;
+  margin: 0 auto 24px;
 }
-
-.travel-detail-header-img {
+.travel-hero-img {
+  display: block;
   width: 100%;
-  height: 360px;
+  height: clamp(300px, 45vw, 600px);
   object-fit: cover;
 }
 
-.travel-detail-header-div {
-  position: absolute;
-  left: 24px;
-  bottom: 24px;
-  color: #fff;
-  text-shadow: 0 2px 6px rgba(0,0,0,.4);
-}
-
-.travel-detail-h1 {
-  margin: 0;
-}
-
-.travel-detail-p {
-  margin: 0;
-}
-
-.travel-detail-intro-section {
-  max-width: 1040px;
-  margin: 48px auto;
-  padding: 0 16px;
-  line-height: 1.8;
-}
-
-.travel-detail-gallery-div {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-  gap: 12px;
-  max-width: 1200px;
-  margin: 32px auto;
-  padding: 0 16px;
-}
-
-.travel-detail-extraintro-section {
-  max-width: 1040px;
-  margin: 48px auto;
-  padding: 0 16px;
-  line-height: 1.8;
-}
-
-.travel-detail-extragallery-div {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
-  gap: 12px;
-  max-width: 1200px;
-  margin: 32px auto;
-  padding: 0 16px;
-}
-
-.travel-detail-gallery-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
+/* 제목/부제 */
+.travel-title {
+  max-width: 2000px;
+  margin: 0 auto 16px;
+  padding: 40px 40px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #eee;
   border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+.travel-title-h1 {
+  margin: 0 0 6px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  color: #1a1a1a;
+}
+.travel-title-sub {
+  margin: 0;
+  color: #666;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
 
-.travel-detail-foods-section {
-  max-width: 1040px;
+/* 소개 */
+.travel-detail-intro-section {
+  max-width: 2000px;
   margin: 48px auto;
+  padding: 0 40px;
+  line-height: 1.8;
+  font-size: 1.6rem;
+}
+
+/* 갤러리 */
+.travel-detail-gallery-div {
+  display: flex;
+  gap: 12px;
+  max-width: 2000px;
+  margin: 48px auto;
+  padding: 0 40px;
+}
+.travel-detail-gallery-img {
+  flex: 1 1 0; /* 모든 사진이 남은 공간을 동일하게 나눠 갖도록 설정 */
+  width: auto; /* flex 속성이 너비를 제어하도록 설정 */
+  height: clamp(180px, 20vw, 300px);
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+.travel-detail-gallery-img:hover { transform: scale(1.02); }
+
+/* 지역 먹거리 & 주변 */
+.travel-detail-foods-section,
+.travel-detail-nearby-section {
+  max-width: 2000px;
+  margin: 100px auto;
   padding: 0 16px;
 }
-
-.travel-detail-foods-div {
+.travel-detail-foods-section h3,
+.travel-detail-nearby-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  text-align: left;
+}
+.travel-detail-foods-div,
+.travel-detail-nearby-div {
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 16px;
 }
-
-.travel-detail-foods-article {
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 12px;
-}
-
-.travel-detail-foods-img {
-  width: 100%;
-  height: 140px;
-  object-fit: cover;
+.travel-detail-foods-article,
+.travel-detail-nearby-article {
+  background-color: #fff;
   border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.travel-detail-foods-name {
-  margin-top: 8px;
+.travel-detail-foods-article:hover,
+.travel-detail-nearby-article:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.travel-detail-foods-img,
+.travel-detail-nearby-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+.travel-detail-foods-name,
+.travel-detail-nearby-name {
+  padding: 24px;
   font-weight: 600;
+  text-align: center;
+  font-size: 28px;
 }
 
+/* 지도 */
 .travel-detail-map-div {
-  max-width: 1200px;
+  max-width: 1040px;
   margin: 48px auto;
   padding: 0 16px;
 }
-
 .travel-detail-map-iframe {
   border: 0;
   border-radius: 8px;
-}
-
-.travel-detail-nearby-section {
-  max-width: 1040px;
-  margin: 48px auto;
-  padding: 0 16px;
-}
-
-.travel-detail-nearby-div {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(220px,1fr));
-  gap: 16px;
-}
-
-.travel-detail-nearby-article {
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 12px;
-}
-
-.travel-detail-nearby-img {
   width: 100%;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 8px;
+  height: 450px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-.travel-detail-nearby-name {
-  margin-top: 8px;
-  font-weight: 600;
-}
-
+/* TOP 버튼 */
 .travel-detail-top-button {
-  position: fixed;
-  right: 24px;
-  bottom: 24px;
-  border-radius: 50%;
-  width: 56px;
-  height: 56px;
+  position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+  background-color: #333; color: #fff; border: none; border-radius: 50%;
+  width: 50px; height: 50px; font-size: 1rem; font-weight: bold; cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.travel-detail-top-button:hover { background-color: #555; transform: translateY(-3px); }
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .travel-detail-header-div { padding: 24px 16px; }
+  .travel-detail-gallery-div,
+  .travel-detail-foods-section,
+  .travel-detail-nearby-section,
+  .travel-detail-map-div { margin: 24px auto; }
+  .travel-detail-top-button { width: 45px; height: 45px; font-size: 0.9rem; }
 }

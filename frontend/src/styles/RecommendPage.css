@@ -1,13 +1,13 @@
 .recommend-page-main {
-  max-width: 1040px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 16px;
 }
 
 .recommend-page-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
 }
 
 .recommend-page-link {
@@ -17,13 +17,13 @@
 
 .recommend-page-article {
   border: 1px solid #eee;
-  border-radius: 12px;
+  border-radius: 18px;
   overflow: hidden;
 }
 
 .recommend-page-img {
   width: 100%;
-  height: 160px;
+  height: 300px;
   object-fit: cover;
 }
 
@@ -33,9 +33,27 @@
 
 .recommend-page-name {
   font-weight: 700;
+  font-size: 20px;
 }
 
 .recommend-page-prefecture {
-  font-size: 12px;
+  font-size: 15px;
   color: #666;
+}
+
+.recommend-page-article {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #fff; /* 기본 흰색 */
+  transition: background-color 0.3s ease; /* 부드럽게 색 변환 */
+}
+
+.recommend-page-article:hover {
+  background-color: #eaeaea; /* 마우스를 올리면 연회색으로 변경 */
+}
+
+.recommend-page-article:hover {
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }

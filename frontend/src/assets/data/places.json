@@ -38,11 +38,11 @@
         "image": "/Place/1.Hokkaido_8.jpg"
       },
       {
-        "name": "라벤더 아이스크림",
+        "name": "스프카레",
         "image": "/Place/1.Hokkaido_9.jpg"
       },
       {
-        "name": "스프카레",
+        "name": "라벤더 아이스크림",
         "image": "/Place/1.Hokkaido_10.jpg"
       }
     ],
@@ -224,11 +224,11 @@
         "image": "/Place/4.Iwate_5.jpg"
       },
       {
-        "name": "모리오카 쟈쟈멘",
+        "name": "완코소바",
         "image": "/Place/4.Iwate_6.jpg"
       },
       {
-        "name": "완코소바",
+        "name": "모리오카 쟈쟈멘",
         "image": "/Place/4.Iwate_7.jpg"
       }
     ],
@@ -512,7 +512,7 @@
       "ENFJ"
     ],
     "hero": {
-      "image": "/9.Tochigi_1.jpg",
+      "image": "/Place/9.Tochigi_1.jpg",
       "subtitle": "세 마리 원숭이와 화려한 장식"
     },
     "intro": {

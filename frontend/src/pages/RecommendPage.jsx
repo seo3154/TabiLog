@@ -19,8 +19,10 @@ export default function RecommendPage() {
   );
 
   return (
+
     <main className="recommend-page-main">
       <h1 align="center">{TARGET_MBTI} 추천 여행지</h1>
+      <br />
 
       {/* ✅ 결과 없을 때 안내 */}
       {list.length === 0 ? (
