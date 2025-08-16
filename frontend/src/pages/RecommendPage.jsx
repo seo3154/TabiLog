@@ -2,6 +2,8 @@ import { useParams, Link } from "react-router-dom";
 import places from "../assets/data/places.json";
 import "../styles/RecommendPage.css";
 
+const pub = (p) => `${process.env.PUBLIC_URL}${p}`;
+
 export default function RecommendPage() {
   
   const { mbti } = useParams();
@@ -16,10 +18,9 @@ export default function RecommendPage() {
     (p) => Array.isArray(p.mbti) && p.mbti.some((t) => String(t).toUpperCase() === TARGET_MBTI)
   );
 
-
   return (
     <main className="recommend-page-main">
-      <h1>{TARGET_MBTI} 추천 여행지</h1>
+      <h1 align="center">{TARGET_MBTI} 추천 여행지</h1>
 
       {/* ✅ 결과 없을 때 안내 */}
       {list.length === 0 ? (
@@ -29,7 +30,7 @@ export default function RecommendPage() {
           {list.map((p) => (
             <Link key={p.id} to={`/place/${p.id}`} className="recommend-page-link">
               <article className="recommend-page-article">
-                <img src={p.hero.image} alt={p.name_ko} className="recommend-page-img" />
+                <img src={pub(p.hero.image)} alt={p.name_ko} className="recommend-page-img" />
                 <div className="recommend-page-article-div">
                   <div className="recommend-page-name">{p.name_ko}</div>
                   <div className="recommend-page-prefecture">{p.prefecture}</div>

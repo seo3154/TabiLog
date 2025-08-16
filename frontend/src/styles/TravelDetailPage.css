@@ -44,6 +44,22 @@
   padding: 0 16px;
 }
 
+.travel-detail-extraintro-section {
+  max-width: 1040px;
+  margin: 48px auto;
+  padding: 0 16px;
+  line-height: 1.8;
+}
+
+.travel-detail-extragallery-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+  gap: 12px;
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 0 16px;
+}
+
 .travel-detail-gallery-img {
   width: 100%;
   height: 200px;
