@@ -5,25 +5,6 @@ import "../styles/TravelDetailPage.css";
 // public 경로 헬퍼
 const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
 
-// intro / extraintro 병합 유틸(이 파일 안에서만 사용)
-const mergeIntro = (place) => {
-  const s  = place?.intro?.summary ?? "";
-  const d  = place?.intro?.detail  ?? "";
-  const es = place?.extraintro?.summary ?? "";
-  const ed = place?.extraintro?.detail  ?? "";
-  return {
-    summary: s || es || "소개 정보가 준비중입니다.",
-    detail : [d, ed].filter(Boolean).join(" "),
-  };
-};
-
-// gallery / extragallery 병합
-const mergeGallery = (place) => {
-  const base  = Array.isArray(place?.gallery) ? place.gallery : [];
-  const extra = Array.isArray(place?.extragallery) ? place.extragallery : [];
-  return [...base, ...extra];
-};
-
 export default function TravelDetailPage() {
   const { id } = useParams();
   const place = places.find((p) => String(p.id) === String(id));
@@ -37,67 +18,86 @@ export default function TravelDetailPage() {
     );
   }
 
-  // 데이터 준비
-  const { summary, detail } = mergeIntro(place);
-  const gallery   = mergeGallery(place);
+  // 기본 데이터
   const heroImg   = place?.hero?.image ?? "";
   const subtitle  = [place?.prefecture, place?.hero?.subtitle].filter(Boolean).join(" / ");
-  const foods     = Array.isArray(place?.foods) ? place.foods : [];
-  const nearRest  = Array.isArray(place?.nearbyRestaurants) ? place.nearbyRestaurants : [];
-  const nearHotels= Array.isArray(place?.nearbyHotels) ? place.nearbyHotels : [];
-  const mapUrl    = place?.map?.embedUrl || "";
+
+  // Intro(기본) — 병합 없음
+  const introSummary = place?.intro?.summary || "소개 정보가 준비중입니다.";
+  const introDetail  = place?.intro?.detail  || "";
+
+  // Extra Intro — 있을 때만 독립 섹션으로
+  const hasExtraIntro = !!(place?.extraintro?.summary || place?.extraintro?.detail);
+  const extraSummary  = place?.extraintro?.summary || "";
+  const extraDetail   = place?.extraintro?.detail  || "";
+
+  // Galleries — 병합 없음
+  const gallery       = Array.isArray(place?.gallery) ? place.gallery : [];
+  const extraGallery  = Array.isArray(place?.extragallery) ? place.extragallery : [];
+
+  // 기타
+  const foods      = Array.isArray(place?.foods) ? place.foods : [];
+  const nearRest   = Array.isArray(place?.nearbyRestaurants) ? place.nearbyRestaurants : [];
+  const nearHotels = Array.isArray(place?.nearbyHotels) ? place.nearbyHotels : [];
+  const mapUrl     = place?.map?.embedUrl || "";
 
   return (
     <main>
-      {/* Hero 이미지*/}
+      {/* Hero */}
       <section className="travel-hero">
-        <img
-          src={pub(heroImg)}
-          alt={place.name_ko}
-          className="travel-hero-img"
-        />
-      </section>  
-      
-      {/* 제목/부제 (Hero 아래 분리) */}
+        {!!heroImg && (
+          <img
+            src={pub(heroImg)}
+            alt={place.name_ko}
+            className="travel-hero-img"
+          />
+        )}
+      </section>
+
+      {/* 제목/부제 */}
       <section className="travel-title">
         <h1 className="travel-title-h1">{place.name_ko}</h1>
         {subtitle && <p className="travel-title-sub">{subtitle}</p>}
       </section>
 
-      {/* 소개 */}
-      <section className="travel-detail-intro-section">
-        <p>{summary}</p>
-        {detail && <p>{detail}</p>}
-      </section>
+      {/* 소개 (Intro) */}
+      {(introSummary || introDetail) && (
+        <section className="travel-detail-intro-section">
+          {introSummary && <p>{introSummary}</p>}
+          {introDetail && <p>{introDetail}</p>}
+        </section>
+      )}
 
       {/* 갤러리 */}
       {gallery.length > 0 && (
         <div className="travel-detail-gallery-div">
           {gallery.map((src, i) => (
             <img
-              key={i}
+              key={`g-${i}`}
               src={pub(src)}
-              alt={`${place.name_ko}-${i}`}
+              alt={`${place.name_ko}-gallery-${i}`}
               className="travel-detail-gallery-img"
             />
           ))}
         </div>
       )}
 
-      {/* 추가 소개 */}
-      <section className="travel-detail-intro-section">
-        <p>{summary}</p>
-        {detail && <p>{detail}</p>}
-      </section>
+      {/* 추가 소개 (Extra Intro) — Intro와 별개로 독립 섹션 */}
+      {hasExtraIntro && (
+        <section className="travel-detail-intro-section travel-detail-intro-extra">
+          {extraSummary && <p>{extraSummary}</p>}
+          {extraDetail && <p>{extraDetail}</p>}
+        </section>
+      )}
 
-      {/* 추가 갤러리 */}
-      {gallery.length > 0 && (
-        <div className="travel-detail-gallery-div">
-          {gallery.map((src, i) => (
+      {/* 추가 갤러리 (Extra Gallery) — 갤러리와 별개로 독립 섹션 */}
+      {extraGallery.length > 0 && (
+        <div className="travel-detail-gallery-div travel-detail-gallery-extra">
+          {extraGallery.map((src, i) => (
             <img
-              key={i}
+              key={`eg-${i}`}
               src={pub(src)}
-              alt={`${place.name_ko}-${i}`}
+              alt={`${place.name_ko}-extragallery-${i}`}
               className="travel-detail-gallery-img"
             />
           ))}

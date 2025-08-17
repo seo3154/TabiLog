@@ -49,6 +49,32 @@ main { max-width: 2000px; margin: 0 auto; }
   color: #666;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
 }
+/* 제목/부제 안의 행: 왼쪽 제목 + 오른쪽 버튼 */
+.travel-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 즐겨찾기 버튼 */
+.travel-fav-button {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #ccc; /* 기본 밝은 회색 */
+  transition: color 0.25s ease, transform 0.15s ease;
+}
+
+.travel-fav-button:hover {
+  color: #999; /* hover 시 조금 진하게 */
+  transform: translateY(-1px);
+}
+
+.travel-fav-button.active {
+  color: gold; /* 클릭 시 노란색 */
+}
 
 /* 소개 */
 .travel-detail-intro-section {
@@ -70,7 +96,7 @@ main { max-width: 2000px; margin: 0 auto; }
 .travel-detail-gallery-img {
   flex: 1 1 0; /* 모든 사진이 남은 공간을 동일하게 나눠 갖도록 설정 */
   width: auto; /* flex 속성이 너비를 제어하도록 설정 */
-  height: clamp(180px, 20vw, 300px);
+  height: 400px;
   object-fit: cover;
   border-radius: 4px;
   transition: transform 0.3s ease;
