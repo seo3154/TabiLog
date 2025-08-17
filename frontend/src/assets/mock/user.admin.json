@@ -1,0 +1,15 @@
+{
+  "loginId": "admin",
+  "nickname": "테스트 유저",
+  "email": "test@example.com",
+  "tel": "010-1234-5678",
+  "mbtiName": "INFP",
+  "mbtiUrl": "https://placehold.co/120x120",
+  "introText": "임시 소개입니다.",
+  "bookmarks": [
+    "tokyo-odaiba",
+    "yamagata-ginzan-onsen",
+    "gifu-shirakawago",
+    "okinawa-shurijo"
+  ]
+}

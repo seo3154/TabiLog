@@ -1,22 +1,41 @@
 // src/pages/MyPage.jsx
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import SideBar from "../components/SideBar";
 import { getUserByLoginId } from "../apis/users";
+import places from "../assets/data/places.json";
+import mockUser from "../assets/mock/user.admin.json"; // ✅ 파일 분리: 하드코딩 아님
 import "../styles/MyPage.css";
 
-export default function MyPage() {
-  // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
-  const [loginId] = useState("admin");
+const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
+const MOCK_UI = String(process.env.REACT_APP_MOCK_UI) === "1";
 
+export default function MyPage() {
+  const [loginId] = useState("admin");
   const [tab, setTab] = useState("myPost");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
 
+  // places id → place 매핑
+  const placeIndex = useMemo(() => {
+    const map = {};
+    for (const p of places) map[p.id] = p;
+    return map;
+  }, []);
+
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
+
+        if (MOCK_UI) {
+          // ✅ 모의 UI 모드: 백엔드 호출 안 함
+          setUser(mockUser);
+          return;
+        }
+
+        // 원래 백엔드 호출 흐름
         const data = await getUserByLoginId(loginId);
         setUser(data);
       } catch (e) {
@@ -40,16 +59,28 @@ export default function MyPage() {
   const profileImg =
     user.mbtiUrl && user.mbtiUrl.startsWith("http")
       ? user.mbtiUrl
-      : user.mbtiUrl || "https://placehold.co/120x120"; // 백엔드가 /img/... 주면 public에 매핑해도 됨
+      : user.mbtiUrl || "https://placehold.co/120x120";
 
-  // TODO: 실제 내 글/북마크 API 붙이기 전 임시
+  // ✅ 북마크: user.bookmarks(from DB dump JSON) → places 매칭
+  const myBookmarks = Array.isArray(user.bookmarks)
+    ? user.bookmarks
+        .map((id) => placeIndex[id])
+        .filter(Boolean)
+        .map((p) => ({
+          id: p.id,
+          title: p.name_ko,
+          subtitle: p.prefecture,
+          image: p?.hero?.image,
+          type: "place",
+        }))
+    : [];
+
+  // 임시 내 글
   const myPosts = Array(8).fill({ title: "커뮤니티" });
-  const myBookmarks = Array(8).fill({ title: "북마크" });
 
   return (
     <div className="mypage-container">
       <div className="content-wrapper">
-        {/* 사이드바 */}
         <SideBar
           menuItems={menuItems.map((m) => ({
             label: m.label,
@@ -68,7 +99,6 @@ export default function MyPage() {
               <span className="mbti">{user.mbtiName || "-"}</span>
               <span className="nickname">{user.nickname}</span>
               <ul className="mbti-desc">
-                {/* 추후 백엔드에서 MBTI 설명 내려주면 여기 바인딩 */}
                 <li>{user.introText || "소개가 없습니다."}</li>
                 <li>이메일: {user.email}</li>
                 <li>전화: {user.tel || "-"}</li>
@@ -84,9 +114,7 @@ export default function MyPage() {
           <hr className="divider" />
 
           {tab === "myPost" && <BoardList title="커뮤니티" items={myPosts} />}
-          {tab === "bookmark" && (
-            <BoardList title="북마크" items={myBookmarks} />
-          )}
+          {tab === "bookmark" && <BookmarkGrid items={myBookmarks} />}
           {tab === "setting" && <SettingMenu />}
         </main>
       </div>
@@ -113,6 +141,38 @@ function BoardList({ title, items }) {
         <span className="page">4</span>
         <span className="page">5</span>
         <span className="page page--chevron">&gt;</span>
+      </div>
+    </section>
+  );
+}
+
+function BookmarkGrid({ items = [] }) {
+  if (!items.length)
+    return <div className="bookmark-empty">북마크가 없습니다.</div>;
+  const toPath = (item) =>
+    item.type === "place" ? `/place/${item.id}` : `/board/${item.id}`;
+
+  return (
+    <section className="bookmark">
+      <div className="bookmark-grid" aria-label="북마크">
+        {items.map((it) => (
+          <Link key={it.id} to={toPath(it)} className="bookmark-link">
+            <article className="bookmark-card">
+              <img
+                src={pub(it.image) || "https://placehold.co/600x400"}
+                alt={it.title || "bookmark"}
+                className="bookmark-img"
+                loading="lazy"
+              />
+              <div className="bookmark-meta">
+                <div className="bookmark-title">{it.title || "제목 없음"}</div>
+                {it.subtitle && (
+                  <div className="bookmark-sub">{it.subtitle}</div>
+                )}
+              </div>
+            </article>
+          </Link>
+        ))}
       </div>
     </section>
   );

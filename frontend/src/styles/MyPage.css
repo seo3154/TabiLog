@@ -194,3 +194,72 @@
   background: #f9f9f9;
   font-weight: 600;
 }
+
+/* ===== 북마크 썸네일 그리드 ===== */
+.bookmark {
+  margin-top: 18px;
+}
+
+.bookmark-empty {
+  margin-top: 24px;
+  text-align: center;
+  color: #666;
+}
+
+.bookmark-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+.bookmark-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.bookmark-card {
+  border: 2px solid #222;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #fff;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.2s ease;
+}
+
+.bookmark-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  background: #f7f7f7;
+}
+
+.bookmark-img {
+  width: 100%;
+  height: 180px; /* 필요시 200~240으로 조절 */
+  object-fit: cover;
+  display: block;
+}
+
+.bookmark-meta {
+  padding: 12px 14px;
+}
+
+.bookmark-title {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.bookmark-sub {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 반응형 */
+@media (max-width: 520px) {
+  .bookmark-img {
+    height: 150px;
+  }
+  .bookmark-title {
+    font-size: 16px;
+  }
+}
