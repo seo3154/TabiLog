@@ -92,7 +92,8 @@
 .nickname {
   font-weight: 900;
   font-size: 36px;
-  margin-left: 16px;
+  line-height: 1.1;
+  margin: 0; /* ✅ 왼쪽 여백 제거 */
 }
 
 .mbti-desc {
@@ -262,4 +263,312 @@
   .bookmark-title {
     font-size: 16px;
   }
+}
+
+/* ===== 모달 ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.modal {
+  width: min(640px, 92vw);
+  background: #fff;
+  border: 3px solid #222; /* 사이트 톤 맞춤 */
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  border-bottom: 1.5px solid #bbb;
+}
+
+.modal-close {
+  font-size: 22px;
+  line-height: 1;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-body {
+  padding: 14px 18px;
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.modal-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.modal-row:last-child {
+  border-bottom: none;
+}
+
+.modal-key {
+  color: #555;
+  font-weight: 600;
+}
+
+.modal-val {
+  font-weight: 700;
+}
+
+.modal-footer {
+  padding: 12px 18px;
+  border-top: 1.5px solid #bbb;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* 세팅 카드 버튼화 */
+.setting-card--button {
+  background: #fff;
+  cursor: pointer;
+}
+.setting-card--button:hover {
+  filter: brightness(0.98);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.field-label {
+  font-weight: 700;
+}
+.input,
+.textarea,
+select.input {
+  border: 1.5px solid #bbb;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 15px;
+  outline: none;
+}
+.input:focus,
+.textarea:focus,
+select.input:focus {
+  border-color: #222;
+}
+.textarea {
+  resize: vertical;
+}
+.preview {
+  margin-top: 8px;
+}
+.preview-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+.hint {
+  color: #666;
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* ===== MBTI 선택 모달 확장 ===== */
+.modal--xl {
+  width: min(1100px, 96vw);
+}
+.mbti-modal .modal-header {
+  justify-content: center;
+}
+.mbti-modal #mbti-modal-title {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+/* 그리드 */
+.mbti-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 22px 36px;
+  justify-items: center;
+}
+
+@media (max-width: 900px) {
+  .mbti-grid {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .mbti-grid {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+}
+
+/* 카드 */
+.mbti-card {
+  width: 200px;
+  padding: 10px 8px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 16px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+.mbti-card:hover {
+  background: #f7f7f7;
+  transform: translateY(-2px);
+}
+.mbti-card--selected {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+  background: #fff;
+}
+
+/* 텍스트 */
+.mbti-type {
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-top: 2px;
+}
+.mbti-sub {
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+}
+
+/* 접근성 포커스 */
+.mbti-card:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 2px;
+  background: #fff;
+}
+
+/* MBTI 이미지 카드 버전 */
+.modal--xl {
+  width: min(1100px, 96vw);
+}
+.mbti-modal .modal-header {
+  justify-content: center;
+}
+.mbti-modal #mbti-modal-title {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.mbti-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 22px 36px;
+  justify-items: center;
+}
+@media (max-width: 900px) {
+  .mbti-grid {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .mbti-grid {
+    grid-template-columns: repeat(2, minmax(150px, 1fr));
+  }
+}
+
+.mbti-card {
+  width: 200px;
+  padding: 12px 8px 14px;
+  border: 2px solid transparent;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    border-color 0.12s ease, background 0.12s ease;
+}
+.mbti-card:hover {
+  transform: translateY(-2px);
+  background: #f7f7f7;
+}
+.mbti-card--selected {
+  border-color: #222;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14);
+}
+
+.mbti-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain; /* 링 이미지가 잘리지 않게 */
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.mbti-type {
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+.mbti-sub {
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+}
+
+.mbti-card:focus-visible {
+  outline: 3px solid #111;
+  outline-offset: 2px;
+}
+
+/* MBTI 모달 헤더 정렬 */
+.mbti-modal .modal-header {
+  position: relative; /* 닫기 버튼 절대배치용 */
+  justify-content: center; /* 제목 가운데 */
+}
+
+.mbti-modal #mbti-modal-title {
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  width: 100%;
+  padding-right: 36px; /* 닫기 버튼과 겹치지 않게 여유 */
+}
+
+/* 닫기 버튼을 오른쪽 끝으로 */
+.mbti-modal .modal-close {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 아바타 하드클램프: 전역 img 리셋이 있어도 안전 */
+.avatar {
+  width: 120px;
+  height: 120px;
+  flex: 0 0 120px;
+  border-radius: 50%;
+  overflow: hidden; /* 둥글게 자름 */
+  display: block;
+}
+.avatar-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain; /* 원본 비율 유지 */
+  background-color: #fff; /* 남는 부분 흰색으로 채움 */
+  border-radius: 50%;
+  display: block;
 }
