@@ -1,4 +1,4 @@
-// model/User.java
+// example/mbti/model/User.java
 package com.example.mbti.model;
 
 import lombok.Getter;
