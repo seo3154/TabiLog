@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "./Button"; // Button.jsx 불러오기
 
 export default function CenterPage() {
   const [activeTab, setActiveTab] = useState("all");
@@ -59,11 +60,26 @@ export default function CenterPage() {
       <h1 style={{ textAlign: "center", marginTop: 20 }}>顧客センター</h1>
       <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
 
-      {/* 좌측 탭 */}
-      <div className="tab-container">
-        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>全ての投稿</div>
-        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>自分の投稿</div>
-        <div className={`tab ${activeTab === "write" ? "active" : ""}`} onClick={() => setActiveTab("write")}>1:1 작성하기</div>
+      {/* 좌측 탭 (Button 적용) */}
+      <div className="tab-container" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+        <Button
+          variant={activeTab === "all" ? "active" : "default"}
+          onClick={() => setActiveTab("all")}
+        >
+          全ての投稿
+        </Button>
+        <Button
+          variant={activeTab === "mine" ? "active" : "default"}
+          onClick={() => setActiveTab("mine")}
+        >
+          自分の投稿
+        </Button>
+        <Button
+          variant={activeTab === "write" ? "active" : "default"}
+          onClick={() => setActiveTab("write")}
+        >
+          1:1 작성하기
+        </Button>
       </div>
 
       {/* 중앙 콘텐츠 */}
