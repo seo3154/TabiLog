@@ -1,18 +1,11 @@
+// src/main/java/com/example/mbti/repository/UserRepository.java
 package com.example.mbti.repository;
 
 import com.example.mbti.model.User;
-import org.springframework.data.jpa.repository.*;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.*;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-
     Optional<User> findByLoginId(String loginId);
-
-    @Query("select u from User u left join fetch u.mbti m where u.loginId = :loginId")
-    Optional<User> findByLoginIdWithMbti(@Param("loginId") String loginId);
-
-    @Query("select u from User u left join fetch u.mbti m")
-    List<User> findAllWithMbti();
 }

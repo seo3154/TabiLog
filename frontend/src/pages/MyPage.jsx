@@ -30,7 +30,7 @@ function getProfileImgs(user) {
 
 export default function MyPage() {
   // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
-  const [loginId] = useState("admin");
+  const [loginId] = useState("ddatg123");
 
   const [tab, setTab] = useState("myPost");
   const [user, setUser] = useState(null);

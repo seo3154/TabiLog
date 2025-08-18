@@ -1,3 +1,4 @@
+// src/apis/users.js
 import client from "./client";
 
 export async function getUserByLoginId(loginId) {
@@ -5,12 +6,12 @@ export async function getUserByLoginId(loginId) {
   return data; // UserProfileDto
 }
 
-// src/apis/users.js
 export async function updateUserProfile(loginId, form) {
-  // return (await axios.put(`/api/users/${loginId}`, form)).data;
-  return Promise.resolve(form); // MOCK
+  const { data } = await client.put(`/api/users/${loginId}`, form);
+  return data; // 최신 UserProfileDto
 }
+
 export async function updateUserMbti(loginId, mbtiName) {
-  // return (await axios.put(`/api/users/${loginId}/mbti`, { mbtiName })).data;
-  return Promise.resolve({ mbtiName }); // MOCK
+  const { data } = await client.put(`/api/users/${loginId}/mbti`, { mbtiName });
+  return data; // 최신 UserProfileDto (mbtiName/mbtiUrl 반영)
 }
