@@ -38,7 +38,7 @@ export default function OneToOneForm() {
                   <input type="checkbox" id="agree" name="agree" />
                   <label htmlFor="agree">個人情報に同意します</label>
                   <button type="submit" className="submit-btn">
-                    작성하기
+                    作成する
                   </button>
                 </div>
               </div>
