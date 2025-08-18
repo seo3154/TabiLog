@@ -41,8 +41,8 @@ export default function OneToOneForm() {
             padding: "10px",
           }}
         >
-          <div className="tab">全ての投稿</div>
-          <div className="tab active">自分の投稿</div>
+          <div href="CenterPage.jsx" className="tab">全ての投稿</div>
+          <div href="CenterPage.jsx" className="tab active">自分の投稿</div>
         </div>
 
         {/* 중앙 콘텐츠 */}
