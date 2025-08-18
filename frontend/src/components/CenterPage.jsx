@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Button from "./Button"; // Button.jsx 불러오기
 
-export default function CenterPage() {
+export default function CustomerCenter() {
   const [activeTab, setActiveTab] = useState("all");
   const [openFaq, setOpenFaq] = useState(null);
   const [submittedPosts, setSubmittedPosts] = useState([]);
@@ -33,7 +32,9 @@ export default function CenterPage() {
     { title: "写真がアップロードできない", status: "未対応", date: "2025-08-06" },
   ];
 
-  const toggleFaq = (index) => setOpenFaq(openFaq === index ? null : index);
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -46,11 +47,14 @@ export default function CenterPage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.title) return alert("タイトルを入力してください");
-    const newPost = formData.file
-      ? `${formData.title} - ${formData.file.name}`
-      : formData.title;
+    const newPost = formData.file ? `${formData.title} - ${formData.file.name}` : formData.title;
     setSubmittedPosts(prev => [...prev, newPost]);
     setFormData({ title: "", content: "", file: null, agree: false });
+  };
+
+  const showWriteForm = () => {
+    setActiveTab("write");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -58,14 +62,12 @@ export default function CenterPage() {
       <h1 style={{ textAlign: "center", marginTop: 20 }}>顧客センター</h1>
       <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
 
-      {/* 좌측 탭 버튼 */}
+      {/* 좌측 탭 */}
       <div className="tab-container">
-        <Button variant={activeTab === "all" ? "black" : "white"} onClick={() => setActiveTab("all")}>全ての投稿</Button>
-        <Button variant={activeTab === "mine" ? "black" : "white"} onClick={() => setActiveTab("mine")}>自分の投稿</Button>
-        <Button variant={activeTab === "write" ? "black" : "white"} onClick={() => setActiveTab("write")}>1:1 작성하기</Button>
+        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>全ての投稿</div>
+        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>自分の投稿</div>
       </div>
 
-      {/* 중앙 콘텐츠 */}
       <div className="content">
         {activeTab === "all" && (
           <>
@@ -74,8 +76,7 @@ export default function CenterPage() {
               {faqs.map((faq, idx) => (
                 <div className="faq-item" key={idx}>
                   <button onClick={() => toggleFaq(idx)}>
-                    <span style={{ color: "red", marginRight: 5 }}>Q</span>
-                    {idx + 1}. {faq.question}
+                    <span style={{ color: "red", marginRight: 5 }}>Q</span>{idx + 1}. {faq.question}
                   </button>
                   <div className="faq-answer" style={{ maxHeight: openFaq === idx ? "150px" : "0", padding: openFaq === idx ? "10px" : "0" }}>
                     <p>{faq.answer}</p>
@@ -83,6 +84,7 @@ export default function CenterPage() {
                 </div>
               ))}
             </div>
+
             <h2>ユーザーのお問い合わせ</h2>
             <table>
               <thead>
@@ -97,10 +99,16 @@ export default function CenterPage() {
                     <td>{p.date}</td>
                   </tr>
                 ))}
+                <tr>
+                  <td colSpan={4} style={{ textAlign: "right" }}>
+                    <button onClick={showWriteForm} className="submit-btn">1:1相談する</button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </>
         )}
+
         {activeTab === "mine" && (
           <>
             <h2>私の投稿</h2>
@@ -110,31 +118,41 @@ export default function CenterPage() {
               </thead>
               <tbody>
                 {myPosts.map((p, idx) => (
-                  <tr key={idx} style={{ cursor: "pointer" }} onClick={() => setActiveTab("write")}>
+                  <tr key={idx} style={{ cursor: "pointer" }} onClick={showWriteForm}>
                     <td>{p.title}</td>
                     <td>{p.status}</td>
                     <td>{p.date}</td>
                   </tr>
                 ))}
+                <tr>
+                  <td colSpan={4} style={{ textAlign: "right" }}>
+                    <button onClick={showWriteForm} className="submit-btn">1:1相談する</button>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </>
         )}
+
         {activeTab === "write" && (
-          <>
+          <div id="write-form">
             <h2>1:1 相談フォーム</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder="タイトルを入力してください" />
               </div>
               <div className="form-group">
-                <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください" />
-                <input type="file" name="file" onChange={handleInputChange} />
-                <label>
-                  <input type="checkbox" name="agree" checked={formData.agree} onChange={handleInputChange} />
-                  個人情報に同意します
-                </label>
-                <Button type="submit">작성하기</Button>
+                <div className="textarea-wrapper">
+                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください"></textarea>
+                  <div className="bottom-actions">
+                    <input type="file" name="file" onChange={handleInputChange} />
+                    <div className="actions-inline">
+                      <input type="checkbox" name="agree" checked={formData.agree} onChange={handleInputChange} />
+                      <label htmlFor="agree">個人情報に同意します</label>
+                      <button type="submit" className="submit-btn">작성하기</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </form>
             {submittedPosts.length > 0 && (
@@ -142,7 +160,7 @@ export default function CenterPage() {
                 {submittedPosts.map((post, idx) => <li key={idx}>{post}</li>)}
               </ul>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
