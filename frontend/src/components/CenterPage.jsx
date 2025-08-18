@@ -3,6 +3,8 @@ import React, { useState } from "react";
 export default function CenterPage() {
   const [activeTab, setActiveTab] = useState("all");
   const [openFaq, setOpenFaq] = useState(null);
+  const [submittedPosts, setSubmittedPosts] = useState([]);
+  const [formData, setFormData] = useState({ title: "", content: "", file: null, agree: false });
 
   const faqs = [
     { question: "一人でも構いませんか", answer: "一人で旅行をする方は多いので、大丈夫です。" },
@@ -30,80 +32,54 @@ export default function CenterPage() {
     { title: "写真がアップロードできない", status: "未対応", date: "2025-08-06" },
   ];
 
-  const toggleFaq = (idx) => {
-    setOpenFaq(openFaq === idx ? null : idx);
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : type === "file" ? files[0] : value
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!formData.title) return alert("タイトルを入力してください");
+    const newPost = formData.file
+      ? `${formData.title} - ${formData.file.name}`
+      : formData.title;
+    setSubmittedPosts(prev => [...prev, newPost]);
+    setFormData({ title: "", content: "", file: null, agree: false });
   };
 
   return (
-    <div style={{ fontFamily: "Arial, sans-serif" }}>
+    <div>
+      <h1 style={{ textAlign: "center", marginTop: 20 }}>顧客センター</h1>
+      <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
+
       {/* 좌측 탭 */}
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        position: "fixed",
-        left: 0,
-        top: 100,
-        width: 150,
-        backgroundColor: "#f5f5f5",
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        padding: 10
-      }}>
-        <button
-          className={`tab ${activeTab === "all" ? "active" : ""}`}
-          style={{ padding: "10px 5px", marginBottom: 5, cursor: "pointer", border: "none", borderRadius: 5, backgroundColor: "#fff", textAlign: "center" }}
-          onClick={() => setActiveTab("all")}
-        >
-          全ての投稿
-        </button>
-        <button
-          className={`tab ${activeTab === "mine" ? "active" : ""}`}
-          style={{ padding: "10px 5px", marginBottom: 5, cursor: "pointer", border: "none", borderRadius: 5, backgroundColor: "#fff", textAlign: "center" }}
-          onClick={() => setActiveTab("mine")}
-        >
-          自分の投稿
-        </button>
+      <div className="tab-container">
+        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>全ての投稿</div>
+        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>自分の投稿</div>
+        <div className={`tab ${activeTab === "write" ? "active" : ""}`} onClick={() => setActiveTab("write")}>1:1 작성하기</div>
       </div>
 
-      <div style={{ marginLeft: 170, width: "80%" }}>
-        {/* 전체 게시글 */}
+      {/* 중앙 콘텐츠 */}
+      <div className="content">
+        {/* 전체 게시글 + FAQ */}
         {activeTab === "all" && (
           <>
             <h2>いつもある質問(FAQ)</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10, marginBottom: 30 }}>
+            <div className="faq-grid">
               {faqs.map((faq, idx) => (
-                <div key={idx}>
-                  <button
-                    onClick={() => toggleFaq(idx)}
-                    style={{
-                      cursor: "pointer",
-                      padding: "15px 10px",
-                      fontSize: 16,
-                      borderTop: "1px solid #888",
-                      borderBottom: "1px solid #888",
-                      borderLeft: "none",
-                      borderRight: "none",
-                      backgroundColor: "#fff",
-                      textAlign: "left",
-                      minHeight: 60,
-                      display: "flex",
-                      alignItems: "center",
-                      width: "100%",
-                      boxSizing: "border-box",
-                      transition: "background-color 0.3s"
-                    }}
-                  >
+                <div className="faq-item" key={idx}>
+                  <button onClick={() => toggleFaq(idx)}>
                     <span style={{ color: "red", marginRight: 5 }}>Q</span>
                     {idx + 1}. {faq.question}
                   </button>
-                  <div style={{
-                    overflow: "hidden",
-                    maxHeight: openFaq === idx ? 150 : 0,
-                    transition: "max-height 0.3s ease-out, padding 0.3s ease",
-                    borderBottom: "1px solid #000",
-                    backgroundColor: "#fafafa",
-                    padding: openFaq === idx ? 10 : 0,
-                  }}>
+                  <div className="faq-answer" style={{ maxHeight: openFaq === idx ? "150px" : "0", padding: openFaq === idx ? "10px" : "0" }}>
                     <p>{faq.answer}</p>
                   </div>
                 </div>
@@ -111,30 +87,21 @@ export default function CenterPage() {
             </div>
 
             <h2>ユーザーのお問い合わせ</h2>
-            <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: 30 }}>
+            <table>
               <thead>
-                <tr>
-                  <th>問い合わせ者</th>
-                  <th>タイトル</th>
-                  <th>状態</th>
-                  <th>日付</th>
-                </tr>
+                <tr><th>問い合わせ者</th><th>タイトル</th><th>状態</th><th>日付</th></tr>
               </thead>
               <tbody>
                 {allPosts.map((p, idx) => (
                   <tr key={idx}>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.name}</td>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.title}</td>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.status}</td>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.date}</td>
+                    <td>{p.name}</td>
+                    <td>{p.title}</td>
+                    <td>{p.status}</td>
+                    <td>{p.date}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
-
-            <div style={{ textAlign: "right", marginBottom: 30 }}>
-              <a href="1to1.html" style={{ textDecoration: "underline", color: "black", fontSize: 16 }}>1:1 相談する</a>
-            </div>
           </>
         )}
 
@@ -142,28 +109,50 @@ export default function CenterPage() {
         {activeTab === "mine" && (
           <>
             <h2>私の投稿</h2>
-            <table style={{ width: "100%", borderCollapse: "collapse", marginBottom: 30 }}>
+            <table>
               <thead>
-                <tr>
-                  <th>タイトル</th>
-                  <th>状態</th>
-                  <th>日付</th>
-                </tr>
+                <tr><th>タイトル</th><th>状態</th><th>日付</th></tr>
               </thead>
               <tbody>
                 {myPosts.map((p, idx) => (
-                  <tr key={idx}>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.title}</td>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.status}</td>
-                    <td style={{ borderTop: "1px solid #000", borderBottom: "1px solid #000", padding: 8 }}>{p.date}</td>
+                  <tr key={idx} style={{ cursor: "pointer" }} onClick={() => setActiveTab("write")}>
+                    <td>{p.title}</td>
+                    <td>{p.status}</td>
+                    <td>{p.date}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </>
+        )}
 
-            <div style={{ textAlign: "right", marginBottom: 30 }}>
-              <a href="1to1.html" style={{ textDecoration: "underline", color: "black", fontSize: 16 }}>1:1 相談する</a>
-            </div>
+        {/* 1:1 작성폼 */}
+        {activeTab === "write" && (
+          <>
+            <h2>1:1 相談フォーム</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder="タイトルを入力してください" />
+              </div>
+              <div className="form-group">
+                <div className="textarea-wrapper">
+                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください" />
+                  <div className="bottom-actions">
+                    <input type="file" name="file" onChange={handleInputChange} />
+                    <div className="actions-inline">
+                      <input type="checkbox" name="agree" checked={formData.agree} onChange={handleInputChange} />
+                      <label htmlFor="agree">個人情報に同意します</label>
+                      <button type="submit" className="submit-btn">작성하기</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            {submittedPosts.length > 0 && (
+              <ul>
+                {submittedPosts.map((post, idx) => <li key={idx}>{post}</li>)}
+              </ul>
+            )}
           </>
         )}
       </div>
