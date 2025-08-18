@@ -3,8 +3,8 @@ import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import NoticePage from "./pages/NoticePage";
 import Header from "./components/Header";
-
 import RecommendPage from "./pages/RecommendPage";
+import CommunityPage from "./pages/CommunityPage";
 import TravelDetailPage from "./pages/TravelDetailPage";
 
 function App() {
@@ -15,8 +15,8 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/notice/*" element={<NoticePage />} />
-
         <Route path="/recommend/*" element={<RecommendPage />} />
+        <Route path="/community" element={<CommunityPage />} />
         <Route path="/place/:id" element={<TravelDetailPage />} />
         <Route path="*" element={<Navigate to="/" />} />
         {/* 기타 Route 추가 */}
