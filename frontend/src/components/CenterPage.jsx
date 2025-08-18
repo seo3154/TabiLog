@@ -33,9 +33,7 @@ export default function CenterPage() {
     { title: "写真がアップロードできない", status: "未対応", date: "2025-08-06" },
   ];
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  const toggleFaq = (index) => setOpenFaq(openFaq === index ? null : index);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -60,31 +58,15 @@ export default function CenterPage() {
       <h1 style={{ textAlign: "center", marginTop: 20 }}>顧客センター</h1>
       <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
 
-      {/* 좌측 탭 (Button 적용) */}
-      <div className="tab-container" style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
-        <Button
-          variant={activeTab === "all" ? "active" : "default"}
-          onClick={() => setActiveTab("all")}
-        >
-          全ての投稿
-        </Button>
-        <Button
-          variant={activeTab === "mine" ? "active" : "default"}
-          onClick={() => setActiveTab("mine")}
-        >
-          自分の投稿
-        </Button>
-        <Button
-          variant={activeTab === "write" ? "active" : "default"}
-          onClick={() => setActiveTab("write")}
-        >
-          1:1 작성하기
-        </Button>
+      {/* 좌측 탭 버튼 */}
+      <div className="tab-container">
+        <Button variant={activeTab === "all" ? "black" : "white"} onClick={() => setActiveTab("all")}>全ての投稿</Button>
+        <Button variant={activeTab === "mine" ? "black" : "white"} onClick={() => setActiveTab("mine")}>自分の投稿</Button>
+        <Button variant={activeTab === "write" ? "black" : "white"} onClick={() => setActiveTab("write")}>1:1 작성하기</Button>
       </div>
 
       {/* 중앙 콘텐츠 */}
       <div className="content">
-        {/* 전체 게시글 + FAQ */}
         {activeTab === "all" && (
           <>
             <h2>いつもある質問(FAQ)</h2>
@@ -101,7 +83,6 @@ export default function CenterPage() {
                 </div>
               ))}
             </div>
-
             <h2>ユーザーのお問い合わせ</h2>
             <table>
               <thead>
@@ -120,8 +101,6 @@ export default function CenterPage() {
             </table>
           </>
         )}
-
-        {/* 내 게시글 */}
         {activeTab === "mine" && (
           <>
             <h2>私の投稿</h2>
@@ -141,8 +120,6 @@ export default function CenterPage() {
             </table>
           </>
         )}
-
-        {/* 1:1 작성폼 */}
         {activeTab === "write" && (
           <>
             <h2>1:1 相談フォーム</h2>
@@ -151,17 +128,13 @@ export default function CenterPage() {
                 <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder="タイトルを入力してください" />
               </div>
               <div className="form-group">
-                <div className="textarea-wrapper">
-                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください" />
-                  <div className="bottom-actions">
-                    <input type="file" name="file" onChange={handleInputChange} />
-                    <div className="actions-inline">
-                      <input type="checkbox" name="agree" checked={formData.agree} onChange={handleInputChange} />
-                      <label htmlFor="agree">個人情報に同意します</label>
-                      <button type="submit" className="submit-btn">작성하기</button>
-                    </div>
-                  </div>
-                </div>
+                <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください" />
+                <input type="file" name="file" onChange={handleInputChange} />
+                <label>
+                  <input type="checkbox" name="agree" checked={formData.agree} onChange={handleInputChange} />
+                  個人情報に同意します
+                </label>
+                <Button type="submit">작성하기</Button>
               </div>
             </form>
             {submittedPosts.length > 0 && (
