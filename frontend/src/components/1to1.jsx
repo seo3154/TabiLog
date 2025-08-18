@@ -1,140 +1,130 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function OneToOneForm() {
-  const [activeTab, setActiveTab] = useState("all");
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    title: "",
-    content: "",
-    image: null
-  });
-  const [submittedPosts, setSubmittedPosts] = useState([]);
-
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === "image") {
-      // 이미지 파일 선택 시
-      const file = files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setFormData((prev) => ({ ...prev, image: reader.result }));
-        };
-        reader.readAsDataURL(file);
-      }
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmittedPosts([...submittedPosts, { ...formData, date: new Date().toISOString().slice(0,10), status:"未対応" }]);
-    setFormData({ name: "", email: "", title: "", content: "", image: null });
-  };
-
   return (
     <div>
-      <h2 style={{ textAlign: "center" }}>1:1 相談フォーム</h2>
+      <h2>1:1 相談フォーム</h2>
+      <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
 
-      <div style={{ display: "flex", marginTop: "20px" }}>
-        {/* 좌측 탭 */}
-        <div style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "150px",
-          backgroundColor: "#f5f5f5",
-          borderTopRightRadius: "10px",
-          borderBottomRightRadius: "10px",
-          padding: "10px",
-          position: "fixed",
-          left: 0,
-          top: "100px"
-        }}>
-          <div
-            onClick={() => setActiveTab("all")}
-            style={{
-              padding: "10px 5px",
-              textAlign: "center",
-              marginBottom: "5px",
-              borderRadius: "5px",
-              cursor: "pointer",
-              backgroundColor: activeTab === "all" ? "#ddd" : "transparent",
-              fontWeight: activeTab === "all" ? "bold" : "normal"
-            }}
-          >
-            全ての投稿
-          </div>
-          <div
-            onClick={() => setActiveTab("mine")}
-            style={{
-              padding: "10px 5px",
-              textAlign: "center",
-              marginBottom: "5px",
-              borderRadius: "5px",
-              cursor: "pointer",
-              backgroundColor: activeTab === "mine" ? "#ddd" : "transparent",
-              fontWeight: activeTab === "mine" ? "bold" : "normal"
-            }}
-          >
-            自分の投稿
-          </div>
-        </div>
-
-        {/* 오른쪽 컨텐츠 */}
-        <div style={{ width: "80%", margin: "0 auto", paddingLeft: "150px" }}>
-          {/* 폼 */}
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px", marginTop: "30px" }}>
-            <label>名前</label>
-            <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-
-            <label>メールアドレス</label>
-            <input type="text" name="email" value={formData.email} onChange={handleChange} required />
-
-            <label>タイトル</label>
-            <input type="text" name="title" value={formData.title} onChange={handleChange} required />
-
-            <label>内容</label>
-            <textarea name="content" value={formData.content} onChange={handleChange} required />
-
-            <label>画像添付 (jpg, png)</label>
-            <input type="file" name="image" accept="image/*" onChange={handleChange} />
-            {formData.image && <img src={formData.image} alt="プレビュー" style={{ maxWidth:"200px", marginTop:"10px" }} />}
-
-            <button type="submit">送信</button>
-          </form>
-
-          {/* 작성글 게시판 */}
-          {submittedPosts.length > 0 && (
-            <div style={{ marginTop:"40px" }}>
-              <h2>投稿一覧</h2>
-              <table style={{ width:"100%", borderCollapse:"collapse", marginTop:"20px" }}>
-                <thead>
-                  <tr>
-                    <th>名前</th>
-                    <th>タイトル</th>
-                    <th>状態</th>
-                    <th>日付</th>
-                    <th>画像</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {submittedPosts.map((post, idx) => (
-                    <tr key={idx}>
-                      <td>{post.name}</td>
-                      <td>{post.title}</td>
-                      <td>{post.status}</td>
-                      <td>{post.date}</td>
-                      <td>{post.image ? <img src={post.image} alt="投稿画像" style={{ maxWidth:"100px" }} /> : "-"}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
+      {/* 좌측 탭 */}
+      <div className="tab-container">
+        <div className="tab" id="tab-all">全ての投稿</div>
+        <div className="tab active" id="tab-mine">自分の投稿</div>
       </div>
+
+      {/* 중앙 콘텐츠 */}
+      <div className="content">
+        <form>
+          <div className="form-group">
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="タイトルを入力してください"
+            />
+          </div>
+
+          <div className="form-group">
+            <div className="textarea-wrapper">
+              <textarea
+                id="content"
+                name="content"
+                placeholder="内容を入力してください"
+                rows={10}
+              ></textarea>
+              <div className="bottom-actions">
+                <input type="file" id="file" name="file" />
+                <div className="actions-inline">
+                  <input type="checkbox" id="agree" name="agree" />
+                  <label htmlFor="agree">個人情報に同意します</label>
+                  <button type="submit" className="submit-btn">
+                    작성하기
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      {/* 스타일 */}
+      <style jsx>{`
+        body {
+          font-family: Arial, sans-serif;
+        }
+        h2 {
+          text-align: center;
+        }
+        .tab-container {
+          display: flex;
+          flex-direction: column;
+          position: fixed;
+          left: 0;
+          top: 100px;
+          width: 150px;
+          background-color: #f5f5f5;
+          border-top-right-radius: 10px;
+          border-bottom-right-radius: 10px;
+          padding: 10px;
+        }
+        .tab {
+          padding: 10px 5px;
+          text-align: center;
+          margin-bottom: 5px;
+          cursor: pointer;
+          border: none;
+          border-radius: 5px;
+        }
+        .tab.active {
+          background-color: #ddd;
+          font-weight: bold;
+        }
+        .content {
+          margin-left: 170px;
+          width: 80%;
+        }
+        .form-group {
+          margin-bottom: 15px;
+        }
+        input[type="text"],
+        textarea {
+          width: 100%;
+          padding: 12px;
+          box-sizing: border-box;
+          font-size: 14px;
+        }
+        textarea {
+          min-height: 400px;
+          resize: vertical;
+        }
+        .textarea-wrapper {
+          position: relative;
+        }
+        .bottom-actions {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-top: 10px;
+          gap: 10px;
+        }
+        input[type="file"] {
+          display: block;
+        }
+        .actions-inline {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        .submit-btn {
+          padding: 6px 12px;
+          font-size: 14px;
+          background-color: black;
+          color: white;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      `}</style>
     </div>
   );
 }
