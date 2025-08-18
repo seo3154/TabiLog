@@ -27,13 +27,13 @@ a{
 /* board */
 .board{
     width: 1000px;
-    margin-top: 60px; 
+    margin-top: 40px; 
 }
 
 .board h2{
-    text-align: center;
+    text-align: left;
     position: relative;
-    margin-bottom: 40px;
+    margin-bottom: 16px;
 }
 
 
@@ -90,7 +90,6 @@ a{
 
 /* 제목 */
 .board_table tbody td.title a {
-    text-align: left;
     padding-left: 5px;
 }
 

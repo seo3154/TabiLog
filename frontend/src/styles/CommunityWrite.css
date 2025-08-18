@@ -1,0 +1,116 @@
+@charset "utf-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.wrap {
+  width: 1920px;
+  margin: 0 auto;
+}
+
+
+
+/* MBTI */
+.mbti {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.mbti p {
+  width: 80px;
+  height: 38px;
+  border: 1px solid #000;
+  text-align: center;
+  line-height: 38px;
+}
+
+
+
+/* 글 작성 */
+.write_section {
+  width: 100%;
+  max-width: 1000px;
+  margin: 150px auto 0 auto;
+  text-align: center;
+}
+
+
+
+/* 선택 영역 (MBTI, 카테고리, 제목) */
+.selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.selection .filter select {
+  appearance: none;
+  width: 100px;
+  height: 38px;
+  padding-left: 10px;
+  min-width: 80px;
+}
+
+.selection .title input {
+  width: 690px;
+  height: 38px;
+  padding-left: 10px;
+  color: #ccc;
+  max-width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+
+
+/* 글 작성 */
+.writebox textarea {
+  width: 100%;
+  max-width: 814px;
+  height: 500px;
+  color: #ccc;
+  font-size: 18px;
+  margin-bottom: 30px;
+  padding: 4px 0 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+
+
+/* 버튼 */
+.button {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.button .submit {
+  appearance: none;
+  width: 70px;
+  height: 35px;
+  border: none;
+  border-radius: 6px;
+  background-color: #131313;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}

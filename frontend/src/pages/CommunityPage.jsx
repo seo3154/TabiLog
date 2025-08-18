@@ -1,9 +1,15 @@
+// 커뮤니티
 import React from "react";
-import "../styles/CommunityPage.css";
+import { useNavigate } from "react-router-dom";
+import "../styles/CommunityBoard.css";
 import Header from "../components/Header";
 import Sidebar from "../components/SideBar";
+import WriteButton from "../components/Button";
+import CommunityBoard from "../components/CommunityBoard";
 
-export default function Community() {
+export default function CommunityPage() {
+  const navigate = useNavigate();
+
   const posts = Array.from({ length: 15 }, (_, i) => {
     const no = 15 - i;
     return {
@@ -25,32 +31,10 @@ export default function Community() {
     <div className="community-page">
       <Sidebar menuItems={menuItems} />
       <div className="wrap">
-        <div className="board">
-          <h2>INFJ</h2>
-          <table className="board_table">
-            <thead>
-              <tr>
-                <th>NO</th>
-                <th>MBTI</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-              </tr>
-            </thead>
-            <tbody>
-              {posts.map((post) => (
-                <tr key={post.id}>
-                  <td><a href="#">{post.id}</a></td>
-                  <td><a href="#">{post.mbti}</a></td>
-                  <td className="title"><a href="#">{post.title}</a></td>
-                  <td><a href="#">{post.author}</a></td>
-                  <td><a href="#">{post.date}</a></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
+        <WriteButton onClick={() => navigate("/community/write")}>
+          글 작성
+        </WriteButton>
+        <CommunityBoard posts={posts} />
         <div className="bottom">
           <div>
             <select name="select" id="select">
@@ -58,11 +42,7 @@ export default function Community() {
               <option value="내용">내용</option>
               <option value="제목과 내용">제목과 내용</option>
             </select>
-
-            <input
-              type="search"
-              placeholder="검색어를 입력해주세요."
-            />
+            <input type="search" placeholder="검색어를 입력해주세요." />
           </div>
         </div>
       </div>

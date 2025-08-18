@@ -10,6 +10,9 @@
     cursor: pointer;
 }
 
+
+
+/* 기본 버튼 스타일 */
 .btn.white {
     background-color: #fff;
     color: #000;
@@ -18,4 +21,18 @@
 .btn.black {
     background-color: #000;
     color: #fff;
+}
+
+
+
+/* 여기서부턴 커스텀 */
+/* CommunityWrite */
+
+.delete_button{
+    width: 70px;
+    height: 35px;
+    border: 1px solid #131313;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
 }
