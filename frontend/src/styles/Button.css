@@ -1,38 +1,79 @@
 @charset "utf-8";
 
-.btn{
+/* 기본 버튼 스타일 */
+.btn {
     appearance: none;
-    width: 100px;
-    height: 40px;
+    width: 80px;
+    height: 35px;
     border-radius: 20px;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
     cursor: pointer;
 }
 
-
-
-/* 기본 버튼 스타일 */
+/* 기본 버튼 색상 */
 .btn.white {
     background-color: #fff;
     color: #000;
-} 
+}
 
 .btn.black {
     background-color: #000;
     color: #fff;
 }
 
-
-
-/* 여기서부턴 커스텀 */
-/* CommunityWrite */
-
-.delete_button{
+/* 여기서부터 커스텀 버튼 */
+.delete_button {
     width: 70px;
     height: 35px;
     border: 1px solid #131313;
     border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
+}
+
+/* 반응형 추가 */
+@media screen and (max-width: 1024px) {
+  /* 화면 크기가 1024px 이하일 때 */
+  .btn {
+    width: 70px;
+    height: 30px;
+    font-size: 12px; /* 버튼 글자 크기 줄이기 */
+  }
+
+  .delete_button {
+    width: 60px;
+    height: 30px;
+    font-size: 14px; /* 삭제 버튼 글자 크기 줄이기 */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  /* 화면 크기가 768px 이하일 때 */
+  .btn {
+    width: 60px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .delete_button {
+    width: 50px;
+    height: 25px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* 화면 크기가 480px 이하일 때 */
+  .btn {
+    width: 50px;
+    height: 25px;
+    font-size: 10px; /* 버튼 글자 크기 더 줄이기 */
+  }
+
+  .delete_button {
+    width: 45px;
+    height: 20px;
+    font-size: 10px;
+  }
 }
