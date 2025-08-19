@@ -2,6 +2,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CommunityBoard.css";
+import "../styles/CommunityPage.css";
 import Header from "../components/Header";
 import Sidebar from "../components/SideBar";
 import WriteButton from "../components/Button";
@@ -31,7 +32,8 @@ export default function CommunityPage() {
     <div className="community-page">
       <Sidebar menuItems={menuItems} />
       <div className="wrap">
-        <WriteButton onClick={() => navigate("/community/write")}>
+        <WriteButton variant="black" className="WriteButton"
+        onClick={() => navigate("/community/write")}>
           글 작성
         </WriteButton>
         <CommunityBoard posts={posts} />
