@@ -58,7 +58,7 @@ header .logo a h2 {
 header .menu {
   display: flex;
   justify-content: space-evenly;
-  width: 75%;
+  width: 80%;
   line-height: 70px;
 }
 
