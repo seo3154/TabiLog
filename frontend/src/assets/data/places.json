@@ -47,6 +47,8 @@
       }
     ],
     "map": {
+      "lat": 43.5317,
+      "lng": 142.4653,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -105,6 +107,8 @@
       }
     ],
     "map": {
+      "lat": 40.6081,
+      "lng": 140.4636,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -171,6 +175,8 @@
       }
     ],
     "map": {
+      "lat": 39.5994,
+      "lng": 140.5617,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -233,6 +239,8 @@
       }
     ],
     "map": {
+      "lat": 39.7048,
+      "lng": 141.1381,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -291,6 +299,8 @@
       }
     ],
     "map": {
+      "lat": 38.5706,
+      "lng": 140.5301,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -361,6 +371,8 @@
       }
     ],
     "map": {
+      "lat": 38.0414,
+      "lng": 140.5298,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -419,6 +431,8 @@
       }
     ],
     "map": {
+      "lat": 37.331,
+      "lng": 139.8604,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -477,6 +491,8 @@
       }
     ],
     "map": {
+      "lat": 36.623,
+      "lng": 138.5967,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -544,6 +560,8 @@
       }
     ],
     "map": {
+      "lat": 36.7586,
+      "lng": 139.5986,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -602,6 +620,8 @@
       }
     ],
     "map": {
+      "lat": 36.4064,
+      "lng": 140.5964,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -661,6 +681,8 @@
       }
     ],
     "map": {
+      "lat": 35.7863,
+      "lng": 140.3182,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -719,6 +741,8 @@
       }
     ],
     "map": {
+      "lat": 35.9216,
+      "lng": 139.6179,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -764,8 +788,7 @@
     "gallery": [
       "/Place/13.Tokyo_2.jpg",
       "/Place/13.Tokyo_3.jpg",
-      "/Place/13.Tokyo_4.jpg",
-      "/Place/13.Tokyo_5.jpg"
+      "/Place/13.Tokyo_4.jpg"
     ],
     "foods": [
       {
@@ -778,6 +801,8 @@
       }
     ],
     "map": {
+      "lat": 35.628,
+      "lng": 139.7718,
       "embedUrl": ""
     },
     "nearbyRestaurants": [
@@ -840,7 +865,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 35.4553,
+      "lng": 139.6369
     },
     "nearbyRestaurants": [
       {
@@ -894,7 +921,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 37.4549, 
+      "lng": 138.8392
     },
     "nearbyRestaurants": [
       {
@@ -952,7 +981,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 36.5766, 
+      "lng": 137.5915
     },
     "nearbyRestaurants": [
       {
@@ -1018,7 +1049,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 36.5623, 
+      "lng": 136.6626
     },
     "nearbyRestaurants": [
       {
@@ -1072,7 +1105,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 36.0849, 
+      "lng": 136.5084
     },
     "nearbyRestaurants": [
       {
@@ -1131,7 +1166,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.9740, 
+      "lng": 138.4659
     },
     "nearbyRestaurants": [
       {
@@ -1193,7 +1230,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 35.5016, 
+      "lng": 138.8016
     },
     "nearbyRestaurants": [
       {
@@ -1255,7 +1294,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 36.2569, 
+      "lng": 137.6372
     },
     "nearbyRestaurants": [
       {
@@ -1313,7 +1354,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 36.2584, 
+      "lng": 136.9062
     },
     "nearbyRestaurants": [
       {
@@ -1375,7 +1418,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 35.0906, 
+      "lng": 136.8784
     },
     "nearbyRestaurants": [
       {
@@ -1429,7 +1474,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.4555, 
+      "lng": 136.7254
     },
     "nearbyRestaurants": [
       {
@@ -1487,7 +1534,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 35.0113, 
+      "lng": 135.8679
     },
     "nearbyRestaurants": [
       {
@@ -1557,7 +1606,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.6756, 
+      "lng": 135.8876
     },
     "nearbyRestaurants": [
       {
@@ -1615,7 +1666,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.9679, 
+      "lng": 135.7791
     },
     "nearbyRestaurants": [
       {
@@ -1673,7 +1726,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.6854, 
+      "lng": 135.8429
     },
     "nearbyRestaurants": [
       {
@@ -1735,7 +1790,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.6516,
+      "lng": 135.5059
     },
     "nearbyRestaurants": [
       {
@@ -1793,7 +1850,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.8396, 
+      "lng": 134.6938
     },
     "nearbyRestaurants": [
       {
@@ -1847,7 +1906,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.5958, 
+      "lng": 133.7717
     },
     "nearbyRestaurants": [
       {
@@ -1870,19 +1931,20 @@
       }
     ]
   },
-  { "id": "hiroshima-miyajima",
+  {
+    "id": "hiroshima-miyajima",
     "prefecture": "히로시마현",
     "name_ko": "미야지마",
     "name_jp": "宮島",
     "mbti": [
-        "INFP",
-        "ISFP",
-        "ENFP",
-        "INFJ"
-    ], 
+      "INFP",
+      "ISFP",
+      "ENFP",
+      "INFJ"
+    ],
     "hero": {
-      "image": "/Place/32.Hiroshima_1.jpg", 
-      "subtitle": "이쓰쿠시마" 
+      "image": "/Place/32.Hiroshima_1.jpg",
+      "subtitle": "이쓰쿠시마"
     },
     "intro": {
       "summary": "미야지마는 일본 혼슈 히로시마현에 위치한 아름다운 섬으로, 정식 명칭은 이쓰쿠시마입니다. 신의 섬이라 불리며 엄숙하면서도 신비로운 장소로 여겨져, 바다 위에 떠 있는 듯한 거대한 도리이와 유서 깊은 이쓰쿠시마 신사가 유명합니다.",
@@ -1894,37 +1956,39 @@
       "/Place/32.Hiroshima_4.jpg"
     ],
     "foods": [
-      { 
+      {
         "name": "모미지 만쥬",
         "image": "/Place/32.Hiroshima_5.jpg"
       },
-      { 
+      {
         "name": "굴 요리",
         "image": "/Place/32.Hiroshima_6.jpg"
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.2962, 
+      "lng": 132.3198
     },
     "nearbyRestaurants": [
-      { 
-        "name": "",
-        "image": ""
-      },
-      { 
-        "name": "",
-        "image": ""
-      } 
-    ],
-    "nearbyHotels": [ 
       {
         "name": "",
         "image": ""
       },
-      { 
+      {
         "name": "",
         "image": ""
-      } 
+      }
+    ],
+    "nearbyHotels": [
+      {
+        "name": "",
+        "image": ""
+      },
+      {
+        "name": "",
+        "image": ""
+      }
     ]
   },
   {
@@ -1962,7 +2026,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 35.5439, 
+      "lng": 134.2365
     },
     "nearbyRestaurants": [
       {
@@ -2016,7 +2082,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 35.4020, 
+      "lng": 132.6854
     },
     "nearbyRestaurants": [
       {
@@ -2074,7 +2142,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.9567, 
+      "lng": 130.9458
     },
     "nearbyRestaurants": [
       {
@@ -2136,7 +2206,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.3542, 
+      "lng": 134.0487
     },
     "nearbyRestaurants": [
       {
@@ -2194,7 +2266,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 34.0702, 
+      "lng": 134.5449
     },
     "nearbyRestaurants": [
       {
@@ -2252,7 +2326,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.8521, 
+      "lng": 132.7864
     },
     "nearbyRestaurants": [
       {
@@ -2306,7 +2382,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.4976, 
+      "lng": 133.5748
     },
     "nearbyRestaurants": [
       {
@@ -2368,7 +2446,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.5898, 
+      "lng": 130.4109
     },
     "nearbyRestaurants": [
       {
@@ -2426,7 +2506,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.1893, 
+      "lng": 129.8991
     },
     "nearbyRestaurants": [
       {
@@ -2484,7 +2566,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 32.7765,
+      "lng": 129.8636
     },
     "nearbyRestaurants": [
       {
@@ -2542,7 +2626,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 33.3159, 
+      "lng": 131.4696
     },
     "nearbyRestaurants": [
       {
@@ -2596,7 +2682,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 32.9255, 
+      "lng": 131.0777
     },
     "nearbyRestaurants": [
       {
@@ -2654,7 +2742,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 31.8048, 
+      "lng": 131.4749
     },
     "nearbyRestaurants": [
       {
@@ -2716,7 +2806,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 31.5964, 
+      "lng": 130.5628
     },
     "nearbyRestaurants": [
       {
@@ -2778,7 +2870,9 @@
       }
     ],
     "map": {
-      "embedUrl": ""
+      "embedUrl": "",
+      "lat": 26.2172, 
+      "lng": 127.7194
     },
     "nearbyRestaurants": [
       {
