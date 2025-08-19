@@ -9,17 +9,19 @@ export default function Signup() {
     phone: "",
     email: "",
     gender: "",
+    agree: false, // 동의 체크
   });
 
   // 입력값 변경 핸들러
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    const { name, value, type, checked } = e.target;
+    setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
   };
 
   // 제출 핸들러
   const handleSubmit = (e) => {
     e.preventDefault(); // 페이지 새로고침 방지
+    if (!formData.agree) return alert("회원가입 약관에 동의해주세요."); // 체크 확인
     console.log("회원가입 데이터:", formData);
     alert("회원가입 데이터가 콘솔에 출력됩니다!");
     // 여기서 Axios로 서버 전송 가능
@@ -140,6 +142,20 @@ export default function Signup() {
                   </label>
                 </td>
               </tr>
+              {/* 회원동의 체크박스 추가 */}
+              <tr>
+                <td colSpan="2">
+                  <label style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+                    <input
+                      type="checkbox"
+                      name="agree"
+                      checked={formData.agree}
+                      onChange={handleChange}
+                    />
+                    회원가입 약관에 동의합니다.
+                  </label>
+                </td>
+              </tr>
               <tr>
                 <td colSpan="2" style={{ textAlign: "center", paddingTop: "10px" }}>
                   <input type="submit" value="회원가입" style={submitStyle} />
@@ -153,7 +169,7 @@ export default function Signup() {
   );
 }
 
-// 스타일
+// 기존 스타일 그대로
 const fieldsetStyle = {
   width: "300px",
   margin: "auto",
