@@ -1,11 +1,38 @@
 // 게시판 글 목록
-import React from "react";
+import React, {useState} from "react";
 import "../styles/CommunityBoard.css";
 
 export default function PostList({ posts }) {
+  const mbtiList = [
+    "INFJ", "INFP", "INTJ", "INTP",
+    "ENFJ", "ENFP", "ENTJ", "ENTP",
+    "ISFJ", "ISFP", "ISTJ", "ISTP",
+    "ESFJ", "ESFP", "ESTJ", "ESTP"
+  ];
+
+  const [selectedMbti, setSelectedMbti] = useState('');
+
+  const handleChange = (e) => {
+    setSelectedMbti(e.target.value);
+  };
+
   return (
     <div className="board">
-      <h2>INFJ</h2>
+      <div>
+        <h2>INFJ</h2>
+
+        <div>
+          <select name="select" id="select" value={selectedMbti} onChange={handleChange}>
+            <option value="">MBTI ▼</option>
+            {mbtiList.map((mbti) => (
+              <option key={mbti} value={mbti}>
+                {mbti}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
       <table className="board_table">
         <thead>
           <tr>
