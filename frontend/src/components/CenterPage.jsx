@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function CenterPage() {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("all"); // all, mine, write, detail
   const [openFaq, setOpenFaq] = useState(null);
-  const [allPosts, setAllPosts] = useState([]);
-  const [myPosts, setMyPosts] = useState([]);
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  const [submittedPosts, setSubmittedPosts] = useState([]);
+
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -25,21 +27,17 @@ export default function CenterPage() {
     { question: "脱退したいです。", answer: "脱退の理由を聞いてみます。" },
   ];
 
-  useEffect(() => {
-    // 페이지 로드 시 전체 게시글 불러오기
-    fetch("/api/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setAllPosts(data);
-        // 내 게시글만 필터링 (예: userId === 내 id)
-        setMyPosts(data.filter((p) => p.isMine));
-      })
-      .catch((err) => console.error(err));
-  }, []);
+  const allPosts = [
+    { id: 1, name: "山田太郎", title: "ログインできません", status: "対応中", date: "2025-08-10", content: "ログインができない内容", answer: "対応中です", isMine: true },
+    { id: 2, name: "佐藤花子", title: "パスワード再発行について", status: "完了", date: "2025-08-09", content: "パスワードを忘れた", answer: "再発行完了", isMine: false },
+    { id: 3, name: "鈴木一郎", title: "会員登録方法を教えてください", status: "未対応", date: "2025-08-08", content: "会員登録方法の質問", answer: "", isMine: false },
+    { id: 4, name: "高橋美咲", title: "投稿の削除依頼", status: "対応中", date: "2025-08-07", content: "投稿削除希望", answer: "", isMine: true },
+    { id: 5, name: "田中健", title: "写真がアップロードできない", status: "未対応", date: "2025-08-06", content: "写真をアップできない", answer: "", isMine: true },
+  ];
 
-  const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
-  };
+  const myPosts = allPosts.filter((p) => p.isMine);
+
+  const toggleFaq = (idx) => setOpenFaq(openFaq === idx ? null : idx);
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -49,30 +47,31 @@ export default function CenterPage() {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.title) return alert("タイトルを入力してください");
+    const newPost = {
+      id: Date.now(),
+      name: "自分",
+      title: formData.title,
+      status: "未対応",
+      date: new Date().toISOString().split("T")[0],
+      content: formData.content,
+      answer: "",
+      isMine: true,
+    };
+    setSubmittedPosts([newPost, ...submittedPosts]);
+    setFormData({ title: "", content: "", file: null, agree: false });
+    setActiveTab("mine");
+  };
 
-    const fd = new FormData();
-    fd.append("title", formData.title);
-    fd.append("content", formData.content);
-    if (formData.file) fd.append("file", formData.file);
-
-    try {
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        body: fd,
-      });
-      if (!res.ok) throw new Error("投稿に失敗しました");
-
-      const newPost = await res.json();
-      setAllPosts((prev) => [newPost, ...prev]);
-      setMyPosts((prev) => [newPost, ...prev]);
-      setFormData({ title: "", content: "", file: null, agree: false });
-      setActiveTab("all"); // 작성 후 전체 탭으로 이동
-    } catch (err) {
-      alert(err.message);
-    }
+  const handleDelete = (id) => {
+    if (!window.confirm("本当に削除しますか？")) return;
+    const filteredPosts = myPosts.filter((p) => p.id !== id);
+    // 실제 삭제 로직 연결 가능
+    alert("삭제 완료 (임시)");
+    setSelectedPost(null);
+    setActiveTab("mine");
   };
 
   return (
@@ -81,15 +80,12 @@ export default function CenterPage() {
       <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
 
       <div className="tab-container">
-        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>
-          全ての投稿
-        </div>
-        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>
-          自分の投稿
-        </div>
+        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>全ての投稿</div>
+        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>自分の投稿</div>
       </div>
 
       <div className="content">
+        {/* FAQ & 전체 게시글 */}
         {activeTab === "all" && (
           <>
             <h2>いつもある質問(FAQ)</h2>
@@ -118,8 +114,8 @@ export default function CenterPage() {
                 </tr>
               </thead>
               <tbody>
-                {allPosts.map((p, idx) => (
-                  <tr key={idx}>
+                {allPosts.map((p) => (
+                  <tr key={p.id}>
                     <td>{p.name}</td>
                     <td>{p.title}</td>
                     <td>{p.status}</td>
@@ -128,9 +124,7 @@ export default function CenterPage() {
                 ))}
                 <tr style={{ textAlign: "right" }}>
                   <td colSpan={4}>
-                    <button className="submit-btn" onClick={() => setActiveTab("write")}>
-                      1:1相談する
-                    </button>
+                    <button className="submit-btn" onClick={() => setActiveTab("write")}>1:1相談する</button>
                   </td>
                 </tr>
               </tbody>
@@ -138,6 +132,7 @@ export default function CenterPage() {
           </>
         )}
 
+        {/* 내 게시글 */}
         {activeTab === "mine" && (
           <>
             <h2>私の投稿</h2>
@@ -150,8 +145,8 @@ export default function CenterPage() {
                 </tr>
               </thead>
               <tbody>
-                {myPosts.map((p, idx) => (
-                  <tr key={idx} onClick={() => setActiveTab("write")} style={{ cursor: "pointer" }}>
+                {myPosts.map((p) => (
+                  <tr key={p.id} style={{ cursor: "pointer" }} onClick={() => { setSelectedPost(p); setActiveTab("detail"); }}>
                     <td>{p.title}</td>
                     <td>{p.status}</td>
                     <td>{p.date}</td>
@@ -162,6 +157,32 @@ export default function CenterPage() {
           </>
         )}
 
+        {/* 상세보기 */}
+        {activeTab === "detail" && selectedPost && (
+          <div className="post-detail">
+            <div className="header" style={{ display: "flex", justifyContent: "space-between" }}>
+              <h2>{selectedPost.title}</h2>
+              <span>{selectedPost.date}</span>
+            </div>
+            <div className="content-area" style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
+              <div style={{ flex: 1 }}>
+                <h3>内容</h3>
+                <p>{selectedPost.content}</p>
+              </div>
+              <div style={{ flex: 1 }}>
+                <h3>回答</h3>
+                <p>{selectedPost.answer || "まだ回答がありません。"}</p>
+              </div>
+            </div>
+            <div className="actions" style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
+              <button className="submit-btn" onClick={() => setActiveTab("mine")}>戻る</button>
+              <button className="submit-btn" onClick={() => setActiveTab("write")}>修正</button>
+              <button className="submit-btn" onClick={() => handleDelete(selectedPost.id)}>削除</button>
+            </div>
+          </div>
+        )}
+
+        {/* 1:1 작성폼 */}
         {activeTab === "write" && (
           <>
             <h2>1:1 相談フォーム</h2>
@@ -171,7 +192,7 @@ export default function CenterPage() {
               </div>
               <div className="form-group">
                 <div className="textarea-wrapper">
-                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください" />
+                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください"></textarea>
                   <div className="bottom-actions">
                     <input type="file" name="file" onChange={handleInputChange} />
                     <div className="actions-inline">
@@ -183,6 +204,14 @@ export default function CenterPage() {
                 </div>
               </div>
             </form>
+
+            <div id="submitted-posts">
+              <ul>
+                {submittedPosts.map((p) => (
+                  <li key={p.id}>{p.title}{p.file ? ` - ${p.file.name}` : ""}</li>
+                ))}
+              </ul>
+            </div>
           </>
         )}
       </div>
