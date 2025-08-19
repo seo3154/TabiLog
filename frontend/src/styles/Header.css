@@ -15,23 +15,18 @@ a {
   color: inherit;
 }
 
-.wrap {
-  width: 1920px;
-  height: 5000px;
-}
+
 
 /* 로고 */
 header {
   display: flex;
   width: 100%;
-  height: var(--header-h);          /* 100px 대신 변수 사용 */
+  height: 70px;
   border-bottom: 1px solid #000;
   position: sticky;
   top: 0;
   background-color: #fff;
-  z-index: 2000;                    /* ← 헤더를 항상 위로 */
-  /* 선택: 살짝 그림자 */
-  /* box-shadow: 0 2px 6px rgba(0,0,0,.06); */
+  z-index: 2000;
 }
 
 header .logo {
@@ -47,15 +42,24 @@ header .logo a {
 }
 
 header .logo a img {
+  width: 40px;
+  height: 40px;
   margin-right: 20px;
+  object-fit: contain;
 }
+
+header .logo a h2 {
+  font-size: 20px;
+}
+
+
 
 /* 메뉴 */
 header .menu {
   display: flex;
   justify-content: space-evenly;
   width: 75%;
-  line-height: 100px;
+  line-height: 70px;
 }
 
 .menu {
@@ -63,6 +67,47 @@ header .menu {
 }
 
 .menu li {
-  font-size: 24px;
+  font-size: 18px;
   margin-left: 50px;
 }
+
+
+
+/* 반응형 추가 */
+@media screen and (max-width: 1024px) {
+  .menu li {
+    font-size: 16px;
+    margin-left: 30px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    height: 60px;
+  }
+
+  .menu li {
+    font-size: 12px;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header .logo {
+    width: 30%; 
+  }
+
+  header .logo a h2 {
+    font-size: 18px;
+  }
+
+  header .menu {
+    justify-content: space-between;
+  }
+
+  .menu li {
+    font-size: 10px;
+    margin-left: 10px;
+  }
+}
+
