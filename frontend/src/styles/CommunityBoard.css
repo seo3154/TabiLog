@@ -30,10 +30,28 @@ a{
     margin-top: 40px; 
 }
 
+.board div{
+    display: flex;
+    gap: 750px;
+}
+
 .board h2{
     text-align: left;
     position: relative;
     margin-bottom: 16px;
+}
+
+.board #select{
+    display: inline-block;
+    appearance: none;
+    width: 90px;
+    height: 35px;
+    border: 2px solid;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
 }
 
 
