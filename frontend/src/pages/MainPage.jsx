@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const images = [
   "Group 1.jpg", "Group 2.jpg", "Group 3.jpg", "Group 4.jpg", "Group 5.jpg",
