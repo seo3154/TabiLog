@@ -96,8 +96,14 @@ export default function MyPage() {
     : [];
 
   // TODO: 실제 내 글 API 연동 전 임시
-  const myPosts = Array(8).fill({ title: "커뮤니티" });
-
+  const myPosts = Array.from({ length: 8 }).map((_, i) => ({
+    id: `dummy-${i + 1}`,
+    title: `커뮤니티 글 ${i + 1}`,
+    snippet: "여행에 관한 두서없는 잡담 한 스푼.",
+    createdAt: "2025-08-15",
+    likes: Math.floor(Math.random() * 20),
+    comments: Math.floor(Math.random() * 10),
+  }));
   // ===== 저장 핸들러 =====
   async function handleSaveProfile(form) {
     try {
@@ -217,26 +223,56 @@ export default function MyPage() {
   );
 }
 
-function BoardList({ title, items }) {
+function BoardList({ title, items = [] }) {
+  if (!items.length) {
+    return (
+      <section className="board">
+        <h3 className="board-title">{title}</h3>
+        <div className="board-empty">아직 작성한 글이 없습니다.</div>
+      </section>
+    );
+  }
+
   return (
     <section className="board">
-      <div className="board-box" aria-label={title}>
-        {items.map((item, idx) => (
-          <div key={idx} className="board-item">
-            {item.title}
-          </div>
+      <h3 className="board-title">{title}</h3>
+
+      <div className="board-grid" aria-label={title}>
+        {items.map((item) => (
+          <article key={item.id} className="board-card">
+            <header className="board-card__header">
+              <h4 className="board-card__title" title={item.title}>
+                {item.title}
+              </h4>
+              <time className="board-card__date">{item.createdAt}</time>
+            </header>
+
+            {item.snippet && (
+              <p className="board-card__snippet">{item.snippet}</p>
+            )}
+
+            <footer className="board-card__meta">
+              <span className="badge">♥ {item.likes}</span>
+              <span className="badge">💬 {item.comments}</span>
+              <Link className="board-card__link" to={`/board/${item.id}`}>
+                자세히
+              </Link>
+            </footer>
+          </article>
         ))}
       </div>
 
-      <div className="pagination">
-        <span className="page page--chevron">&lt;</span>
-        <span className="page page--active">1</span>
-        <span className="page">2</span>
-        <span className="page">3</span>
-        <span className="page">4</span>
-        <span className="page">5</span>
-        <span className="page page--chevron">&gt;</span>
-      </div>
+      <nav className="pagination" aria-label="페이지">
+        <button className="page page--chevron" aria-label="이전 페이지">
+          &lt;
+        </button>
+        <button className="page page--active">1</button>
+        <button className="page">2</button>
+        <button className="page">3</button>
+        <button className="page page--chevron" aria-label="다음 페이지">
+          &gt;
+        </button>
+      </nav>
     </section>
   );
 }
