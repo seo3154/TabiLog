@@ -16,7 +16,15 @@ const Header = () => {
     <header>
       <div className="logo">
         <Link to="/">
-          <img src={logo} alt="로고" />
+          {(() => {
+            const raw = window.localStorage.getItem("tabilog.user");
+            const me = raw ? JSON.parse(raw) : null;
+            const mbti = me?.mbtiName ? me.mbtiName.toUpperCase() : null;
+            const avatar = mbti
+              ? `${process.env.PUBLIC_URL}/MbtiProfileImg/${mbti}.png`
+              : logo; // 기본 로고
+            return <img src={avatar} alt="프로필/로고" />;
+          })()}
           <h2>旅ログ</h2>
         </Link>
       </div>
