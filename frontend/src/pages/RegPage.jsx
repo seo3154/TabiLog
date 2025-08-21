@@ -20,29 +20,29 @@ export default function Signup() {
   };
 
   const checkDuplicate = async () => {
-    if (!formData.userid) return alert("IDを入力してください");
+    if (!formData.userid) return alert("ID를 입력하세요");
     try {
       const res = await axios.post("http://localhost:3001/check-id", { userid: formData.userid });
       setAvailable(res.data.available);
     } catch (err) {
-      alert("サーバー誤謬");
+      alert("서버 오류");
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.agree) return alert("会員登録の約款に同意します。");
-    console.log("会員登録データ:", formData);
-    alert("会員登録データがコンソールに出力します!");
+    if (!formData.agree) return alert("회원가입 개인정보에 동의합니다.");
+    console.log("회원가입 데이터:", formData);
+    alert("회원가입 데이터가 콘솔에 출력합니다.");
     // Axios로 서버 전송 가능
   };
 
   return (
     <div>
-      <h1 style={{ textAlign: "center" }}>会員登録</h1>
+      <h1 style={{ textAlign: "center" }}>회원가입</h1>
       <form onSubmit={handleSubmit}>
         <fieldset style={fieldsetStyle}>
-          <legend style={{ textAlign: "center" }}>会員登録</legend>
+          <legend style={{ textAlign: "center" }}>회원가입</legend>
           <table style={{ margin: "0 auto", width: "100%" }}>
             <tbody>
               <tr>
@@ -56,9 +56,9 @@ export default function Signup() {
                     onChange={handleChange}
                     style={inputStyle}
                   />
-                  <button type="button" onClick={checkDuplicate}>重複</button>
-                  {available === true && <span style={{color:'green'}}>使用可能</span>}
-                  {available === false && <span style={{color:'red'}}>もう採用中</span>}
+                  <button type="button" onClick={checkDuplicate}>중복</button>
+                  {available === true && <span style={{color:'green'}}>사용가능</span>}
+                  {available === false && <span style={{color:'red'}}>사용 중인 아이디입니다.</span>}
                 </td>
               </tr>
               <tr>
@@ -85,6 +85,9 @@ export default function Signup() {
                     onChange={handleChange}
                     style={inputStyle}
                   />
+                  <button type="button" onClick={checkDuplicate}>중복</button>
+                  {available === true && <span style={{color:'green'}}>사용가능</span>}
+                  {available === false && <span style={{color:'red'}}>사용 중인 닉네임입니다.</span>}
                 </td>
               </tr>
               <tr>
@@ -133,23 +136,23 @@ export default function Signup() {
                     <input
                       type="radio"
                       name="gender"
-                      value="男"
+                      value="남자"
                       required
-                      checked={formData.gender === "男"}
+                      checked={formData.gender === "남자"}
                       onChange={handleChange}
                       style={radioStyle}
-                    /> MAN
+                    /> 남자
                   </label>
                   <label>
                     <input
                       type="radio"
                       name="gender"
-                      value="女"
+                      value="여자"
                       required
-                      checked={formData.gender === "女"}
+                      checked={formData.gender === "여자"}
                       onChange={handleChange}
                       style={radioStyle}
-                    /> WOMAN
+                    /> 여자
                   </label>
                 </td>
               </tr>
@@ -162,13 +165,13 @@ export default function Signup() {
                       checked={formData.agree}
                       onChange={handleChange}
                     />
-                    会員登録の約款に同意します。
+                    회원가입 개인 정보에 동의합니다.
                   </label>
                 </td>
               </tr>
               <tr>
                 <td colSpan="2" style={{ textAlign: "center", paddingTop: "10px" }}>
-                  <input type="submit" value="会員登録" style={submitStyle} />
+                  <input type="submit" value="회원 가입" style={submitStyle} />
                 </td>
               </tr>
             </tbody>
