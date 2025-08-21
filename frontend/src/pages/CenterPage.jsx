@@ -15,24 +15,24 @@ export default function CenterPage() {
   });
 
   const faqs = [
-    { question: "一人でも構いませんか", answer: "一人で旅行をする方は多いので、大丈夫です。" },
-    { question: "私は老人ですけど。", answer: "旅行には年とは関係ないです。" },
-    { question: "旅行が初めてなので心配があります。", answer: "そういう方はここの方々に聞けばいいです。" },
-    { question: "話すのが怖いです。", answer: "みんな優しい方なので、大丈夫です。" },
-    { question: "I don't know Japanese.", answer: "It's OK. I don't know English." },
-    { question: "旅行以外でも、話してもいいですか？", answer: "構いません" },
-    { question: "ここの社員になりたいです。", answer: "採用情報がアップしたら確認してください。" },
-    { question: "なんで旅行について話をしますか？", answer: "旅行は楽しいものですから、みんなに共有したらいいと思います。" },
-    { question: "変な話を見つけました。", answer: "申告してください。" },
-    { question: "脱退したいです。", answer: "脱退の理由を聞いてみます。" },
+    { question: "혼자여도 괜찮습니까?", answer: "혼자 여행하는 사람이 많으니까 괜찮아요." },
+    { question: "저는 50대가 넘었습니다.", answer: "여행에는 나이는 상관없습니다." },
+    { question: "여행이 처음인데 걱정이 됩니다.", answer: "이런 분은 커뮤니티에 물어보시면 됩니다." },
+    { question: "얘기하는 것이 두렵습니다.", answer: "모두가 상냥하므로 괜찮습니다." },
+    { question: "I don't know Korean.", answer: "It's OK. I don't know English." },
+    { question: "여행 이외에도 얘기해도 됩니까?", answer: "상관없습니다." },
+    { question: "여기 사원이 되고 싶습니다.", answer: "채용공지가 올라오면 확인하세요." },
+    { question: "어째서 여행에 대해서 얘기를 하는 겁니까?", answer: "여행은 즐거운 것이니까요." },
+    { question: "안 좋은 얘기를 쓴 글을 봤어요.", answer: "신고해주십시오." },
+    { question: "탈퇴하고 싶습니다.", answer: "탈퇴 이유를 들어보겠습니다." },
   ];
 
   const allPosts = [
-    { id: 1, name: "山田太郎", title: "ログインできません", status: "対応中", date: "2025-08-10", content: "ログインができない内容", answer: "対応中です", isMine: true },
-    { id: 2, name: "佐藤花子", title: "パスワード再発行について", status: "完了", date: "2025-08-09", content: "パスワードを忘れた", answer: "再発行完了", isMine: false },
-    { id: 3, name: "鈴木一郎", title: "会員登録方法を教えてください", status: "未対応", date: "2025-08-08", content: "会員登録方法の質問", answer: "", isMine: false },
-    { id: 4, name: "高橋美咲", title: "投稿の削除依頼", status: "対応中", date: "2025-08-07", content: "投稿削除希望", answer: "", isMine: true },
-    { id: 5, name: "田中健", title: "写真がアップロードできない", status: "未対応", date: "2025-08-06", content: "写真をアップできない", answer: "", isMine: true },
+    { id: 1, name: "홍길동", title: "로그인 아이디 변경하고 싶어요.", status: "응답완료", date: "2025-08-10", content: "로그인 아이디 변경", answer: "처리중입니다.", isMine: true },
+    { id: 2, name: "가길동", title: "패스워드 변경하고 싶어요.", status: "응답완료", date: "2025-08-09", content: "패스워드 변경", answer: "안내해 드렸습니다.", isMine: false },
+    { id: 3, name: "나길동", title: "마길동이라는 사람이 욕했습니다.", status: "처리중", date: "2025-08-08", content: "마길동 신고", answer: "", isMine: false },
+    { id: 4, name: "다길동", title: "닉넴 변경하고 싶어요.", status: "처리중", date: "2025-08-07", content: "닉넴 변경", answer: "", isMine: true },
+    { id: 5, name: "라길동", title: "사진 업로드가 안됩니다.", status: "처리중", date: "2025-08-06", content: "사진 업로드 안됩니다.", answer: "", isMine: true },
   ];
 
   const myPosts = allPosts.filter((p) => p.isMine);
@@ -49,12 +49,12 @@ export default function CenterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.title) return alert("タイトルを入力してください");
+    if (!formData.title) return alert("타이틀 입력");
     const newPost = {
       id: Date.now(),
-      name: "自分",
+      name: "닉넴",
       title: formData.title,
-      status: "未対応",
+      status: "처리중",
       date: new Date().toISOString().split("T")[0],
       content: formData.content,
       answer: "",
@@ -66,7 +66,7 @@ export default function CenterPage() {
   };
 
   const handleDelete = (id) => {
-    if (!window.confirm("本当に削除しますか？")) return;
+    if (!window.confirm("정말 삭제합니까?")) return;
     const filteredPosts = myPosts.filter((p) => p.id !== id);
     // 실제 삭제 로직 연결 가능
     alert("삭제 완료 (임시)");
@@ -76,19 +76,19 @@ export default function CenterPage() {
 
   return (
     <div>
-      <h1 style={{ textAlign: "center", marginTop: 20 }}>顧客センター</h1>
+      <h1 style={{ textAlign: "center", marginTop: 20 }}>고객센터</h1>
       <hr style={{ border: "1px solid #c2c0c0", width: "80%", margin: "10px auto" }} />
 
       <div className="tab-container">
-        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>全ての投稿</div>
-        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>自分の投稿</div>
+        <div className={`tab ${activeTab === "all" ? "active" : ""}`} onClick={() => setActiveTab("all")}>모든 게시글</div>
+        <div className={`tab ${activeTab === "mine" ? "active" : ""}`} onClick={() => setActiveTab("mine")}>내 글</div>
       </div>
 
       <div className="content">
         {/* FAQ & 전체 게시글 */}
         {activeTab === "all" && (
           <>
-            <h2>いつもある質問(FAQ)</h2>
+            <h2>항상 있는 질문(FAQ)</h2>
             <div className="faq-grid">
               {faqs.map((faq, idx) => (
                 <div className="faq-item" key={idx}>
@@ -103,14 +103,14 @@ export default function CenterPage() {
               ))}
             </div>
 
-            <h2>ユーザーのお問い合わせ</h2>
+            <h2>유저의 질문들</h2>
             <table>
               <thead>
                 <tr>
-                  <th>問い合わせ者</th>
-                  <th>タイトル</th>
-                  <th>状態</th>
-                  <th>日付</th>
+                  <th>닉네임</th>
+                  <th>제목</th>
+                  <th>답변상태</th>
+                  <th>날짜</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,7 +124,7 @@ export default function CenterPage() {
                 ))}
                 <tr style={{ textAlign: "right" }}>
                   <td colSpan={4}>
-                    <button className="submit-btn" onClick={() => setActiveTab("write")}>1:1相談する</button>
+                    <button className="submit-btn" onClick={() => setActiveTab("write")}>1:1 상담하기</button>
                   </td>
                 </tr>
               </tbody>
@@ -135,13 +135,13 @@ export default function CenterPage() {
         {/* 내 게시글 */}
         {activeTab === "mine" && (
           <>
-            <h2>私の投稿</h2>
+            <h2>내 글</h2>
             <table>
               <thead>
                 <tr>
-                  <th>タイトル</th>
-                  <th>状態</th>
-                  <th>日付</th>
+                  <th>제목</th>
+                  <th>답변상태</th>
+                  <th>날짜</th>
                 </tr>
               </thead>
               <tbody>
@@ -166,18 +166,18 @@ export default function CenterPage() {
             </div>
             <div className="content-area" style={{ display: "flex", gap: "20px", marginTop: "20px" }}>
               <div style={{ flex: 1 }}>
-                <h3>内容</h3>
+                <h3>내용</h3>
                 <p>{selectedPost.content}</p>
               </div>
               <div style={{ flex: 1 }}>
-                <h3>回答</h3>
-                <p>{selectedPost.answer || "まだ回答がありません。"}</p>
+                <h3>회답</h3>
+                <p>{selectedPost.answer || "아직 회답이 없습니다."}</p>
               </div>
             </div>
             <div className="actions" style={{ marginTop: "20px", display: "flex", gap: "10px" }}>
-              <button className="submit-btn" onClick={() => setActiveTab("mine")}>戻る</button>
-              <button className="submit-btn" onClick={() => setActiveTab("write")}>修正</button>
-              <button className="submit-btn" onClick={() => handleDelete(selectedPost.id)}>削除</button>
+              <button className="submit-btn" onClick={() => setActiveTab("mine")}>돌아가기</button>
+              <button className="submit-btn" onClick={() => setActiveTab("write")}>수정</button>
+              <button className="submit-btn" onClick={() => handleDelete(selectedPost.id)}>삭제</button>
             </div>
           </div>
         )}
@@ -185,19 +185,19 @@ export default function CenterPage() {
         {/* 1:1 작성폼 */}
         {activeTab === "write" && (
           <>
-            <h2>1:1 相談フォーム</h2>
+            <h2>1:1 상담</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder="タイトルを入力してください" />
+                <input type="text" name="title" value={formData.title} onChange={handleInputChange} placeholder="타이틀 입력" />
               </div>
               <div className="form-group">
                 <div className="textarea-wrapper">
-                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="内容を入力してください"></textarea>
+                  <textarea name="content" value={formData.content} onChange={handleInputChange} placeholder="내용 입력"></textarea>
                   <div className="bottom-actions">
                     <input type="file" name="file" onChange={handleInputChange} />
                     <div className="actions-inline">
                       <input type="checkbox" name="agree" checked={formData.agree} onChange={handleInputChange} />
-                      <label htmlFor="agree">個人情報に同意します</label>
+                      <label htmlFor="agree">개인 정보에 동의합니다.</label>
                       <button type="submit" className="submit-btn">작성하기</button>
                     </div>
                   </div>
