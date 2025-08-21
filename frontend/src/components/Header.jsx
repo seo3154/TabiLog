@@ -1,11 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom"; // 추가!
+import { Link, useNavigate } from "react-router-dom"; // 추가!
 import "../styles/Header.css";
 import "../styles/Button.css";
 import logo from "../assets/logo.png";
 import Button from "../components/Button.jsx";
 
 const Header = () => {
+  const navigate = useNavigate(); // ✅ 훅은 컴포넌트 내부에서!
+
+  const goToMyPage = () => {
+    navigate("/mypage"); // ✅ 라우트 경로 소문자로 일치
+  };
+
   return (
     <header>
       <div className="logo">
@@ -29,6 +35,13 @@ const Header = () => {
           <Link to="/contact">문의하기</Link>
         </li>
         <li>
+          <button
+            onClick={goToMyPage}
+            style={{ padding: "12px 32px", fontSize: 18, cursor: "pointer" }}
+          >
+            임시 MYPAGE
+          </button>
+          &nbsp;&nbsp;&nbsp;
           <Button variant="white">로그인</Button>
           &nbsp;&nbsp;&nbsp;
           <Button variant="black">회원가입</Button>
