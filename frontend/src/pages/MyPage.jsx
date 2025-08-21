@@ -155,11 +155,9 @@ export default function MyPage() {
               <img
                 src={profileSrc}
                 alt="프로필"
-                className="avatar-img"
-                style={{
-                  objectFit: user.mbtiName ? "contain" : "cover",
-                  backgroundColor: user.mbtiName ? "#fff" : "transparent",
-                }}
+                className={`avatar-img ${
+                  user.mbtiName ? "avatar--mbti" : "avatar--user"
+                }`}
               />
             </div>
 
@@ -226,35 +224,35 @@ export default function MyPage() {
 function BoardList({ title, items = [] }) {
   if (!items.length) {
     return (
-      <section className="board">
-        <h3 className="board-title">{title}</h3>
-        <div className="board-empty">아직 작성한 글이 없습니다.</div>
+      <section className="mp-board">
+        <h3 className="mp-board__title">{title}</h3>
+        <div className="mp-board__empty">아직 작성한 글이 없습니다.</div>
       </section>
     );
   }
 
   return (
-    <section className="board">
-      <h3 className="board-title">{title}</h3>
+    <section className="mp-board">
+      <h3 className="mp-board__title">{title}</h3>
 
-      <div className="board-grid" aria-label={title}>
+      <div className="mp-board__grid" aria-label={title}>
         {items.map((item) => (
-          <article key={item.id} className="board-card">
-            <header className="board-card__header">
-              <h4 className="board-card__title" title={item.title}>
+          <article key={item.id} className="mp-board__card">
+            <header className="mp-board__card-header">
+              <h4 className="mp-board__card-title" title={item.title}>
                 {item.title}
               </h4>
-              <time className="board-card__date">{item.createdAt}</time>
+              <time className="mp-board__card-date">{item.createdAt}</time>
             </header>
 
             {item.snippet && (
-              <p className="board-card__snippet">{item.snippet}</p>
+              <p className="mp-board__card-snippet">{item.snippet}</p>
             )}
 
-            <footer className="board-card__meta">
+            <footer className="mp-board__card-meta">
               <span className="badge">♥ {item.likes}</span>
               <span className="badge">💬 {item.comments}</span>
-              <Link className="board-card__link" to={`/board/${item.id}`}>
+              <Link className="mp-board__card-link" to={`/board/${item.id}`}>
                 자세히
               </Link>
             </footer>
@@ -262,14 +260,14 @@ function BoardList({ title, items = [] }) {
         ))}
       </div>
 
-      <nav className="pagination" aria-label="페이지">
-        <button className="page page--chevron" aria-label="이전 페이지">
+      <nav className="mp-pagination" aria-label="페이지">
+        <button className="mp-page mp-page--chevron" aria-label="이전 페이지">
           &lt;
         </button>
-        <button className="page page--active">1</button>
-        <button className="page">2</button>
-        <button className="page">3</button>
-        <button className="page page--chevron" aria-label="다음 페이지">
+        <button className="mp-page mp-page--active">1</button>
+        <button className="mp-page">2</button>
+        <button className="mp-page">3</button>
+        <button className="mp-page mp-page--chevron" aria-label="다음 페이지">
           &gt;
         </button>
       </nav>
