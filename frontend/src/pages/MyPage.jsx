@@ -49,18 +49,38 @@ export default function MyPage() {
     return map;
   }, []);
 
+  // 헤더 로고 사진 변경
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
         if (MOCK_UI) {
           setUser(mockUser);
+          // ✅ 로컬 저장
+          window.localStorage.setItem(
+            "tabilog.user",
+            JSON.stringify({
+              nickname: mockUser.nickname,
+              mbtiName: mockUser.mbtiName || "",
+              mbtiUrl: mockUser.mbtiUrl || "",
+            })
+          );
           return;
         }
         const data = await getUserByLoginId(loginId);
         setUser(data);
+        // ✅ 로컬 저장
+        window.localStorage.setItem(
+          "tabilog.user",
+          JSON.stringify({
+            nickname: data.nickname,
+            mbtiName: data.mbtiName || "",
+            mbtiUrl: data.mbtiUrl || "",
+          })
+        );
       } catch (e) {
         setErr(e?.message || "불러오기 실패");
+        window.localStorage.removeItem("tabilog.user");
       } finally {
         setLoading(false);
       }
