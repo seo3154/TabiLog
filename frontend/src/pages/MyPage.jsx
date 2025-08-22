@@ -31,7 +31,6 @@ function getProfileImgs(user) {
 export default function MyPage() {
   // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
   const [loginId] = useState("ddatg123");
-
   const [tab, setTab] = useState("myPost");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -67,7 +66,7 @@ export default function MyPage() {
           );
           return;
         }
-        const data = await getUserByLoginId(loginId);
+        const data = await getUserByLoginId(loginId); // apis/users 파일
         setUser(data);
         // ✅ 로컬 저장
         window.localStorage.setItem(
@@ -296,6 +295,7 @@ function BoardList({ title, items = [] }) {
 }
 
 function BookmarkGrid({ items = [] }) {
+  // 여기예요~!
   if (!items.length)
     return <div className="bookmark-empty">북마크가 없습니다.</div>;
   const toPath = (item) =>
