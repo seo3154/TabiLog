@@ -7,6 +7,7 @@ import RecommendPage from "./pages/RecommendPage";
 import CommunityPage from "./pages/CommunityPage";
 import CommunityWrite from "./components/CommunityWrite";
 import TravelDetailPage from "./pages/TravelDetailPage";
+import SignIn from "./pages/RegPage";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/community/write" element={<CommunityWrite />} />
         <Route path="/place/:id" element={<TravelDetailPage />} />
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/regpage" element={<SignIn />}/>
         {/* 기타 Route 추가 */}
       </Routes>
     </>
