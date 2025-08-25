@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import image1 from '../assets/MainPagePictures/Group 1.jpg'
+import image2 from '../assets/MainPagePictures/Group 2.jpg'
+import image3 from '../assets/MainPagePictures/Group 3.jpg'
+import image4 from '../assets/MainPagePictures/Group 4.jpg'
+import image5 from '../assets/MainPagePictures/Group 5.jpg'
+import image6 from '../assets/MainPagePictures/Group 6.jpg'
+import image7 from '../assets/MainPagePictures/Group 7.jpg'
+import image8 from '../assets/MainPagePictures/Group 8.jpg'
+import image9 from '../assets/MainPagePictures/Group 9.jpg'
+import image10 from '../assets/MainPagePictures/Group 10.jpg'
+import image11 from '../assets/MainPagePictures/Group 11.jpg'
+import image12 from '../assets/MainPagePictures/Group 12.jpg'
+import image13 from '../assets/MainPagePictures/Group 13.jpg'
+import image14 from '../assets/MainPagePictures/Group 14.jpg'
+import image15 from '../assets/MainPagePictures/Group 15.jpg'
+import image16 from '../assets/MainPagePictures/Group 16.jpg'
 
 const images = [
-  "Group 1.jpg",
-  "Group 2.jpg",
-  "Group 3.jpg",
-  "Group 4.jpg",
-  "Group 5.jpg",
-  "Group 6.jpg",
-  "Group 7.jpg",
-  "Group 8.jpg",
-  "Group 9.jpg",
-  "Group 10.jpg",
-  "Group 11.jpg",
-  "Group 12.jpg",
-  "Group 13.jpg",
-  "Group 14.jpg",
-  "Group 15.jpg",
-  "Group 16.jpg",
+  image1, image2, image3, image4,
+  image5, image6, image7, image8,
+  image9, image10, image11, image12,
+  image13, image14, image15, image16
 ];
 
 // CSS 객체 그대로 유지
@@ -48,23 +52,22 @@ function App() {
   return (
     <div style={styles.body}>
       {/* 이미지 슬라이더 */}
-      <div style={styles.imageSliderContainer}>
+      <div style={{position:"relative",...styles.imageSliderContainer}}>
         {images.map((src, index) => (
           <img
             key={index}
             src={src}
-            style={{
+            style={{ objectFit:"cover",width:'100%',position:"absolute",top:"0",left:"0",
               ...styles.imageSliderImage,
-              opacity: index === currentIndex ? 1 : 0,
+             opacity: index === currentIndex ? 1 : 0,
             }}
             alt={`여행 사진 ${index + 1}`}
           />
         ))}
       </div>
-      <br />
-      <br />
 
       {/* 공지사항 */}
+      <div style={{position:"relative", top:"600px"}}>
       <table style={styles.noticeTable}>
         <tbody>
           <tr>
@@ -134,6 +137,7 @@ function App() {
           최신 커뮤니티의 글을 확인해봅시다!
         </a>
       </p>
+    </div>
     </div>
   );
 }
