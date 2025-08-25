@@ -44,7 +44,7 @@ const Header = () => {
           <Link to="/community">커뮤니티</Link>
         </li>
         <li>
-          <Link to="/contact">문의하기</Link>
+          <Link to="/contact">고객센터</Link>
         </li>
         <li>
           <button
