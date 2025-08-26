@@ -1,21 +1,29 @@
-// CommunityPage.jsx
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "../styles/CommunityBoard.css";
 import "../styles/CommunityPage.css";
 import Sidebar from "../components/SideBar";
 import WriteButton from "../components/Button";
 import CommunityBoard from "../components/CommunityBoard";
-import { Route, Routes } from "react-router-dom";
 import CommunityWrite from "../components/CommunityWrite";
+import CommunityPost from "../components/CommunityPost";
 
 export default function CommunityPage() {
   const navigate = useNavigate();
   const [selectedBoard, setSelectedBoard] = useState("전체 게시판");
-  const [posts, setPosts] = useState([]); // 게시글 상태 관리
+  const [posts, setPosts] = useState([
+    {
+      id : 1,
+      mbti : "ENTP",
+      title : "테스트용 게시물입니다.",
+      writer : "대이건",
+      content : "대 이 건의 은총이 함께하는 즐거운 사다수",
+      date : "2025-08-26"
+    }
+  ]);
 
-  // 게시글 추가 함수
-  const onAddPost = (newPost) => {
+  const AddPost = (newPost) => {
     setPosts((prevPosts) => [newPost, ...prevPosts]); // 새 게시글을 기존 목록에 추가
   };
 
@@ -29,11 +37,10 @@ export default function CommunityPage() {
     <div className="community-page">
       <Sidebar menuItems={menuItems} />
       <div className="wrap">
-        {/* 글 작성 버튼 */}
         <WriteButton
           variant="black"
           className="WriteButton"
-          onClick={() => navigate("/community/write")} // WriteButton 클릭 시 글 작성 페이지로 이동
+          onClick={() => navigate("/community/write")}
         >
           글 작성
         </WriteButton>
@@ -42,7 +49,7 @@ export default function CommunityPage() {
         <Routes>
           <Route
             path="/community/write"
-            element={<CommunityWrite onAddPost={onAddPost} />} // 글 작성 후 onAddPost로 게시글 추가
+            element={<CommunityWrite AddPost={AddPost} />} // AddPost 함수 전달
           />
         </Routes>
 
