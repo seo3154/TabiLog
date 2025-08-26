@@ -1,5 +1,6 @@
 // CommunityBoard.jsx
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../styles/CommunityBoard.css";
 
 export default function CommunityBoard({ posts, selectedBoard }) {
@@ -52,11 +53,11 @@ export default function CommunityBoard({ posts, selectedBoard }) {
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <tr key={post.id}>
-                <td><a href="#">{post.id}</a></td>
-                <td><a href="#">{post.mbti}</a></td>
-                <td className="title"><a href="#">{post.title}</a></td>
-                <td><a href="#">{post.author}</a></td>
-                <td><a href="#">{post.date}</a></td>
+                <td><Link to={`/community/post/${post.id}`}>{post.id}</Link></td>  {/* 상세 페이지 링크 추가 */}
+                <td><Link to={`/community/post/${post.id}`}>{post.mbti}</Link></td>  {/* 상세 페이지 링크 추가 */}
+                <td className="title"><Link to={`/community/post/${post.id}`}>{post.title}</Link></td>  {/* 상세 페이지 링크 추가 */}
+                <td><Link to={`/community/post/${post.id}`}>{post.writer}</Link></td>  {/* 상세 페이지 링크 추가 */}
+                <td><Link to={`/community/post/${post.id}`}>{post.date}</Link></td>  {/* 상세 페이지 링크 추가 */}
               </tr>
             ))
           ) : (

@@ -1,42 +1,42 @@
-// CommunityWrite.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/CommunityWrite.css";
 import Button from "../components/Button";
 
-export default function WritePage({ onAddPost }) {
-  const navigate = useNavigate();
-  const [category, setCategory] = useState("default");
+export default function WritePage({ AddPost }) {
   const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("전체게시판");
   const [content, setContent] = useState("");
+  const [selectedMbti, setSelectedMbti] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (!title || !content) {
       alert("제목과 내용을 입력해주세요.");
       return;
     }
 
     // 새 게시글 객체 생성
-    const newPost = {
-      id: Date.now(),
-      mbti: "INFJ",  // 여기서 나중에 백에서 가져온 유저 정보로 수정할 것
-      category,
-      title,
-      content,
-      date: new Date().toISOString().split("T")[0],
-    };
+  const newPost = {
+    id: Date.now(),
+    mbti: selectedMbti,  // 예시로 현재 선택된 MBTI를 추가
+    category,
+    title,
+    content,
+    author: "작성자 이름",  // 작성자 정보도 추가
+    date: new Date().toISOString().split("T")[0],
+  };
 
-    // 부모 컴포넌트의 onAddPost 함수 호출하여 게시글 추가
-    if (onAddPost) {
-      onAddPost(newPost);
+    if (AddPost) {
+      AddPost(newPost); 
       alert("글이 등록되었습니다!");
     } else {
-      console.error("onAddPost 함수가 전달되지 않았습니다.");
+      console.error("AddPost 함수가 전달되지 않았습니다.");
     }
 
-    // 글 작성 후 CommunityPage로 돌아가기
-    navigate("/community"); // 글 작성 후 CommunityPage로 돌아감
+    navigate("/community");
   };
 
   const handleCancel = () => {
@@ -44,12 +44,6 @@ export default function WritePage({ onAddPost }) {
       setTitle("");
       setContent("");
     }
-  };
-
-  const handleBoard = () => {
-    if (window.confirm("목록으로 돌아가시겠습니까?")) {
-      navigate("/community")
-    };
   };
 
   return (
@@ -67,8 +61,8 @@ export default function WritePage({ onAddPost }) {
 
           <div className="filter">
             <select
-              name="mbti_select"
-              id="mbti_select"
+              name="category"
+              id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
@@ -82,7 +76,7 @@ export default function WritePage({ onAddPost }) {
 
         <div className="writebox">
           <textarea
-            name="write"
+            name="content"
             placeholder="내용을 입력하세요."
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -101,7 +95,7 @@ export default function WritePage({ onAddPost }) {
             삭제
           </Button>
 
-          <Button variant="white" onClick={handleBoard}>
+          <Button variant="white" onClick={() => navigate(-1)}>
             목록
           </Button>
         </div>
