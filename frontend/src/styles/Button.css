@@ -28,10 +28,9 @@
 
 /* 여기서부터 커스텀 버튼 */
 .delete_button {
-    width: 70px;
+    width: 90px;
     height: 35px;
     border: 1px solid #131313;
-    border-radius: 6px;
     font-size: 16px;
     cursor: pointer;
 }
