@@ -9,7 +9,7 @@ import CommunityBoard from "./components/CommunityBoard";
 import CommunityWrite from "./components/CommunityWrite";
 import TravelDetailPage from "./pages/TravelDetailPage";
 import SignIn from "./pages/RegPage";
-import Contact from "./pages/CenterPage"
+import Contact from "./pages/CenterPage";
 
 function App() {
   return (
@@ -24,9 +24,9 @@ function App() {
         <Route path="/community/board" element={<CommunityBoard />} />
         <Route path="/community/write" element={<CommunityWrite />} />
         <Route path="/place/:id" element={<TravelDetailPage />} />
-        <Route path="*" element={<Navigate to="/" />} />
-        <Route path="/regpage" element={<SignIn />}/>
+        <Route path="/regpage" element={<SignIn />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<Navigate to="/" />} />
         {/* 기타 Route 추가 */}
       </Routes>
     </>
