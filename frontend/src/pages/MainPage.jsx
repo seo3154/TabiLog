@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../style/MainPage.css"
-
 import { useNavigate } from "react-router-dom";
 import image1 from '../assets/MainPagePictures/Group 1.jpg'
 import image2 from '../assets/MainPagePictures/Group 2.jpg'
@@ -18,6 +16,7 @@ import image13 from '../assets/MainPagePictures/Group 13.jpg'
 import image14 from '../assets/MainPagePictures/Group 14.jpg'
 import image15 from '../assets/MainPagePictures/Group 15.jpg'
 import image16 from '../assets/MainPagePictures/Group 16.jpg'
+import "../style/MainPage.css"
 
 const images = [
   image1, image2, image3, image4,
