@@ -1,87 +1,106 @@
 @charset "utf-8";
 
+/* 리셋 – 이 파일 단독 사용 시에만 유지, 전역 리셋 있으면 삭제해도 됨 */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 li {
-    list-style: none;
+  list-style: none;
 }
-
 a {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 }
 
-
-
-/* footer */
+/* === Footer 외부 래퍼 === */
 .wrap {
-    display: flex;
-    position: relative;
+  width: 100%;
+  display: block; /* 불필요한 position 제거 */
 }
 
+/* === Footer 본체 === */
 footer {
-    width: 100%;
-    height: 300px;
-    background-color: #111; 
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: absolute;
-    bottom: 0;
+  width: 100%;
+  background-color: #111;
+  color: #fff;
 }
 
-footer .footertop{
-    display: flex;
-    width: 70%;
-    height: 40%;
-    border-bottom: 1px solid #fff;
-    align-items: center;
+/* 상단 영역 */
+footer .footertop {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px 20px;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* 로고 */
 footer .footertop .logo {
-    display: flex;
-    width: 20%;
-    justify-content: left;
-    margin-left: 16px;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-width: 160px; /* 제목 길면 줄바꿈 방지용 */
 }
 
-footer .footertop .logo a{
-    display: flex;
-    align-items: center;
-    text-align: start;
+footer .footertop .logo a {
+  display: flex;
+  align-items: center;
 }
 
-footer .footertop .logo a img{
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+footer .footertop .logo a img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
-footer .footertop .logo a h3{
-    display: inline-block;
-    margin-left: 10px;
+footer .footertop .logo a h3 {
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
+/* 메뉴 */
 footer .footertop ul {
-    display: flex;
-    width: 60%;
-    justify-content: space-evenly;
+  display: flex;
+  align-items: center;
+  gap: 24px; /* space-evenly 대신 gap로 간격 제어 */
+  margin-left: auto; /* 오른쪽으로 밀기 */
+  flex-wrap: wrap; /* 좁을 때 줄바꿈 */
 }
 
-footer .footerbottom{
-    width: 70%;
-    height: 40%;
-    text-align: center;
-    line-height: 120px;
+footer .footertop ul li a {
+  font-size: 14px;
+  opacity: 0.9;
+}
+footer .footertop ul li a:hover,
+footer .footertop ul li a:focus {
+  opacity: 1;
+  text-decoration: underline;
 }
 
-footer .footerbottom span{
-    
+/* 하단 카피라이트 */
+footer .footerbottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 20px 24px;
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+/* 반응형 */
+@media (max-width: 720px) {
+  footer .footertop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  footer .footertop ul {
+    margin-left: 0;
+    gap: 16px;
+  }
 }

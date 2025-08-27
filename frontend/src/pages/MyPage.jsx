@@ -77,47 +77,47 @@ export default function MyPage() {
         setLoading(true);
         if (MOCK_UI) {
           setUser(mockUser);
-// ✅ 일부 필드만 로컬 저장
-  window.localStorage.setItem(
-    "tabilog.user",
-    JSON.stringify({
-      nickname: mockUser.nickname,
-      mbtiName: mockUser.mbtiName || "",
-      mbtiUrl: mockUser.mbtiUrl || "",
-    })
-  );
+          // ✅ 일부 필드만 로컬 저장
+          window.localStorage.setItem(
+            "tabilog.user",
+            JSON.stringify({
+              nickname: mockUser.nickname,
+              mbtiName: mockUser.mbtiName || "",
+              mbtiUrl: mockUser.mbtiUrl || "",
+            })
+          );
 
-  // ✅ 헤더 동기화 함수가 있으면 호출
-  if (typeof syncUserToHeader === "function") {
-    syncUserToHeader({
-      nickname: mockUser.nickname,
-      mbtiName: mockUser.mbtiName || "",
-      mbtiUrl: mockUser.mbtiUrl || "",
-    });
-  }
+          // ✅ 헤더 동기화 함수가 있으면 호출
+          if (typeof syncUserToHeader === "function") {
+            syncUserToHeader({
+              nickname: mockUser.nickname,
+              mbtiName: mockUser.mbtiName || "",
+              mbtiUrl: mockUser.mbtiUrl || "",
+            });
+          }
 
-  return;
-}
+          return;
+        }
         const data = await getUserByLoginId(loginId); // apis/users 파일
         setUser(data);
-// ✅ 일부 필드만 로컬 저장
-window.localStorage.setItem(
-  "tabilog.user",
-  JSON.stringify({
-    nickname: data.nickname,
-    mbtiName: data.mbtiName || "",
-    mbtiUrl: data.mbtiUrl || "",
-  })
-);
+        // ✅ 일부 필드만 로컬 저장
+        window.localStorage.setItem(
+          "tabilog.user",
+          JSON.stringify({
+            nickname: data.nickname,
+            mbtiName: data.mbtiName || "",
+            mbtiUrl: data.mbtiUrl || "",
+          })
+        );
 
-// ✅ 헤더 동기화 함수가 있으면 호출
-if (typeof syncUserToHeader === "function") {
-  syncUserToHeader({
-    nickname: data.nickname,
-    mbtiName: data.mbtiName || "",
-    mbtiUrl: data.mbtiUrl || "",
-  });
-}
+        // ✅ 헤더 동기화 함수가 있으면 호출
+        if (typeof syncUserToHeader === "function") {
+          syncUserToHeader({
+            nickname: data.nickname,
+            mbtiName: data.mbtiName || "",
+            mbtiUrl: data.mbtiUrl || "",
+          });
+        }
       } catch (e) {
         setErr(e?.message || "불러오기 실패");
         window.localStorage.removeItem("tabilog.user");
@@ -335,13 +335,13 @@ function BoardList({ title, items = [] }) {
               <p className="mp-board__card-snippet">{item.snippet}</p>
             )}
 
-            <footer className="mp-board__card-meta">
+            <div className="mp-board__card-meta">
               <span className="badge">♥ {item.likes}</span>
               <span className="badge">💬 {item.comments}</span>
               <Link className="mp-board__card-link" to={`/board/${item.id}`}>
                 자세히
               </Link>
-            </footer>
+            </div>
           </article>
         ))}
       </div>
@@ -374,7 +374,13 @@ function BookmarkGrid({ items = [] }) {
           <Link key={it.id} to={toPath(it)} className="bookmark-link">
             <article className="bookmark-card">
               <img
-                src={pub(it.image) || "https://placehold.co/600x400"}
+                src={
+                  it.image
+                    ? it.image.startsWith("http")
+                      ? it.image
+                      : pub(it.image)
+                    : "https://placehold.co/600x400"
+                }
                 alt={it.title || "bookmark"}
                 className="bookmark-img"
                 loading="lazy"
@@ -478,4 +484,3 @@ function AccountInfoModal({ user, onClose }) {
     </div>
   );
 }
-
