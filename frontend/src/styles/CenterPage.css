@@ -1,0 +1,29 @@
+@charset "utf-8";
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2열 */
+  gap: 10px; /* 아이템 간격 */
+}
+
+.faq-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.faq-item button {
+  background: none;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.faq-answer {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
