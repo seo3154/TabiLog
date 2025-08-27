@@ -3,26 +3,40 @@ import { useNavigate } from "react-router-dom";
 import "../styles/CommunityWrite.css";
 import Button from "../components/Button";
 
-export default function WritePage() {
-    const navigate = useNavigate();
-  const [mbti, setMbti] = useState("INFJ"); 
-  const [category, setCategory] = useState("전체게시판"); 
-  const [title, setTitle] = useState(""); 
-  const [content, setContent] = useState(""); 
+export default function WritePage({ AddPost }) {
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("전체게시판");
+  const [content, setContent] = useState("");
+  const [selectedMbti, setSelectedMbti] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     if (!title || !content) {
       alert("제목과 내용을 입력해주세요.");
       return;
     }
-    console.log({
-      mbti,
-      category,
-      title,
-      content,
-    });
-    alert("글이 등록되었습니다!");
+
+    // 새 게시글 객체 생성
+  const newPost = {
+    id: Date.now(),
+    mbti: selectedMbti,  // 예시로 현재 선택된 MBTI를 추가
+    category,
+    title,
+    content,
+    author: "작성자 이름",  // 작성자 정보도 추가
+    date: new Date().toISOString().split("T")[0],
+  };
+
+    if (AddPost) {
+      AddPost(newPost); 
+      alert("글이 등록되었습니다!");
+    } else {
+      console.error("AddPost 함수가 전달되지 않았습니다.");
+    }
+
+    navigate("/community");
   };
 
   const handleCancel = () => {
@@ -35,24 +49,7 @@ export default function WritePage() {
   return (
     <div className="wrap">
       <div className="write_section">
-        <div className="mbti">
-          <p>{mbti}</p>
-        </div>
-
         <div className="selection">
-          <div className="filter">
-            <select
-              name="mbti_select"
-              id="mbti_select"
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              <option value="전체게시판">전체 게시판</option>
-              <option value="리뷰게시판">리뷰 게시판</option>
-              <option value="질문게시판">Q&A 게시판</option>
-            </select>
-          </div>
-
           <div className="title">
             <input
               type="text"
@@ -61,11 +58,25 @@ export default function WritePage() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+
+          <div className="filter">
+            <select
+              name="category"
+              id="category"
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="default">게시판 선택 ▼</option>
+              <option value="전체게시판">전체 게시판</option>
+              <option value="리뷰게시판">리뷰 게시판</option>
+              <option value="질문게시판">Q&A 게시판</option>
+            </select>
+          </div>
         </div>
 
         <div className="writebox">
           <textarea
-            name="write"
+            name="content"
             placeholder="내용을 입력하세요."
             value={content}
             onChange={(e) => setContent(e.target.value)}
@@ -80,10 +91,13 @@ export default function WritePage() {
             value="등록"
             onClick={handleSubmit}
           />
-        <Button variant="white" className="delete_button" 
-        onClick={() => navigate("/community")}>
-          삭제
-        </Button>
+          <Button variant="white" className="delete_button" onClick={handleCancel}>
+            삭제
+          </Button>
+
+          <Button variant="white" onClick={() => navigate(-1)}>
+            목록
+          </Button>
         </div>
       </div>
     </div>

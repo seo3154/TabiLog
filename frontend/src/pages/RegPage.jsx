@@ -185,5 +185,5 @@ export default function Signup() {
 // 스타일 그대로 유지
 const fieldsetStyle = { width: "300px", margin: "auto", borderRadius: "10px", padding: "20px" };
 const inputStyle = { borderRadius: "5px", border: "1px solid #ccc", padding: "5px", width: "95%" };
-const radioStyle = { appearance: "none", WebkitAppearance: "none", width: "18px", height: "18px", border: "2px solid #888", borderRadius: "50%", outline: "none", cursor: "pointer", position: "relative" };
+const radioStyle = { width: "18px", height: "18px", border: "2px solid #888", borderRadius: "50%", outline: "none", cursor: "pointer", position: "relative" };
 const submitStyle = { borderRadius: "5px", padding: "5px 10px", border: "1px solid #888", backgroundColor: "#f5f5f5", cursor: "pointer" };

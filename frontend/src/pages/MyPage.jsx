@@ -28,10 +28,18 @@ function getProfileImgs(user) {
   return { mbtiImg, userImg };
 }
 
+function syncUserToHeader(next) {
+  // 1) localStorage 동기화
+  window.localStorage.setItem("tabilog.user", JSON.stringify(next));
+  // 2) 헤더에 즉시 알림
+  window.dispatchEvent(
+    new CustomEvent("tabilog:user-updated", { detail: next })
+  );
+}
+
 export default function MyPage() {
   // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
   const [loginId] = useState("ddatg123");
-
   const [tab, setTab] = useState("myPost");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -49,18 +57,30 @@ export default function MyPage() {
     return map;
   }, []);
 
+  // 헤더 로고 사진 변경
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
         if (MOCK_UI) {
           setUser(mockUser);
+          syncUserToHeader({
+            nickname: mockUser.nickname,
+            mbtiName: mockUser.mbtiName || "",
+            mbtiUrl: mockUser.mbtiUrl || "",
+          });
           return;
         }
-        const data = await getUserByLoginId(loginId);
+        const data = await getUserByLoginId(loginId); // apis/users 파일
         setUser(data);
+        syncUserToHeader({
+          nickname: data.nickname,
+          mbtiName: data.mbtiName || "",
+          mbtiUrl: data.mbtiUrl || "",
+        });
       } catch (e) {
         setErr(e?.message || "불러오기 실패");
+        window.localStorage.removeItem("tabilog.user");
       } finally {
         setLoading(false);
       }
@@ -96,18 +116,34 @@ export default function MyPage() {
     : [];
 
   // TODO: 실제 내 글 API 연동 전 임시
-  const myPosts = Array(8).fill({ title: "커뮤니티" });
-
+  const myPosts = Array.from({ length: 8 }).map((_, i) => ({
+    id: `dummy-${i + 1}`,
+    title: `커뮤니티 글 ${i + 1}`,
+    snippet: "여행에 관한 두서없는 잡담 한 스푼.",
+    createdAt: "2025-08-15",
+    likes: Math.floor(Math.random() * 20),
+    comments: Math.floor(Math.random() * 10),
+  }));
   // ===== 저장 핸들러 =====
   async function handleSaveProfile(form) {
     try {
       if (MOCK_UI) {
         setUser((prev) => ({ ...prev, ...form }));
+        syncUserToHeader({
+          nickname: form.nickname ?? user.nickname,
+          mbtiName: (form.mbtiName ?? user.mbtiName) || "",
+          mbtiUrl: (form.mbtiUrl ?? user.mbtiUrl) || "",
+        });
         setShowEditProfile(false);
         return;
       }
       const updated = await updateUserProfile(loginId, form);
       setUser((prev) => ({ ...prev, ...updated }));
+      syncUserToHeader({
+        nickname: updated.nickname ?? user.nickname,
+        mbtiName: (updated.mbtiName ?? user.mbtiName) || "",
+        mbtiUrl: (updated.mbtiUrl ?? user.mbtiUrl) || "",
+      });
       setShowEditProfile(false);
     } catch (e) {
       alert(e?.message || "프로필 저장 실패");
@@ -118,11 +154,21 @@ export default function MyPage() {
     try {
       if (MOCK_UI) {
         setUser((prev) => ({ ...prev, mbtiName: newMbti }));
+        syncUserToHeader({
+          nickname: user.nickname,
+          mbtiName: newMbti || "",
+          mbtiUrl: user.mbtiUrl || "",
+        });
         setShowEditMbti(false);
         return;
       }
       const updated = await updateUserMbti(loginId, newMbti);
       setUser((prev) => ({ ...prev, ...updated }));
+      syncUserToHeader({
+        nickname: updated.nickname ?? user.nickname,
+        mbtiName: (updated.mbtiName ?? newMbti) || "",
+        mbtiUrl: (updated.mbtiUrl ?? user.mbtiUrl) || "",
+      });
       setShowEditMbti(false);
     } catch (e) {
       alert(e?.message || "MBTI 저장 실패");
@@ -149,11 +195,9 @@ export default function MyPage() {
               <img
                 src={profileSrc}
                 alt="프로필"
-                className="avatar-img"
-                style={{
-                  objectFit: user.mbtiName ? "contain" : "cover",
-                  backgroundColor: user.mbtiName ? "#fff" : "transparent",
-                }}
+                className={`avatar-img ${
+                  user.mbtiName ? "avatar--mbti" : "avatar--user"
+                }`}
               />
             </div>
 
@@ -217,31 +261,62 @@ export default function MyPage() {
   );
 }
 
-function BoardList({ title, items }) {
+function BoardList({ title, items = [] }) {
+  if (!items.length) {
+    return (
+      <section className="mp-board">
+        <h3 className="mp-board__title">{title}</h3>
+        <div className="mp-board__empty">아직 작성한 글이 없습니다.</div>
+      </section>
+    );
+  }
+
   return (
-    <section className="board">
-      <div className="board-box" aria-label={title}>
-        {items.map((item, idx) => (
-          <div key={idx} className="board-item">
-            {item.title}
-          </div>
+    <section className="mp-board">
+      <h3 className="mp-board__title">{title}</h3>
+
+      <div className="mp-board__grid" aria-label={title}>
+        {items.map((item) => (
+          <article key={item.id} className="mp-board__card">
+            <header className="mp-board__card-header">
+              <h4 className="mp-board__card-title" title={item.title}>
+                {item.title}
+              </h4>
+              <time className="mp-board__card-date">{item.createdAt}</time>
+            </header>
+
+            {item.snippet && (
+              <p className="mp-board__card-snippet">{item.snippet}</p>
+            )}
+
+            <footer className="mp-board__card-meta">
+              <span className="badge">♥ {item.likes}</span>
+              <span className="badge">💬 {item.comments}</span>
+              <Link className="mp-board__card-link" to={`/board/${item.id}`}>
+                자세히
+              </Link>
+            </footer>
+          </article>
         ))}
       </div>
 
-      <div className="pagination">
-        <span className="page page--chevron">&lt;</span>
-        <span className="page page--active">1</span>
-        <span className="page">2</span>
-        <span className="page">3</span>
-        <span className="page">4</span>
-        <span className="page">5</span>
-        <span className="page page--chevron">&gt;</span>
-      </div>
+      <nav className="mp-pagination" aria-label="페이지">
+        <button className="mp-page mp-page--chevron" aria-label="이전 페이지">
+          &lt;
+        </button>
+        <button className="mp-page mp-page--active">1</button>
+        <button className="mp-page">2</button>
+        <button className="mp-page">3</button>
+        <button className="mp-page mp-page--chevron" aria-label="다음 페이지">
+          &gt;
+        </button>
+      </nav>
     </section>
   );
 }
 
 function BookmarkGrid({ items = [] }) {
+  // 여기예요~!
   if (!items.length)
     return <div className="bookmark-empty">북마크가 없습니다.</div>;
   const toPath = (item) =>

@@ -85,10 +85,11 @@ function NoticeList({ notices }) {
       </table>
 
       {/* 글쓰기 버튼 */}
-      <div className="write-button" style={{ marginTop: "20px" }}>
-        <Link to="/write">
-          <button>글쓰기</button>
+      <div style={{ textAlign: "right" }}>
+        <Link to="/notice/write" className="btn">
+          글쓰기
         </Link>
+        {/* 또는 현재 경로가 이미 /notice 라우트 아래라면: <Link to="write">글쓰기</Link> */}
       </div>
 
       {/* 페이지네이션 */}

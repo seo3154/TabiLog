@@ -5,8 +5,12 @@ import NoticePage from "./pages/NoticePage";
 import Header from "./components/Header";
 import RecommendPage from "./pages/RecommendPage";
 import CommunityPage from "./pages/CommunityPage";
+import CommunityBoard from "./components/CommunityBoard";
 import CommunityWrite from "./components/CommunityWrite";
+import CommunityPost from "./components/CommunityPost";
 import TravelDetailPage from "./pages/TravelDetailPage";
+import SignIn from "./pages/RegPage";
+import Contact from "./pages/CenterPage";
 
 function App() {
   return (
@@ -18,8 +22,12 @@ function App() {
         <Route path="/notice/*" element={<NoticePage />} />
         <Route path="/recommend/*" element={<RecommendPage />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/community/board" element={<CommunityBoard />} />
         <Route path="/community/write" element={<CommunityWrite />} />
+        <Route path="/community/post/:id" element={<CommunityPost />} />
         <Route path="/place/:id" element={<TravelDetailPage />} />
+        <Route path="/regpage" element={<SignIn />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<Navigate to="/" />} />
         {/* 기타 Route 추가 */}
       </Routes>
