@@ -15,7 +15,7 @@ import image13 from "../assets/MainPagePictures/Group 13.jpg";
 import image14 from "../assets/MainPagePictures/Group 14.jpg";
 import image15 from "../assets/MainPagePictures/Group 15.jpg";
 import image16 from "../assets/MainPagePictures/Group 16.jpg";
-import "../style/MainPage.css";
+import "../styles/MainPage.css";
 
 const images = [
   image1,
