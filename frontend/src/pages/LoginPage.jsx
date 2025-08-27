@@ -1,9 +1,5 @@
 import React from "react";
-<<<<<<< Updated upstream
-import "../style/LoginPage.css"
-=======
-import "./style/LoginPage.css";
->>>>>>> Stashed changes
+import "../style/LoginPage.css";
 
 export default function Login() {
   return (
@@ -24,7 +20,12 @@ export default function Login() {
               <tr>
                 <td>아이디</td>
                 <td>
-                  <input type="text" name="userid" required style={inputStyle} />
+                  <input
+                    type="text"
+                    name="userid"
+                    required
+                    style={inputStyle}
+                  />
                 </td>
               </tr>
               <tr>
