@@ -13,7 +13,7 @@ public class RegController {
     private RegService regService;
 
     @PostMapping("/reg")
-    public String signup(@RequestBody RegDto dto) {
+    public String reg(@RequestBody RegDto dto) {
         regService.register(dto);
         return "success";
     }
