@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../style/CenterPage.css"
 
 export default function CenterPage() {
   const [activeTab, setActiveTab] = useState("all"); // all, mine, write, detail

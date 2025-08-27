@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import "../style/MainPage.css"
+
 import { useNavigate } from "react-router-dom";
 import image1 from '../assets/MainPagePictures/Group 1.jpg'
 import image2 from '../assets/MainPagePictures/Group 2.jpg'
