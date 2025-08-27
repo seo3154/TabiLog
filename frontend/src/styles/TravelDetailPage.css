@@ -227,6 +227,26 @@ main { max-width: 2000px; margin: 0 auto; }
 }
 .travel-detail-top-button:hover { background-color: #555; transform: translateY(-3px); }
 
+/* 즐겨찾기 버튼 */
+.travel-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bookmark-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #ccc; /* 기본 회색 */
+  transition: color 0.3s ease;
+}
+
+.bookmark-btn.active {
+  color: gold; /* 클릭 시 노란색 */
+}
+
 /* 반응형 */
 @media (max-width: 1024px) {
   .nearby-wrap { grid-template-columns: 1fr; }

@@ -17,6 +17,19 @@ const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
 const MOCK_UI = String(process.env.REACT_APP_MOCK_UI) === "1";
 const PLACEHOLDER = "https://placehold.co/120x120";
 
+// ✅ 로컬스토리지 키
+const LS_BOOKMARKS_KEY = "tabilog.bookmarks";
+// ✅ 로컬스토리지에서 북마크 id 배열 읽기
+function readLsBookmarks() {
+  try {
+    const raw = window.localStorage.getItem(LS_BOOKMARKS_KEY);
+    const arr = raw ? JSON.parse(raw) : [];
+    return Array.isArray(arr) ? arr : [];
+  } catch {
+    return [];
+  }
+}
+
 /** MBTI/유저 이미지 우선순위로 프로필 이미지 결정 */
 function getProfileImgs(user) {
   const mbti = user?.mbtiName ? String(user.mbtiName).toUpperCase() : "";
@@ -57,27 +70,54 @@ export default function MyPage() {
     return map;
   }, []);
 
-  // 헤더 로고 사진 변경
+  // 유저 로드
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
         if (MOCK_UI) {
           setUser(mockUser);
-          syncUserToHeader({
-            nickname: mockUser.nickname,
-            mbtiName: mockUser.mbtiName || "",
-            mbtiUrl: mockUser.mbtiUrl || "",
-          });
-          return;
-        }
+// ✅ 일부 필드만 로컬 저장
+  window.localStorage.setItem(
+    "tabilog.user",
+    JSON.stringify({
+      nickname: mockUser.nickname,
+      mbtiName: mockUser.mbtiName || "",
+      mbtiUrl: mockUser.mbtiUrl || "",
+    })
+  );
+
+  // ✅ 헤더 동기화 함수가 있으면 호출
+  if (typeof syncUserToHeader === "function") {
+    syncUserToHeader({
+      nickname: mockUser.nickname,
+      mbtiName: mockUser.mbtiName || "",
+      mbtiUrl: mockUser.mbtiUrl || "",
+    });
+  }
+
+  return;
+}
         const data = await getUserByLoginId(loginId); // apis/users 파일
         setUser(data);
-        syncUserToHeader({
-          nickname: data.nickname,
-          mbtiName: data.mbtiName || "",
-          mbtiUrl: data.mbtiUrl || "",
-        });
+// ✅ 일부 필드만 로컬 저장
+window.localStorage.setItem(
+  "tabilog.user",
+  JSON.stringify({
+    nickname: data.nickname,
+    mbtiName: data.mbtiName || "",
+    mbtiUrl: data.mbtiUrl || "",
+  })
+);
+
+// ✅ 헤더 동기화 함수가 있으면 호출
+if (typeof syncUserToHeader === "function") {
+  syncUserToHeader({
+    nickname: data.nickname,
+    mbtiName: data.mbtiName || "",
+    mbtiUrl: data.mbtiUrl || "",
+  });
+}
       } catch (e) {
         setErr(e?.message || "불러오기 실패");
         window.localStorage.removeItem("tabilog.user");
@@ -101,19 +141,24 @@ export default function MyPage() {
   const { mbtiImg, userImg } = getProfileImgs(user || {});
   const profileSrc = mbtiImg || userImg || PLACEHOLDER;
 
-  // ✅ 북마크: user.bookmarks → places 매칭
-  const myBookmarks = Array.isArray(user.bookmarks)
-    ? user.bookmarks
-        .map((id) => placeIndex[id])
-        .filter(Boolean)
-        .map((p) => ({
-          id: p.id,
-          title: p.name_ko,
-          subtitle: p.prefecture,
-          image: p?.hero?.image,
-          type: "place",
-        }))
-    : [];
+  // ✅ 북마크 소스: 로컬스토리지 값이 있으면 우선, 없으면 user.bookmarks 사용
+  const bookmarkIds = (() => {
+    const fromLS = readLsBookmarks();
+    if (fromLS.length) return fromLS;
+    return Array.isArray(user.bookmarks) ? user.bookmarks : [];
+  })();
+
+  // ✅ id → place 매핑
+  const myBookmarks = bookmarkIds
+    .map((id) => placeIndex[id])
+    .filter(Boolean)
+    .map((p) => ({
+      id: p.id,
+      title: p.name_ko,
+      subtitle: p.prefecture,
+      image: p?.hero?.image,
+      type: "place",
+    }));
 
   // TODO: 실제 내 글 API 연동 전 임시
   const myPosts = Array.from({ length: 8 }).map((_, i) => ({
@@ -124,6 +169,7 @@ export default function MyPage() {
     likes: Math.floor(Math.random() * 20),
     comments: Math.floor(Math.random() * 10),
   }));
+
   // ===== 저장 핸들러 =====
   async function handleSaveProfile(form) {
     try {
@@ -316,7 +362,6 @@ function BoardList({ title, items = [] }) {
 }
 
 function BookmarkGrid({ items = [] }) {
-  // 여기예요~!
   if (!items.length)
     return <div className="bookmark-empty">북마크가 없습니다.</div>;
   const toPath = (item) =>
@@ -433,3 +478,4 @@ function AccountInfoModal({ user, onClose }) {
     </div>
   );
 }
+
