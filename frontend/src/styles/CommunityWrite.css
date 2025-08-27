@@ -55,27 +55,40 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
   margin-bottom: 8px;
   width: 100%;
 }
 
-.selection .filter select {
-  appearance: none;
-  width: 100px;
-  height: 38px;
-  padding-left: 10px;
-  min-width: 80px;
+.selection .title{
+  margin-left: -8px;
 }
 
 .selection .title input {
-  width: 690px;
+  width: 680px;
   height: 38px;
   padding-left: 10px;
-  color: #ccc;
+  color: #000;
   max-width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid #000;
+  border-radius: 20px;
+}
+
+.selection .title input:focus{
+  color: #000;
+  outline: none;
+}
+
+.selection .filter select {
+  appearance: none;
+  width: 120px;
+  height: 38px;
+  min-width: 80px;
+  border: 2px solid #000;
+  border-radius: 20px;
+  line-height: 38px;
+  text-align: center;
+  font-weight: bold;
 }
 
 
@@ -85,13 +98,18 @@ a {
   width: 100%;
   max-width: 814px;
   height: 500px;
-  color: #ccc;
+  color: #000;
   font-size: 18px;
   margin-bottom: 30px;
-  padding: 4px 0 0 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 16px 0 0 16px;
+  border: 2px solid #000;
+  border-radius: 20px;
   resize: none;
+}
+
+.writebox textarea:focus{
+  color: #000;
+  outline: none;
 }
 
 
@@ -101,14 +119,16 @@ a {
   display: flex;
   justify-content: center;
   gap: 12px;
+  justify-content: flex-end;
+  margin-right: 90px;
 }
 
 .button .submit {
   appearance: none;
-  width: 70px;
+  width: 90px;
   height: 35px;
   border: none;
-  border-radius: 6px;
+  border-radius: 20px;
   background-color: #131313;
   color: #fff;
   font-size: 16px;

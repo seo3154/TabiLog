@@ -41,6 +41,15 @@ function getProfileImgs(user) {
   return { mbtiImg, userImg };
 }
 
+function syncUserToHeader(next) {
+  // 1) localStorage 동기화
+  window.localStorage.setItem("tabilog.user", JSON.stringify(next));
+  // 2) 헤더에 즉시 알림
+  window.dispatchEvent(
+    new CustomEvent("tabilog:user-updated", { detail: next })
+  );
+}
+
 export default function MyPage() {
   // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
   const [loginId] = useState("ddatg123");
@@ -68,28 +77,47 @@ export default function MyPage() {
         setLoading(true);
         if (MOCK_UI) {
           setUser(mockUser);
-          // ✅ 일부 필드만 로컬 저장 (UI에서 참고)
-          window.localStorage.setItem(
-            "tabilog.user",
-            JSON.stringify({
-              nickname: mockUser.nickname,
-              mbtiName: mockUser.mbtiName || "",
-              mbtiUrl: mockUser.mbtiUrl || "",
-            })
-          );
-          return;
-        }
+// ✅ 일부 필드만 로컬 저장
+  window.localStorage.setItem(
+    "tabilog.user",
+    JSON.stringify({
+      nickname: mockUser.nickname,
+      mbtiName: mockUser.mbtiName || "",
+      mbtiUrl: mockUser.mbtiUrl || "",
+    })
+  );
+
+  // ✅ 헤더 동기화 함수가 있으면 호출
+  if (typeof syncUserToHeader === "function") {
+    syncUserToHeader({
+      nickname: mockUser.nickname,
+      mbtiName: mockUser.mbtiName || "",
+      mbtiUrl: mockUser.mbtiUrl || "",
+    });
+  }
+
+  return;
+}
         const data = await getUserByLoginId(loginId); // apis/users 파일
         setUser(data);
-        // ✅ 일부 필드만 로컬 저장
-        window.localStorage.setItem(
-          "tabilog.user",
-          JSON.stringify({
-            nickname: data.nickname,
-            mbtiName: data.mbtiName || "",
-            mbtiUrl: data.mbtiUrl || "",
-          })
-        );
+// ✅ 일부 필드만 로컬 저장
+window.localStorage.setItem(
+  "tabilog.user",
+  JSON.stringify({
+    nickname: data.nickname,
+    mbtiName: data.mbtiName || "",
+    mbtiUrl: data.mbtiUrl || "",
+  })
+);
+
+// ✅ 헤더 동기화 함수가 있으면 호출
+if (typeof syncUserToHeader === "function") {
+  syncUserToHeader({
+    nickname: data.nickname,
+    mbtiName: data.mbtiName || "",
+    mbtiUrl: data.mbtiUrl || "",
+  });
+}
       } catch (e) {
         setErr(e?.message || "불러오기 실패");
         window.localStorage.removeItem("tabilog.user");
@@ -147,11 +175,21 @@ export default function MyPage() {
     try {
       if (MOCK_UI) {
         setUser((prev) => ({ ...prev, ...form }));
+        syncUserToHeader({
+          nickname: form.nickname ?? user.nickname,
+          mbtiName: (form.mbtiName ?? user.mbtiName) || "",
+          mbtiUrl: (form.mbtiUrl ?? user.mbtiUrl) || "",
+        });
         setShowEditProfile(false);
         return;
       }
       const updated = await updateUserProfile(loginId, form);
       setUser((prev) => ({ ...prev, ...updated }));
+      syncUserToHeader({
+        nickname: updated.nickname ?? user.nickname,
+        mbtiName: (updated.mbtiName ?? user.mbtiName) || "",
+        mbtiUrl: (updated.mbtiUrl ?? user.mbtiUrl) || "",
+      });
       setShowEditProfile(false);
     } catch (e) {
       alert(e?.message || "프로필 저장 실패");
@@ -162,11 +200,21 @@ export default function MyPage() {
     try {
       if (MOCK_UI) {
         setUser((prev) => ({ ...prev, mbtiName: newMbti }));
+        syncUserToHeader({
+          nickname: user.nickname,
+          mbtiName: newMbti || "",
+          mbtiUrl: user.mbtiUrl || "",
+        });
         setShowEditMbti(false);
         return;
       }
       const updated = await updateUserMbti(loginId, newMbti);
       setUser((prev) => ({ ...prev, ...updated }));
+      syncUserToHeader({
+        nickname: updated.nickname ?? user.nickname,
+        mbtiName: (updated.mbtiName ?? newMbti) || "",
+        mbtiUrl: (updated.mbtiUrl ?? user.mbtiUrl) || "",
+      });
       setShowEditMbti(false);
     } catch (e) {
       alert(e?.message || "MBTI 저장 실패");
