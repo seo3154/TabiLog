@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+<<<<<<< Updated upstream
 import "../style/CenterPage.css"
+=======
+import "./style/CenterPage.css";
+>>>>>>> Stashed changes
 
 export default function CenterPage() {
   const [activeTab, setActiveTab] = useState("all"); // all, mine, write, detail

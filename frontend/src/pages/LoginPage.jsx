@@ -1,5 +1,9 @@
 import React from "react";
+<<<<<<< Updated upstream
 import "../style/LoginPage.css"
+=======
+import "./style/LoginPage.css";
+>>>>>>> Stashed changes
 
 export default function Login() {
   return (
