@@ -95,7 +95,7 @@ function App() {
       </div>
 
       {/* 공지사항 */}
-      <div style={{ position: "relative", top: "600px" }}>
+      <div style={{ position: "relative", top: "600px", marginBottom: "600px"}}>
         <table style={styles.noticeTable}>
           <tbody>
             <tr>

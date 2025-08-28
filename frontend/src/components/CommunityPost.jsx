@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // useParams로 URL에서 파라미터 받기
 import Button from "../components/Button";
 import "../styles/CommunityPost.css";
+import profil from "../assets/logo.png";
 
 export default function CommunityPost() {
   const { id } = useParams();  // URL에서 게시글 id를 받아옴
@@ -21,7 +22,8 @@ export default function CommunityPost() {
         title: "테스트용 게시물입니다.",
         writer: "대이건",
         content: "대 이 건의 은총이 함께하는 즐거운 사다수",
-        date: "2025-08-26",
+        date: "2025.08.26 15:50",
+        cnt: "14"
       };
       setPost(postData);
 
@@ -51,7 +53,7 @@ export default function CommunityPost() {
     }
     const newCommentObj = {
       id: comments.length + 1,
-      writer: "영지", // 실제 사용자 정보로 수정
+      writer: "테스트", // 실제 사용자 정보로 수정
       content: newComment,
       date: new Date().toISOString().split("T")[0],
     };
@@ -63,13 +65,18 @@ export default function CommunityPost() {
 
   return (
     <div className="post-container">
-      {/* 게시글 상단 */}
+      <a href="#">
+        <span className="mbti">{post.mbti} &#62;</span>
+      </a>
+
       <div className="post-header">
         <div className="post-info">
-          <span className="mbti">{post.mbti}</span>
+          <span className="title">{post.title}</span>
           <span className="post-date">{post.date}</span>
         </div>
+
         <div className="post-writer">
+          <img src={profil} alt="대체이미지" />
           <span className="writer">{post.writer}</span>
         </div>
       </div>
@@ -85,6 +92,18 @@ export default function CommunityPost() {
         <button className="report-btn">신고</button>
       </div>
 
+      {/* 댓글 작성 */}
+      <div className="comment-form">
+        <textarea
+          placeholder="댓글을 입력하세요."
+          value={newComment}
+          onChange={handleCommentChange}
+        />
+        <button className="comment-submit-btn" onClick={handleCommentSubmit}>
+          댓글 작성
+        </button>
+      </div>
+
       {/* 댓글 영역 */}
       <div className="comments-section">
         {comments.map((comment) => (
@@ -96,18 +115,6 @@ export default function CommunityPost() {
             <p>{comment.content}</p>
           </div>
         ))}
-      </div>
-
-      {/* 댓글 작성 */}
-      <div className="comment-form">
-        <textarea
-          placeholder="댓글을 입력하세요."
-          value={newComment}
-          onChange={handleCommentChange}
-        />
-        <button className="comment-submit-btn" onClick={handleCommentSubmit}>
-          댓글 작성
-        </button>
       </div>
     </div>
   );

@@ -41,13 +41,15 @@ export default function WritePage({ AddPost }) {
 
   const handleCancel = () => {
     if (window.confirm("작성을 취소하시겠습니까?")) {
-      setTitle("");
-      setContent("");
+      navigate(-1);
     }
   };
 
   return (
     <div className="wrap">
+      <div className="mbti">
+        <p></p>
+      </div>
       <div className="write_section">
         <div className="selection">
           <div className="title">

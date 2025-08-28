@@ -23,20 +23,7 @@ a {
 
 
 /* MBTI */
-.mbti {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 20px;
-}
 
-.mbti p {
-  width: 80px;
-  height: 38px;
-  border: 1px solid #000;
-  text-align: center;
-  line-height: 38px;
-}
 
 
 
