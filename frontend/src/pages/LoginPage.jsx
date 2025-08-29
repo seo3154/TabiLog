@@ -1,5 +1,5 @@
 import React from "react";
-import "../style/LoginPage.css";
+import "../styles/LoginPage.css";
 
 export default function Login() {
   return (
@@ -44,7 +44,7 @@ export default function Login() {
                   <input
                     type="button"
                     value="회원가입"
-                    onClick={() => (window.location.href = "/signup")}
+                    onClick={() => (window.location.href = "/regpage")}
                     style={buttonStyle}
                   />
                 </td>
