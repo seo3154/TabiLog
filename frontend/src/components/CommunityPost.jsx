@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; // useParams로 URL에서 파라미터 받기
 import Button from "../components/Button";
 import "../styles/CommunityPost.css";
-import profil from "../assets/logo.png";
+import profile from "../assets/logo.png";
 
 export default function CommunityPost() {
   const { id } = useParams();  // URL에서 게시글 id를 받아옴
@@ -76,7 +76,7 @@ export default function CommunityPost() {
         </div>
 
         <div className="post-writer">
-          <img src={profil} alt="대체이미지" />
+          <img src={profile} alt="대체이미지" />
           <span className="writer">{post.writer}</span>
         </div>
       </div>
@@ -86,21 +86,38 @@ export default function CommunityPost() {
         <p>{post.content}</p>
       </div>
 
+      {/*댓글 개수 / 추천 개수*/}
+      <div className="cnt">
+        <div >
+          댓글 
+        </div>
+      </div>
+
       {/* 추천 및 신고 버튼 */}
       <div className="post-actions">
-        <button className="like-btn">추천</button>
-        <button className="report-btn">신고</button>
+        <Button
+          className="like_btn">
+          추천
+        </Button>
+        <Button
+          variant="white"
+          className="report_btn">
+          신고
+        </Button>
       </div>
 
       {/* 댓글 작성 */}
       <div className="comment-form">
         <textarea
-          placeholder="댓글을 입력하세요."
+          name="comment"
+          placeholder="댓글을 입력해주세요."
           value={newComment}
           onChange={handleCommentChange}
-        />
+        >
+        </textarea>
+
         <button className="comment-submit-btn" onClick={handleCommentSubmit}>
-          댓글 작성
+          작성
         </button>
       </div>
 
@@ -109,9 +126,11 @@ export default function CommunityPost() {
         {comments.map((comment) => (
           <div key={comment.id} className="comment">
             <div className="comment-author">
+              <img src={profile} alt="img" />
               <span className="writer">{comment.writer}</span>
               <span className="comment-date">{comment.date}</span>
             </div>
+
             <p>{comment.content}</p>
           </div>
         ))}
