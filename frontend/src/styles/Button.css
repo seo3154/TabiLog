@@ -35,6 +35,11 @@
     cursor: pointer;
 }
 
+.like_btn{
+  background-color: #FFE9CF;
+  color: #000;
+}
+
 /* 반응형 추가 */
 @media screen and (max-width: 1024px) {
   .btn {
