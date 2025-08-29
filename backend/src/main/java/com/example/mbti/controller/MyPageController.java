@@ -1,4 +1,3 @@
-// src/main/java/com/example/mbti/controller/MyPageController.java
 package com.example.mbti.controller;
 
 import com.example.mbti.dto.UpdateMbtiRequest;
@@ -11,9 +10,11 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = "http://localhost:3000",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH,
+                RequestMethod.DELETE, RequestMethod.OPTIONS},
+        allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class MyPageController {
-
     private final MyPageService myPageService;
 
     @GetMapping("/{loginId}")
@@ -28,7 +29,7 @@ public class MyPageController {
         return myPageService.updateProfile(loginId, req);
     }
 
-    // MBTI 수정 (프런트: updateUserMbti(loginId, mbtiName))
+    // MBTI 수정
     @PutMapping("/{loginId}/mbti")
     public UserProfileDto updateMbti(@PathVariable String loginId,
             @RequestBody UpdateMbtiRequest req) {
