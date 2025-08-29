@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 @Service
 @RequiredArgsConstructor
 public class MyPageService {
-
     private final UserRepository userRepository;
     private final MbtiRepository mbtiRepository;
 

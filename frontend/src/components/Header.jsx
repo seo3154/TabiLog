@@ -44,6 +44,10 @@ const Header = () => {
     navigate("/mypage"); // ✅ 라우트 경로 소문자로 일치
   };
 
+  const loginpage = () => {
+    navigate("/login");
+  };
+
   const regpage = () => {
     navigate("/regpage");
   };
@@ -78,7 +82,9 @@ const Header = () => {
             임시 MYPAGE
           </button>
           &nbsp;&nbsp;&nbsp;
-          <Button variant="white">로그인</Button>
+          <Button variant="white" onClick={loginpage}>
+            로그인
+          </Button>
           &nbsp;&nbsp;&nbsp;
           <Button variant="black" onClick={regpage}>
             회원가입

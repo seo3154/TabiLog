@@ -9,6 +9,7 @@ import CommunityBoard from "./components/CommunityBoard";
 import CommunityWrite from "./components/CommunityWrite";
 import CommunityPost from "./components/CommunityPost";
 import TravelDetailPage from "./pages/TravelDetailPage";
+import Login from "./pages/LoginPage";
 import SignIn from "./pages/RegPage";
 import Contact from "./pages/CenterPage";
 import Footer from "./components/Footer";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route path="/community/post/:id" element={<CommunityPost />} />
           <Route path="/place/:id" element={<TravelDetailPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/regpage" element={<SignIn />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Navigate to="/" />} />
