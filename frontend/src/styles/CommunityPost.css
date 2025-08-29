@@ -1,24 +1,39 @@
 /* 게시글 컨테이너 */
 .post-container {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  margin-bottom: 20px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 150px auto 0 auto;
 }
 
+
+
 /* 게시글 상단 */
+.post-container a .mbti {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .post-header {
   display: flex;
   justify-content: space-between;
+  border-bottom: 3px solid #000;
+  align-items: center;
 }
 
-.post-info {
-  font-size: 14px;
+.post-info{
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
-.mbti {
+.post-info .title{
+  font-size: 24px;
   font-weight: bold;
+  margin-right: 16px;
+}
+
+.post-info .post-date{
+  font-size: 12px;
+  opacity: 0.6;
 }
 
 .post-date {
@@ -30,20 +45,41 @@
 }
 
 .post-writer {
-  font-size: 14px;
+  display: flex;
+  align-items: center;
   font-weight: bold;
 }
 
+.post-writer img{
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  margin-right: 12px;
+}
+
+
+
+
 /* 게시글 본문 */
 .post-content {
+  width: 1000px;
+  height: 400px;
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.5;
 }
 
+.post-content p{
+  margin-top: 16px;
+  margin-left: 16px;
+}
+
+
+
 /* 버튼 */
 .post-actions {
   margin-top: 10px;
+  text-align: right;
 }
 
 .like-btn, .report-btn {
