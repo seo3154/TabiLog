@@ -1,5 +1,12 @@
 @charset "utf-8";
 
+/* ✅ 스크롤바 생겨도 레이아웃 점프 방지 */
+html { scrollbar-gutter: stable; }
+/* ⛳ 지원 안 하는 브라우저 폴백 */
+@supports not (scrollbar-gutter: stable) {
+  html { overflow-y: scroll; }  /* 항상 세로 스크롤바 자리 확보 */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,8 +21,6 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-
 
 /* 로고 */
 header {
@@ -52,8 +57,6 @@ header .logo a h2 {
   font-size: 20px;
 }
 
-
-
 /* 메뉴 */
 header .menu {
   display: flex;
@@ -70,8 +73,6 @@ header .menu {
   font-size: 18px;
   margin-left: 50px;
 }
-
-
 
 /* 반응형 추가 */
 @media screen and (max-width: 1024px) {
@@ -94,7 +95,7 @@ header .menu {
 
 @media screen and (max-width: 480px) {
   header .logo {
-    width: 30%; 
+    width: 30%;
   }
 
   header .logo a h2 {
@@ -110,4 +111,3 @@ header .menu {
     margin-left: 10px;
   }
 }
-
