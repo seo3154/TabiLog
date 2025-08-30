@@ -49,12 +49,14 @@ header .logo a {
 header .logo a img {
   width: 40px;
   height: 40px;
-  margin-right: 20px;
+  margin-right: 10px;
   object-fit: contain;
 }
 
 header .logo a h2 {
-  font-size: 20px;
+  margin-left: 10px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 /* 메뉴 */

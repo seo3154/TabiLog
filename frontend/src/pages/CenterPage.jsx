@@ -148,7 +148,7 @@ export default function CenterPage() {
   };
 
   return (
-    <div>
+    <div className="center-page">
       <br /><br />
       <h1 style={{ textAlign: "center"}}>고객센터</h1>
       <br /><br />

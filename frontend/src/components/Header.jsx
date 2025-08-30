@@ -57,7 +57,7 @@ const Header = () => {
       <div className="logo">
         <Link to="/">
           <img src={avatar} alt="프로필/로고" />
-          <h2>旅ログ</h2>
+          <h2>TABILOG</h2>
         </Link>
       </div>
 
