@@ -1,96 +1,181 @@
 @charset "utf-8";
 
+/* ====== 메인 페이지 베이스 ====== */
 .home-body {
   font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* 최소 화면 높이 설정 */
+  min-height: 100vh;
 }
 
+/* ====== 상단 배너(슬라이더) ====== */
 .image-slider-container {
   position: relative;
   width: 100%;
-  height: 400px;
+  height: clamp(360px, 56vw, 640px);
   overflow: hidden;
+  margin-bottom: 32px;
 }
-
 .image-slider-container img {
   position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity .6s ease;
+  /* 상단 크롭 최소화는 JSX에서 objectPosition: '50% 0%'로 제어 */
 }
 
-.notice-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
+/* ====== 본문 컨테이너 ====== */
+.main-content {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto 48px;
+}
+.home-body h1 {
+  text-align: center;
+  margin: 16px 0 24px;
 }
 
-.notice-table td {
-  padding: 10px;
+/* ────────────────────────────────────────────────────────────── */
+/* [NEW] Tabi 설명용 풀-블리드 화이트 밴드 */
+/* ────────────────────────────────────────────────────────────── */
+.tabi-band {
+  position: relative;
+  min-height: 600px;          /* 밴드 높이 */
+  padding: 80px 0;            /* 안쪽 여백 */
+  margin: 12px 0 64px;        /* 바깥 여백 */
 }
 
-.notice-header {
-  font-weight: bold;
-  background-color: #f0f0f0;
+/* [NEW] 흰색 배경을 화면 좌우 끝까지 펼치기(풀-블리드) */
+.tabi-band .band-bg {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  width: 100vw;               /* 뷰포트 가로 전체 */
+  transform: translateX(-50%);
+  background: #fff;
+  border-top: 1px solid #e6e6e6;   /* 윗 테두리 */
+  border-bottom: 1px solid #e6e6e6;/* 아래 테두리 */
+  z-index: 0;
 }
 
-.notice-link {
-  text-decoration: none;
-  color: black;
-}
-
-.notice-text {
-  font-size: 14px;
-}
-
-h1 {
+/* [NEW] 중앙 콘텐츠 */
+.tabi-band .band-content {
+  position: relative;
+  z-index: 1;
+  width: min(860px, 90%);
+  margin: 0 auto;
   text-align: center;
 }
+.tabi-band .band-title {
+  font-size: clamp(25px, 2.6vw, 28px);
+  font-weight: 600;
+  margin: 0 0 16px;
+}
+.tabi-band .band-desc {
+  color: #333;
+  line-height: 3;
+  font-size: 20px;
+}
+.tabi-band .band-desc p { margin: 8px 0; }
 
-.content-box {
-  width: 80%;
-  margin: auto;
+/* [NEW] CTA 버튼(가입하기) */
+.cta-join {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+  padding: 14px 28px;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 9999px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .15s ease, background-color .2s ease, box-shadow .2s ease;
+}
+.cta-join:hover {
+  transform: translateY(-1px);
+  background: #ffc144;
+  box-shadow: 0 4px 0 #000;   /* 살짝 눌림 효과 */
+}
+.cta-join:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.cta-join .cta-arrow { font-weight: 900; }
+
+/* [NEW] 상·하 테두리 위의 일러스트 레일(위/아래 교차) */
+.band-rails { 
+  position: absolute;
+  inset: 0;
+  z-index: 1;                 /* 배경 위, 텍스트와 같은 레벨 */
+  pointer-events: none;       /* 클릭 방해 X */
 }
 
-.rounded-box {
-  background-color: #f5f5f5;
-  border-radius: 15px;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 10px;
+/* 각 레일 위치: top/bottom + left/right */
+.band-rail {
+  position: absolute;
 }
+.band-rail.top    { top: 0;    transform: translateY(-10%); }  /* 윗 테두리에서 살짝 위로 걸쳐 보이게 */
+.band-rail.bottom { bottom: 0; transform: translateY( 32%); }  /* 아랫 테두리에서 살짝 아래로 */
+.band-rail.left   { left: min(24px, 3vw); }
+.band-rail.right  { right: min(24px, 3vw); }
 
-.content-p {
-  font-size: 16px;
-  line-height: 1.5;
-}
-
-.rounded-table-container {
-  width: 80%;
-  margin: auto;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.community-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.community-table th {
-  text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #000;
-}
-
-.community-link {
+/* 이미지 자체 크기(반응형) */
+.edge-illo {
+  width: clamp(250px, 28vw, 500px);
+  height: auto;
   display: block;
-  text-align: center;
-  margin-top: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  color: #000;
+}
+
+/* ────────────────────────────────────────────────────────────── */
+/* 기존 리빌 애니메이션(슬라이드+페이드) - 그대로 재사용 */
+/* ────────────────────────────────────────────────────────────── */
+.illo-reveal {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateX(0) scale(.98);
+  transition: transform .7s ease, opacity .7s ease, filter .7s ease;
+  will-change: transform, opacity, filter;
+}
+.from-left  { transform: translateX(-80px) scale(.98); }
+.from-right { transform: translateX( 80px) scale(.98); }
+.illo-reveal.in {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateX(0) scale(1);
+}
+
+/* 모션 최소화 환경 배려 */
+@media (prefers-reduced-motion: reduce) {
+  .illo-reveal, .illo-reveal.in {
+    transition: none;
+    transform: none;
+    filter: none;
+    opacity: 1;
+  }
+}
+
+/* 데스크톱에서 가장자리 더 바깥으로 살짝 밀기(선택 조절) */
+@media (min-width: 960px) {
+  .band-rail.top.left    .edge-illo { margin-left:  -500px; }
+  .band-rail.top.right   .edge-illo { margin-right: -500px; }
+  .band-rail.bottom.left .edge-illo { margin-left:  -200px; }
+  .band-rail.bottom.right .edge-illo { margin-right: -200px; }
+}
+/* ↑ 위 margin 값은 원하는 거리로 조절하세요. */
+
+/* [NEW] 제목 이미지를 위한 래퍼/스타일 */
+.title-image-wrap {
+  margin: 250px auto 12px;      /* 위아래 간격 */
+  width: 100%;
+  max-width: 1000px;          /* main-content와 동일 폭 */
+}
+.title-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;        /* 비율 유지 */
 }
