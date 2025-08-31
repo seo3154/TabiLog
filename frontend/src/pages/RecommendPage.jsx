@@ -88,8 +88,9 @@ export default function RecommendPage() {
 
   return (
     <main className="recommend-page-main">
+      <br /><br />
       <h1 align="center">{TARGET_MBTI} 추천 여행지</h1>
-      <br />
+      <br /><br />
 
       {/* 지정 MBTI 카드 */}
       {mbtiList.length === 0 ? (

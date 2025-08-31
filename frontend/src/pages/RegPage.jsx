@@ -69,10 +69,12 @@ export default function Signup() {
 
   return (
     <div className="signup-container">
+      <br/><br/>
       <h1>회원가입</h1>
+      <br/><br/>
       <form onSubmit={handleSubmit}>
         <fieldset className="signup-fieldset">
-          <legend className="signup-legend">회원가입</legend>
+          <legend className="signup-legend"></legend>
           <table className="signup-table">
             <tbody>
               <tr>
@@ -88,6 +90,7 @@ export default function Signup() {
                   />
                   <button
                     type="button"
+                    className="signup-duplicate-btn"
                     onClick={() => checkDuplicate("userid")}
                   >
                     중복
@@ -105,6 +108,8 @@ export default function Signup() {
                 </td>
               </tr>
 
+              <br/>
+
               <tr>
                 <td>PASSWORD</td>
                 <td>
@@ -119,6 +124,8 @@ export default function Signup() {
                 </td>
               </tr>
 
+              <br/>
+
               <tr>
                 <td>NICKNAME</td>
                 <td>
@@ -132,6 +139,7 @@ export default function Signup() {
                   />
                   <button
                     type="button"
+                    className="signup-duplicate-btn"
                     onClick={() => checkDuplicate("nickname")}
                   >
                     중복
@@ -149,6 +157,8 @@ export default function Signup() {
                 </td>
               </tr>
 
+              <br/>
+
               <tr>
                 <td>BIRTH</td>
                 <td>
@@ -163,6 +173,8 @@ export default function Signup() {
                   />
                 </td>
               </tr>
+
+              <br/>
 
               <tr>
                 <td>PHONE</td>
@@ -179,6 +191,8 @@ export default function Signup() {
                 </td>
               </tr>
 
+              <br/>
+
               <tr>
                 <td>EMAIL</td>
                 <td>
@@ -193,6 +207,8 @@ export default function Signup() {
                   />
                 </td>
               </tr>
+
+              <br/>
 
               <tr>
                 <td>GENDER</td>
@@ -224,6 +240,8 @@ export default function Signup() {
                 </td>
               </tr>
 
+              <br/>
+
               <tr>
                 <td colSpan="2">
                   <label
@@ -243,6 +261,8 @@ export default function Signup() {
                   </label>
                 </td>
               </tr>
+
+              <br/>
 
               <tr>
                 <td
