@@ -6,11 +6,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegDto {
-    private String userid;
+    private String loginId; // userid → loginId
     private String password;
+    private String name;
     private String nickname;
-    private String birth;
-    private String phone;
+    private Integer gender;
     private String email;
-    private String gender;
+    private String tel; // phone → tel
+    private String introText;
 }

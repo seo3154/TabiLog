@@ -22,6 +22,6 @@ public class LoginController {
     // 로그인
     @PostMapping("/login")
     public boolean login(@RequestBody LoginDto dto) {
-        return loginService.login(dto.getUserid(), dto.getPassword());
+        return loginService.login(dto.getLoginId(), dto.getPassword());
     }
 }

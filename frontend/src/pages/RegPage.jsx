@@ -1,23 +1,31 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import {
+  checkIdDuplicate,
+  checkNicknameDuplicate,
+  register,
+} from "../apis/users";
+import { useNavigate } from "react-router-dom";
+
 import "../styles/RegPage.css";
 
 export default function Signup() {
   const [formData, setFormData] = useState({
-    userid: "",
+    loginId: "",
     password: "",
+    name: "",
     nickname: "",
-    birth: "",
-    phone: "",
-    email: "",
     gender: "",
+    email: "",
+    tel: "",
+    introText: "",
     agree: false,
   });
 
   // 중복 체크 결과를 ID/닉네임 각각 보관
   const [availableId, setAvailableId] = useState(null); // true | false | null
   const [availableNick, setAvailableNick] = useState(null); // true | false | null
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -26,27 +34,25 @@ export default function Signup() {
     }));
 
     // 필드를 수정하면 해당 중복 결과 초기화
-    if (name === "userid") setAvailableId(null);
+    if (name === "loginId") setAvailableId(null);
     if (name === "nickname") setAvailableNick(null);
   };
 
   // 필드별 중복 체크
   const checkDuplicate = async (field) => {
     try {
-      if (field === "userid") {
-        if (!formData.userid.trim()) return alert("ID를 입력하세요.");
+      if (field === "loginId") {
+        if (!formData.loginId.trim()) return alert("ID를 입력하세요.");
         // 🔧 백엔드 엔드포인트에 맞춰 조정하세요 (예시)
-        const res = await axios.post("http://localhost:3000/check-id", {
-          userid: formData.userid.trim(),
-        });
-        setAvailableId(Boolean(res.data?.available));
+        const available = await checkIdDuplicate(formData.loginId.trim());
+        setAvailableId(available); // exists=true면 이미 존재 → 사용 불가
       } else if (field === "nickname") {
         if (!formData.nickname.trim()) return alert("닉네임을 입력하세요.");
         // 🔧 백엔드 엔드포인트에 맞춰 조정하세요 (예시)
-        const res = await axios.post("http://localhost:3000/check-nickname", {
-          nickname: formData.nickname.trim(),
-        });
-        setAvailableNick(Boolean(res.data?.available));
+        const available = await checkNicknameDuplicate(
+          formData.nickname.trim()
+        );
+        setAvailableNick(available);
       }
     } catch (err) {
       console.error(err);
@@ -54,24 +60,43 @@ export default function Signup() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.agree) return alert("회원가입 개인정보에 동의해 주세요.");
-
-    // (선택) 중복 체크 유도
     if (availableId === false) return alert("이미 사용 중인 ID입니다.");
     if (availableNick === false) return alert("이미 사용 중인 닉네임입니다.");
 
+    const payload = {
+      loginId: formData.loginId.trim(),
+      password: formData.password,
+      name: formData.name.trim(),
+      nickname: formData.nickname.trim(),
+      gender: Number(formData.gender),
+      email: formData.email.trim(),
+      tel: formData.tel.trim(),
+      introText: formData.introText?.trim() || "",
+    };
+
     // TODO: 실제 회원가입 API 연동
-    console.log("회원가입 데이터:", formData);
-    alert("회원가입 데이터가 콘솔에 출력되었습니다. (API 연동 필요)");
+    try {
+      await register(payload);
+      alert("회원가입 성공!");
+      navigate("/mainpage");
+    } catch (err) {
+      console.error(err);
+      alert(
+        `회원가입 중 오류 발생: ${err?.response?.data?.message || err.message}`
+      );
+    }
   };
 
   return (
     <div className="signup-container">
-      <br/><br/>
+      <br />
+      <br />
       <h1>회원가입</h1>
-      <br/><br/>
+      <br />
+      <br />
       <form onSubmit={handleSubmit}>
         <fieldset className="signup-fieldset">
           <legend className="signup-legend"></legend>
@@ -82,16 +107,16 @@ export default function Signup() {
                 <td>
                   <input
                     type="text"
-                    name="userid"
+                    name="loginId"
                     required
-                    value={formData.userid}
+                    value={formData.loginId}
                     onChange={handleChange}
                     className="signup-input"
                   />
                   <button
                     type="button"
                     className="signup-duplicate-btn"
-                    onClick={() => checkDuplicate("userid")}
+                    onClick={() => checkDuplicate("loginId")}
                   >
                     중복
                   </button>
@@ -108,7 +133,7 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td>PASSWORD</td>
@@ -124,7 +149,23 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
+
+              <tr>
+                <td>NAME</td>
+                <td>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="signup-input"
+                  />
+                </td>
+              </tr>
+
+              <br />
 
               <tr>
                 <td>NICKNAME</td>
@@ -157,7 +198,7 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td>BIRTH</td>
@@ -174,16 +215,16 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td>PHONE</td>
                 <td>
                   <input
                     type="text"
-                    name="phone"
+                    name="tel"
                     required
-                    value={formData.phone}
+                    value={formData.tel}
                     onChange={handleChange}
                     className="signup-input"
                     placeholder="010-1234-5678"
@@ -191,7 +232,7 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td>EMAIL</td>
@@ -208,7 +249,7 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td>GENDER</td>
@@ -217,9 +258,9 @@ export default function Signup() {
                     <input
                       type="radio"
                       name="gender"
-                      value="남자"
+                      value="1"
                       required
-                      checked={formData.gender === "남자"}
+                      checked={formData.gender === "1"}
                       onChange={handleChange}
                       className="signup-radio"
                     />{" "}
@@ -229,9 +270,9 @@ export default function Signup() {
                     <input
                       type="radio"
                       name="gender"
-                      value="여자"
+                      value="2"
                       required
-                      checked={formData.gender === "여자"}
+                      checked={formData.gender === "2"}
                       onChange={handleChange}
                       className="signup-radio"
                     />{" "}
@@ -240,7 +281,7 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td colSpan="2">
@@ -262,7 +303,7 @@ export default function Signup() {
                 </td>
               </tr>
 
-              <br/>
+              <br />
 
               <tr>
                 <td

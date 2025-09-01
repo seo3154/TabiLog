@@ -2,12 +2,10 @@
 import axios from "axios";
 
 const client = axios.create({
-
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:8080",
+  baseURL: "/api",
   timeout: 10000,
   // 쿠키/세션 안 쓰면 OFF. 켜면 서버 CORS도 allowCredentials=true + Origin 고정 필요
   // withCredentials: true,
-
 });
 
 // 에러 메시지 통일 (Network Error/타임아웃 가시화)

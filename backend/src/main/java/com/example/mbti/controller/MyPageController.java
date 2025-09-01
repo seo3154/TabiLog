@@ -8,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:3000",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH,
-                RequestMethod.DELETE, RequestMethod.OPTIONS},
-        allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
+@RequestMapping("/api/users")
+// @CrossOrigin(origins = "http://localhost:3000",
+// methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH,
+// RequestMethod.DELETE, RequestMethod.OPTIONS},
+// allowedHeaders = "*", allowCredentials = "true", maxAge = 3600)
 public class MyPageController {
     private final MyPageService myPageService;
 

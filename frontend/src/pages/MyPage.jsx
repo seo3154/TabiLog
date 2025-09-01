@@ -43,7 +43,11 @@ function getProfileImgs(user) {
 
 function syncUserToHeader(next) {
   // 1) localStorage 동기화
-  window.localStorage.setItem("tabilog.user", JSON.stringify(next));
+  const prev = JSON.parse(window.localStorage.getItem("tabilog.user") || "{}");
+  window.localStorage.setItem(
+    "tabilog.user",
+    JSON.stringify({ ...prev, ...next })
+  );
   // 2) 헤더에 즉시 알림
   window.dispatchEvent(
     new CustomEvent("tabilog:user-updated", { detail: next })
@@ -51,9 +55,9 @@ function syncUserToHeader(next) {
 }
 
 export default function MyPage() {
-  // TODO: 로그인 연동되면 'admin' 대신 스토어/쿠키에서 가져오기
-  // TODO: 로그인 연동: 전역 스토어/쿠키/헤더 컨텍스트에서 가져오도록
-  const [loginId] = useState("ddatg123");
+  // ✅ 로그인한 사용자 정보 localStorage에서 불러오기
+  const me = JSON.parse(localStorage.getItem("tabilog.user"));
+  const loginId = me?.loginId || "";
   const [tab, setTab] = useState("myPost");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -82,6 +86,7 @@ export default function MyPage() {
           window.localStorage.setItem(
             "tabilog.user",
             JSON.stringify({
+              loginId: mockUser.loginId,
               nickname: mockUser.nickname,
               mbtiName: mockUser.mbtiName || "",
               mbtiUrl: mockUser.mbtiUrl || "",
@@ -91,6 +96,7 @@ export default function MyPage() {
           // ✅ 헤더 동기화 함수가 있으면 호출
           if (typeof syncUserToHeader === "function") {
             syncUserToHeader({
+              loginId: mockUser.loginId,
               nickname: mockUser.nickname,
               mbtiName: mockUser.mbtiName || "",
               mbtiUrl: mockUser.mbtiUrl || "",
@@ -101,10 +107,10 @@ export default function MyPage() {
         }
         const data = await getUserByLoginId(loginId); // apis/users 파일
         setUser(data);
-        // ✅ 일부 필드만 로컬 저장
         window.localStorage.setItem(
           "tabilog.user",
           JSON.stringify({
+            loginId: data.loginId,
             nickname: data.nickname,
             mbtiName: data.mbtiName || "",
             mbtiUrl: data.mbtiUrl || "",
@@ -114,6 +120,7 @@ export default function MyPage() {
         // ✅ 헤더 동기화 함수가 있으면 호출
         if (typeof syncUserToHeader === "function") {
           syncUserToHeader({
+            loginId: data.loginId,
             nickname: data.nickname,
             mbtiName: data.mbtiName || "",
             mbtiUrl: data.mbtiUrl || "",

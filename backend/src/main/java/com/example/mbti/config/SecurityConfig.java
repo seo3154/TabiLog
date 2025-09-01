@@ -17,29 +17,16 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-
-
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().and().csrf().disable().exceptionHandling()
-                .authenticationEntryPoint((req, res, ex) -> {
-                    res.setStatus(401);
-                    res.setContentType("application/json;charset=UTF-8");
-                    res.getWriter().write("{\"message\":\"Unauthorized\"}");
-                }).accessDeniedHandler((req, res, ex) -> {
-                    res.setStatus(403);
-                    res.setContentType("application/json;charset=UTF-8");
-                    res.getWriter().write("{\"message\":\"Forbidden\"}");
-                }).and().authorizeRequests().anyRequest().permitAll() // ⚠️ 개발용: 전부 허용
-                .and().httpBasic().disable().formLogin().disable().logout().disable();
-
-
+    SecurityFilterChain filter(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable().authorizeHttpRequests(auth -> auth
+                .antMatchers("/api/auth/**", "/api/users/**").permitAll().anyRequest().permitAll());
         return http.build();
     }
 
 
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
+    CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration cfg = new CorsConfiguration();
         // 프론트 도메인만 허용
         cfg.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000"));
