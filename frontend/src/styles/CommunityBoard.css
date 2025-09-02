@@ -43,7 +43,7 @@ a{
     margin-bottom: 16px;
 }
 
-.board #select{
+.board select{
     display: inline-block;
     appearance: none;
     width: 90px;
