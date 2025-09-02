@@ -10,10 +10,11 @@ import lombok.Setter;
 @Table(name = "board")
 @Getter
 @Setter
-public class Board{
+public class Board {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq_gen")
+    @SequenceGenerator(name = "board_seq_gen", sequenceName = "BOARD_SEQ", allocationSize = 1)
     @Column(name = "board_id")
     private Long boardID;
 
@@ -46,9 +47,8 @@ public class Board{
 
     @PrePersist
     public void prePersist() {
-        if(createAt == null){
+        if (createAt == null) {
             createAt = new Date(); // 현재 시간
         }
     }
-
 }

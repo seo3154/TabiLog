@@ -2,9 +2,7 @@ package com.example.mbti.controller;
 
 import com.example.mbti.dto.BoardDto;
 import com.example.mbti.dto.CommentDto;
-import com.example.mbti.model.Board;
 import com.example.mbti.service.BoardService;
-import com.example.mbti.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,9 +18,7 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
-    @Autowired
-    private CommentService commentService;
-
+    // ===================== Board =====================
     // 게시글 목록 (페이징 + 검색)
     @GetMapping
     public Page<BoardDto> getBoards(@RequestParam(required = false) String searchWhat,
@@ -46,7 +42,7 @@ public class BoardController {
     // 게시글 수정
     @PutMapping("/{boardId}")
     public BoardDto updateBoard(@PathVariable Long boardId, @RequestBody BoardDto boardDto) {
-        boardDto.setBoardID(boardId);
+        boardDto.setBoardid(boardId);
         return boardService.updateBoard(boardDto);
     }
 
@@ -57,17 +53,18 @@ public class BoardController {
         return "삭제 완료";
     }
 
+    // ===================== Comment =====================
     // 댓글 생성 (대댓글 포함)
     @PostMapping("/{boardId}/comments")
     public CommentDto createComment(@PathVariable Long boardId,
                                     @RequestBody CommentDto commentDto) {
-        return commentService.createComment(boardId, commentDto);
+        return boardService.createComment(boardId, commentDto);
     }
 
-    // 댓글 조회 (게시글의 댓글 모두)
+    // 게시글 댓글 전체 조회
     @GetMapping("/{boardId}/comments")
     public List<CommentDto> getComments(@PathVariable Long boardId) {
-        return commentService.getCommentsByBoard(boardId);
+        return boardService.getCommentsByBoard(boardId);
     }
 
     // 댓글 수정
@@ -75,13 +72,13 @@ public class BoardController {
     public CommentDto updateComment(@PathVariable Long commentId,
                                     @RequestBody CommentDto commentDto) {
         commentDto.setCommentID(commentId);
-        return commentService.updateComment(commentDto);
+        return boardService.updateComment(commentDto);
     }
 
     // 댓글 삭제
     @DeleteMapping("/comments/{commentId}")
     public String deleteComment(@PathVariable Long commentId) {
-        commentService.deleteComment(commentId);
+        boardService.deleteComment(commentId);
         return "댓글 삭제 완료";
     }
 }

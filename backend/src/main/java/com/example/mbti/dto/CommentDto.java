@@ -3,17 +3,12 @@ package com.example.mbti.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
-
 @Getter
 @Setter
-public class CommentDto{
-
+public class CommentDto {
     private Long commentID;
+    private Long boardId;
+    private Long userId;     // User PK
+    private String userName; // User loginId
     private String content;
-    private Date createAt;
-    private Long userID;
-
-    private List<CommentDto> children = new ArrayList<>();
-
 }

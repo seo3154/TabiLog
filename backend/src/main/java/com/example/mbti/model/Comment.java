@@ -10,10 +10,11 @@ import lombok.Setter;
 @Table(name = "comment")
 @Getter
 @Setter
-public class Comment{
+public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq_gen")
+    @SequenceGenerator(name = "comment_seq_gen", sequenceName = "COMMENT_SEQ", allocationSize = 1)
     @Column(name = "comment_id", nullable = false)
     private Long commentID;
 
@@ -42,9 +43,8 @@ public class Comment{
 
     @PrePersist
     public void prePersist() {
-        if(createAt == null){
+        if (createAt == null) {
             createAt = new Date(); // 현재 시간
         }
     }
-
 }

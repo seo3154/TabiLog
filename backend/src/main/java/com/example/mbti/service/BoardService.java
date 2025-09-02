@@ -1,5 +1,7 @@
 package com.example.mbti.service;
 
+import com.example.mbti.dto.BoardDto;
+import com.example.mbti.dto.CommentDto;
 import com.example.mbti.model.Board;
 import com.example.mbti.model.Comment;
 import com.example.mbti.model.User;
@@ -14,80 +16,122 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BoardCommentService {
+public class BoardService {
 
     private final BoardRepository boardRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 
-    // ===================== Board =====================
-    public Board saveBoard(Board board, Long userId) {
-        Optional<User> userOpt = userRepository.findById(userId);
-        if (userOpt.isEmpty()) {
-            throw new IllegalArgumentException("해당 유저가 없습니다.");
+    // ================= Board =================
+    public Page<BoardDto> getBoards(String searchWhat, String keyword, Pageable pageable) {
+        Page<Board> boards;
+        if ("title".equals(searchWhat)) {
+            boards = boardRepository.findByTitleContaining(keyword, pageable);
+        } else if ("content".equals(searchWhat)) {
+            boards = boardRepository.findByContentContaining(keyword, pageable);
+        } else if ("user".equals(searchWhat)) {
+            boards = boardRepository.findByUser_LoginIdContaining(keyword, pageable);
+        } else {
+            boards = boardRepository.findAll(pageable);
         }
-        board.setUser(userOpt.get());
-        return boardRepository.save(board);
+        return boards.map(this::toDto);
     }
 
-    public Page<Board> searchByTitle(String keyword, Pageable pageable) {
-        return boardRepository.findByTitleContaining(keyword, pageable);
-    }
-
-    public Page<Board> searchByUser(String keyword, Pageable pageable) {
-        return boardRepository.findByUser_UseridContaining(keyword, pageable);
-    }
-
-    public Page<Board> searchByContent(String keyword, Pageable pageable) {
-        return boardRepository.findByContentContaining(keyword, pageable);
-    }
-
-    public Optional<Board> getBoard(Long boardId) {
-        return boardRepository.findById(boardId);
-    }
-
-
-
-    // ===================== Comment =====================
-    public Comment saveComment(Comment comment, Long boardId, Long userId) {
-        Optional<Board> boardOpt = boardRepository.findById(boardId);
-        Optional<User> userOpt = userRepository.findById(userId);
-
-        if (boardOpt.isEmpty() || userOpt.isEmpty()) {
-            throw new IllegalArgumentException("게시글 또는 유저가 없습니다.");
-        }
-
-        comment.setBoard(boardOpt.get());
-        comment.setUser(userOpt.get());
-
-        return commentRepository.save(comment);
-    }
-
-    public Comment saveReply(Comment reply, Long parentCommentId, Long userId) {
-        Optional<Comment> parentOpt = commentRepository.findById(parentCommentId);
-        Optional<User> userOpt = userRepository.findById(userId);
-
-        if (parentOpt.isEmpty() || userOpt.isEmpty()) {
-            throw new IllegalArgumentException("부모 댓글 또는 유저가 없습니다.");
-        }
-
-        reply.setParent(parentOpt.get());
-        reply.setBoard(parentOpt.get().getBoard());
-        reply.setUser(userOpt.get());
-
-        return commentRepository.save(reply);
-    }
-
-    public List<Comment> getCommentsByBoard(Long boardId) {
+    public BoardDto getBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)
                 .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
-        return commentRepository.findByBoardOrderByCreateAtAsc(board);
+        // 조회수 증가
+        board.setViews(board.getViews() + 1);
+        boardRepository.save(board);
+        return toDto(board);
+    }
+
+    public BoardDto createBoard(BoardDto boardDto) {
+        User user = userRepository.findById(boardDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
+
+        Board board = new Board();
+        board.setTitle(boardDto.getTitle());
+        board.setContent(boardDto.getContent());
+        board.setCategory(boardDto.getCategory());
+        board.setUser(user);
+        board.setViews(0);
+
+        Board saved = boardRepository.save(board);
+        return toDto(saved);
+    }
+
+    public BoardDto updateBoard(BoardDto boardDto) {
+        Board board = boardRepository.findById(boardDto.getBoardid())
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
+        board.setTitle(boardDto.getTitle());
+        board.setContent(boardDto.getContent());
+        board.setCategory(boardDto.getCategory());
+        Board updated = boardRepository.save(board);
+        return toDto(updated);
+    }
+
+    public void deleteBoard(Long boardId) {
+        boardRepository.deleteById(boardId);
+    }
+
+    // ================= Comment =================
+    public CommentDto createComment(Long boardId, CommentDto commentDto) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
+        User user = userRepository.findById(commentDto.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("유저가 없습니다."));
+
+        Comment comment = new Comment();
+        comment.setBoard(board);
+        comment.setUser(user);
+        comment.setContent(commentDto.getContent());
+        Comment saved = commentRepository.save(comment);
+
+        return toCommentDto(saved);
+    }
+
+    public List<CommentDto> getCommentsByBoard(Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
+        List<Comment> comments = commentRepository.findByBoardOrderByCreateAtAsc(board);
+        return comments.stream().map(this::toCommentDto).collect(Collectors.toList());
+    }
+
+    public CommentDto updateComment(CommentDto commentDto) {
+        Comment comment = commentRepository.findById(commentDto.getCommentID())
+                .orElseThrow(() -> new IllegalArgumentException("댓글이 없습니다."));
+        comment.setContent(commentDto.getContent());
+        Comment updated = commentRepository.save(comment);
+        return toCommentDto(updated);
     }
 
     public void deleteComment(Long commentId) {
         commentRepository.deleteById(commentId);
+    }
+
+    // ================= DTO 변환 =================
+    private BoardDto toDto(Board board) {
+        BoardDto dto = new BoardDto();
+        dto.setBoardid(board.getBoardID());
+        dto.setTitle(board.getTitle());
+        dto.setContent(board.getContent());
+        dto.setCategory(board.getCategory());
+        dto.setUserId(board.getUser().getId());
+        dto.setViews(board.getViews());
+        return dto;
+    }
+
+    private CommentDto toCommentDto(Comment comment) {
+        CommentDto dto = new CommentDto();
+        dto.setCommentID(comment.getCommentID());
+        dto.setContent(comment.getContent());
+        dto.setBoardId(comment.getBoard().getBoardID());
+        dto.setUserId(comment.getUser().getId());
+        return dto;
     }
 }

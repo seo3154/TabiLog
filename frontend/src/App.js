@@ -24,7 +24,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/notice/*" element={<NoticePage />} />
           <Route path="/recommend/*" element={<RecommendPage />} />
-          <Route path="/community" element={<CommunityPage />} />
+          <Route path="/community/*" element={<CommunityPage />} />
           <Route path="/community/board" element={<CommunityBoard />} />
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route path="/community/post/:id" element={<CommunityPost />} />
