@@ -54,7 +54,7 @@
 
 .recommend-page-article:hover {
   background-color: #f5f5f5;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* ===== 검색 섹션 ===== */
@@ -80,7 +80,7 @@
   border: 1px solid #eee;
   border-radius: 40px;
   padding: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .recommend-search-input {
@@ -93,10 +93,14 @@
   font-size: 1rem;
   outline: none;
 }
-.recommend-search-input:focus { border-color: #888; }
+.recommend-search-input:focus {
+  border-color: #888;
+}
 
 /* 드롭다운 */
-.recommend-select-wrap { position: relative; }
+.recommend-select-wrap {
+  position: relative;
+}
 .recommend-select {
   height: 42px;
   padding: 0 12px;
@@ -106,7 +110,9 @@
   font-size: 0.95rem;
   outline: none;
 }
-.recommend-select:focus { border-color: #888; }
+.recommend-select:focus {
+  border-color: #888;
+}
 
 /* 라디오(검색 범위) */
 .recommend-scope-radios {
@@ -123,7 +129,9 @@
 }
 
 /* 결과 */
-.recommend-search-result { margin-top: 16px; }
+.recommend-search-result {
+  margin-top: 16px;
+}
 .recommend-search-count {
   margin: 10px 4px 12px;
   color: #555;
@@ -146,13 +154,21 @@
   color: #777;
 }
 
-.recommend-search-grid { margin-top: 8px; }
+.recommend-search-grid {
+  margin-top: 8px;
+}
 
 /* 반응형 */
 @media (max-width: 768px) {
-  .recommend-search { padding: 0 16px; }
-  .recommend-search-bar { padding: 12px; }
-  .recommend-search-input { flex-basis: 100%; }
+  .recommend-search {
+    padding: 0 16px;
+  }
+  .recommend-search-bar {
+    padding: 12px;
+  }
+  .recommend-search-input {
+    flex-basis: 100%;
+  }
 }
 
 /* ===== 지역으로 찾기 ===== */
@@ -170,7 +186,7 @@
   border: 1px solid #eee;
   border-radius: 40px;
   padding: 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .pref-chip {
@@ -182,10 +198,19 @@
   font-size: 0.95rem;
   cursor: pointer;
   padding: 0 14px;
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+  transition: background-color 0.2s ease, border-color 0.2s ease,
+    transform 0.1s ease;
 }
-.pref-chip:hover { background: #f2f4f7; border-color: #cfcfcf; transform: translateY(-1px); }
-.pref-chip.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+.pref-chip:hover {
+  background: #f2f4f7;
+  border-color: #cfcfcf;
+  transform: translateY(-1px);
+}
+.pref-chip.active {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
 
 .pref-actions {
   display: flex;
@@ -202,11 +227,323 @@
   color: #ffffff;
   cursor: pointer;
 }
-.pref-clear:disabled { opacity: 0.5; cursor: default; }
-.pref-clear:hover:not(:disabled) { background: #000000; color: #ffffff; }
+.pref-clear:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.pref-clear:hover:not(:disabled) {
+  background: #000000;
+  color: #ffffff;
+}
 
 /* 반응형 */
 @media (max-width: 768px) {
-  .recommend-pref { padding: 0 16px; }
-  .recommend-pref-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+  .recommend-pref {
+    padding: 0 16px;
+  }
+  .recommend-pref-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+}
+
+/* ====== 일본 지도형(타일 그리드) ====== 삭제해도 됨 */
+.jp-map-wrap {
+  margin-top: 16px;
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 24px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.jp-map-toolbar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.map-toggle {
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid #ddd;
+  background: #fafafa;
+  cursor: pointer;
+}
+.map-toggle.active {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
+
+/* 14x14 격자에 도도부현을 배치 */
+.jp-map-grid {
+  --cell: 44px; /* 셀 크기 */
+  display: grid;
+  grid-template-columns: repeat(14, var(--cell));
+  grid-template-rows: repeat(14, var(--cell));
+  gap: 6px;
+  justify-content: center;
+}
+
+/* 지도 타일 공통 스타일 */
+.jp-tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  background: #fafafa;
+  font-size: 12px;
+  line-height: 1.1;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.08s ease, background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+.jp-tile:hover {
+  background: #f2f4f7;
+  border-color: #cfcfcf;
+  transform: translateY(-1px);
+}
+.jp-tile.active {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
+.jp-tile:focus {
+  outline: 2px solid #1f6feb44;
+}
+
+/* ====== 타일 좌표 (grid-area 대신 위치 지정) ======
+   grid-column: start / span 1;
+   grid-row: start / span 1;
+   아래 좌표는 '일본 느낌' 나도록 대략 배치한 것.
+   필요하면 숫자 미세 조정해도 됨.
+*/
+
+/* 홋카이도 & 도호쿠 */
+.pref-홋카이도 {
+  grid-column: 11 / span 1;
+  grid-row: 1 / span 1;
+}
+.pref-아오모리현 {
+  grid-column: 10 / span 1;
+  grid-row: 3 / span 1;
+}
+.pref-이와테현 {
+  grid-column: 11 / span 1;
+  grid-row: 4 / span 1;
+}
+.pref-미야기현 {
+  grid-column: 11 / span 1;
+  grid-row: 5 / span 1;
+}
+.pref-아키타현 {
+  grid-column: 10 / span 1;
+  grid-row: 4 / span 1;
+}
+.pref-야마가타현 {
+  grid-column: 10 / span 1;
+  grid-row: 5 / span 1;
+}
+.pref-후쿠시마현 {
+  grid-column: 10 / span 1;
+  grid-row: 6 / span 1;
+}
+
+/* 간토 */
+.pref-이바라키현 {
+  grid-column: 11 / span 1;
+  grid-row: 7 / span 1;
+}
+.pref-도치기현 {
+  grid-column: 10 / span 1;
+  grid-row: 7 / span 1;
+}
+.pref-군마현 {
+  grid-column: 9 / span 1;
+  grid-row: 7 / span 1;
+}
+.pref-사이타마현 {
+  grid-column: 9 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-치바현 {
+  grid-column: 11 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-도쿄도 {
+  grid-column: 10 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-가나가와현 {
+  grid-column: 10 / span 1;
+  grid-row: 9 / span 1;
+}
+
+/* 고신에쓰/호쿠리쿠 */
+.pref-니가타현 {
+  grid-column: 8 / span 1;
+  grid-row: 6 / span 1;
+}
+.pref-야마나시현 {
+  grid-column: 9 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-나가노현 {
+  grid-column: 8 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-도야마현 {
+  grid-column: 7 / span 1;
+  grid-row: 7 / span 1;
+}
+.pref-이시카와현 {
+  grid-column: 6 / span 1;
+  grid-row: 7 / span 1;
+}
+.pref-후쿠이현 {
+  grid-column: 6 / span 1;
+  grid-row: 8 / span 1;
+}
+
+/* 도카이 */
+.pref-시즈오카현 {
+  grid-column: 8 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-아이치현 {
+  grid-column: 7 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-기후현 {
+  grid-column: 7 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-미에현 {
+  grid-column: 7 / span 1;
+  grid-row: 10 / span 1;
+}
+
+/* 긴키(칸사이) */
+.pref-시가현 {
+  grid-column: 6 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-교토부 {
+  grid-column: 5 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-오사카부 {
+  grid-column: 5 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-효고현 {
+  grid-column: 4 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-나라현 {
+  grid-column: 6 / span 1;
+  grid-row: 10 / span 1;
+}
+.pref-와카야마현 {
+  grid-column: 5 / span 1;
+  grid-row: 10 / span 1;
+}
+
+/* 주고쿠 */
+.pref-돗토리현 {
+  grid-column: 3 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-시마네현 {
+  grid-column: 2 / span 1;
+  grid-row: 8 / span 1;
+}
+.pref-오카야마현 {
+  grid-column: 3 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-히로시마현 {
+  grid-column: 2 / span 1;
+  grid-row: 9 / span 1;
+}
+.pref-야마구치현 {
+  grid-column: 1 / span 1;
+  grid-row: 9 / span 1;
+}
+
+/* 시코쿠 */
+.pref-가가와현 {
+  grid-column: 3 / span 1;
+  grid-row: 10 / span 1;
+}
+.pref-도쿠시마현 {
+  grid-column: 4 / span 1;
+  grid-row: 10 / span 1;
+}
+.pref-에히메현 {
+  grid-column: 2 / span 1;
+  grid-row: 10 / span 1;
+}
+.pref-고치현 {
+  grid-column: 3 / span 1;
+  grid-row: 11 / span 1;
+}
+
+/* 규슈 */
+.pref-후쿠오카현 {
+  grid-column: 1 / span 1;
+  grid-row: 10 / span 1;
+}
+.pref-사가현 {
+  grid-column: 1 / span 1;
+  grid-row: 11 / span 1;
+}
+.pref-나가사키현 {
+  grid-column: 0 / span 1;
+  grid-row: 11 / span 1;
+} /* 살짝 바깥으로 */
+.pref-구마모토현 {
+  grid-column: 2 / span 1;
+  grid-row: 11 / span 1;
+}
+.pref-오이타현 {
+  grid-column: 2 / span 1;
+  grid-row: 10 / span 1;
+}
+.pref-미야자키현 {
+  grid-column: 3 / span 1;
+  grid-row: 12 / span 1;
+}
+.pref-가고시마현 {
+  grid-column: 2 / span 1;
+  grid-row: 13 / span 1;
+}
+
+/* 오키나와 (멀리 아래) */
+.pref-오키나와현 {
+  grid-column: 11 / span 1;
+  grid-row: 13 / span 1;
+}
+
+/* 반응형: 셀 크기 축소 */
+@media (max-width: 768px) {
+  .jp-map-grid {
+    --cell: 34px;
+    gap: 4px;
+  }
+  .jp-tile {
+    font-size: 11px;
+    padding: 4px;
+  }
+}
+
+/* ‘지역으로 찾기’의 요약/버튼 줄과 잘 어울리게 간격 */
+.jp-map-wrap + .pref-actions {
+  margin-top: 12px;
 }
