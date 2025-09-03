@@ -1,53 +1,50 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { login } from "../apis/users";
-import "../styles/LoginPage.css";
 
-export default function Login() {
-  const navigate = useNavigate();
-  const [form, setForm] = useState({ loginId: "", password: "" });
-  const [loading, setLoading] = useState(false);
+import axios from "axios";
+import "../style/LoginPage.css";
 
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setForm((p) => ({ ...p, [name]: value }));
-  };
+export default function Login({ navigate }) {
+  const [userid, setUserid] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!form.loginId.trim() || !form.password) return;
-
+  const handleLogin = async (e) => {
+    e.preventDefault(); // 기본 form 제출 막기
     try {
-      setLoading(true);
-      const me = await login(form.loginId.trim(), form.password);
+      const res = await axios.post("http://localhost:8080/api/login", {
+        userid,
+        password,
+      });
 
-      // ✅ 로그인 성공 처리: 저장 + 전역 알림 + 이동
-      localStorage.setItem("tabilog.user", JSON.stringify(me));
-      window.dispatchEvent(
-        new CustomEvent("tabilog:user-updated", { detail: me })
-      );
-      navigate("/mainpage"); // 또는 navigate("/mainpage")
+      if (res.data && res.data.userid) {
+        localStorage.setItem("userid", res.data.userid); // ✅ 로그인 성공 시 저장
+        alert("로그인 성공!");
+        window.location.href = "/community"; // 로그인 후 이동
+      } else {
+        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+      }
     } catch (err) {
-      console.error(err);
-      alert(err?.response?.data?.message || "아이디/비밀번호를 확인해 주세요.");
-    } finally {
-      setLoading(false);
+      console.error("로그인 실패", err);
+      alert("로그인 실패. 서버 확인 필요!");
+
     }
   };
 
   return (
-    <div className="login-container">
-      <br />
-      <br />
-      <h1 className="login-title">로그인</h1>
-      <br />
-      <br />
 
-      <form onSubmit={handleSubmit}>
-        <fieldset className="login-fieldset">
-          <legend className="login-legend"></legend>
+    <div>
+      <h1 style={{ textAlign: "center" }}>로그인</h1>
+      <form onSubmit={handleLogin}>
+        <fieldset
+          style={{
+            width: "300px",
+            margin: "auto",
+            borderRadius: "10px",
+            padding: "20px",
+          }}
+        >
+          <legend style={{ textAlign: "center" }}>로그인</legend>
+          <table style={{ margin: "0 auto", width: "100%" }}>
 
-          <table className="login-table">
             <tbody>
               <tr>
                 <td className="login-label">
@@ -57,7 +54,10 @@ export default function Login() {
                   <input
                     id="loginId"
                     type="text"
-                    name="loginId"
+
+                    value={userid}
+                    onChange={(e) => setUserid(e.target.value)}
+
                     required
                     className="login-input"
                     value={form.loginId}
@@ -77,7 +77,8 @@ export default function Login() {
                   <input
                     id="password"
                     type="password"
-                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                     className="login-input"
                     value={form.password}
@@ -115,3 +116,20 @@ export default function Login() {
     </div>
   );
 }
+
+
+const inputStyle = {
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  padding: "5px",
+  width: "95%",
+};
+
+const buttonStyle = {
+  borderRadius: "5px",
+  padding: "5px 10px",
+  border: "1px solid #888",
+  backgroundColor: "#f5f5f5",
+  cursor: "pointer",
+};
+
