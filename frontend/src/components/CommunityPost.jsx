@@ -1,137 +1,84 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; // useParams로 URL에서 파라미터 받기
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import Button from "../components/Button";
-import "../styles/CommunityPost.css";
 import profile from "../assets/logo.png";
 
 export default function CommunityPost() {
-  const { id } = useParams();  // URL에서 게시글 id를 받아옴
-
-  // 예시 게시글 데이터 (이 부분을 실제 API나 데이터를 통해 가져오게 변경 가능)
+  const { id } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    // id에 맞는 게시글을 찾는 로직 (예시)
-    const fetchPost = () => {
-      // 실제 데이터에서 해당 id에 맞는 게시글을 찾는 코드
-      const postData = {
-        id: id,
-        mbti: "ENTP",
-        title: "테스트용 게시물입니다.",
-        writer: "대이건",
-        content: "대 이 건의 은총이 함께하는 즐거운 사다수",
-        date: "2025.08.26 15:50",
-        cnt: "14"
-      };
-      setPost(postData);
-
-      // 댓글 예시 데이터
-      const postComments = [
-        {
-          id: 1,
-          writer: "땃 쥐",
-          content: "숭배를 시작하면 잠이 확 깨 버릴 걸 알면서도, 나는 숭배해야만 해. 그것이 대이건을 목도한 자의 사명이다.",
-          date: "2025-08-26",
-        },
-      ];
-      setComments(postComments);
-    };
-
     fetchPost();
-  }, [id]); // id가 변경될 때마다 새로운 게시글 데이터를 가져옴
+  }, [id]);
 
-  const handleCommentChange = (e) => {
-    setNewComment(e.target.value);
-  };
+  const fetchPost = async () => {
+    try {
+      const res = await axios.get(`http://localhost:8080/api/boards/${id}`);
+      setPost(res.data);
 
-  const handleCommentSubmit = () => {
-    if (!newComment) {
-      alert("댓글을 입력해주세요.");
-      return;
+      // 댓글 가져오기
+      const commentRes = await axios.get(
+        `http://localhost:8080/api/boards/${id}/comments`
+      );
+      setComments(commentRes.data);
+    } catch (err) {
+      console.error(err);
     }
-    const newCommentObj = {
-      id: comments.length + 1,
-      writer: "테스트", // 실제 사용자 정보로 수정
-      content: newComment,
-      date: new Date().toISOString().split("T")[0],
-    };
-    setComments([newCommentObj, ...comments]);
-    setNewComment("");
   };
 
-  if (!post) return <div>Loading...</div>; // 게시글이 로딩 중일 경우
+  const handleCommentSubmit = async () => {
+    if (!newComment) return alert("댓글을 입력해주세요.");
+    try {
+      const res = await axios.post("http://localhost:8080/api/comments", {
+        boardId: id,
+        content: newComment,
+      });
+      setComments([res.data, ...comments]);
+      setNewComment("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  if (!post) return <div>Loading...</div>;
 
   return (
     <div className="post-container">
-      <a href="#">
-        <span className="mbti">{post.mbti} &#62;</span>
-      </a>
-
       <div className="post-header">
         <div className="post-info">
           <span className="title">{post.title}</span>
-          <span className="post-date">{post.date}</span>
+          <span className="post-date">{post.createAt}</span>
         </div>
-
         <div className="post-writer">
-          <img src={profile} alt="대체이미지" />
-          <span className="writer">{post.writer}</span>
+          <img src={profile} alt="profile" />
+          <span className="writer">{post.userName}</span>
         </div>
       </div>
 
-      {/* 게시글 본문 */}
       <div className="post-content">
         <p>{post.content}</p>
       </div>
 
-      {/*댓글 개수 / 추천 개수*/}
-      <div className="cnt">
-        <div >
-          댓글 
-        </div>
-      </div>
-
-      {/* 추천 및 신고 버튼 */}
-      <div className="post-actions">
-        <Button
-          className="like_btn">
-          추천
-        </Button>
-        <Button
-          variant="white"
-          className="report_btn">
-          신고
-        </Button>
-      </div>
-
-      {/* 댓글 작성 */}
       <div className="comment-form">
         <textarea
-          name="comment"
-          placeholder="댓글을 입력해주세요."
           value={newComment}
-          onChange={handleCommentChange}
-        >
-        </textarea>
-
-        <button className="comment-submit-btn" onClick={handleCommentSubmit}>
-          작성
-        </button>
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button onClick={handleCommentSubmit}>작성</button>
       </div>
 
-      {/* 댓글 영역 */}
       <div className="comments-section">
-        {comments.map((comment) => (
-          <div key={comment.id} className="comment">
+        {comments.map((c) => (
+          <div key={c.commentID} className="comment">
             <div className="comment-author">
               <img src={profile} alt="img" />
-              <span className="writer">{comment.writer}</span>
-              <span className="comment-date">{comment.date}</span>
+              <span className="writer">{c.userName}</span>
+              <span className="comment-date">{c.createAt}</span>
             </div>
-
-            <p>{comment.content}</p>
+            <p>{c.content}</p>
           </div>
         ))}
       </div>
