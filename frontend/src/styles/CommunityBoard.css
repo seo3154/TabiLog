@@ -1,143 +1,149 @@
 @charset "utf-8";
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a{
-    text-decoration: none;
-    color: inherit;
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.community-page{
-    display: flex;
-    justify-content: flex-start;
-    min-height: 100vh;
+.community-page {
+  display: flex;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
 
-.wrap{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-
-
 
 /* board */
-.board{
-    width: 1000px;
-    margin-top: 40px; 
+.board {
+  width: 1000px;
+  margin-top: 40px;
 }
 
-.board div{
-    display: flex;
-    gap: 690px;
+.board div {
+  display: flex;
+  gap: 690px;
 }
 
-.board h2{
-    text-align: left;
-    position: relative;
-    margin-bottom: 16px;
+.board h2 {
+  text-align: left;
+  position: relative;
+  margin-bottom: 16px;
 }
 
-.board #select{
-    display: inline-block;
-    appearance: none;
-    width: 90px;
-    height: 35px;
-    border: 2px solid;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    text-align: center;
+.board select {
+  display: inline-block;
+  appearance: none;
+  width: 90px;
+  height: 35px;
+  border: 2px solid;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
 }
-
-
 
 /* 게시판 테이블 */
 .board_table {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    table-layout: fixed;
-    text-align: center;
-    font-size: 14px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align: center;
+  font-size: 14px;
 }
 
 /* 테이블 헤더 */
 .board_table thead {
-    background-color: #e3e3e3;
-    height: 50px;
-    line-height: 45px;
-    border-bottom: 1px solid #131313;
+  background-color: #e3e3e3;
+  height: 50px;
+  line-height: 45px;
+  border-bottom: 1px solid #131313;
 }
 
 .board_table thead th {
-    font-weight: bold;
+  font-weight: bold;
 }
 
-.board_table thead th:nth-child(1){ width: 100px; padding-left: 8px; }
-.board_table thead th:nth-child(2){ width: 120px; }
-.board_table thead th:nth-child(3){ width: 380px; }
-.board_table thead th:nth-child(4){ width: 200px; }
-.board_table thead th:nth-child(5){ width: 120px; padding-right: 8px; }
-
-
+.board_table thead th:nth-child(1) {
+  width: 100px;
+  padding-left: 8px;
+}
+.board_table thead th:nth-child(2) {
+  width: 120px;
+}
+.board_table thead th:nth-child(3) {
+  width: 380px;
+}
+.board_table thead th:nth-child(4) {
+  width: 200px;
+}
+.board_table thead th:nth-child(5) {
+  width: 120px;
+  padding-right: 8px;
+}
 
 /* 게시글 목록 */
 .board_table tbody tr {
-    height: 40px;
-    border-bottom: 1px solid #969696;
+  height: 40px;
+  border-bottom: 1px solid #969696;
 }
 
 .board_table tbody td {
-    line-height: 40px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  line-height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .board_table tbody td a {
-    display: block;
-    width: 100%;
-    height: 100%;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 /* 제목 */
 .board_table tbody td.title a {
-    padding-left: 5px;
+  padding-left: 5px;
 }
 
 /* bottom */
-.bottom div{
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 40px;
+.bottom div {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 40px;
 }
 
-.bottom #select{
-    appearance: none;
-    width: 120px;
-    height: 38px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    font-size: 16px;
-    padding: 10px;
+.bottom #select {
+  appearance: none;
+  width: 120px;
+  height: 38px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+  padding: 10px;
 }
 
-.bottom input{
-    width: 500px;
-    height: 38px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    font-size: 16px;
-    color: #ccc;
-    padding: 10px;
+.bottom input {
+  width: 500px;
+  height: 38px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  font-size: 16px;
+  color: #ccc;
+  padding: 10px;
 }

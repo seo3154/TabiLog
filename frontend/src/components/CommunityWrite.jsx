@@ -1,42 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/CommunityWrite.css";
 import Button from "../components/Button";
 
-export default function WritePage({ AddPost }) {
+export default function WritePage() {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("전체게시판");
   const [content, setContent] = useState("");
-  const [selectedMbti, setSelectedMbti] = useState("");
+  const [selectedMbti, setSelectedMbti] = useState(""); // 유저의 MBTI 값을 상태로 관리
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // 유저의 정보를 받아오는 useEffect
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem("userid");
+        if (userId) {
+          const response = await axios.get(
+            `http://localhost:8080/api/user/${userId}`
+          );
+          setSelectedMbti(response.data.mbti); // 유저의 MBTI 설정
+        }
+      } catch (error) {
+        console.error("유저 정보 가져오기 실패", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!title || !content) {
       alert("제목과 내용을 입력해주세요.");
       return;
     }
 
-    // 새 게시글 객체 생성
-  const newPost = {
-    id: Date.now(),
-    mbti: selectedMbti,  // 예시로 현재 선택된 MBTI를 추가
-    category,
-    title,
-    content,
-    author: "작성자 이름",  // 작성자 정보도 추가
-    date: new Date().toISOString().split("T")[0],
-  };
+    const newPost = {
+      title,
+      content,
+      category,
+      mbti: selectedMbti, // 선택된 MBTI
+      writer: localStorage.getItem("userid"),
+      date: new Date().toISOString().split("T")[0],
+    };
 
-    if (AddPost) {
-      AddPost(newPost); 
-      alert("글이 등록되었습니다!");
-    } else {
-      console.error("AddPost 함수가 전달되지 않았습니다.");
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/board/write",
+        newPost
+      );
+
+      if (response.status === 200) {
+        alert("글이 등록되었습니다!");
+        navigate("/community"); // 등록 후 목록 페이지로 이동
+      }
+    } catch (error) {
+      console.error("게시글 등록 중 오류:", error);
+      alert("게시글 등록에 실패했습니다.");
     }
-
-    navigate("/community");
   };
 
   const handleCancel = () => {
@@ -44,12 +68,12 @@ export default function WritePage({ AddPost }) {
       navigate(-1);
     }
   };
-
   return (
     <div className="wrap">
       <div className="mbti">
-        <p></p>
+        <input type="text" value={selectedMbti} disabled />
       </div>
+
       <div className="write_section">
         <div className="selection">
           <div className="title">
@@ -60,7 +84,6 @@ export default function WritePage({ AddPost }) {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
-
           <div className="filter">
             <select
               name="category"
@@ -68,14 +91,12 @@ export default function WritePage({ AddPost }) {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="default">게시판 선택 ▼</option>
               <option value="전체게시판">전체 게시판</option>
               <option value="리뷰게시판">리뷰 게시판</option>
               <option value="질문게시판">Q&A 게시판</option>
             </select>
           </div>
         </div>
-
         <div className="writebox">
           <textarea
             name="content"
@@ -85,7 +106,6 @@ export default function WritePage({ AddPost }) {
             style={{ resize: "none" }}
           />
         </div>
-
         <div className="button">
           <input
             className="submit"
@@ -93,10 +113,13 @@ export default function WritePage({ AddPost }) {
             value="등록"
             onClick={handleSubmit}
           />
-          <Button variant="white" className="delete_button" onClick={handleCancel}>
+          <Button
+            variant="white"
+            className="delete_button"
+            onClick={handleCancel}
+          >
             삭제
           </Button>
-
           <Button variant="white" onClick={() => navigate(-1)}>
             목록
           </Button>
