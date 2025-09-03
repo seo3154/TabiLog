@@ -8,4 +8,7 @@ import java.util.Optional;
 
 public interface MbtiRepository extends JpaRepository<Mbti, Long> {
     Optional<Mbti> findByName(String name);
+
+    Optional<Mbti> findByNameIgnoreCase(String name); // ← 있으면 서비스에서 이거 쓰자
+
 }

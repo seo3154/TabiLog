@@ -2,8 +2,10 @@ package com.example.mbti.service;
 
 import com.example.mbti.dto.RegDto;
 import com.example.mbti.model.User;
+import com.example.mbti.repository.MbtiRepository;
 import com.example.mbti.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.Date;
 public class RegService {
 
     private final UserRepository userRepository;
+    private final MbtiRepository mbtiRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     // 회원가입
@@ -28,7 +31,19 @@ public class RegService {
         user.setIntroText(dto.getIntroText());
         user.setRole(0); // 기본 사용자
         user.setRegDate(new Date());
-        return userRepository.save(user);
+
+        if (dto.getMbtiName() != null && !dto.getMbtiName().trim().isEmpty()) {
+            String key = dto.getMbtiName().trim();
+            mbtiRepository.findByNameIgnoreCase(key).ifPresent(user::setMbti);
+        }
+        try {
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException e) {
+            // DB 유니크 제약 위반 등
+            throw new IllegalArgumentException("회원가입 중 중복 데이터가 감지되었습니다.", e);
+        }
+
+
     }
 
     // ID 중복 체크
