@@ -40,12 +40,24 @@ const Header = () => {
     return mbti ? `${process.env.PUBLIC_URL}/MbtiProfileImg/${mbti}.png` : logo;
   }, [me?.mbtiName]);
 
-  const goToMyPage = () => {
-    navigate("/mypage"); // ✅ 라우트 경로 소문자로 일치
-  };
+  const loginpage = () => navigate("/login");
+  const regpage = () => navigate("/regpage");
 
-  const regpage = () => {
-    navigate("/regpage");
+  // 추가: 마이페이지/로그아웃 핸들러
+  const mypage = () => navigate("/mypage"); // 라우트에 맞춰 경로 조정
+  const logout = () => {
+    try {
+      // 필요하면 백엔드 로그아웃 API 호출도 여기서
+      window.localStorage.removeItem("tabilog.user");
+      // 전역에 상태 변경 알림
+      window.dispatchEvent(
+        new CustomEvent("tabilog:user-updated", { detail: null })
+      );
+      navigate("/"); // 로그아웃 후 홈으로
+    } catch (e) {
+      console.error(e);
+      alert("로그아웃 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -53,7 +65,7 @@ const Header = () => {
       <div className="logo">
         <Link to="/">
           <img src={avatar} alt="프로필/로고" />
-          <h2>旅ログ</h2>
+          <h2>TABILOG</h2>
         </Link>
       </div>
 
@@ -71,18 +83,29 @@ const Header = () => {
           <Link to="/contact">고객센터</Link>
         </li>
         <li>
-          <button
-            onClick={goToMyPage}
-            style={{ padding: "12px 32px", fontSize: 18, cursor: "pointer" }}
-          >
-            임시 MYPAGE
-          </button>
-          &nbsp;&nbsp;&nbsp;
-          <Button variant="white">로그인</Button>
-          &nbsp;&nbsp;&nbsp;
-          <Button variant="black" onClick={regpage}>
-            회원가입
-          </Button>
+          {/* me 없으면: 로그인/회원가입 */}
+          {!me ? (
+            <>
+              <Button variant="white" onClick={loginpage}>
+                로그인
+              </Button>
+              &nbsp;&nbsp;&nbsp;
+              <Button variant="black" onClick={regpage}>
+                회원가입
+              </Button>
+            </>
+          ) : (
+            // me 있으면: 마이페이지/로그아웃
+            <>
+              <Button variant="white" onClick={mypage}>
+                마이페이지
+              </Button>
+              &nbsp;&nbsp;&nbsp;
+              <Button variant="black" onClick={logout}>
+                로그아웃
+              </Button>
+            </>
+          )}
         </li>
       </ul>
     </header>

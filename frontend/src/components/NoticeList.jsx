@@ -36,7 +36,9 @@ function NoticeList({ notices }) {
 
   return (
     <div className="notice-list-container">
+      <br /><br />
       <h1>공지사항</h1>
+      <br /><br />
 
       {/* 검색창 */}
       <div className="search-box">

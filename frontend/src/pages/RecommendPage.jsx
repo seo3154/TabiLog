@@ -7,20 +7,91 @@ const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
 
 // 47개 도도부현(한국어 표기)
 const PREFECTURES = [
-  "홋카이도","아오모리현","이와테현","미야기현","아키타현","야마가타현","후쿠시마현",
-  "이바라키현","도치기현","군마현","사이타마현","치바현","도쿄도","가나가와현",
-  "니가타현","도야마현","이시카와현","후쿠이현","시즈오카현","야마나시현","나가노현",
-  "기후현","아이치현","미에현","시가현","교토부","오사카부",
-  "효고현","나라현","와카야마현","돗토리현","시마네현","오카야마현","히로시마현",
-  "야마구치현","도쿠시마현","카가와현","에히메현","고치현",
-  "후쿠오카현","사가현","나가사키현","구마모토현","오이타현","미야자키현","가고시마현","오키나와현"
+  "홋카이도",
+  "아오모리현",
+  "이와테현",
+  "미야기현",
+  "아키타현",
+  "야마가타현",
+  "후쿠시마현",
+  "이바라키현",
+  "도치기현",
+  "군마현",
+  "사이타마현",
+  "치바현",
+  "도쿄도",
+  "가나가와현",
+  "니가타현",
+  "도야마현",
+  "이시카와현",
+  "후쿠이현",
+  "시즈오카현",
+  "야마나시현",
+  "나가노현",
+  "기후현",
+  "아이치현",
+  "미에현",
+  "시가현",
+  "교토부",
+  "오사카부",
+  "효고현",
+  "나라현",
+  "와카야마현",
+  "돗토리현",
+  "시마네현",
+  "오카야마현",
+  "히로시마현",
+  "야마구치현",
+  "도쿠시마현",
+  "카가와현",
+  "에히메현",
+  "고치현",
+  "후쿠오카현",
+  "사가현",
+  "나가사키현",
+  "구마모토현",
+  "오이타현",
+  "미야자키현",
+  "가고시마현",
+  "오키나와현",
 ];
 
 export default function RecommendPage() {
-  const { mbti } = useParams();
-  const TARGET_MBTI = (mbti || "INFP").toUpperCase();
+  const { mbti: mbtiFromUrl } = useParams();
 
-  // MBTI 대상 목록
+  const [userMbti, setUserMbti] = useState(() => {
+    try {
+      const me = JSON.parse(localStorage.getItem("tabilog.user") || "{}");
+      return (me?.mbtiName || "").toUpperCase();
+    } catch {
+      return "";
+    }
+  });
+
+  useEffect(() => {
+    const onUserUpdated = (e) => {
+      const up = e?.detail || {};
+      if (typeof up.mbtiName === "string") {
+        setUserMbti(String(up.mbtiName).toUpperCase());
+      }
+    };
+    window.addEventListener("tabilog:user-updated", onUserUpdated);
+    return () =>
+      window.removeEventListener("tabilog:user-updated", onUserUpdated);
+  }, []);
+
+  const TARGET_MBTI = (
+    mbtiFromUrl?.toUpperCase() ||
+    userMbti ||
+    "INFP"
+  ).toUpperCase();
+
+  const mbtiSource = mbtiFromUrl
+    ? "URL 지정"
+    : userMbti
+    ? "내 MBTI"
+    : "임시(INFP)";
+
   const mbtiList = useMemo(
     () =>
       places.filter(
@@ -33,8 +104,8 @@ export default function RecommendPage() {
 
   // ===== 검색 상태 =====
   const [query, setQuery] = useState("");
-  const [mode, setMode] = useState("name");     // 'name' | 'name+content' (드롭다운)
-  const [scope, setScope] = useState("mbti");   // 'mbti' | 'all' (라디오)
+  const [mode, setMode] = useState("name"); // 'name' | 'name+content' (드롭다운)
+  const [scope, setScope] = useState("mbti"); // 'mbti' | 'all' (라디오)
 
   // ===== 지역 필터 상태 (다중 선택) =====
   const [selectedPrefs, setSelectedPrefs] = useState([]); // ex) ["도쿄도","가나가와현"]
@@ -52,7 +123,9 @@ export default function RecommendPage() {
   const buildContentText = (p) => {
     const name = `${p?.name_ko || ""} ${p?.name_jp || ""}`.trim();
     const intro = `${p?.intro?.summary || ""} ${p?.intro?.detail || ""}`.trim();
-    const extra = `${p?.extraintro?.summary || ""} ${p?.extraintro?.detail || ""}`.trim();
+    const extra = `${p?.extraintro?.summary || ""} ${
+      p?.extraintro?.detail || ""
+    }`.trim();
     return { name, content: `${intro} ${extra}`.trim() };
   };
 
@@ -82,13 +155,24 @@ export default function RecommendPage() {
   // 지역 선택 변경 시 결과 영역으로 스크롤
   useEffect(() => {
     if (selectedPrefs.length > 0 && regionResultRef.current) {
-      regionResultRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+      regionResultRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
     }
   }, [selectedPrefs]);
 
   return (
     <main className="recommend-page-main">
-      <h1 align="center">{TARGET_MBTI} 추천 여행지</h1>
+      <br />
+      <br />
+      <h1 align="center">
+        {TARGET_MBTI} 추천 여행지{" "}
+        <span className="recommend-mbti-chip" title="MBTI 출처">
+          {mbtiSource}
+        </span>{" "}
+      </h1>
+      <br />
       <br />
 
       {/* 지정 MBTI 카드 */}
@@ -97,12 +181,22 @@ export default function RecommendPage() {
       ) : (
         <div className="recommend-page-grid">
           {mbtiList.map((p) => (
-            <Link key={p.id} to={`/place/${p.id}`} className="recommend-page-link">
+            <Link
+              key={p.id}
+              to={`/place/${p.id}`}
+              className="recommend-page-link"
+            >
               <article className="recommend-page-article">
-                <img src={pub(p?.hero?.image)} alt={p.name_ko} className="recommend-page-img" />
+                <img
+                  src={pub(p?.hero?.image)}
+                  alt={p.name_ko}
+                  className="recommend-page-img"
+                />
                 <div className="recommend-page-article-div">
                   <div className="recommend-page-name">{p.name_ko}</div>
-                  <div className="recommend-page-prefecture">{p.prefecture}</div>
+                  <div className="recommend-page-prefecture">
+                    {p.prefecture}
+                  </div>
                 </div>
               </article>
             </Link>
@@ -138,7 +232,11 @@ export default function RecommendPage() {
           </label>
 
           {/* 라디오: 검색 범위 */}
-          <div className="recommend-scope-radios" role="radiogroup" aria-label="검색 범위">
+          <div
+            className="recommend-scope-radios"
+            role="radiogroup"
+            aria-label="검색 범위"
+          >
             <label className="recommend-radio">
               <input
                 type="radio"
@@ -173,16 +271,28 @@ export default function RecommendPage() {
             </div>
 
             {results.length === 0 ? (
-              <div className="recommend-search-empty">검색 결과가 없습니다.</div>
+              <div className="recommend-search-empty">
+                검색 결과가 없습니다.
+              </div>
             ) : (
               <div className="recommend-page-grid recommend-search-grid">
                 {results.map((p) => (
-                  <Link key={`sr-${p.id}`} to={`/place/${p.id}`} className="recommend-page-link">
+                  <Link
+                    key={`sr-${p.id}`}
+                    to={`/place/${p.id}`}
+                    className="recommend-page-link"
+                  >
                     <article className="recommend-page-article">
-                      <img src={pub(p?.hero?.image)} alt={p.name_ko} className="recommend-page-img" />
+                      <img
+                        src={pub(p?.hero?.image)}
+                        alt={p.name_ko}
+                        className="recommend-page-img"
+                      />
                       <div className="recommend-page-article-div">
                         <div className="recommend-page-name">{p.name_ko}</div>
-                        <div className="recommend-page-prefecture">{p.prefecture}</div>
+                        <div className="recommend-page-prefecture">
+                          {p.prefecture}
+                        </div>
                       </div>
                     </article>
                   </Link>
@@ -243,16 +353,28 @@ export default function RecommendPage() {
             </div>
 
             {regionResults.length === 0 ? (
-              <div className="recommend-search-empty">해당 지역의 등록된 관광지가 없습니다.</div>
+              <div className="recommend-search-empty">
+                해당 지역의 등록된 관광지가 없습니다.
+              </div>
             ) : (
               <div className="recommend-page-grid recommend-search-grid">
                 {regionResults.map((p) => (
-                  <Link key={`pref-${p.id}`} to={`/place/${p.id}`} className="recommend-page-link">
+                  <Link
+                    key={`pref-${p.id}`}
+                    to={`/place/${p.id}`}
+                    className="recommend-page-link"
+                  >
                     <article className="recommend-page-article">
-                      <img src={pub(p?.hero?.image)} alt={p.name_ko} className="recommend-page-img" />
+                      <img
+                        src={pub(p?.hero?.image)}
+                        alt={p.name_ko}
+                        className="recommend-page-img"
+                      />
                       <div className="recommend-page-article-div">
                         <div className="recommend-page-name">{p.name_ko}</div>
-                        <div className="recommend-page-prefecture">{p.prefecture}</div>
+                        <div className="recommend-page-prefecture">
+                          {p.prefecture}
+                        </div>
                       </div>
                     </article>
                   </Link>

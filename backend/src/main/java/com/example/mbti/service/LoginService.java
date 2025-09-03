@@ -21,7 +21,7 @@ public class LoginService {
     // 회원가입
     public Login register(LoginDto loginDto) {
         Login login = new Login();
-        login.setUserid(loginDto.getUserid());
+        login.setUserid(loginDto.getLoginId());
         login.setPassword(passwordEncoder.encode(loginDto.getPassword()));
         login.setName(loginDto.getName());
         return loginRepository.save(login);

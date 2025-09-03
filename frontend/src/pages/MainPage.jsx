@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+// [CHANGED] useNavigate 추가
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom"; // [NEW]
+
 import image1 from "../assets/MainPagePictures/Group 1.jpg";
 import image2 from "../assets/MainPagePictures/Group 2.jpg";
 import image3 from "../assets/MainPagePictures/Group 3.jpg";
@@ -15,149 +18,183 @@ import image13 from "../assets/MainPagePictures/Group 13.jpg";
 import image14 from "../assets/MainPagePictures/Group 14.jpg";
 import image15 from "../assets/MainPagePictures/Group 15.jpg";
 import image16 from "../assets/MainPagePictures/Group 16.jpg";
+
+import left1 from "../assets/MainPagePictures/left1.png";
+import left2 from "../assets/MainPagePictures/left2.png";
+import right1 from "../assets/MainPagePictures/right1.png";
+import right2 from "../assets/MainPagePictures/right2.png";
+
+// [NEW] 텍스트 타이틀 대신 사용될 이미지(요청하신 경로)
+import titleImage from "../assets/MainPagePictures/MBTINANI.png";
+
 import "../styles/MainPage.css";
 
-const images = [
-  image1,
-  image2,
-  image3,
-  image4,
-  image5,
-  image6,
-  image7,
-  image8,
-  image9,
-  image10,
-  image11,
-  image12,
-  image13,
-  image14,
-  image15,
-  image16,
+const sliders = [
+  image1, image2, image3, image4, image5, image6, image7, image8,
+  image9, image10, image11, image12, image13, image14, image15, image16,
 ];
 
-// CSS 객체는 필요 시 확장해서 쓰세요.
-const styles = {
-  // 예시 키들 (없어도 동작, 추후 채워넣기)
-  imageSliderContainer: {},
-  imageSliderImage: {},
-  noticeTable: {},
-  noticeTd: {},
-  noticeHeader: {},
-  noticeLink: {},
-  noticeText: {},
-  h1: {},
-  contentBox: {},
-  roundedBox: {},
-  contentP: {},
-  communityLink: {},
-};
+const LEFT_ILLOS  = [left1, left2];
+const RIGHT_ILLOS = [right1, right2];
 
-function App() {
-  const [currentIndex, setCurrentIndex] = useState(0);
+/* 그대로 유지: 스크롤을 ‘한 번이라도’ 했는지 (로드 직후엔 애니메이션 대기) */
+function useHasScrolled() {
+  const [has, setHas] = useState(false);
+  useEffect(() => {
+    const mark = () => setHas(true);
+    window.addEventListener("scroll", mark, { once: true, passive: true });
+    window.addEventListener("wheel", mark, { once: true, passive: true });
+    window.addEventListener("touchstart", mark, { once: true });
+    return () => {
+      window.removeEventListener("scroll", mark);
+      window.removeEventListener("wheel", mark);
+      window.removeEventListener("touchstart", mark);
+    };
+  }, []);
+  return has;
+}
 
-  const [communityPosts] = useState([
-    { type: "INFP", content: "여행 가는 게 무서워." },
-    { type: "ISTP", content: "여행 같은 건 어찌되어도 좋아." },
-    { type: "ENFP", content: "오사카에 가니까 도키도키다" },
-    { type: "ESTJ", content: "여러 문화재를 찾아보자!" },
-    { type: "INTP", content: "구글 지도로 여행해보았다!" },
-  ]);
+/** 그대로 유지: 뷰포트에 들어오면 in, 나가면 out(숨김) 되는 토글형 리빌 */
+function RevealToggle({ children, side = "left", threshold = 0.35 }) {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  const hasScrolled = useHasScrolled();
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
-    return () => clearInterval(interval);
+    const el = ref.current;
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!hasScrolled) return setInView(false);
+          setInView(entry.isIntersecting);
+        });
+      },
+      {
+        threshold,
+        rootMargin: "0px 0px -10% 0px",
+      }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [hasScrolled, threshold]);
+
+  return (
+    <div
+      ref={ref}
+      className={[
+        "illo-reveal",
+        side === "right" ? "from-right" : "from-left",
+        inView ? "in" : "",
+      ].join(" ")}
+    >
+      {children}
+    </div>
+  );
+}
+
+export default function App() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const navigate = useNavigate(); // [NEW]
+
+  useEffect(() => {
+    const t = setInterval(
+      () => setCurrentIndex((i) => (i + 1) % sliders.length),
+      5000
+    );
+    return () => clearInterval(t);
   }, []);
+
+  // [NEW] 상·하 테두리 위에서 등장할 이미지들(상단/하단 배치)
+  const topLeft     = LEFT_ILLOS[0];
+  const bottomLeft  = LEFT_ILLOS[1] || LEFT_ILLOS[0];
+  const topRight    = RIGHT_ILLOS[0];
+  const bottomRight = RIGHT_ILLOS[1] || RIGHT_ILLOS[0];
 
   return (
     <div className="home-body">
-      {/* 이미지 슬라이더 */}
-      <div style={{ position: "relative", ...styles.imageSliderContainer }}>
-        {images.map((src, index) => (
+      {/* 이미지 슬라이더 (상단 잘림 ↓ 최소화) */}
+      <div className="image-slider-container">
+        {sliders.map((src, index) => (
           <img
             key={index}
             src={src}
             alt={`여행 사진 ${index + 1}`}
             style={{
-              objectFit: "cover",
-              width: "100%",
-              position: "absolute",
-              top: 0,
-              left: 0,
               opacity: index === currentIndex ? 1 : 0,
-              transition: "opacity 0.6s ease",
-              ...styles.imageSliderImage,
+              objectPosition: "50% 0%", // 윗부분 우선 노출
             }}
+            loading="eager"
           />
         ))}
       </div>
 
-      {/* 공지사항 */}
-      <div style={{ position: "relative", top: "600px", marginBottom: "600px"}}>
-        <table style={styles.noticeTable}>
-          <tbody>
-            <tr>
-              <td style={{ ...styles.noticeTd, ...styles.noticeHeader }}>
-                <a href="/NoticePage" style={styles.noticeLink}>
-                  공지사항
-                </a>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ ...styles.noticeTd, ...styles.noticeText }}>
-                공지사항입니다.
-                <br />
-                남을 비하하는 행위는 멈춰주십쇼.
-                <br />
-                중요한 공지사항입니다.
-                <br />
-                감사합니다.
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      {/* 본문 영역 */}
+      <div className="main-content">
+        {/* [CHANGED] 기존 H1 텍스트 제거, 이미지 타이틀로 교체 */}
+        <div className="title-image-wrap"> {/* [NEW] */}
+          <img
+            src={titleImage}            // [NEW]
+            alt="메인 타이틀"            // [NEW]
+            className="title-image"     // [NEW]
+            loading="eager"
+          />
+        </div>
 
-        {/* Tabi 소개 */}
-        <h1 style={styles.h1}>WHAT'S YOUR TABI?</h1>
-        <div style={styles.contentBox}>
-          <div style={styles.roundedBox}>
-            <span>TABI라는 건 무엇인가요?</span>
+        {/* 풀-블리드 하얀 직사각형 밴드 */}
+        <section className="tabi-band">
+          <div className="band-bg" />
+
+          {/* 상·하 테두리 위에서 움직일 일러스트 레일 */}
+          <div className="band-rails">
+            <div className="band-rail top left">
+              <RevealToggle side="left">
+                <img src={topLeft} alt="left top" className="edge-illo" />
+              </RevealToggle>
+            </div>
+            <div className="band-rail top right">
+              <RevealToggle side="right">
+                <img src={topRight} alt="right top" className="edge-illo" />
+              </RevealToggle>
+            </div>
+
+            <div className="band-rail bottom left">
+              <RevealToggle side="left">
+                <img src={bottomLeft} alt="left bottom" className="edge-illo" />
+              </RevealToggle>
+            </div>
+            <div className="band-rail bottom right">
+              <RevealToggle side="right">
+                <img src={bottomRight} alt="right bottom" className="edge-illo" />
+              </RevealToggle>
+            </div>
           </div>
-          <p style={styles.contentP}>
-            TABI라는 것은 일본어 旅(たび)의 로마자입니다
-            <br />
-            <br />
-            자신에게 맞는 여행을 알고
-            <br />
-            <br />
-            함께 여행에 대해서 얘기합시다.
-          </p>
-        </div>
 
-        {/* 커뮤니티 테이블 */}
-        <div className="rounded-table-container">
-          <table className="community-table">
-            <tbody>
-              {communityPosts.map((post, index) => (
-                <tr key={index}>
-                  <th>{post.type}</th>
-                  <th>{post.content}</th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+          {/* 설명 + CTA */}
+          <div className="band-content">
+            <h1 className="band-title">자신만의 MBTI로 여행을 떠나보세요!</h1>
+            <br/>
+            <div className="band-desc">
+              <p>MBTI는 성격 유형 검사의 일종으로, 내가 어떤 사람인지를 아는 데 기준이 될 수 있어요.</p>
+              <p>일본 여행을 계획 중이라면, 나에게 맞는 도시와 코스가 무엇인지 여기서 함께 찾아봐요.</p>
+              <p>커뮤니티에서 다양한 정보를 얻고, 내가 알고 있는 팁도 나눠 보세요!</p>
+            </div>
 
-        <p>
-          <a href="/CommunityPage" style={styles.communityLink}>
-            최신 커뮤니티의 글을 확인해봅시다!
-          </a>
-        </p>
+            <br/><br/>
+
+            <button
+              type="button"
+              className="cta-join"
+              onClick={() => navigate("/regpage")}
+              aria-label="회원가입 하러 가기"
+            >
+              가입하기
+              <span aria-hidden="true" className="cta-arrow">→</span>
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   );
 }
-
-export default App;

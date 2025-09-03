@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 @Service
 @RequiredArgsConstructor
 public class MyPageService {
-
     private final UserRepository userRepository;
     private final MbtiRepository mbtiRepository;
 
@@ -68,22 +67,6 @@ public class MyPageService {
     }
 
     private UserProfileDto toDto(User u) {
-        UserProfileDto d = new UserProfileDto();
-        d.setId(u.getId());
-        d.setLoginId(u.getLoginId());
-        d.setNickname(u.getNickname());
-        d.setEmail(u.getEmail());
-        d.setTel(u.getTel());
-        d.setIntroText(u.getIntroText());
-        d.setRole(u.getRole());
-
-        if (u.getMbti() != null) {
-            d.setMbtiName(u.getMbti().getName());
-            d.setMbtiUrl(u.getMbti().getUrl());
-        }
-
-        d.setCreatedAt(u.getRegDate() != null ? F.format(u.getRegDate()) : null);
-        d.setLastLoginAt(null); // 해당 컬럼이 없으니 일단 null
-        return d;
+        return new UserProfileDto(u);
     }
 }

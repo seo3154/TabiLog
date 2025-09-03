@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import axios from "axios";
 import "../style/LoginPage.css";
 
@@ -24,10 +25,12 @@ export default function Login({ navigate }) {
     } catch (err) {
       console.error("로그인 실패", err);
       alert("로그인 실패. 서버 확인 필요!");
+
     }
   };
 
   return (
+
     <div>
       <h1 style={{ textAlign: "center" }}>로그인</h1>
       <form onSubmit={handleLogin}>
@@ -41,42 +44,69 @@ export default function Login({ navigate }) {
         >
           <legend style={{ textAlign: "center" }}>로그인</legend>
           <table style={{ margin: "0 auto", width: "100%" }}>
+
             <tbody>
               <tr>
-                <td>아이디</td>
-                <td>
+                <td className="login-label">
+                  <label htmlFor="userid">아이디</label>
+                </td>
+                <td className="login-field">
                   <input
+                    id="loginId"
                     type="text"
+
                     value={userid}
                     onChange={(e) => setUserid(e.target.value)}
+
                     required
-                    style={inputStyle}
+                    className="login-input"
+                    value={form.loginId}
+                    onChange={onChange}
+                    autoComplete="username"
                   />
                 </td>
               </tr>
+
+              <br />
+
               <tr>
-                <td>비밀번호</td>
-                <td>
+                <td className="login-label">
+                  <label htmlFor="password">비밀번호</label>
+                </td>
+                <td className="login-field">
                   <input
+                    id="password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
-                    style={inputStyle}
+                    className="login-input"
+                    value={form.password}
+                    onChange={onChange}
+                    autoComplete="current-password"
                   />
                 </td>
               </tr>
+
+              <br />
+
               <tr>
-                <td style={{ textAlign: "left" }}>
-                  <input
+                <td className="login-actions" colSpan={2}>
+                  <button
+                    type="submit"
+                    className="login-button"
+                    disabled={loading}
+                  >
+                    {loading ? "로그인 중..." : "로그인"}
+                  </button>
+
+                  <button
                     type="button"
-                    value="회원가입"
-                    onClick={() => (window.location.href = "/signup")}
-                    style={buttonStyle}
-                  />
-                </td>
-                <td style={{ textAlign: "right" }}>
-                  <input type="submit" value="로그인" style={buttonStyle} />
+                    className="signin-button"
+                    onClick={() => navigate("/regpage")}
+                  >
+                    회원가입
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -86,6 +116,7 @@ export default function Login({ navigate }) {
     </div>
   );
 }
+
 
 const inputStyle = {
   borderRadius: "5px",
@@ -101,3 +132,4 @@ const buttonStyle = {
   backgroundColor: "#f5f5f5",
   cursor: "pointer",
 };
+

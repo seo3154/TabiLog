@@ -148,8 +148,10 @@ export default function CenterPage() {
   };
 
   return (
-    <div>
-      <h1 style={{ textAlign: "center", marginTop: 20 }}>고객센터</h1>
+    <div className="center-page">
+      <br /><br />
+      <h1 style={{ textAlign: "center"}}>고객센터</h1>
+      <br /><br />
       <hr
         style={{
           border: "1px solid #c2c0c0",

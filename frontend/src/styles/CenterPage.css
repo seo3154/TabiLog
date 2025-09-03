@@ -1,29 +1,158 @@
 @charset "utf-8";
 
-.faq-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2열 */
-  gap: 10px; /* 아이템 간격 */
+/* 이 페이지에만 적용 */
+.center-page .content {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  color: #111;
 }
 
-.faq-item {
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 10px;
-  transition: all 0.3s ease;
+.center-page h2 {
+  font-weight: 700;
+  margin: 24px 0 12px;
+}
+
+/* 탭 */
+.center-page .tab-container {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 0 16px;
+}
+.center-page .tab {
+  padding: 10px 16px;
+  border: 2px solid #000;
+  border-radius: 9999px;
+  background: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+.center-page .tab.active {
+  background: #111;
+  color: #fff;
+  border-color: #111;
+}
+
+/* FAQ */
+.center-page .faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (max-width: 768px) {
+  .center-page .faq-grid { grid-template-columns: 1fr; }
+}
+.center-page .faq-item {
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 16px;
   overflow: hidden;
 }
-
-.faq-item button {
-  background: none;
-  border: none;
-  font-weight: bold;
-  cursor: pointer;
+.center-page .faq-item button {
+  display: block;
   width: 100%;
   text-align: left;
+  background: none;
+  border: 0;
+  padding: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.center-page .faq-answer {
+  /* 닫힌 기본 상태(열림은 인라인 스타일로 제어) */
+  max-height: 0;
+  padding: 0 16px;
+  overflow: hidden;
+  transition: max-height .25s ease, padding .25s ease;
+  color: #666;
+  border-top: 1px solid transparent;
 }
 
-.faq-answer {
+/* 테이블 공통(목록) */
+.center-page .content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 2px solid #000;
+  border-radius: 16px;
   overflow: hidden;
-  transition: all 0.3s ease;
+  margin-top: 16px;
+}
+.center-page thead th {
+  background: #f7f7f7;
+  text-align: left;
+  padding: 12px 14px;
+  font-weight: 700;
+  border-bottom: 1px solid #c2c0c0;
+}
+.center-page tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #e5e5e5;
+}
+.center-page tbody tr:hover { background: #fafafa; }
+
+/* 상세 카드 */
+.center-page .post-detail {
+  border: 2px solid #000;
+  border-radius: 16px;
+  background: #fff;
+  padding: 20px;
+  margin-top: 16px;
+}
+.center-page .post-detail .actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+/* 1:1 상담 폼 */
+.center-page .form-group input[type="text"],
+.center-page .textarea-wrapper textarea {
+  width: 100%;
+  border: 2px solid #000;
+  border-radius: 20px;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: #fff;
+  box-sizing: border-box;
+}
+.center-page .textarea-wrapper {
+  background: #f7f7f7;
+  border-radius: 16px;
+  padding: 0;                 /* 폭 맞춤을 위해 패딩 제거 */
+  margin-top: 12px;
+}
+.center-page .textarea-wrapper textarea {
+  min-height: 220px;          /* 본문칸 키우기 */
+  resize: vertical;           /* 사용자가 더 늘릴 수 있음 */
+}
+.center-page .bottom-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 0 12px;            /* wrapper 패딩을 뺀 대신 약간의 좌우 여백 */
+}
+.center-page .actions-inline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.center-page input[type="file"] { font-size: 14px; }
+
+/* 버튼 */
+.center-page .submit-btn {
+  border: 2px solid #000;
+  background: #fff;
+  padding: 10px 18px;
+  border-radius: 9999px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.center-page .submit-btn.primary {
+  background: #111;
+  color: #fff;
+  border-color: #111;
 }
