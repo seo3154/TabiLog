@@ -12,23 +12,24 @@ import ProfileModify from "../components/ProfileModify";
 import MbtiModify from "../components/MbtiModify";
 import mockUser from "../assets/mock/user.admin.json";
 import "../styles/MyPage.css";
+import { readBookmarks } from "../utils/bookmarks";
 
 const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
 const MOCK_UI = String(process.env.REACT_APP_MOCK_UI) === "1";
 const PLACEHOLDER = "https://placehold.co/120x120";
 
 // ✅ 로컬스토리지 키
-const LS_BOOKMARKS_KEY = "tabilog.bookmarks";
+//const LS_BOOKMARKS_KEY = "tabilog.bookmarks";
 // ✅ 로컬스토리지에서 북마크 id 배열 읽기
-function readLsBookmarks() {
-  try {
-    const raw = window.localStorage.getItem(LS_BOOKMARKS_KEY);
-    const arr = raw ? JSON.parse(raw) : [];
-    return Array.isArray(arr) ? arr : [];
-  } catch {
-    return [];
-  }
-}
+// function readLsBookmarks() {
+//   try {
+//     const raw = window.localStorage.getItem(LS_BOOKMARKS_KEY);
+//     const arr = raw ? JSON.parse(raw) : [];
+//     return Array.isArray(arr) ? arr : [];
+//   } catch {
+//     return [];
+//   }
+// }
 
 /** MBTI/유저 이미지 우선순위로 프로필 이미지 결정 */
 function getProfileImgs(user) {
@@ -62,6 +63,7 @@ export default function MyPage() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [err, setErr] = useState(null);
+  const [bookmarkSlugs, setBookmarkSlugs] = useState([]);
 
   // 모달 상태
   const [showAccount, setShowAccount] = useState(false);
@@ -102,7 +104,7 @@ export default function MyPage() {
               mbtiUrl: mockUser.mbtiUrl || "",
             });
           }
-
+          setBookmarkSlugs(readBookmarks(mockUser.loginId));
           return;
         }
         const data = await getUserByLoginId(loginId); // apis/users 파일
@@ -126,6 +128,7 @@ export default function MyPage() {
             mbtiUrl: data.mbtiUrl || "",
           });
         }
+        setBookmarkSlugs(readBookmarks(loginId));
       } catch (e) {
         setErr(e?.message || "불러오기 실패");
         window.localStorage.removeItem("tabilog.user");
@@ -133,6 +136,16 @@ export default function MyPage() {
         setLoading(false);
       }
     })();
+  }, [loginId]);
+
+  useEffect(() => {
+    const onBM = (e) => {
+      const who = e?.detail?.loginId;
+      if (!who || who !== loginId) return;
+      setBookmarkSlugs(e.detail.slugs || []);
+    };
+    window.addEventListener("tabilog:bookmarks-updated", onBM);
+    return () => window.removeEventListener("tabilog:bookmarks-updated", onBM);
   }, [loginId]);
 
   const menuItems = [
@@ -150,15 +163,15 @@ export default function MyPage() {
   const profileSrc = mbtiImg || userImg || PLACEHOLDER;
 
   // ✅ 북마크 소스: 로컬스토리지 값이 있으면 우선, 없으면 user.bookmarks 사용
-  const bookmarkIds = (() => {
-    const fromLS = readLsBookmarks();
-    if (fromLS.length) return fromLS;
-    return Array.isArray(user.bookmarks) ? user.bookmarks : [];
-  })();
+  // const bookmarkIds = (() => {
+  //   const fromLS = readLsBookmarks();
+  //   if (fromLS.length) return fromLS;
+  //   return Array.isArray(user.bookmarks) ? user.bookmarks : [];
+  // })();
 
   // ✅ id → place 매핑
-  const myBookmarks = bookmarkIds
-    .map((id) => placeIndex[id])
+  const myBookmarks = bookmarkSlugs
+    .map((slug) => placeIndex[slug])
     .filter(Boolean)
     .map((p) => ({
       id: p.id,
