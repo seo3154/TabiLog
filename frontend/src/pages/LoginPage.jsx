@@ -26,7 +26,7 @@ export default function Login() {
       window.dispatchEvent(
         new CustomEvent("tabilog:user-updated", { detail: me })
       );
-      navigate("/mainpage"); // 또는 navigate("/mainpage")
+      navigate("/mainpage");
     } catch (err) {
       console.error(err);
       alert(err?.response?.data?.message || "아이디/비밀번호를 확인해 주세요.");

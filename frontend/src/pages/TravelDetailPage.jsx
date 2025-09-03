@@ -2,13 +2,18 @@ import { useParams } from "react-router-dom";
 import places from "../assets/data/places.json";
 import "../styles/TravelDetailPage.css";
 import { useEffect, useRef, useState } from "react";
+import {
+  isBookmarked as isBM,
+  toggleBookmark as toggleBM,
+} from "../utils/bookmarks";
 
 // public 경로 헬퍼
 const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
 
 // Google Maps API 키
 const GMAPS_KEY =
-  (typeof import.meta !== "undefined" && import.meta.env?.VITE_GOOGLE_MAPS_API_KEY) ||
+  (typeof import.meta !== "undefined" &&
+    import.meta.env?.VITE_GOOGLE_MAPS_API_KEY) ||
   process.env.REACT_APP_GOOGLE_MAPS_API_KEY ||
   "";
 
@@ -32,6 +37,9 @@ function loadGoogleMaps() {
 export default function TravelDetailPage() {
   const { id } = useParams();
   const place = places.find((p) => String(p.id) === String(id));
+  const me = JSON.parse(localStorage.getItem("tabilog.user") || "{}");
+  const loginId = me?.loginId || "";
+  const slug = place?.id; // places.json의 문자열 id
 
   // ===== Hook은 항상 상단에서 고정 호출 =====
   const mapRef = useRef(null);
@@ -42,11 +50,26 @@ export default function TravelDetailPage() {
   const [nearbyHotels, setNearbyHotels] = useState([]);
 
   // ⭐ 북마크 상태 추가
-  const [bookmarked, setBookmarked] = useState(false);
-  const toggleBookmark = () => setBookmarked((prev) => !prev);
+  // const [bookmarked, setBookmarked] = useState(false);
+  // const toggleBookmark = () => setBookmarked((prev) => !prev);
+  const [bookmarked, setBookmarked] = useState(() =>
+    slug ? isBM(loginId, slug) : false
+  );
+  useEffect(() => {
+    if (!slug) return;
+    setBookmarked(isBM(loginId, slug));
+  }, [loginId, slug]);
+
+  const toggleBookmark = () => {
+    if (!slug) return;
+    const next = toggleBM(loginId, slug);
+    setBookmarked(next.includes(slug));
+  };
 
   const center =
-    place && typeof place?.map?.lat === "number" && typeof place?.map?.lng === "number"
+    place &&
+    typeof place?.map?.lat === "number" &&
+    typeof place?.map?.lng === "number"
       ? { lat: place.map.lat, lng: place.map.lng }
       : null;
 
@@ -95,7 +118,10 @@ export default function TravelDetailPage() {
             service.nearbySearch(
               { location: center, radius, type },
               (results, status) => {
-                if (status === g.places.PlacesServiceStatus.OK && Array.isArray(results)) {
+                if (
+                  status === g.places.PlacesServiceStatus.OK &&
+                  Array.isArray(results)
+                ) {
                   resolve(results.slice(0, 2));
                 } else {
                   resolve([]);
@@ -138,20 +164,26 @@ export default function TravelDetailPage() {
 
   // 기본 데이터
   const heroImg = place?.hero?.image ?? "";
-  const subtitle = [place?.prefecture, place?.hero?.subtitle].filter(Boolean).join(" / ");
+  const subtitle = [place?.prefecture, place?.hero?.subtitle]
+    .filter(Boolean)
+    .join(" / ");
 
   // Intro
   const introSummary = place?.intro?.summary || "소개 정보가 준비중입니다.";
   const introDetail = place?.intro?.detail || "";
 
   // Extra Intro
-  const hasExtraIntro = !!(place?.extraintro?.summary || place?.extraintro?.detail);
+  const hasExtraIntro = !!(
+    place?.extraintro?.summary || place?.extraintro?.detail
+  );
   const extraSummary = place?.extraintro?.summary || "";
   const extraDetail = place?.extraintro?.detail || "";
 
   // Galleries
   const gallery = Array.isArray(place?.gallery) ? place.gallery : [];
-  const extraGallery = Array.isArray(place?.extragallery) ? place.extragallery : [];
+  const extraGallery = Array.isArray(place?.extragallery)
+    ? place.extragallery
+    : [];
 
   const foods = Array.isArray(place?.foods) ? place.foods : [];
 
@@ -159,9 +191,14 @@ export default function TravelDetailPage() {
     const name = pl.name || "이름 미상";
     const rating = typeof pl.rating === "number" ? pl.rating.toFixed(1) : null;
     const total = pl.user_ratings_total;
-    const photoUrl = pl.photos?.[0]?.getUrl?.({ maxWidth: 1200, maxHeight: 800 });
+    const photoUrl = pl.photos?.[0]?.getUrl?.({
+      maxWidth: 1200,
+      maxHeight: 800,
+    });
     const placeId = pl.place_id;
-    const mapsUrl = placeId ? `https://www.google.com/maps/place/?q=place_id:${placeId}` : null;
+    const mapsUrl = placeId
+      ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
+      : null;
     const vicinity = pl.vicinity || pl.formatted_address || "";
     const openNow = pl.opening_hours?.isOpen?.() ?? pl.opening_hours?.open_now;
     return { name, rating, total, photoUrl, mapsUrl, vicinity, openNow };
@@ -253,9 +290,7 @@ export default function TravelDetailPage() {
                     className="travel-detail-foods-img"
                   />
                 )}
-                <div className="travel-detail-foods-name">
-                  {f?.name || ""}
-                </div>
+                <div className="travel-detail-foods-name">{f?.name || ""}</div>
               </article>
             ))}
           </div>
