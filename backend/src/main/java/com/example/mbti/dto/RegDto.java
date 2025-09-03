@@ -14,4 +14,5 @@ public class RegDto {
     private String email;
     private String tel; // phone → tel
     private String introText;
+    private String mbtiName;
 }

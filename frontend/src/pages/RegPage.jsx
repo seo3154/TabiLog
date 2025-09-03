@@ -7,6 +7,7 @@ import {
 } from "../apis/users";
 import { useNavigate } from "react-router-dom";
 
+import MbtiModify from "../components/MbtiModify"; // ✅ 추가
 import "../styles/RegPage.css";
 
 export default function Signup() {
@@ -20,12 +21,17 @@ export default function Signup() {
     tel: "",
     introText: "",
     agree: false,
+    // ✅ MBTI 필드 추가
+    mbtiName: "", // 예: "ENFP"
   });
+
+  const [showEditMbti, setShowEditMbti] = useState(false);
 
   // 중복 체크 결과를 ID/닉네임 각각 보관
   const [availableId, setAvailableId] = useState(null); // true | false | null
   const [availableNick, setAvailableNick] = useState(null); // true | false | null
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
@@ -38,17 +44,22 @@ export default function Signup() {
     if (name === "nickname") setAvailableNick(null);
   };
 
+  // ✅ MBTI 저장 핸들러
+  const handleSaveMbti = (newMbti) => {
+    const upper = (newMbti || "").toUpperCase();
+    setFormData((prev) => ({ ...prev, mbtiName: upper }));
+    setShowEditMbti(false);
+  };
+
   // 필드별 중복 체크
   const checkDuplicate = async (field) => {
     try {
       if (field === "loginId") {
         if (!formData.loginId.trim()) return alert("ID를 입력하세요.");
-        // 🔧 백엔드 엔드포인트에 맞춰 조정하세요 (예시)
         const available = await checkIdDuplicate(formData.loginId.trim());
-        setAvailableId(available); // exists=true면 이미 존재 → 사용 불가
+        setAvailableId(available);
       } else if (field === "nickname") {
         if (!formData.nickname.trim()) return alert("닉네임을 입력하세요.");
-        // 🔧 백엔드 엔드포인트에 맞춰 조정하세요 (예시)
         const available = await checkNicknameDuplicate(
           formData.nickname.trim()
         );
@@ -75,9 +86,10 @@ export default function Signup() {
       email: formData.email.trim(),
       tel: formData.tel.trim(),
       introText: formData.introText?.trim() || "",
+      // ✅ 백엔드 스키마에 맞게 포함 (User에 mbtiName/mbtiUrl가 있다면 둘 다 전송)
+      mbtiName: formData.mbtiName || null,
     };
 
-    // TODO: 실제 회원가입 API 연동
     try {
       await register(payload);
       alert("회원가입 성공!");
@@ -207,7 +219,7 @@ export default function Signup() {
                     type="text"
                     name="birth"
                     required
-                    value={formData.birth}
+                    value={formData.birth || ""}
                     onChange={handleChange}
                     className="signup-input"
                     placeholder="YYYY-MM-DD"
@@ -283,6 +295,25 @@ export default function Signup() {
 
               <br />
 
+              {/* ✅ MBTI 선택 미리보기 섹션 */}
+              <tr>
+                <td>MBTI</td>
+                <td style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                  <button
+                    type="button"
+                    className="edit-btn"
+                    onClick={() => setShowEditMbti(true)}
+                  >
+                    MBTI 수정
+                  </button>
+                  <span>
+                    {formData.mbtiName ? formData.mbtiName : "미선택"}
+                  </span>
+                </td>
+              </tr>
+
+              <br />
+
               <tr>
                 <td colSpan="2">
                   <label
@@ -321,6 +352,15 @@ export default function Signup() {
           </table>
         </fieldset>
       </form>
+
+      {/* ✅ MBTI 선택 모달 */}
+      {showEditMbti && (
+        <MbtiModify
+          current={formData.mbtiName || ""}
+          onClose={() => setShowEditMbti(false)}
+          onSave={handleSaveMbti}
+        />
+      )}
     </div>
   );
 }
