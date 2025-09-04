@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import NoticeList from "../components/NoticeList";
-import NoticeDetail from "../components/NoticeDetail";
-import NoticeWrite from "../components/NoticeWrite";
+import NoticeList from "../components/notice/NoticeList";
+import NoticeDetail from "../components/notice/NoticeDetail";
+import NoticeWrite from "../components/notice/NoticeWrite";
+
 import { Routes, Route } from "react-router-dom";
 
 function NoticePage() {

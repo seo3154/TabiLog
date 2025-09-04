@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "../styles/Notice.css";
+import "../../styles/Notice.css";
+import Button from "../../components/Button.jsx";
 
 function NoticeList({ notices }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -36,9 +37,11 @@ function NoticeList({ notices }) {
 
   return (
     <div className="notice-list-container">
-      <br /><br />
+      <br />
+      <br />
       <h1>공지사항</h1>
-      <br /><br />
+      <br />
+      <br />
 
       {/* 검색창 */}
       <div className="search-box">
@@ -88,9 +91,15 @@ function NoticeList({ notices }) {
 
       {/* 글쓰기 버튼 */}
       <div style={{ textAlign: "right" }}>
+        <br />
+        <Link to="/notice/write" className="btn">
+          <Button variant="white">글쓰기</Button>
+        </Link>
+        {/* 
         <Link to="/notice/write" className="btn">
           글쓰기
         </Link>
+        */}
         {/* 또는 현재 경로가 이미 /notice 라우트 아래라면: <Link to="write">글쓰기</Link> */}
       </div>
 
