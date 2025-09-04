@@ -1,6 +1,6 @@
-import React from 'react';
-import '../styles/Notice.css';
-import { useParams, useNavigate } from 'react-router-dom';
+import React from "react";
+import "../../styles/Notice.css";
+import { useParams, useNavigate } from "react-router-dom";
 
 function NoticeDetail({ notices, onDelete, onEdit }) {
   const { id } = useParams();
@@ -10,9 +10,9 @@ function NoticeDetail({ notices, onDelete, onEdit }) {
   if (!notice) return <p className="notice-not-found">공지사항이 없습니다.</p>;
 
   const handleDelete = () => {
-    if (window.confirm('정말로 삭제하시겠습니까?')) {
+    if (window.confirm("정말로 삭제하시겠습니까?")) {
       onDelete(notice.id);
-      navigate('/notices');
+      navigate("/notices");
     }
   };
 
@@ -29,14 +29,20 @@ function NoticeDetail({ notices, onDelete, onEdit }) {
           <span className="notice-date">작성일 {notice.date}</span>
         </div>
         <div className="notice-content">
-          {notice.content.split('\n').map((line, index) => (
+          {notice.content.split("\n").map((line, index) => (
             <p key={index}>{line}</p>
           ))}
         </div>
         <div className="button-container">
-          <button className="edit-button" onClick={handleEdit}>수정</button>
-          <button className="delete-button" onClick={handleDelete}>삭제</button>
-          <button className="back-button" onClick={() => navigate(-1)}>목록</button>
+          <button className="edit-button" onClick={handleEdit}>
+            수정
+          </button>
+          <button className="delete-button" onClick={handleDelete}>
+            삭제
+          </button>
+          <button className="back-button" onClick={() => navigate(-1)}>
+            목록
+          </button>
         </div>
       </div>
     </div>
