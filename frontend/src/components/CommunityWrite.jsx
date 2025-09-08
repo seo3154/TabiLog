@@ -1,73 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { createBoard } from "../apis/boards";
 import "../styles/CommunityWrite.css";
 import Button from "../components/Button";
 
-export default function WritePage() {
+export default function CommunityWrite() {
   const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("전체게시판");
   const [content, setContent] = useState("");
-  const [selectedMbti, setSelectedMbti] = useState(""); // 유저의 MBTI 값을 상태로 관리
+  const [category, setCategory] = useState("ALL");
+  const [selectedMbti, setSelectedMbti] = useState("");
+  const [writer, setWriter] = useState("");
+  const [createdAt, setcreatedAt] = useState("");
   const navigate = useNavigate();
 
-  // 유저의 정보를 받아오는 useEffect
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userId = localStorage.getItem("userid");
-        if (userId) {
-          const response = await axios.get(
-            `http://localhost:8080/api/user/${userId}`
-          );
-          setSelectedMbti(response.data.mbti); // 유저의 MBTI 설정
-        }
-      } catch (error) {
-        console.error("유저 정보 가져오기 실패", error);
-      }
-    };
+  // const payload = {
+  //   title: String,
+  //   content: String,
+  //   category: String,
+  //   selectedMbti: String,
+  //   writer: String,
+  //   createdAt: String,
+  // };
 
-    fetchUserData();
+  useEffect(() => {
+    // 로그인된 유저 정보 가정: localStorage에 userid/username/mbti 저장되어 있음
+    const mbti = localStorage.getItem("mbti") || "";
+    setSelectedMbti(mbti);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !content) {
-      alert("제목과 내용을 입력해주세요.");
-      return;
-    }
+    // if (!title.trim() || !content.trim())
+    //   return alert("제목과 내용을 입력해주세요.");
 
-    const newPost = {
+    const payload = {
       title,
       content,
-      category,
-      mbti: selectedMbti, // 선택된 MBTI
-      writer: localStorage.getItem("userid"),
-      date: new Date().toISOString().split("T")[0],
+      category, // "ALL" | "REVIEW" | "QNA"
+      mbti: selectedMbti, // DTO 필드명에 맞게
     };
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/board/write",
-        newPost
-      );
+    const status = await createBoard(payload);
 
-      if (response.status === 200) {
-        alert("글이 등록되었습니다!");
-        navigate("/community"); // 등록 후 목록 페이지로 이동
-      }
-    } catch (error) {
-      console.error("게시글 등록 중 오류:", error);
-      alert("게시글 등록에 실패했습니다.");
+    if (status?.success) {
+      alert("글이 등록되었습니다!");
+      navigate("/community");
     }
   };
 
   const handleCancel = () => {
-    if (window.confirm("작성을 취소하시겠습니까?")) {
-      navigate(-1);
-    }
+    if (window.confirm("작성을 취소하시겠습니까?")) navigate(-1);
   };
+
   return (
     <div className="wrap">
       <div className="mbti">
@@ -91,9 +76,9 @@ export default function WritePage() {
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="전체게시판">전체 게시판</option>
-              <option value="리뷰게시판">리뷰 게시판</option>
-              <option value="질문게시판">Q&A 게시판</option>
+              <option value="ALL">전체 게시판</option>
+              <option value="REVIEW">리뷰 게시판</option>
+              <option value="QUESTION">Q&A 게시판</option>
             </select>
           </div>
         </div>

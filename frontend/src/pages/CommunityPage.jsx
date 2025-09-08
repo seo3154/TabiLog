@@ -1,45 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, Route, Routes } from "react-router-dom";
-import axios from "axios"; // API 호출용
+import { useNavigate } from "react-router-dom";
 import "../styles/CommunityBoard.css";
 import "../styles/CommunityPage.css";
 import Sidebar from "../components/SideBar";
 import WriteButton from "../components/Button";
 import CommunityBoard from "../components/CommunityBoard";
-import CommunityWrite from "../components/CommunityWrite";
+import CommunityWrite from "../components/CommunityWrite"; // 라우팅은 App에서
+import { fetchBoards } from "../apis/boards";
 
 export default function CommunityPage() {
   const navigate = useNavigate();
   const [selectedBoard, setSelectedBoard] = useState("전체 게시판");
   const [posts, setPosts] = useState([]);
 
-  // 서버에서 게시글 가져오기
   useEffect(() => {
-    fetchPosts();
-  }, [selectedBoard]);
-
-  const fetchPosts = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/api/boards", {
-        params: {
-          category: selectedBoard === "전체 게시판" ? "" : selectedBoard,
-        },
+    const load = async () => {
+      const categoryParam =
+        selectedBoard === "전체 게시판" ? "" : selectedBoard;
+      const { data } = await fetchBoards({
+        category: categoryParam,
+        page: 0,
+        size: 200,
       });
-      setPosts(res.data);
-    } catch (err) {
-      console.error("게시글 가져오기 실패", err);
-    }
-  };
-
-  const AddPost = async (newPost) => {
-    try {
-      const res = await axios.post("http://localhost:8080/api/boards", newPost);
-      setPosts([res.data, ...posts]);
-      alert("글이 등록되었습니다!");
-    } catch (err) {
-      console.error("글 등록 실패", err);
-    }
-  };
+      setPosts(data.content || data); // Page 지원/미지원 모두 대응
+    };
+    load();
+  }, [selectedBoard]);
 
   const menuItems = [
     {
@@ -66,7 +52,7 @@ export default function CommunityPage() {
           variant="black"
           className="WriteButton"
           onClick={() => {
-            const userid = localStorage.getItem("userid"); // 로그인 여부 체크
+            const userid = localStorage.getItem("userid");
             if (!userid) {
               alert("로그인이 필요합니다!");
               navigate("/login");
@@ -77,15 +63,7 @@ export default function CommunityPage() {
         >
           글 작성
         </WriteButton>
-        {/* Routes로 CommunityWrite 컴포넌트를 라우팅 */}
-        <Routes>
-          <Route
-            path="/community/write"
-            element={<CommunityWrite AddPost={AddPost} />}
-          />
-        </Routes>
 
-        {/* 게시글 목록 출력 */}
         <CommunityBoard posts={posts} selectedBoard={selectedBoard} />
       </div>
     </div>

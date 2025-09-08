@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import Button from "../components/Button";
+import { fetchBoard, fetchComments, createComment } from "../apis/boards";
 import profile from "../assets/logo.png";
 
 export default function CommunityPost() {
@@ -11,36 +10,27 @@ export default function CommunityPost() {
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    fetchPost();
+    const load = async () => {
+      const { data: b } = await fetchBoard(id, { increaseView: true });
+      setPost(b);
+      const { data: cs } = await fetchComments(id);
+      setComments(cs);
+    };
+    load();
   }, [id]);
 
-  const fetchPost = async () => {
-    try {
-      const res = await axios.get(`http://localhost:8080/api/boards/${id}`);
-      setPost(res.data);
-
-      // 댓글 가져오기
-      const commentRes = await axios.get(
-        `http://localhost:8080/api/boards/${id}/comments`
-      );
-      setComments(commentRes.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const handleCommentSubmit = async () => {
-    if (!newComment) return alert("댓글을 입력해주세요.");
-    try {
-      const res = await axios.post("http://localhost:8080/api/comments", {
-        boardId: id,
-        content: newComment,
-      });
-      setComments([res.data, ...comments]);
-      setNewComment("");
-    } catch (err) {
-      console.error(err);
-    }
+    if (!newComment.trim()) return alert("댓글을 입력해주세요.");
+    const userId = Number(localStorage.getItem("userid")) || 0;
+    const userName = localStorage.getItem("username") || "anon";
+    const { data } = await createComment({
+      boardId: Number(id),
+      userId,
+      userName,
+      content: newComment,
+    });
+    setComments((prev) => [data, ...prev]);
+    setNewComment("");
   };
 
   if (!post) return <div>Loading...</div>;
@@ -50,7 +40,9 @@ export default function CommunityPost() {
       <div className="post-header">
         <div className="post-info">
           <span className="title">{post.title}</span>
-          <span className="post-date">{post.createAt}</span>
+          <span className="post-date">
+            {new Date(post.createdAt).toLocaleString()}
+          </span>
         </div>
         <div className="post-writer">
           <img src={profile} alt="profile" />
@@ -72,11 +64,13 @@ export default function CommunityPost() {
 
       <div className="comments-section">
         {comments.map((c) => (
-          <div key={c.commentID} className="comment">
+          <div key={c.commentId} className="comment">
             <div className="comment-author">
               <img src={profile} alt="img" />
               <span className="writer">{c.userName}</span>
-              <span className="comment-date">{c.createAt}</span>
+              <span className="comment-date">
+                {new Date(c.createdAt).toLocaleString()}
+              </span>
             </div>
             <p>{c.content}</p>
           </div>

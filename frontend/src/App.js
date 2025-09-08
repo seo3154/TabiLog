@@ -5,7 +5,7 @@ import NoticePage from "./pages/NoticePage";
 import Header from "./components/Header";
 import RecommendPage from "./pages/RecommendPage";
 import CommunityPage from "./pages/CommunityPage";
-import CommunityBoard from "./components/CommunityBoard";
+
 import CommunityWrite from "./components/CommunityWrite";
 import CommunityPost from "./components/CommunityPost";
 import TravelDetailPage from "./pages/TravelDetailPage";
@@ -25,8 +25,7 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/notice/*" element={<NoticePage />} />
           <Route path="/recommend/*" element={<RecommendPage />} />
-          <Route path="/community/*" element={<CommunityPage />} />
-          <Route path="/community/board" element={<CommunityBoard />} />
+          <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route path="/community/post/:id" element={<CommunityPost />} />
           <Route path="/place/:id" element={<TravelDetailPage />} />

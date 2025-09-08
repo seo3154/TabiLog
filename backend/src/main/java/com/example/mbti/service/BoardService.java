@@ -1,137 +1,60 @@
 package com.example.mbti.service;
 
-import com.example.mbti.dto.BoardDto;
-import com.example.mbti.dto.CommentDto;
+
+import com.example.mbti.dto.BoardDTO;
+import com.example.mbti.dto.BoardDtos;
 import com.example.mbti.model.Board;
-import com.example.mbti.model.Comment;
-import com.example.mbti.model.User;
 import com.example.mbti.repository.BoardRepository;
-import com.example.mbti.repository.CommentRepository;
-import com.example.mbti.repository.UserRepository;
-
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BoardService {
-
     private final BoardRepository boardRepository;
-    private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
 
-    // ================= Board =================
-    public Page<BoardDto> getBoards(String searchWhat, String keyword, Pageable pageable) {
-        Page<Board> boards;
-        if ("title".equals(searchWhat)) {
-            boards = boardRepository.findByTitleContaining(keyword, pageable);
-        } else if ("content".equals(searchWhat)) {
-            boards = boardRepository.findByContentContaining(keyword, pageable);
-        } else if ("user".equals(searchWhat)) {
-            boards = boardRepository.findByUser_LoginIdContaining(keyword, pageable);
-        } else {
-            boards = boardRepository.findAll(pageable);
-        }
-        return boards.map(this::toDto);
+
+    @Transactional(readOnly = true)
+    public Page<Board> list(String category, String mbti, int page, int size) {
+        String c = category == null ? "" : category;
+        String m = mbti == null ? "" : mbti;
+        Pageable pageable = PageRequest.of(page, size, Sort.by("boardId").descending());
+
+        return boardRepository.findByCategoryContainingAndMbtiContainingIgnoreCase(c, m, pageable);
     }
 
-    public BoardDto getBoard(Long boardId) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
-        // 조회수 증가
-        board.setViews(board.getViews() + 1);
-        boardRepository.save(board);
-        return toDto(board);
-    }
 
-    public BoardDto createBoard(BoardDto boardDto) {
-        User user = userRepository.findById(boardDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
+    @Transactional
+    public void create(BoardDTO dto) {
 
         Board board = new Board();
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
-        board.setCategory(boardDto.getCategory());
-        board.setUser(user);
-        board.setViews(0);
 
-        Board saved = boardRepository.save(board);
-        return toDto(saved);
+        board.setTitle(dto.getTitle());
+        board.setContent(dto.getContent());
+        board.setCategory(dto.getCategory());
+        board.setMbti(dto.getMbti());
+        board.setWriter(dto.getWriter());
+        board.setCreatedAt(dto.getCreatedAt());
+
+        boardRepository.save(board);
     }
 
-    public BoardDto updateBoard(BoardDto boardDto) {
-        Board board = boardRepository.findById(boardDto.getBoardid())
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
-        board.setCategory(boardDto.getCategory());
-        Board updated = boardRepository.save(board);
-        return toDto(updated);
-    }
 
-    public void deleteBoard(Long boardId) {
-        boardRepository.deleteById(boardId);
-    }
+    // @Transactional
+    // public Board increaseViews(Long boardId) {
+    // Board b = boardRepository.findById(boardId)
+    // .orElseThrow(() -> new IllegalArgumentException("board not found"));
+    // b.setViews(b.getViews() + 1);
+    // return b;
+    // }
 
-    // ================= Comment =================
-    public CommentDto createComment(Long boardId, CommentDto commentDto) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
-        User user = userRepository.findById(commentDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("유저가 없습니다."));
 
-        Comment comment = new Comment();
-        comment.setBoard(board);
-        comment.setUser(user);
-        comment.setContent(commentDto.getContent());
-        Comment saved = commentRepository.save(comment);
-
-        return toCommentDto(saved);
-    }
-
-    public List<CommentDto> getCommentsByBoard(Long boardId) {
-        Board board = boardRepository.findById(boardId)
-                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
-        List<Comment> comments = commentRepository.findByBoardOrderByCreateAtAsc(board);
-        return comments.stream().map(this::toCommentDto).collect(Collectors.toList());
-    }
-
-    public CommentDto updateComment(CommentDto commentDto) {
-        Comment comment = commentRepository.findById(commentDto.getCommentID())
-                .orElseThrow(() -> new IllegalArgumentException("댓글이 없습니다."));
-        comment.setContent(commentDto.getContent());
-        Comment updated = commentRepository.save(comment);
-        return toCommentDto(updated);
-    }
-
-    public void deleteComment(Long commentId) {
-        commentRepository.deleteById(commentId);
-    }
-
-    // ================= DTO 변환 =================
-    private BoardDto toDto(Board board) {
-        BoardDto dto = new BoardDto();
-        dto.setBoardid(board.getBoardID());
-        dto.setTitle(board.getTitle());
-        dto.setContent(board.getContent());
-        dto.setCategory(board.getCategory());
-        dto.setUserId(board.getUser().getId());
-        dto.setViews(board.getViews());
-        return dto;
-    }
-
-    private CommentDto toCommentDto(Comment comment) {
-        CommentDto dto = new CommentDto();
-        dto.setCommentID(comment.getCommentID());
-        dto.setContent(comment.getContent());
-        dto.setBoardId(comment.getBoard().getBoardID());
-        dto.setUserId(comment.getUser().getId());
-        return dto;
-    }
+    // @Transactional(readOnly = true)
+    // public Board get(Long id) {
+    // return boardRepository.findById(id)
+    // .orElseThrow(() -> new IllegalArgumentException("board not found"));
+    // }
 }

@@ -1,50 +1,44 @@
 package com.example.mbti.model;
 
-import javax.persistence.*;
-import java.util.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import javax.persistence.*;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "comment")
 @Getter
 @Setter
 public class Comment {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq_gen")
-    @SequenceGenerator(name = "comment_seq_gen", sequenceName = "COMMENT_SEQ", allocationSize = 1)
-    @Column(name = "comment_id", nullable = false)
-    private Long commentID;
+    @Column(name = "comment_id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_comment")
+    @SequenceGenerator(name = "seq_comment", sequenceName = "seq_comment", allocationSize = 1)
+    private Long commentId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "board_id", nullable = false)
-    private Board board;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(name = "board_id")
+    private Long boardId;
 
-    @Column(name = "content", nullable = false)
+
+    @Column(name = "user_id")
+    private Long userId;
+
+
+    @Column(name = "user_name")
+    private String userName;
+
+
     @Lob
     private String content;
 
-    @Column(name = "create_at", nullable = false)
+
+    @Column(name = "parent_id")
+    private Long parentId; // 대댓글용
+
+
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id")
-    private Comment parent;
-
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> children = new ArrayList<>();
-
-    @PrePersist
-    public void prePersist() {
-        if (createAt == null) {
-            createAt = new Date(); // 현재 시간
-        }
-    }
+    @Column(name = "created_at")
+    private Date createdAt = new Date();
 }

@@ -1,54 +1,39 @@
 package com.example.mbti.model;
 
-import javax.persistence.*;
-import java.util.*;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import javax.persistence.*;
+import java.util.Date;
+
 
 @Entity
 @Table(name = "board")
 @Getter
 @Setter
 public class Board {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq_gen")
-    @SequenceGenerator(name = "board_seq_gen", sequenceName = "BOARD_SEQ", allocationSize = 1)
     @Column(name = "board_id")
-    private Long boardID;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_board")
+    @SequenceGenerator(name = "seq_board", sequenceName = "seq_board", allocationSize = 1)
+    private Long boardId;
 
-    @Column(name = "title", nullable = false, length = 100)
     private String title;
 
-    @Column(name = "content", nullable = false)
     @Lob
     private String content;
 
-    @Column(name = "create_at", nullable = false)
+    public enum CategoryType {
+        ALL, REVIEW, QUESTION
+    };
+
+    private CategoryType category; // 전체 게시판 / 리뷰 게시판 / Q&A 게시판
+
+    private String mbti; // 게시글 작성자의 MBTI (필터용)
+
+    @Column(name = "writer")
+    private String writer; // 작성자 표시명
+
     @Temporal(TemporalType.TIMESTAMP)
-    private Date createAt;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @Column(name = "category", nullable = false, length = 20)
-    private String category;
-
-    @Column(name = "views")
-    private Integer views = 0;
-
-    @Column(name = "image_id")
-    private Long imageID;
-
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Comment> comments = new ArrayList<>();
-
-    @PrePersist
-    public void prePersist() {
-        if (createAt == null) {
-            createAt = new Date(); // 현재 시간
-        }
-    }
+    @Column(name = "created_at")
+    private Date createdAt = new Date();
 }

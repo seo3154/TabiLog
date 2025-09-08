@@ -21,15 +21,13 @@ export default function CommunityBoard({ posts, selectedBoard }) {
     "ESTJ",
     "ESTP",
   ];
-
   const [selectedMbti, setSelectedMbti] = useState("");
-
   const handleChange = (e) => setSelectedMbti(e.target.value);
 
   const filteredPosts = posts.filter(
     (post) =>
       (selectedBoard === "전체 게시판" || post.category === selectedBoard) &&
-      (selectedMbti === "" || post.mbti === selectedMbti)
+      (selectedMbti === "" || (post.mbti || "") === selectedMbti)
   );
 
   return (
@@ -58,30 +56,30 @@ export default function CommunityBoard({ posts, selectedBoard }) {
         <tbody>
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
-              <tr key={post.boardID}>
+              <tr key={post.boardId}>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
-                    {post.boardID}
+                  <Link to={`/community/post/${post.boardId}`}>
+                    {post.boardId}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
+                  <Link to={`/community/post/${post.boardId}`}>
                     {post.mbti}
                   </Link>
                 </td>
                 <td className="title">
-                  <Link to={`/community/post/${post.boardID}`}>
+                  <Link to={`/community/post/${post.boardId}`}>
                     {post.title}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
+                  <Link to={`/community/post/${post.boardId}`}>
                     {post.userName}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
-                    {post.createAt}
+                  <Link to={`/community/post/${post.boardId}`}>
+                    {new Date(post.createdAt).toLocaleDateString()}
                   </Link>
                 </td>
               </tr>

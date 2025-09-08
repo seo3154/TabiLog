@@ -1,83 +1,46 @@
 package com.example.mbti.controller;
 
-import com.example.mbti.dto.BoardDto;
-import com.example.mbti.dto.CommentDto;
+
+import com.example.mbti.dto.BoardDTO;
+import com.example.mbti.dto.BoardDtos;
+import com.example.mbti.dto.SuccessMessageDTO;
+import com.example.mbti.model.Board;
 import com.example.mbti.service.BoardService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
+import org.springframework.data.domain.*;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @RestController
-@RequestMapping("/boards")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/boards")
+@RequiredArgsConstructor
 public class BoardController {
+    private final BoardService boardService;
 
-    @Autowired
-    private BoardService boardService;
+    // 커뮤니티 들어가마 문제 가 생기는 이유 << 여기가 고장남
+    // @GetMapping("/list")
+    // public ResponseEntity<Map<String, Object>> list(@RequestParam(required = false) String
+    // category,
+    // @RequestParam(required = false) String mbti,
+    // @RequestParam(defaultValue = "0") int page) {
 
-    // ===================== Board =====================
-    // 게시글 목록 (페이징 + 검색)
-    @GetMapping
-    public Page<BoardDto> getBoards(@RequestParam(required = false) String searchWhat,
-            @RequestParam(required = false) String keyword, Pageable pageable) {
-        return boardService.getBoards(searchWhat, keyword, pageable);
+    // int size = 10;
+    // Pageable pageable = PageRequest.of(page, size, Sort.by("boardId").descending());
+
+
+    // return boardService.list(category, mbti, page);
+    // }
+
+    @PostMapping("/create")
+    public SuccessMessageDTO create(@RequestBody BoardDTO dto) {
+        System.out.println(dto.getTitle());
+        boardService.create(dto);
+        return SuccessMessageDTO.builder().Message("게시글 작성에 성공").success(true).build();
     }
 
-    // 게시글 단건 조회 (조회수 증가 포함)
-    @GetMapping("/{boardId}")
-    public BoardDto getBoard(@PathVariable Long boardId) {
-        return boardService.getBoard(boardId);
-    }
-
-    // 게시글 생성
-    @PostMapping
-    public BoardDto createBoard(@RequestBody BoardDto boardDto) {
-        return boardService.createBoard(boardDto);
-    }
-
-    // 게시글 수정
-    @PutMapping("/{boardId}")
-    public BoardDto updateBoard(@PathVariable Long boardId, @RequestBody BoardDto boardDto) {
-        boardDto.setBoardid(boardId);
-        return boardService.updateBoard(boardDto);
-    }
-
-    // 게시글 삭제
-    @DeleteMapping("/{boardId}")
-    public String deleteBoard(@PathVariable Long boardId) {
-        boardService.deleteBoard(boardId);
-        return "삭제 완료";
-    }
-
-    // ===================== Comment =====================
-    // 댓글 생성 (대댓글 포함)
-    @PostMapping("/{boardId}/comments")
-    public CommentDto createComment(@PathVariable Long boardId,
-            @RequestBody CommentDto commentDto) {
-        return boardService.createComment(boardId, commentDto);
-    }
-
-    // 게시글 댓글 전체 조회
-    @GetMapping("/{boardId}/comments")
-    public List<CommentDto> getComments(@PathVariable Long boardId) {
-        return boardService.getCommentsByBoard(boardId);
-    }
-
-    // 댓글 수정
-    @PutMapping("/comments/{commentId}")
-    public CommentDto updateComment(@PathVariable Long commentId,
-            @RequestBody CommentDto commentDto) {
-        commentDto.setCommentID(commentId);
-        return boardService.updateComment(commentDto);
-    }
-
-    // 댓글 삭제
-    @DeleteMapping("/comments/{commentId}")
-    public String deleteComment(@PathVariable Long commentId) {
-        boardService.deleteComment(commentId);
-        return "댓글 삭제 완료";
-    }
 }
