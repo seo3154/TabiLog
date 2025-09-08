@@ -12,7 +12,8 @@
 .image-slider-container {
   position: relative;
   width: 100%;
-  height: clamp(360px, 56vw, 640px);
+  /* [CHANGED] 고정 600px → 화면 높이 기반으로 유연 + 최소/최대 가드 */
+  height: clamp(520px, 70vh, 680px);
   overflow: hidden;
   margin-bottom: 32px;
 }
@@ -21,9 +22,24 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  /* [CHANGED] 기본은 꽉 채우기(대화면에서 시원하게) */
   object-fit: cover;
+  object-position: 50% 35%; /* 피사체가 중앙보다 약간 위에 있으면 20~40%로 조정 */
   transition: opacity .6s ease;
-  /* 상단 크롭 최소화는 JSX에서 objectPosition: '50% 0%'로 제어 */
+  /* 상단 크롭 최소화는 JSX에서 objectPosition으로도 제어 가능 */
+}
+
+/* [NEW] 창이 좁거나(<=1200px) 세로가 긴 화면(가로:세로 <= 16:9)에서는
+   잘리지 않게 전체가 보이도록 contain으로 전환 */
+@media (max-width: 1200px), (max-aspect-ratio: 16/9) {
+  .image-slider-container {
+    height: clamp(480px, 65vh, 680px); /* 필요 시 높이도 함께 살짝 낮춰줌 */
+  }
+  .image-slider-container img {
+    object-fit: contain;      /* 잘림 방지(레터박스) */
+    object-position: center;  /* 가운데 정렬 */
+    background: #000;         /* 남는 부분 배경색 – 원하면 #fff/#eee 등으로 변경 */
+  }
 }
 
 /* ====== 본문 컨테이너 ====== */
@@ -171,11 +187,11 @@
 .title-image-wrap {
   margin: 250px auto 12px;      /* 위아래 간격 */
   width: 100%;
-  max-width: 1000px;          /* main-content와 동일 폭 */
+  max-width: 1000px;            /* main-content와 동일 폭 */
 }
 .title-image {
   display: block;
   width: 100%;
   height: auto;
-  object-fit: contain;        /* 비율 유지 */
+  object-fit: contain;          /* 비율 유지 */
 }
