@@ -5,7 +5,7 @@
     "name_ko": "후라노 / 비에이",
     "name_jp": "富良野 / 美瑛",
     "mbti": [
-      "INFP",
+      "INTP",
       "ISFP",
       "ESFP",
       "ENFP"
@@ -206,8 +206,8 @@
     "name_ko": "모리오카",
     "name_jp": "盛岡",
     "mbti": [
-      "ESTJ",
-      "ESFJ",
+      "INTP",
+      "INFP",
       "ENTP",
       "ENTJ"
     ],
@@ -271,9 +271,9 @@
     "name_jp": "銀山温泉",
     "mbti": [
       "INFP",
-      "ISFP",
-      "INFJ",
-      "ENFP"
+      "ISFJ",
+      "ENTJ",
+      "ENFJ"
     ],
     "hero": {
       "image": "/Place/5.Yamagata_1.jpg",
@@ -330,9 +330,9 @@
     "name_ko": "자오 여우 마을",
     "name_jp": "蔵王キツネ村",
     "mbti": [
-      "ENFP",
-      "ESFP",
-      "ISFP",
+      "ENFJ",
+      "ESFJ",
+      "ISFJ",
       "INFP"
     ],
     "hero": {
@@ -463,9 +463,9 @@
     "name_jp": "草津温泉",
     "mbti": [
       "ISTJ",
-      "ISFJ",
+      "ISFP",
       "ESTJ",
-      "ESFJ"
+      "ESFP"
     ],
     "hero": {
       "image": "/Place/8.Gunma_1.jpg",
@@ -522,9 +522,9 @@
     "name_ko": "닛코 동조궁",
     "name_jp": "日光東照宮",
     "mbti": [
-      "INFJ",
+      "INFP",
       "INTJ",
-      "ISTJ",
+      "ISTP",
       "ENFJ"
     ],
     "hero": {
@@ -591,9 +591,9 @@
     "name_ko": "국영 히타치 해변 공원",
     "name_jp": "国営ひたち海浜公園",
     "mbti": [
-      "ENFP",
-      "ESFP",
-      "ENTP",
+      "INFJ",
+      "ESFJ",
+      "INTJ",
       "ESTP"
     ],
     "hero": {
@@ -651,10 +651,10 @@
     "name_ko": "나리타산 신쇼지",
     "name_jp": "成田山新勝寺",
     "mbti": [
-      "ISFJ",
-      "ESFJ",
-      "ISTJ",
-      "INFJ"
+      "ISFP",
+      "ESFP",
+      "ISTP",
+      "INFP"
     ],
     "hero": {
       "image": "/Place/11.Chiba_1.jpg",
@@ -712,8 +712,8 @@
     "name_ko": "철도박물관",
     "name_jp": "鉄道博物館",
     "mbti": [
-      "INTJ",
       "INTP",
+      "ISTP",
       "ENTJ",
       "ESTJ"
     ],
@@ -833,7 +833,7 @@
     "name_jp": "横浜",
     "mbti": [
       "ESFJ",
-      "ENFJ",
+      "ISFP",
       "ENTP",
       "ESTP"
     ],
@@ -896,10 +896,10 @@
     "name_ko": "나가오카 불꽃 축제",
     "name_jp": "長岡まつり大花火大会",
     "mbti": [
-      "ESFP",
-      "ENFP",
-      "ISFP",
-      "INFP"
+      "ESFJ",
+      "ENFJ",
+      "ISFJ",
+      "INFJ"
     ],
     "hero": {
       "image": "/Place/15.Niigata_1.jpg",
@@ -952,8 +952,8 @@
     "name_ko": "다테야마",
     "name_jp": "立山",
     "mbti": [
-      "ISTP",
-      "ESTP",
+      "ISTJ",
+      "ESTJ",
       "INTJ",
       "ENTJ"
     ],
@@ -1012,10 +1012,10 @@
     "name_ko": "가나자와",
     "name_jp": "金沢",
     "mbti": [
-      "INFJ",
-      "ENFJ",
-      "ISFJ",
-      "ESFJ"
+      "INFP",
+      "ENFP",
+      "ISFP",
+      "ESFP"
     ],
     "hero": {
       "image": "/Place/17.Ishikawa_1.jpg",
@@ -1080,10 +1080,10 @@
     "name_ko": "후쿠이현 공룡 박물관",
     "name_jp": "福井県立恐竜博物館",
     "mbti": [
-      "INTP",
+      "ISTP",
       "INTJ",
       "ENTP",
-      "ENTJ"
+      "ESTJ"
     ],
     "hero": {
       "image": "/Place/18.Fukui_1.jpg",
@@ -1136,9 +1136,9 @@
     "name_ko": "니혼다이라",
     "name_jp": "日本平",
     "mbti": [
-      "ESFJ",
-      "ENFJ",
-      "ISFJ",
+      "ESTP",
+      "ENTP",
+      "ISFP",
       "INFJ"
     ],
     "hero": {
@@ -1200,7 +1200,7 @@
       "ENFP",
       "ESFP",
       "ISFP",
-      "INFP"
+      "INTP"
     ],
     "hero": {
       "image": "/Place/20.Yamanashi_1.jpg",
@@ -1263,7 +1263,7 @@
     "mbti": [
       "INFJ",
       "INFP",
-      "ISFP",
+      "ISFJ",
       "INTJ"
     ],
     "hero": {
@@ -1449,10 +1449,10 @@
     "name_ko": "이세 신궁",
     "name_jp": "伊勢神宮",
     "mbti": [
-      "ISFJ",
-      "INFJ",
+      "INTP",
+      "INFP",
       "ISTJ",
-      "ESFJ"
+      "ENTJ"
     ],
     "hero": {
       "image": "/Place/24.Mie_1.jpg",
@@ -1505,9 +1505,9 @@
     "name_ko": "비와호",
     "name_jp": "琵琶湖",
     "mbti": [
-      "ISTP",
+      "INTP",
       "ISFP",
-      "ESTP",
+      "ENTP",
       "ESFP"
     ],
     "hero": {
@@ -1566,9 +1566,9 @@
     "name_jp": "那智の滝",
     "mbti": [
       "INFJ",
-      "INFP",
-      "ISFP",
-      "ENFP"
+      "INTJ",
+      "ISFJ",
+      "ENFJ"
     ],
     "hero": {
       "image": "/Place/26.Wakayama_1.jpg",
@@ -1637,10 +1637,10 @@
     "name_ko": "후시미 이나리 신사",
     "name_jp": "伏見稲荷大社",
     "mbti": [
-      "ENFJ",
-      "INFJ",
-      "ESFJ",
-      "ISFJ"
+      "ENFP",
+      "INFP",
+      "ESFP",
+      "ISFP"
     ],
     "hero": {
       "image": "/Place/27.Kyoto_1.jpg",
@@ -1698,7 +1698,7 @@
     "name_jp": "奈良公園",
     "mbti": [
       "ISFJ",
-      "ESFJ",
+      "ESFP",
       "ENFP",
       "INFP"
     ],
@@ -1821,9 +1821,9 @@
     "name_ko": "히메지 성",
     "name_jp": "姫路城",
     "mbti": [
-      "ISTJ",
+      "ISTP",
       "INTJ",
-      "ESTJ",
+      "ESTP",
       "ENTJ"
     ],
     "hero": {
@@ -1881,9 +1881,9 @@
     "name_ko": "구라시키 미관지구",
     "name_jp": "倉敷美観地区",
     "mbti": [
-      "ISFJ",
+      "ENFP",
       "INFJ",
-      "INFP",
+      "INTP",
       "ENFJ"
     ],
     "hero": {
@@ -1997,9 +1997,9 @@
     "name_ko": "돗토리 사구",
     "name_jp": "鳥取砂丘",
     "mbti": [
+      "ESFJ",
+      "ESTJ",
       "ESFP",
-      "ESTP",
-      "ISTP",
       "ISFP"
     ],
     "hero": {
@@ -2057,10 +2057,10 @@
     "name_ko": "이즈모 타이샤",
     "name_jp": "出雲大社",
     "mbti": [
-      "ISFJ",
-      "INFJ",
-      "ISTJ",
-      "ENFJ"
+      "ESFJ",
+      "ENFJ",
+      "ESTJ",
+      "ENFP"
     ],
     "hero": {
       "image": "/Place/34.Shimane_1.jpg",
@@ -2299,7 +2299,7 @@
     "mbti": [
       "ISFJ",
       "INFJ",
-      "ESFJ",
+      "ESFP",
       "INFP"
     ],
     "hero": {
@@ -2357,9 +2357,9 @@
     "name_ko": "가쓰라하마",
     "name_jp": "桂浜",
     "mbti": [
-      "ISFP",
+      "ISFJ",
       "ESFP",
-      "ENFP",
+      "ENFJ",
       "INFP"
     ],
     "hero": {
@@ -2478,9 +2478,9 @@
     "name_jp": "有田",
     "mbti": [
       "ISTJ",
-      "ESTJ",
-      "ISFJ",
-      "ESFJ"
+      "ENTJ",
+      "INFJ",
+      "ENFJ"
     ],
     "hero": {
       "image": "/Place/41.Saga_1.jpg",
@@ -2538,9 +2538,9 @@
     "name_jp": "平和公園",
     "mbti": [
       "INFJ",
-      "INFP",
-      "ISFJ",
-      "ENFJ"
+      "INTP",
+      "ISFP",
+      "ENFP"
     ],
     "hero": {
       "image": "/Place/42.Nagasaki_1.jpg",
@@ -2657,10 +2657,10 @@
     "name_ko": "아소산",
     "name_jp": "阿蘇山",
     "mbti": [
-      "ISTP",
-      "ESTP",
-      "ISFP",
-      "ESFP"
+      "ISTJ",
+      "ESTJ",
+      "ISFJ",
+      "ESFJ"
     ],
     "hero": {
       "image": "/Place/44.Kumamoto_1.jpg",
@@ -2714,7 +2714,7 @@
     "name_jp": "青島",
     "mbti": [
       "ISFP",
-      "ESFP",
+      "ENTJ",
       "ENFP",
       "INFP"
     ],
@@ -2773,9 +2773,9 @@
     "name_ko": "사쿠라지마",
     "name_jp": "桜島",
     "mbti": [
-      "ISTP",
+      "INFJ",
       "ESTP",
-      "INTJ",
+      "INTP",
       "ENTJ"
     ],
     "hero": {
@@ -2837,10 +2837,10 @@
     "name_ko": "슈리 성",
     "name_jp": "首里城",
     "mbti": [
+      "ENFP",
+      "ESFP",
       "ESFJ",
-      "ENFJ",
-      "ISFJ",
-      "INFJ"
+      "INFP"
     ],
     "hero": {
       "image": "/Place/47.Okinawa_1.jpg",
