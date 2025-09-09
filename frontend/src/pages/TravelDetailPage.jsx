@@ -7,17 +7,23 @@ import {
   toggleBookmark as toggleBM,
 } from "../utils/bookmarks";
 
-// public 경로 헬퍼
-const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
+/* [CHANGED] public 경로 헬퍼(CRA/Vite 모두 안전) */
+const pub = (p = "") => {
+  const base =
+    (typeof import.meta !== "undefined" && import.meta.env?.BASE_URL) ||
+    process.env.PUBLIC_URL ||
+    "";
+  return `${base}${p}`;
+};
 
-// Google Maps API 키
+/* Google Maps API 키 (Vite/CRA 모두 지원) */
 const GMAPS_KEY =
   (typeof import.meta !== "undefined" &&
     import.meta.env?.VITE_GOOGLE_MAPS_API_KEY) ||
   process.env.REACT_APP_GOOGLE_MAPS_API_KEY ||
   "";
 
-// 스크립트 로더
+/* Google Maps 스크립트 로더 */
 let gmapsLoadingPromise = null;
 function loadGoogleMaps() {
   if (window.google?.maps) return Promise.resolve();
@@ -37,11 +43,13 @@ function loadGoogleMaps() {
 export default function TravelDetailPage() {
   const { id } = useParams();
   const place = places.find((p) => String(p.id) === String(id));
+
+  // 로그인 사용자/북마크 식별
   const me = JSON.parse(localStorage.getItem("tabilog.user") || "{}");
   const loginId = me?.loginId || "";
-  const slug = place?.id; // places.json의 문자열 id
+  const slug = place?.id;
 
-  // ===== Hook은 항상 상단에서 고정 호출 =====
+  /* 지도 관련 상태/참조 */
   const mapRef = useRef(null);
   const [mapError, setMapError] = useState("");
   const [loadingMap, setLoadingMap] = useState(!!GMAPS_KEY);
@@ -49,9 +57,7 @@ export default function TravelDetailPage() {
   const [nearbyRestaurants, setNearbyRestaurants] = useState([]);
   const [nearbyHotels, setNearbyHotels] = useState([]);
 
-  // ⭐ 북마크 상태 추가
-  // const [bookmarked, setBookmarked] = useState(false);
-  // const toggleBookmark = () => setBookmarked((prev) => !prev);
+  /* 북마크 상태 */
   const [bookmarked, setBookmarked] = useState(() =>
     slug ? isBM(loginId, slug) : false
   );
@@ -66,6 +72,7 @@ export default function TravelDetailPage() {
     setBookmarked(next.includes(slug));
   };
 
+  /* 지도 중심 좌표 */
   const center =
     place &&
     typeof place?.map?.lat === "number" &&
@@ -73,6 +80,7 @@ export default function TravelDetailPage() {
       ? { lat: place.map.lat, lng: place.map.lng }
       : null;
 
+  /* 지도 로딩 + 주변 장소 검색 */
   useEffect(() => {
     let cancelled = false;
 
@@ -96,8 +104,8 @@ export default function TravelDetailPage() {
       try {
         await loadGoogleMaps();
         if (cancelled) return;
-        const g = window.google.maps;
 
+        const g = window.google.maps;
         const map = new g.Map(mapRef.current, {
           center,
           zoom: place?.map?.zoom ?? 14,
@@ -135,6 +143,7 @@ export default function TravelDetailPage() {
           doNearby("lodging"),
         ]);
         if (cancelled) return;
+
         setNearbyRestaurants(rest);
         setNearbyHotels(hotel);
         setNearbyLoading(false);
@@ -151,8 +160,9 @@ export default function TravelDetailPage() {
     return () => {
       cancelled = true;
     };
-  }, [id]);
+  }, [id]); // id 변경 시만 재실행
 
+  // 존재하지 않는 장소
   if (!place) {
     console.warn("해당 id를 찾을 수 없습니다:", id);
     return (
@@ -168,33 +178,27 @@ export default function TravelDetailPage() {
     .filter(Boolean)
     .join(" / ");
 
-  // Intro
   const introSummary = place?.intro?.summary || "소개 정보가 준비중입니다.";
   const introDetail = place?.intro?.detail || "";
 
-  // Extra Intro
   const hasExtraIntro = !!(
     place?.extraintro?.summary || place?.extraintro?.detail
   );
   const extraSummary = place?.extraintro?.summary || "";
   const extraDetail = place?.extraintro?.detail || "";
 
-  // Galleries
   const gallery = Array.isArray(place?.gallery) ? place.gallery : [];
   const extraGallery = Array.isArray(place?.extragallery)
     ? place.extragallery
     : [];
-
   const foods = Array.isArray(place?.foods) ? place.foods : [];
 
+  // 주변 장소 카드 변환
   const placeToCard = (pl) => {
     const name = pl.name || "이름 미상";
     const rating = typeof pl.rating === "number" ? pl.rating.toFixed(1) : null;
     const total = pl.user_ratings_total;
-    const photoUrl = pl.photos?.[0]?.getUrl?.({
-      maxWidth: 1200,
-      maxHeight: 800,
-    });
+    const photoUrl = pl.photos?.[0]?.getUrl?.({ maxWidth: 1200, maxHeight: 800 });
     const placeId = pl.place_id;
     const mapsUrl = placeId
       ? `https://www.google.com/maps/place/?q=place_id:${placeId}`
@@ -206,7 +210,7 @@ export default function TravelDetailPage() {
 
   return (
     <main>
-      {/* Hero */}
+      {/* ===== Hero ===== */}
       <section className="travel-hero">
         {!!heroImg && (
           <img
@@ -217,7 +221,7 @@ export default function TravelDetailPage() {
         )}
       </section>
 
-      {/* 제목/부제 + 북마크 버튼 */}
+      {/* ===== 제목/부제 + 북마크 ===== */}
       <section className="travel-title">
         <div className="travel-title-header">
           <h1 className="travel-title-h1">{place.name_ko}</h1>
@@ -232,7 +236,7 @@ export default function TravelDetailPage() {
         {subtitle && <p className="travel-title-sub">{subtitle}</p>}
       </section>
 
-      {/* 소개 */}
+      {/* ===== 소개 ===== */}
       {(introSummary || introDetail) && (
         <section className="travel-detail-intro-section">
           {introSummary && <p>{introSummary}</p>}
@@ -240,7 +244,7 @@ export default function TravelDetailPage() {
         </section>
       )}
 
-      {/* 갤러리 */}
+      {/* ===== 갤러리 ===== */}
       {gallery.length > 0 && (
         <div className="travel-detail-gallery-div">
           {gallery.map((src, i) => (
@@ -254,7 +258,7 @@ export default function TravelDetailPage() {
         </div>
       )}
 
-      {/* 추가 소개 */}
+      {/* ===== 추가 소개 ===== */}
       {hasExtraIntro && (
         <section className="travel-detail-intro-section travel-detail-intro-extra">
           {extraSummary && <p>{extraSummary}</p>}
@@ -262,7 +266,7 @@ export default function TravelDetailPage() {
         </section>
       )}
 
-      {/* 추가 갤러리 */}
+      {/* ===== 추가 갤러리 ===== */}
       {extraGallery.length > 0 && (
         <div className="travel-detail-gallery-div travel-detail-gallery-extra">
           {extraGallery.map((src, i) => (
@@ -276,7 +280,7 @@ export default function TravelDetailPage() {
         </div>
       )}
 
-      {/* 지역 먹거리 */}
+      {/* ===== 지역 먹거리 ===== */}
       {foods.length > 0 && (
         <section className="travel-detail-foods-section">
           <h3>지역 먹거리</h3>
@@ -297,7 +301,107 @@ export default function TravelDetailPage() {
         </section>
       )}
 
-      {/* 지도 & 주변 추천 ... (이 부분은 기존 코드 동일) */}
+      {/* ===== [CHANGED] 지도 & 주변 추천 — 여러분 CSS(.gmaps- / .nearby-)에 맞춰 렌더 ===== */}
+      <section className="gmaps-section">
+        <h3>지도</h3>
+
+        {/* 지도 래퍼(겹치기 컨테이너) */}
+        <div className="gmaps-map-wrap">
+          {/* 실제 지도 div (반드시 ref 필요) */}
+          {!mapError && <div ref={mapRef} className="gmaps-map" aria-label="지도" />}
+
+          {/* 로딩 오버레이 */}
+          {!mapError && loadingMap && (
+            <div className="gmaps-overlay">지도를 불러오는 중…</div>
+          )}
+
+          {/* 에러 오버레이 */}
+          {mapError && <div className="gmaps-error">{mapError}</div>}
+        </div>
+
+        {/* 주변 추천 2-컬럼 (식당/숙소) */}
+        {!mapError && !loadingMap && (
+          <div className="nearby-wrap">
+            {/* 식당 */}
+            <div className="nearby-col">
+              <h4>주변 식당</h4>
+              {nearbyLoading ? (
+                <div className="nearby-loading">불러오는 중…</div>
+              ) : nearbyRestaurants.length === 0 ? (
+                <div className="nearby-empty">표시할 식당이 없습니다.</div>
+              ) : (
+                <div className="nearby-list">
+                  {nearbyRestaurants.map((pl, i) => {
+                    const c = placeToCard(pl);
+                    return (
+                      <a
+                        key={`r-${i}`}
+                        className="nearby-card"
+                        href={c.mapsUrl || "#"}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={c.name}
+                      >
+                        {c.photoUrl && (
+                          <img className="nearby-img" src={c.photoUrl} alt={c.name} />
+                        )}
+                        <div className="nearby-body">
+                          <div className="nearby-name">
+                            {c.mapsUrl ? <a href={c.mapsUrl} target="_blank" rel="noreferrer">{c.name}</a> : c.name}
+                          </div>
+                          {c.rating && (
+                            <div className="nearby-meta">★ {c.rating} ({c.total})</div>
+                          )}
+                          <div className="nearby-addr">{c.vicinity}</div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* 숙소 */}
+            <div className="nearby-col">
+              <h4>주변 숙소</h4>
+              {nearbyLoading ? (
+                <div className="nearby-loading">불러오는 중…</div>
+              ) : nearbyHotels.length === 0 ? (
+                <div className="nearby-empty">표시할 숙소가 없습니다.</div>
+              ) : (
+                <div className="nearby-list">
+                  {nearbyHotels.map((pl, i) => {
+                    const c = placeToCard(pl);
+                    return (
+                      <a
+                        key={`h-${i}`}
+                        className="nearby-card"
+                        href={c.mapsUrl || "#"}
+                        target="_blank"
+                        rel="noreferrer"
+                        title={c.name}
+                      >
+                        {c.photoUrl && (
+                          <img className="nearby-img" src={c.photoUrl} alt={c.name} />
+                        )}
+                        <div className="nearby-body">
+                          <div className="nearby-name">
+                            {c.mapsUrl ? <a href={c.mapsUrl} target="_blank" rel="noreferrer">{c.name}</a> : c.name}
+                          </div>
+                          {c.rating && (
+                            <div className="nearby-meta">★ {c.rating} ({c.total})</div>
+                          )}
+                          <div className="nearby-addr">{c.vicinity}</div>
+                        </div>
+                      </a>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </section>
 
       {/* TOP 버튼 */}
       <button
