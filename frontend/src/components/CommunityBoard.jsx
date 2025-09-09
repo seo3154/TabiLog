@@ -28,9 +28,10 @@ export default function CommunityBoard({ posts, selectedBoard }) {
 
   const filteredPosts = posts.filter(
     (post) =>
-      (selectedBoard === "전체 게시판" || post.category === selectedBoard) &&
+      (selectedBoard === "전체 게시판" || post.category === selectedBoard) && 
       (selectedMbti === "" || post.mbti === selectedMbti)
   );
+
 
   return (
     <div className="board">
@@ -58,30 +59,30 @@ export default function CommunityBoard({ posts, selectedBoard }) {
         <tbody>
           {filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
-              <tr key={post.boardID}>
+              <tr key={post.boardid}>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
-                    {post.boardID}
+                  <Link to={`/community/post/${post.boardid}`}>
+                    {post.boardid}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
+                  <Link to={`/community/post/${post.boardid}`}>
                     {post.mbti}
                   </Link>
                 </td>
                 <td className="title">
-                  <Link to={`/community/post/${post.boardID}`}>
+                  <Link to={`/community/post/${post.boardid}`}>
                     {post.title}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
-                    {post.userName}
+                  <Link to={`/community/post/${post.boardid}`}>
+                    {post.nickname}
                   </Link>
                 </td>
                 <td>
-                  <Link to={`/community/post/${post.boardID}`}>
-                    {post.createAt}
+                  <Link to={`/community/post/${post.boardid}`}>
+                    {new Date(post.createAt).toLocaleDateString()}
                   </Link>
                 </td>
               </tr>

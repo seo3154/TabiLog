@@ -11,22 +11,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/boards")
-@CrossOrigin(origins = "http://localhost:3000")
+@RequestMapping("/api/boards")
+@CrossOrigin(
+        origins = "http://localhost:3000",
+        allowedHeaders = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
+)
 public class BoardController {
 
     @Autowired
     private BoardService boardService;
 
-    // ===================== Board =====================
     // 게시글 목록 (페이징 + 검색)
     @GetMapping
     public Page<BoardDto> getBoards(@RequestParam(required = false) String searchWhat,
-            @RequestParam(required = false) String keyword, Pageable pageable) {
+                                    @RequestParam(required = false) String keyword, Pageable pageable) {
         return boardService.getBoards(searchWhat, keyword, pageable);
     }
 
-    // 게시글 단건 조회 (조회수 증가 포함)
+    // 게시글 단건 조회
     @GetMapping("/{boardId}")
     public BoardDto getBoard(@PathVariable Long boardId) {
         return boardService.getBoard(boardId);
@@ -35,6 +38,7 @@ public class BoardController {
     // 게시글 생성
     @PostMapping
     public BoardDto createBoard(@RequestBody BoardDto boardDto) {
+        System.out.println("POST /api/boards called with: " + boardDto);
         return boardService.createBoard(boardDto);
     }
 
@@ -52,11 +56,10 @@ public class BoardController {
         return "삭제 완료";
     }
 
-    // ===================== Comment =====================
-    // 댓글 생성 (대댓글 포함)
+    // 댓글 생성
     @PostMapping("/{boardId}/comments")
     public CommentDto createComment(@PathVariable Long boardId,
-            @RequestBody CommentDto commentDto) {
+                                    @RequestBody CommentDto commentDto) {
         return boardService.createComment(boardId, commentDto);
     }
 
@@ -69,7 +72,7 @@ public class BoardController {
     // 댓글 수정
     @PutMapping("/comments/{commentId}")
     public CommentDto updateComment(@PathVariable Long commentId,
-            @RequestBody CommentDto commentDto) {
+                                    @RequestBody CommentDto commentDto) {
         commentDto.setCommentID(commentId);
         return boardService.updateComment(commentDto);
     }

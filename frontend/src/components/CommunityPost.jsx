@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import Button from "../components/Button";
 import profile from "../assets/logo.png";
+import "../styles/CommunityPost.css";
 
 export default function CommunityPost() {
   const { id } = useParams();
@@ -16,6 +17,7 @@ export default function CommunityPost() {
 
   const fetchPost = async () => {
     try {
+      // 게시글 가져오기
       const res = await axios.get(`http://localhost:8080/api/boards/${id}`);
       setPost(res.data);
 
@@ -25,21 +27,27 @@ export default function CommunityPost() {
       );
       setComments(commentRes.data);
     } catch (err) {
-      console.error(err);
+      console.error("게시글/댓글 가져오기 실패", err);
     }
   };
 
   const handleCommentSubmit = async () => {
     if (!newComment) return alert("댓글을 입력해주세요.");
     try {
-      const res = await axios.post("http://localhost:8080/api/comments", {
-        boardId: id,
-        content: newComment,
-      });
+      const userId = localStorage.getItem("userid");
+      if (!userId) return alert("로그인이 필요합니다.");
+
+      const res = await axios.post(
+        `http://localhost:8080/api/boards/${id}/comments`,
+        {
+          userId: userId,
+          content: newComment,
+        }
+      );
       setComments([res.data, ...comments]);
       setNewComment("");
     } catch (err) {
-      console.error(err);
+      console.error("댓글 등록 실패", err);
     }
   };
 
@@ -50,11 +58,13 @@ export default function CommunityPost() {
       <div className="post-header">
         <div className="post-info">
           <span className="title">{post.title}</span>
-          <span className="post-date">{post.createAt}</span>
+          <span className="post-date">
+            {new Date(post.createAt).toLocaleString()}
+          </span>
         </div>
         <div className="post-writer">
           <img src={profile} alt="profile" />
-          <span className="writer">{post.userName}</span>
+          <span className="writer">{post.nickname}</span>
         </div>
       </div>
 
@@ -67,7 +77,7 @@ export default function CommunityPost() {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-        <button onClick={handleCommentSubmit}>작성</button>
+        <Button onClick={handleCommentSubmit}>작성</Button>
       </div>
 
       <div className="comments-section">
@@ -75,8 +85,10 @@ export default function CommunityPost() {
           <div key={c.commentID} className="comment">
             <div className="comment-author">
               <img src={profile} alt="img" />
-              <span className="writer">{c.userName}</span>
-              <span className="comment-date">{c.createAt}</span>
+              <span className="writer">{c.nickname}</span>
+              <span className="comment-date">
+                {new Date(c.createAt).toLocaleString()}
+              </span>
             </div>
             <p>{c.content}</p>
           </div>

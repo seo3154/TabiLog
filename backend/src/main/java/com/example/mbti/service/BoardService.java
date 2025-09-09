@@ -12,6 +12,8 @@ import com.example.mbti.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,18 +30,30 @@ public class BoardService {
 
     // ================= Board =================
     public Page<BoardDto> getBoards(String searchWhat, String keyword, Pageable pageable) {
+
+        Pageable sortedPageable = PageRequest.of(
+            pageable.getPageNumber(),
+            pageable.getPageSize(),
+            Sort.by("createAt").descending()
+        );
+
+
         Page<Board> boards;
         if ("title".equals(searchWhat)) {
-            boards = boardRepository.findByTitleContaining(keyword, pageable);
+            boards = boardRepository.findByTitleContaining(keyword, sortedPageable);
         } else if ("content".equals(searchWhat)) {
-            boards = boardRepository.findByContentContaining(keyword, pageable);
+            boards = boardRepository.findByContentContaining(keyword, sortedPageable);
         } else if ("user".equals(searchWhat)) {
-            boards = boardRepository.findByUser_LoginIdContaining(keyword, pageable);
+            boards = boardRepository.findByUser_LoginIdContaining(keyword, sortedPageable);
+        } else if ("category".equals(searchWhat)) {
+            boards = boardRepository.findByCategoryContaining(keyword, sortedPageable);
         } else {
-            boards = boardRepository.findAll(pageable);
+            boards = boardRepository.findAll(sortedPageable);
         }
+        
         return boards.map(this::toDto);
     }
+
 
     public BoardDto getBoard(Long boardId) {
         Board board = boardRepository.findById(boardId)
@@ -51,6 +65,7 @@ public class BoardService {
     }
 
     public BoardDto createBoard(BoardDto boardDto) {
+        try{
         User user = userRepository.findById(boardDto.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
 
@@ -61,8 +76,15 @@ public class BoardService {
         board.setUser(user);
         board.setViews(0);
 
+        System.out.println("저장할 게시글: " + board.getTitle() + ", user=" + board.getUser().getId());
+
         Board saved = boardRepository.save(board);
         return toDto(saved);
+        }catch (Exception e) {
+        // 에러 로그 출력
+        e.printStackTrace();
+        throw e; // 혹은 RuntimeException으로 감싸서 던지기
+    }
     }
 
     public BoardDto updateBoard(BoardDto boardDto) {
@@ -122,9 +144,13 @@ public class BoardService {
         dto.setContent(board.getContent());
         dto.setCategory(board.getCategory());
         dto.setUserId(board.getUser().getId());
+        dto.setNickname(board.getUser().getNickname());
+        dto.setCreateAt(board.getCreateAt());           // 추가
         dto.setViews(board.getViews());
+        dto.setMbti(board.getUser().getMbti() != null ? board.getUser().getMbti().getName() : "");
         return dto;
-    }
+    }   
+
 
     private CommentDto toCommentDto(Comment comment) {
         CommentDto dto = new CommentDto();
@@ -132,6 +158,8 @@ public class BoardService {
         dto.setContent(comment.getContent());
         dto.setBoardId(comment.getBoard().getBoardID());
         dto.setUserId(comment.getUser().getId());
+        dto.setNickname(comment.getUser().getNickname());
+
         return dto;
     }
 }
