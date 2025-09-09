@@ -1,0 +1,7 @@
+.git
+target
+build
+.out
+node_modules
+**/*.iml
+**/.DS_Store
