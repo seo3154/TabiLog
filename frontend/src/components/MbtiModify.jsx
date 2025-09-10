@@ -1,24 +1,26 @@
 // src/components/MbtiModify.jsx
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import "../styles/MyPage.css";
 
-const MBTI_META = [
-  { t: "ESTJ", sub: "엄격한 경영자" },
-  { t: "ESTP", sub: "관대한 사업가" },
-  { t: "ESFJ", sub: "사교적인 외교관" },
-  { t: "ESFP", sub: "자유로운 연예인" },
-  { t: "ENTJ", sub: "대담한 통솔자" },
-  { t: "ENTP", sub: "별난 발명가" },
-  { t: "ENFJ", sub: "이타적인 교사" },
-  { t: "ENFP", sub: "발랄한 활동가" },
-  { t: "ISTJ", sub: "청렴결백한 논리주의자" },
-  { t: "ISTP", sub: "묵묵한 장인" },
-  { t: "ISFJ", sub: "용감한 수호자" },
-  { t: "ISFP", sub: "세심한 성인군자" },
-  { t: "INTJ", sub: "용의주도한 과학자" },
-  { t: "INTP", sub: "객관적인 분석가" },
-  { t: "INFJ", sub: "통찰력 있는 예언가" },
-  { t: "INFP", sub: "상상이 많은 예술가" },
+// 타입만 정의, 별명(sub)은 번역에서 뽑는다
+const MBTI_TYPES = [
+  "ESTJ",
+  "ESTP",
+  "ESFJ",
+  "ESFP",
+  "ENTJ",
+  "ENTP",
+  "ENFJ",
+  "ENFP",
+  "ISTJ",
+  "ISTP",
+  "ISFJ",
+  "ISFP",
+  "INTJ",
+  "INTP",
+  "INFJ",
+  "INFP",
 ];
 
 const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
@@ -29,12 +31,11 @@ export default function MbtiModify({
   onSave,
   mbtiList, // 옵션: 특정 타입만 허용 시
 }) {
+  const { t } = useTranslation();
+
   const allow = useMemo(
     () =>
-      new Set(
-        (mbtiList && mbtiList.map((v) => v.toUpperCase())) ||
-          MBTI_META.map((m) => m.t)
-      ),
+      new Set((mbtiList && mbtiList.map((v) => v.toUpperCase())) || MBTI_TYPES),
     [mbtiList]
   );
 
@@ -51,7 +52,10 @@ export default function MbtiModify({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value) return alert("MBTI를 선택하세요.");
+    if (!value)
+      return alert(
+        t("mbti.alert.select", { defaultValue: "MBTI를 선택하세요." })
+      );
     try {
       setSaving(true);
       await onSave(value);
@@ -60,10 +64,13 @@ export default function MbtiModify({
     }
   };
 
-  const items = MBTI_META.filter((m) => allow.has(m.t));
+  const items = MBTI_TYPES.filter((tpe) => allow.has(tpe)).map((tpe) => ({
+    t: tpe,
+    sub: t(`mbti.meta.${tpe}.sub`, { defaultValue: tpe }), // 별명 번역
+  }));
 
   // 이미지 경로: /public/MbtiProfileImg/TYPE.png
-  const imgSrc = (t) => pub(`/MbtiProfileImg/${t}.png`);
+  const imgSrc = (tpe) => pub(`/MbtiProfileImg/${tpe}.png`);
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
@@ -75,40 +82,56 @@ export default function MbtiModify({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="modal-header">
-          <h2 id="mbti-modal-title">당신의 MBTI는 무엇인가요?</h2>
-          <button className="modal-close" onClick={onClose} aria-label="닫기">
+          <h2 id="mbti-modal-title">
+            {t("mbti.modal.title", {
+              defaultValue: "당신의 MBTI는 무엇인가요?",
+            })}
+          </h2>
+          <button
+            className="modal-close"
+            onClick={onClose}
+            aria-label={t("mbti.modal.close", { defaultValue: "닫기" })}
+          >
             X
           </button>
         </div>
 
         <form className="form" onSubmit={handleSubmit}>
           <div className="modal-body">
-            <div className="mbti-grid" role="radiogroup" aria-label="MBTI 선택">
-              {items.map(({ t, sub }) => {
-                const selected = value === t;
+            <div
+              className="mbti-grid"
+              role="radiogroup"
+              aria-label={t("mbti.modal.ariaGroup", {
+                defaultValue: "MBTI 선택",
+              })}
+            >
+              {items.map(({ t: tp, sub }) => {
+                const selected = value === tp;
                 return (
                   <button
-                    key={t}
+                    key={tp}
                     type="button"
                     role="radio"
                     aria-checked={selected}
-                    onClick={() => setValue(t)}
+                    onClick={() => setValue(tp)}
                     className={
                       "mbti-card" + (selected ? " mbti-card--selected" : "")
                     }
-                    title={`${t} - ${sub}`}
+                    title={`${tp} - ${sub}`}
                   >
                     <img
                       className="mbti-img"
-                      src={imgSrc(t)}
-                      alt={`${t} 프로필`}
+                      src={imgSrc(tp)}
+                      alt={`${tp} ${t("mbti.modal.profileAlt", {
+                        defaultValue: "프로필",
+                      })}`}
                       loading="lazy"
                       onError={(e) => {
                         e.currentTarget.src =
                           "https://placehold.co/120x120?text=MBTI";
                       }}
                     />
-                    <div className="mbti-type">{t}</div>
+                    <div className="mbti-type">{tp}</div>
                     <div className="mbti-sub">{sub}</div>
                   </button>
                 );
@@ -118,14 +141,16 @@ export default function MbtiModify({
 
           <div className="modal-footer">
             <button type="button" className="edit-btn" onClick={onClose}>
-              취소
+              {t("mbti.action.cancel", { defaultValue: "취소" })}
             </button>
             <button
               type="submit"
               className="edit-btn"
               disabled={!value || saving}
             >
-              {saving ? "저장 중..." : "저장"}
+              {saving
+                ? t("mbti.action.saving", { defaultValue: "저장 중..." })
+                : t("mbti.action.save", { defaultValue: "저장" })}
             </button>
           </div>
         </form>

@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function BoardList({ title, items = [] }) {
+  const { t } = useTranslation();
+
   if (!items.length) {
     return (
       <section className="mp-board">
         <h3 className="mp-board__title">{title}</h3>
-        <div className="mp-board__empty">아직 작성한 글이 없습니다.</div>
+        <div className="mp-board__empty">{t("board.empty")}</div>
       </section>
     );
   }
@@ -32,21 +35,27 @@ export default function BoardList({ title, items = [] }) {
               <span className="badge">♥ {item.likes}</span>
               <span className="badge">💬 {item.comments}</span>
               <Link className="mp-board__card-link" to={`/board/${item.id}`}>
-                자세히
+                {t("board.readMore")}
               </Link>
             </div>
           </article>
         ))}
       </div>
 
-      <nav className="mp-pagination" aria-label="페이지">
-        <button className="mp-page mp-page--chevron" aria-label="이전 페이지">
+      <nav className="mp-pagination" aria-label={t("board.pagination.label")}>
+        <button
+          className="mp-page mp-page--chevron"
+          aria-label={t("board.pagination.prev")}
+        >
           &lt;
         </button>
         <button className="mp-page mp-page--active">1</button>
         <button className="mp-page">2</button>
         <button className="mp-page">3</button>
-        <button className="mp-page mp-page--chevron" aria-label="다음 페이지">
+        <button
+          className="mp-page mp-page--chevron"
+          aria-label={t("board.pagination.next")}
+        >
           &gt;
         </button>
       </nav>

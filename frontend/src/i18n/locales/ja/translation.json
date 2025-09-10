@@ -1,0 +1,384 @@
+{
+  "header": {
+    "notice": "お知らせ",
+    "recommendBoard": "おすすめ掲示板",
+    "community": "コミュニティ",
+    "center": "カスタマーセンター",
+    "login": "ログイン",
+    "signup": "会員登録",
+    "mypage": "マイページ",
+    "logout": "ログアウト",
+    "logoutError": "ログアウト中にエラーが発生しました。",
+    "profileOrLogoAlt": "プロフィール / ロゴ"
+  },
+  "center": {
+    "title": "カスタマーセンター",
+    "tabs": { "all": "すべての投稿", "mine": "私の投稿" },
+    "faq": {
+      "title": "よくある質問 (FAQ)",
+      "q1": "一人でも大丈夫ですか？",
+      "a1": "一人旅の方も多いので大丈夫です。",
+      "q2": "私は50代を超えています。",
+      "a2": "旅行に年齢は関係ありません。",
+      "q3": "旅行が初めてで心配です。",
+      "a3": "コミュニティで質問してみてください。",
+      "q4": "話すのが怖いです。",
+      "a4": "みんな優しいので大丈夫です。",
+      "q5": "I don't know Korean.",
+      "a5": "It's OK. I don't know English.",
+      "q6": "旅行以外の話をしてもいいですか？",
+      "a6": "かまいません。",
+      "q7": "ここで社員になりたいです。",
+      "a7": "採用告知が出たらご確認ください。",
+      "q8": "なぜ旅行について話すのですか？",
+      "a8": "旅行は楽しいからです。",
+      "q9": "良くない内容の投稿を見ました。",
+      "a9": "通報してください。",
+      "q10": "退会したいです。",
+      "a10": "退会理由をお聞かせください。"
+    },
+    "usersQuestions": "ユーザーの質問",
+    "table": {
+      "nickname": "ニックネーム",
+      "title": "タイトル",
+      "status": "回答状況",
+      "date": "日付"
+    },
+    "btn": {
+      "consult": "1:1 お問い合わせ",
+      "back": "戻る",
+      "edit": "修正",
+      "delete": "削除",
+      "write": "作成"
+    },
+    "detail": {
+      "content": "内容",
+      "answer": "回答",
+      "noAnswer": "まだ回答がありません。",
+      "attach": "添付",
+      "file": "ファイル"
+    },
+    "write": {
+      "title": "1:1 お問い合わせ",
+      "phTitle": "タイトルを入力",
+      "phContent": "内容を入力",
+      "agree": "個人情報に同意します。"
+    },
+    "alert": {
+      "needTitle": "タイトルを入力してください。",
+      "needAgree": "個人情報同意にチェックしてください。",
+      "confirmDelete": "本当に削除しますか？"
+    },
+    "status": { "processing": "処理中", "answered": "応答完了" }
+  },
+  "auth": {
+    "login": {
+      "title": "ログイン",
+      "submit": "ログイン",
+      "loading": "ログイン中..."
+    },
+    "signup": {
+      "title": "会員登録",
+      "submit": "会員登録",
+      "dupCheck": "重複確認",
+      "available": "使用可能",
+      "idInUse": "使用中のIDです。",
+      "nickInUse": "使用中のニックネームです。",
+      "agree": "会員登録の個人情報に同意します。",
+      "success": "会員登録に成功しました！",
+      "serverDupFail": "重複確認中にサーバーエラーが発生しました。",
+      "needAgree": "会員登録の個人情報同意にチェックしてください。",
+      "needId": "IDを入力してください。",
+      "needNick": "ニックネームを入力してください。"
+    },
+    "id": "ID",
+    "password": "パスワード",
+    "name": "お名前",
+    "nickname": "ニックネーム",
+    "email": "メール",
+    "fields": {
+      "id": "ID",
+      "password": "パスワード",
+      "name": "お名前",
+      "nickname": "ニックネーム",
+      "birth": "生年月日",
+      "phone": "電話番号",
+      "email": "メール",
+      "gender": "性別",
+      "male": "男性",
+      "female": "女性",
+      "mbti": "MBTI",
+      "mbtiEdit": "MBTI 編集"
+    },
+    "placeholder": {
+      "birth": "YYYY-MM-DD",
+      "phone": "010-1234-5678",
+      "email": "you@example.com"
+    },
+    "error": {
+      "invalidCredentials": "IDまたはパスワードをご確認ください。",
+      "signup": "会員登録中にエラーが発生しました: {{msg}}"
+    }
+  },
+  "main": {
+    "heroImageAlt": "メインタイトル",
+    "sliderAlt": "旅行写真 {{index}}",
+    "band": {
+      "title": "自分のMBTIで旅に出よう！",
+      "p1": "MBTIは性格タイプ診断の一種で、自分を知る目安になります。",
+      "p2": "日本旅行を計画中なら、あなたに合う都市やコースをここで探してみましょう。",
+      "p3": "コミュニティで情報を集め、あなたのコツもシェアしてください！",
+      "cta": "会員登録",
+      "ctaAria": "会員登録へ移動"
+    }
+  },
+  "mypage": {
+    "title": "マイページ",
+    "tabs": {
+      "myPost": "マイ投稿",
+      "bookmark": "ブックマーク",
+      "setting": "設定"
+    },
+    "loading": "読み込み中…",
+    "error": "エラー",
+    "empty": "データがありません",
+    "board": { "community": "コミュニティ" },
+    "alert": {
+      "profileSaveFail": "プロフィールの保存に失敗しました。",
+      "mbtiSaveFail": "MBTIの保存に失敗しました。"
+    }
+  },
+  "recommend": {
+    "title": "{{mbti}} おすすめの旅行先",
+    "mbtiSource": {
+      "url": "URL 指定",
+      "mine": "自分のMBTI",
+      "fallback": "仮 (INFP)"
+    },
+    "noneForMbti": "該当MBTIに合うおすすめ旅行先はありません。",
+    "search": {
+      "title": "検索",
+      "placeholder": "キーワードを入力 (例: 宮島, 桜, 温泉...)",
+      "mode": { "name": "観光地名", "nameContent": "観光地名 + 内容" },
+      "scope": {
+        "all": "全体一覧",
+        "chipAll": "全体一覧",
+        "chipMbti": "{{mbti}} 内"
+      },
+      "resultCount": "検索結果: {{count}}件",
+      "empty": "検索結果がありません。"
+    },
+    "region": {
+      "title": "地域で探す",
+      "selected": "選択: {{list}}",
+      "selectedNone": "選択された地域なし",
+      "clearAll": "全て解除",
+      "clearAllTitle": "地域選択を解除",
+      "count": "地域結果: {{count}}件",
+      "empty": "該当地域の登録観光地がありません。"
+    }
+  },
+  "travel": {
+    "detail": {
+      "notFound": "存在しない場所です。",
+      "foods": "地域グルメ",
+      "map": "地図",
+      "loadingMap": "地図を読み込み中…",
+      "mapErrorNoCoord": "この場所には座標情報がなく、地図を表示できません。",
+      "mapErrorNoKey": "Google Maps APIキーが設定されていません。",
+      "mapErrorGeneric": "地図を読み込む際にエラーが発生しました。",
+      "nearby": {
+        "restaurants": "周辺レストラン",
+        "hotels": "周辺ホテル",
+        "loading": "読み込み中…",
+        "emptyRestaurant": "表示できるレストランがありません。",
+        "emptyHotel": "表示できるホテルがありません。"
+      },
+      "bookmark": "ブックマーク",
+      "top": "トップへ"
+    }
+  },
+  "community": {
+    "board": {
+      "all": "全体掲示板",
+      "review": "レビュー掲示板",
+      "qna": "Q&A掲示板",
+      "recommend": "おすすめ掲示板"
+    },
+    "filter": { "mbtiPlaceholder": "MBTI ▼", "mbtiAria": "MBTIで絞り込み" },
+    "table": {
+      "no": "番号",
+      "mbti": "MBTI",
+      "title": "タイトル",
+      "author": "作成者",
+      "date": "作成日"
+    },
+    "empty": "投稿がありません。"
+  },
+  "mbti": {
+    "modal": {
+      "title": "あなたのMBTIは？",
+      "close": "閉じる",
+      "ariaGroup": "MBTIの選択",
+      "profileAlt": "プロフィール"
+    },
+    "alert": { "select": "MBTIを選択してください。" },
+    "action": { "cancel": "キャンセル", "save": "保存", "saving": "保存中..." },
+    "meta": {
+      "ESTJ": { "sub": "厳格な経営者" },
+      "ESTP": { "sub": "寛大な事業家" },
+      "ESFJ": { "sub": "社交的な外交官" },
+      "ESFP": { "sub": "自由奔放なエンターテイナー" },
+      "ENTJ": { "sub": "大胆な統率者" },
+      "ENTP": { "sub": "風変わりな発明家" },
+      "ENFJ": { "sub": "利他的な教師" },
+      "ENFP": { "sub": "朗らかな活動家" },
+      "ISTJ": { "sub": "清廉潔白な論理主義者" },
+      "ISTP": { "sub": "寡黙な職人" },
+      "ISFJ": { "sub": "勇敢な守護者" },
+      "ISFP": { "sub": "細やかな聖人君子" },
+      "INTJ": { "sub": "用意周到な科学者" },
+      "INTP": { "sub": "客観的な分析家" },
+      "INFJ": { "sub": "洞察力のある予言者" },
+      "INFP": { "sub": "想像力豊かな芸術家" }
+    }
+  },
+  "common": {
+    "prev": "前へ",
+    "next": "次へ",
+    "close": "閉じる",
+    "cancel": "キャンセル",
+    "save": "保存",
+    "saving": "保存中...",
+    "fetchFail": "読み込みに失敗しました。"
+  },
+  "profile": {
+    "alt": "プロフィール",
+    "noIntro": "自己紹介がありません。",
+    "email": "メール",
+    "tel": "電話",
+    "editProfile": "プロフィール編集",
+    "editMbti": "MBTI編集",
+    "title": "プロフィール編集",
+    "field": {
+      "nickname": "ニックネーム",
+      "email": "メール",
+      "tel": "電話",
+      "intro": "自己紹介"
+    },
+    "placeholder": {
+      "nickname": "ニックネームを入力",
+      "email": "you@example.com",
+      "tel": "010-1234-5678",
+      "intro": "自己紹介を入力してください。"
+    },
+    "alert": {
+      "nickname": "ニックネームを入力してください。",
+      "email": "メール形式が正しくありません。"
+    }
+  },
+  "account": {
+    "title": "アカウント情報",
+    "field": {
+      "loginId": "ログインID",
+      "nickname": "ニックネーム",
+      "email": "メール",
+      "tel": "電話",
+      "mbti": "MBTI",
+      "role": "権限",
+      "createdAt": "登録日",
+      "lastLoginAt": "最終ログイン"
+    }
+  },
+  "board": {
+    "empty": "まだ投稿がありません。",
+    "readMore": "詳しく見る",
+    "pagination": {
+      "label": "ページ",
+      "prev": "前のページ",
+      "next": "次のページ"
+    }
+  },
+  "bookmark": {
+    "empty": "ブックマークはありません。",
+    "label": "ブックマーク",
+    "noTitle": "タイトルなし"
+  },
+  "setting": {
+    "accountInfo": "アカウント情報",
+    "report": "通報",
+    "support": "カスタマーサポート"
+  },
+  "notice": {
+    "list": {
+      "title": "お知らせ",
+      "searchPH": "キーワードを入力してください",
+      "searchLabel": "検索",
+      "searchBtn": "検索",
+      "empty": "お知らせはありません。",
+      "writeBtn": "投稿"
+    },
+    "table": {
+      "label": "お知らせ一覧",
+      "no": "番号",
+      "title": "タイトル",
+      "writer": "作成者",
+      "content": "内容",
+      "date": "日付"
+    },
+    "edit": {
+      "title": "お知らせ編集",
+      "fieldTitle": "タイトル",
+      "fieldContent": "内容",
+      "saveBtn": "保存",
+      "cancelBtn": "キャンセル",
+      "success": "修正が完了しました。",
+      "sampleTitle": "サンプルタイトルです",
+      "sampleContent": "サンプル内容です"
+    },
+    "detail": {
+      "notFound": "お知らせが見つかりません。",
+      "confirmDelete": "本当に削除しますか？",
+      "writer": "作成者",
+      "date": "作成日",
+      "editBtn": "編集",
+      "deleteBtn": "削除",
+      "backBtn": "一覧"
+    },
+    "delete": {
+      "title": "お知らせ削除",
+      "confirm": "本当にこのお知らせを削除しますか？",
+      "deleteBtn": "削除",
+      "cancelBtn": "キャンセル",
+      "deleted": "削除されました。"
+    },
+    "title": "お知らせ",
+    "alert": { "fillAll": "タイトルと内容をすべて入力してください。" },
+    "form": {
+      "titlePH": "タイトル",
+      "contentPH": "内容",
+      "titleLabel": "タイトル",
+      "contentLabel": "内容",
+      "submit": "登録"
+    },
+    "seed": {
+      "maintenanceTitle": "サーバーメンテナンスのご案内",
+      "maintenanceContent": "8月8日午前2時よりサーバーメンテナンスを実施します。",
+      "newFeatureTitle": "新機能リリース",
+      "newFeatureContent": "会員統計機能を追加しました。"
+    },
+    "write": {
+      "title": "お知らせ投稿",
+      "fieldTitle": "タイトル",
+      "fieldWriter": "作成者",
+      "fieldContent": "内容",
+      "phTitle": "タイトル",
+      "phWriter": "作成者",
+      "phContent": "内容",
+      "saveBtn": "保存",
+      "backBtn": "一覧",
+      "missingAddNotice": "お知らせ登録関数が見つかりません。ルーティング/propsの受け渡しを確認してください。",
+      "error": "登録中にエラーが発生しました。コンソールを確認してください。"
+    }
+  }
+}

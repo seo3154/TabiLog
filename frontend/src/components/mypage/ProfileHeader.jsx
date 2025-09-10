@@ -1,6 +1,8 @@
 import { PLACEHOLDER, getProfileImgs } from "../../utils/profile";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileHeader({ user, onEditProfile, onEditMbti }) {
+  const { t } = useTranslation();
   const { mbtiImg, userImg } = getProfileImgs(user || {});
   const profileSrc = mbtiImg || userImg || PLACEHOLDER;
 
@@ -9,7 +11,7 @@ export default function ProfileHeader({ user, onEditProfile, onEditMbti }) {
       <div className="avatar">
         <img
           src={profileSrc}
-          alt="프로필"
+          alt={t("profile.alt")}
           className={`avatar-img ${
             user.mbtiName ? "avatar--mbti" : "avatar--user"
           }`}
@@ -20,18 +22,22 @@ export default function ProfileHeader({ user, onEditProfile, onEditMbti }) {
         <span className="mbti">{user.mbtiName || "-"}</span>
         <span className="nickname">{user.nickname}</span>
         <ul className="mbti-desc">
-          <li>{user.introText || "소개가 없습니다."}</li>
-          <li>이메일: {user.email}</li>
-          <li>전화: {user.tel || "-"}</li>
+          <li>{user.introText || t("profile.noIntro")}</li>
+          <li>
+            {t("profile.email")}: {user.email}
+          </li>
+          <li>
+            {t("profile.tel")}: {user.tel || "-"}
+          </li>
         </ul>
       </div>
 
       <div className="actions">
         <button className="edit-btn" onClick={onEditProfile}>
-          프로필 수정
+          {t("profile.editProfile")}
         </button>
         <button className="edit-btn" onClick={onEditMbti}>
-          MBTI 수정
+          {t("profile.editMbti")}
         </button>
       </div>
     </section>

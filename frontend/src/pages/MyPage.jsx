@@ -19,10 +19,12 @@ import {
   SettingMenu,
   AccountInfoModal,
 } from "../components/mypage";
+import { useTranslation } from "react-i18next"; // ✅ 추가
 
 const MOCK_UI = String(process.env.REACT_APP_MOCK_UI) === "1";
 
 export default function MyPage() {
+  const { t, i18n } = useTranslation(); // ✅
   // ✅ 로그인한 사용자 정보 localStorage에서 불러오기
   const me = JSON.parse(localStorage.getItem("tabilog.user"));
   const loginId = me?.loginId || "";
@@ -37,6 +39,11 @@ export default function MyPage() {
   const [showAccount, setShowAccount] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
   const [showEditMbti, setShowEditMbti] = useState(false);
+
+  useEffect(() => {
+    document.title = t("mypage.title");
+    document.documentElement.lang = i18n.resolvedLanguage || "ja";
+  }, [t, i18n.resolvedLanguage]);
 
   // places id → place 매핑
   const placeIndex = useMemo(() => {
@@ -97,7 +104,7 @@ export default function MyPage() {
 
         setBookmarkSlugs(readBookmarks(loginId));
       } catch (e) {
-        setErr(e?.message || "불러오기 실패");
+        setErr(e?.message || "FETCH_FAIL"); // ✅ 키워드로 저장
         window.localStorage.removeItem("tabilog.user");
       } finally {
         setLoading(false);
@@ -116,15 +123,29 @@ export default function MyPage() {
     return () => window.removeEventListener("tabilog:bookmarks-updated", onBM);
   }, [loginId]);
 
-  const menuItems = [
-    { key: "myPost", label: "MY POST" },
-    { key: "bookmark", label: "BOOK MARK" },
-    { key: "setting", label: "SETTING" },
-  ];
+  // 사이드바 메뉴 (언어 바뀌면 라벨도 갱신)
+  const menuItems = useMemo(
+    () => [
+      { key: "myPost", label: t("mypage.tabs.myPost") },
+      { key: "bookmark", label: t("mypage.tabs.bookmark") },
+      { key: "setting", label: t("mypage.tabs.setting") },
+    ],
+    [t]
+  );
 
-  if (loading) return <div className="mypage__loading">불러오는 중…</div>;
-  if (err) return <div className="mypage__error">에러: {err}</div>;
-  if (!user) return <div className="mypage__empty">데이터 없음</div>;
+  if (loading)
+    return <div className="mypage__loading">{t("mypage.loading")}</div>;
+
+  if (err) {
+    const msg = err === "FETCH_FAIL" ? t("common.fetchFail") : err;
+    return (
+      <div className="mypage__error">
+        {t("mypage.error")}: {msg}
+      </div>
+    );
+  }
+
+  if (!user) return <div className="mypage__empty">{t("mypage.empty")}</div>;
 
   // ✅ 북마크 id → 카드 데이터 변환
   const myBookmarks = bookmarkSlugs
@@ -132,7 +153,7 @@ export default function MyPage() {
     .filter(Boolean)
     .map((p) => ({
       id: p.id,
-      title: p.name_ko,
+      title: p.name_ko, // 데이터 구조상 ko만 있는 경우 유지
       subtitle: p.prefecture,
       image: p?.hero?.image,
       type: "place",
@@ -141,7 +162,7 @@ export default function MyPage() {
   // TODO: 실제 내 글 API 연동 전 임시
   const myPosts = Array.from({ length: 8 }).map((_, i) => ({
     id: `dummy-${i + 1}`,
-    title: `커뮤니티 글 ${i + 1}`,
+    title: `커뮤니티 글 ${i + 1}`, // 더 진행 시 여기 키로 바꿔도 됨
     snippet: "여행에 관한 두서없는 잡담 한 스푼.",
     createdAt: "2025-08-15",
     likes: Math.floor(Math.random() * 20),
@@ -170,7 +191,7 @@ export default function MyPage() {
       });
       setShowEditProfile(false);
     } catch (e) {
-      alert(e?.message || "프로필 저장 실패");
+      alert(e?.message || t("mypage.alert.profileSaveFail")); // ✅
     }
   }
 
@@ -195,7 +216,7 @@ export default function MyPage() {
       });
       setShowEditMbti(false);
     } catch (e) {
-      alert(e?.message || "MBTI 저장 실패");
+      alert(e?.message || t("mypage.alert.mbtiSaveFail")); // ✅
     }
   }
 
@@ -222,7 +243,9 @@ export default function MyPage() {
 
           <hr className="divider" />
 
-          {tab === "myPost" && <BoardList title="커뮤니티" items={myPosts} />}
+          {tab === "myPost" && (
+            <BoardList title={t("mypage.board.community")} items={myPosts} />
+          )}
           {tab === "bookmark" && <BookmarkGrid items={myBookmarks} />}
           {tab === "setting" && (
             <SettingMenu onOpenAccount={() => setShowAccount(true)} />

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import axios from "axios";
 import {
   checkIdDuplicate,
@@ -7,10 +7,19 @@ import {
 } from "../apis/users";
 import { useNavigate } from "react-router-dom";
 
-import MbtiModify from "../components/MbtiModify"; // ✅ 추가
+import MbtiModify from "../components/MbtiModify";
 import "../styles/RegPage.css";
+import { useTranslation } from "react-i18next";
 
 export default function Signup() {
+  const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = t("auth.signup.title");
+    document.documentElement.lang = i18n.resolvedLanguage || "ja";
+  }, [t, i18n.resolvedLanguage]);
+
   const [formData, setFormData] = useState({
     loginId: "",
     password: "",
@@ -19,18 +28,17 @@ export default function Signup() {
     gender: "",
     email: "",
     tel: "",
+    birth: "",
     introText: "",
     agree: false,
-    // ✅ MBTI 필드 추가
-    mbtiName: "", // 예: "ENFP"
+    mbtiName: "",
   });
 
   const [showEditMbti, setShowEditMbti] = useState(false);
 
-  // 중복 체크 결과를 ID/닉네임 각각 보관
+  // 중복 체크 결과
   const [availableId, setAvailableId] = useState(null); // true | false | null
-  const [availableNick, setAvailableNick] = useState(null); // true | false | null
-  const navigate = useNavigate();
+  const [availableNick, setAvailableNick] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -39,12 +47,11 @@ export default function Signup() {
       [name]: type === "checkbox" ? checked : value,
     }));
 
-    // 필드를 수정하면 해당 중복 결과 초기화
     if (name === "loginId") setAvailableId(null);
     if (name === "nickname") setAvailableNick(null);
   };
 
-  // ✅ MBTI 저장 핸들러
+  // MBTI 저장
   const handleSaveMbti = (newMbti) => {
     const upper = (newMbti || "").toUpperCase();
     setFormData((prev) => ({ ...prev, mbtiName: upper }));
@@ -55,11 +62,11 @@ export default function Signup() {
   const checkDuplicate = async (field) => {
     try {
       if (field === "loginId") {
-        if (!formData.loginId.trim()) return alert("ID를 입력하세요.");
+        if (!formData.loginId.trim()) return alert(t("auth.signup.needId"));
         const available = await checkIdDuplicate(formData.loginId.trim());
         setAvailableId(available);
       } else if (field === "nickname") {
-        if (!formData.nickname.trim()) return alert("닉네임을 입력하세요.");
+        if (!formData.nickname.trim()) return alert(t("auth.signup.needNick"));
         const available = await checkNicknameDuplicate(
           formData.nickname.trim()
         );
@@ -67,15 +74,15 @@ export default function Signup() {
       }
     } catch (err) {
       console.error(err);
-      alert("중복 확인 중 서버 오류가 발생했습니다.");
+      alert(t("auth.signup.serverDupFail"));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.agree) return alert("회원가입 개인정보에 동의해 주세요.");
-    if (availableId === false) return alert("이미 사용 중인 ID입니다.");
-    if (availableNick === false) return alert("이미 사용 중인 닉네임입니다.");
+    if (!formData.agree) return alert(t("auth.signup.needAgree"));
+    if (availableId === false) return alert(t("auth.signup.idInUse"));
+    if (availableNick === false) return alert(t("auth.signup.nickInUse"));
 
     const payload = {
       loginId: formData.loginId.trim(),
@@ -85,20 +92,19 @@ export default function Signup() {
       gender: Number(formData.gender),
       email: formData.email.trim(),
       tel: formData.tel.trim(),
+      birth: formData.birth?.trim() || "",
       introText: formData.introText?.trim() || "",
-      // ✅ 백엔드 스키마에 맞게 포함 (User에 mbtiName/mbtiUrl가 있다면 둘 다 전송)
       mbtiName: formData.mbtiName || null,
     };
 
     try {
       await register(payload);
-      alert("회원가입 성공!");
+      alert(t("auth.signup.success"));
       navigate("/mainpage");
     } catch (err) {
       console.error(err);
-      alert(
-        `회원가입 중 오류 발생: ${err?.response?.data?.message || err.message}`
-      );
+      const msg = err?.response?.data?.message || err.message;
+      alert(t("auth.error.signup", { msg }));
     }
   };
 
@@ -106,7 +112,7 @@ export default function Signup() {
     <div className="signup-container">
       <br />
       <br />
-      <h1>회원가입</h1>
+      <h1>{t("auth.signup.title")}</h1>
       <br />
       <br />
       <form onSubmit={handleSubmit}>
@@ -115,7 +121,7 @@ export default function Signup() {
           <table className="signup-table">
             <tbody>
               <tr>
-                <td>ID</td>
+                <td>{t("auth.fields.id")}</td>
                 <td>
                   <input
                     type="text"
@@ -124,22 +130,23 @@ export default function Signup() {
                     value={formData.loginId}
                     onChange={handleChange}
                     className="signup-input"
+                    aria-label={t("auth.fields.id")}
                   />
                   <button
                     type="button"
                     className="signup-duplicate-btn"
                     onClick={() => checkDuplicate("loginId")}
                   >
-                    중복
+                    {t("auth.signup.dupCheck")}
                   </button>
                   {availableId === true && (
                     <span style={{ color: "green", marginLeft: 8 }}>
-                      사용가능
+                      {t("auth.signup.available")}
                     </span>
                   )}
                   {availableId === false && (
                     <span style={{ color: "red", marginLeft: 8 }}>
-                      사용 중인 아이디입니다.
+                      {t("auth.signup.idInUse")}
                     </span>
                   )}
                 </td>
@@ -157,6 +164,7 @@ export default function Signup() {
                     value={formData.password}
                     onChange={handleChange}
                     className="signup-input"
+                    aria-label={t("auth.fields.password")}
                   />
                 </td>
               </tr>
@@ -173,6 +181,7 @@ export default function Signup() {
                     value={formData.name}
                     onChange={handleChange}
                     className="signup-input"
+                    aria-label={t("auth.fields.name")}
                   />
                 </td>
               </tr>
@@ -189,22 +198,23 @@ export default function Signup() {
                     value={formData.nickname}
                     onChange={handleChange}
                     className="signup-input"
+                    aria-label={t("auth.fields.nickname")}
                   />
                   <button
                     type="button"
                     className="signup-duplicate-btn"
                     onClick={() => checkDuplicate("nickname")}
                   >
-                    중복
+                    {t("auth.signup.dupCheck")}
                   </button>
                   {availableNick === true && (
                     <span style={{ color: "green", marginLeft: 8 }}>
-                      사용가능
+                      {t("auth.signup.available")}
                     </span>
                   )}
                   {availableNick === false && (
                     <span style={{ color: "red", marginLeft: 8 }}>
-                      사용 중인 닉네임입니다.
+                      {t("auth.signup.nickInUse")}
                     </span>
                   )}
                 </td>
@@ -222,7 +232,8 @@ export default function Signup() {
                     value={formData.birth || ""}
                     onChange={handleChange}
                     className="signup-input"
-                    placeholder="YYYY-MM-DD"
+                    placeholder={t("auth.placeholder.birth")}
+                    aria-label={t("auth.fields.birth")}
                   />
                 </td>
               </tr>
@@ -239,7 +250,8 @@ export default function Signup() {
                     value={formData.tel}
                     onChange={handleChange}
                     className="signup-input"
-                    placeholder="010-1234-5678"
+                    placeholder={t("auth.placeholder.phone")}
+                    aria-label={t("auth.fields.phone")}
                   />
                 </td>
               </tr>
@@ -256,7 +268,8 @@ export default function Signup() {
                     value={formData.email}
                     onChange={handleChange}
                     className="signup-input"
-                    placeholder="you@example.com"
+                    placeholder={t("auth.placeholder.email")}
+                    aria-label={t("auth.fields.email")}
                   />
                 </td>
               </tr>
@@ -276,7 +289,7 @@ export default function Signup() {
                       onChange={handleChange}
                       className="signup-radio"
                     />{" "}
-                    남자
+                    {t("auth.fields.male")}
                   </label>
                   <label>
                     <input
@@ -288,26 +301,28 @@ export default function Signup() {
                       onChange={handleChange}
                       className="signup-radio"
                     />{" "}
-                    여자
+                    {t("auth.fields.female")}
                   </label>
                 </td>
               </tr>
 
               <br />
 
-              {/* ✅ MBTI 선택 미리보기 섹션 */}
+              {/* MBTI 선택 섹션 */}
               <tr>
-                <td>MBTI</td>
+                <td>{t("auth.fields.mbti")}</td>
                 <td style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <button
                     type="button"
                     className="edit-btn"
                     onClick={() => setShowEditMbti(true)}
                   >
-                    MBTI 수정
+                    {t("auth.fields.mbtiEdit")}
                   </button>
                   <span>
-                    {formData.mbtiName ? formData.mbtiName : "미선택"}
+                    {formData.mbtiName
+                      ? formData.mbtiName
+                      : t("common.notSelected")}
                   </span>
                 </td>
               </tr>
@@ -329,7 +344,7 @@ export default function Signup() {
                       checked={formData.agree}
                       onChange={handleChange}
                     />
-                    회원가입 개인 정보에 동의합니다.
+                    {t("auth.signup.agree")}
                   </label>
                 </td>
               </tr>
@@ -343,7 +358,7 @@ export default function Signup() {
                 >
                   <input
                     type="submit"
-                    value="회원 가입"
+                    value={t("auth.signup.submit")}
                     className="signup-submit"
                   />
                 </td>
@@ -353,7 +368,7 @@ export default function Signup() {
         </fieldset>
       </form>
 
-      {/* ✅ MBTI 선택 모달 */}
+      {/* MBTI 선택 모달 */}
       {showEditMbti && (
         <MbtiModify
           current={formData.mbtiName || ""}
