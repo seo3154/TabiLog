@@ -1,0 +1,380 @@
+{
+  "header": {
+    "notice": "공지사항",
+    "recommendBoard": "추천게시판",
+    "community": "커뮤니티",
+    "center": "고객센터",
+    "login": "로그인",
+    "signup": "회원가입",
+    "mypage": "마이페이지",
+    "logout": "로그아웃",
+    "logoutError": "로그아웃 중 오류가 발생했습니다.",
+    "profileOrLogoAlt": "프로필 / 로고"
+  },
+  "center": {
+    "title": "고객센터",
+    "tabs": { "all": "모든 게시글", "mine": "내 글" },
+    "faq": {
+      "title": "항상 있는 질문(FAQ)",
+      "q1": "혼자여도 괜찮습니까?",
+      "a1": "혼자 여행하는 사람이 많으니까 괜찮아요.",
+      "q2": "저는 50대가 넘었습니다.",
+      "a2": "여행에는 나이는 상관없습니다.",
+      "q3": "여행이 처음인데 걱정이 됩니다.",
+      "a3": "이런 분은 커뮤니티에 물어보시면 됩니다.",
+      "q4": "얘기하는 것이 두렵습니다.",
+      "a4": "모두가 상냥하므로 괜찮습니다.",
+      "q5": "I don't know Korean.",
+      "a5": "It's OK. I don't know English.",
+      "q6": "여행 이외에도 얘기해도 됩니까?",
+      "a6": "상관없습니다.",
+      "q7": "여기 사원이 되고 싶습니다.",
+      "a7": "채용공지가 올라오면 확인하세요.",
+      "q8": "어째서 여행에 대해서 얘기를 하는 겁니까?",
+      "a8": "여행은 즐거운 것이니까요.",
+      "q9": "안 좋은 얘기를 쓴 글을 봤어요.",
+      "a9": "신고해주십시오.",
+      "q10": "탈퇴하고 싶습니다.",
+      "a10": "탈퇴 이유를 들어보겠습니다."
+    },
+    "usersQuestions": "유저의 질문들",
+    "table": {
+      "nickname": "닉네임",
+      "title": "제목",
+      "status": "답변상태",
+      "date": "날짜"
+    },
+    "btn": {
+      "consult": "1:1 상담하기",
+      "back": "돌아가기",
+      "edit": "수정",
+      "delete": "삭제",
+      "write": "작성하기"
+    },
+    "detail": {
+      "content": "내용",
+      "answer": "회답",
+      "noAnswer": "아직 회답이 없습니다.",
+      "attach": "첨부",
+      "file": "파일"
+    },
+    "write": {
+      "title": "1:1 상담",
+      "phTitle": "타이틀 입력",
+      "phContent": "내용 입력",
+      "agree": "개인 정보에 동의합니다."
+    },
+    "alert": {
+      "needTitle": "타이틀 입력",
+      "needAgree": "개인 정보 동의에 체크해 주세요.",
+      "confirmDelete": "정말 삭제합니까?"
+    },
+    "status": { "processing": "처리중", "answered": "응답완료" }
+  },
+  "auth": {
+    "login": {
+      "title": "로그인",
+      "submit": "로그인",
+      "loading": "로그인 중..."
+    },
+    "signup": {
+      "title": "회원가입",
+      "submit": "회원 가입",
+      "dupCheck": "중복",
+      "available": "사용가능",
+      "idInUse": "이미 사용 중인 ID입니다.",
+      "nickInUse": "이미 사용 중인 닉네임입니다.",
+      "agree": "회원가입 개인 정보에 동의합니다.",
+      "success": "회원가입 성공!",
+      "serverDupFail": "중복 확인 중 서버 오류가 발생했습니다.",
+      "needAgree": "회원가입 개인정보에 동의해 주세요.",
+      "needId": "ID를 입력하세요.",
+      "needNick": "닉네임을 입력하세요."
+    },
+    "id": "아이디",
+    "password": "비밀번호",
+    "name": "이름",
+    "nickname": "닉네임",
+    "email": "이메일",
+    "fields": {
+      "id": "ID",
+      "password": "비밀번호",
+      "name": "이름",
+      "nickname": "닉네임",
+      "birth": "생년월일",
+      "phone": "전화번호",
+      "email": "이메일",
+      "gender": "성별",
+      "male": "남자",
+      "female": "여자",
+      "mbti": "MBTI",
+      "mbtiEdit": "MBTI 수정"
+    },
+    "placeholder": {
+      "birth": "YYYY-MM-DD",
+      "phone": "010-1234-5678",
+      "email": "you@example.com"
+    },
+    "error": {
+      "invalidCredentials": "아이디/비밀번호를 확인해 주세요.",
+      "signup": "회원가입 중 오류 발생: {{msg}}"
+    }
+  },
+  "main": {
+    "heroImageAlt": "메인 타이틀",
+    "sliderAlt": "여행 사진 {{index}}",
+    "band": {
+      "title": "자신만의 MBTI로 여행을 떠나보세요!",
+      "p1": "MBTI는 성격 유형 검사의 일종으로, 내가 어떤 사람인지를 아는 데 기준이 될 수 있어요.",
+      "p2": "일본 여행을 계획 중이라면, 나에게 맞는 도시와 코스를 여기서 함께 찾아봐요.",
+      "p3": "커뮤니티에서 다양한 정보를 얻고, 내가 알고 있는 팁도 나눠 보세요!",
+      "cta": "가입하기",
+      "ctaAria": "회원가입 하러 가기"
+    }
+  },
+  "mypage": {
+    "title": "마이페이지",
+    "tabs": { "myPost": "내 글", "bookmark": "북마크", "setting": "설정" },
+    "loading": "불러오는 중…",
+    "error": "에러",
+    "empty": "데이터 없음",
+    "board": { "community": "커뮤니티" },
+    "alert": {
+      "profileSaveFail": "프로필 저장 실패",
+      "mbtiSaveFail": "MBTI 저장 실패"
+    }
+  },
+  "recommend": {
+    "title": "{{mbti}} 추천 여행지",
+    "mbtiSource": {
+      "url": "URL 지정",
+      "mine": "내 MBTI",
+      "fallback": "임시(INFP)"
+    },
+    "noneForMbti": "해당 MBTI에 맞는 추천 여행지가 없습니다.",
+    "search": {
+      "title": "검색",
+      "placeholder": "검색어를 입력하세요 (예: 미야지마, 벚꽃, 온천...)",
+      "mode": { "name": "관광지명", "nameContent": "관광지명 + 내용" },
+      "scope": {
+        "all": "전체 목록",
+        "chipAll": "전체 목록",
+        "chipMbti": "{{mbti}} 내"
+      },
+      "resultCount": "검색 결과: {{count}}건",
+      "empty": "검색 결과가 없습니다."
+    },
+    "region": {
+      "title": "지역으로 찾기",
+      "selected": "선택: {{list}}",
+      "selectedNone": "선택된 지역 없음",
+      "clearAll": "전체 해제",
+      "clearAllTitle": "지역 선택 해제",
+      "count": "지역 결과: {{count}}건",
+      "empty": "해당 지역의 등록된 관광지가 없습니다."
+    }
+  },
+  "travel": {
+    "detail": {
+      "notFound": "존재하지 않는 장소입니다.",
+      "foods": "지역 먹거리",
+      "map": "지도",
+      "loadingMap": "지도를 불러오는 중…",
+      "mapErrorNoCoord": "이 장소에는 좌표 정보가 없어 지도를 표시할 수 없습니다.",
+      "mapErrorNoKey": "Google Maps API 키가 설정되지 않았습니다.",
+      "mapErrorGeneric": "지도를 불러오는 중 오류가 발생했습니다.",
+      "nearby": {
+        "restaurants": "주변 식당",
+        "hotels": "주변 숙소",
+        "loading": "불러오는 중…",
+        "emptyRestaurant": "표시할 식당이 없습니다.",
+        "emptyHotel": "표시할 숙소가 없습니다."
+      },
+      "bookmark": "북마크",
+      "top": "상단으로"
+    }
+  },
+  "community": {
+    "board": {
+      "all": "전체 게시판",
+      "review": "리뷰게시판",
+      "qna": "Q&A게시판",
+      "recommend": "추천 게시판"
+    },
+    "filter": { "mbtiPlaceholder": "MBTI ▼", "mbtiAria": "MBTI로 필터" },
+    "table": {
+      "no": "번호",
+      "mbti": "MBTI",
+      "title": "제목",
+      "author": "작성자",
+      "date": "작성일"
+    },
+    "empty": "게시글이 없습니다."
+  },
+  "mbti": {
+    "modal": {
+      "title": "당신의 MBTI는 무엇인가요?",
+      "close": "닫기",
+      "ariaGroup": "MBTI 선택",
+      "profileAlt": "프로필"
+    },
+    "alert": { "select": "MBTI를 선택하세요." },
+    "action": { "cancel": "취소", "save": "저장", "saving": "저장 중..." },
+    "meta": {
+      "ESTJ": { "sub": "엄격한 경영자" },
+      "ESTP": { "sub": "관대한 사업가" },
+      "ESFJ": { "sub": "사교적인 외교관" },
+      "ESFP": { "sub": "자유로운 연예인" },
+      "ENTJ": { "sub": "대담한 통솔자" },
+      "ENTP": { "sub": "별난 발명가" },
+      "ENFJ": { "sub": "이타적인 교사" },
+      "ENFP": { "sub": "발랄한 활동가" },
+      "ISTJ": { "sub": "청렴결백한 논리주의자" },
+      "ISTP": { "sub": "묵묵한 장인" },
+      "ISFJ": { "sub": "용감한 수호자" },
+      "ISFP": { "sub": "세심한 성인군자" },
+      "INTJ": { "sub": "용의주도한 과학자" },
+      "INTP": { "sub": "객관적인 분석가" },
+      "INFJ": { "sub": "통찰력 있는 예언가" },
+      "INFP": { "sub": "상상이 많은 예술가" }
+    }
+  },
+  "common": {
+    "prev": "이전",
+    "next": "다음",
+    "close": "닫기",
+    "cancel": "취소",
+    "save": "저장",
+    "saving": "저장 중...",
+    "fetchFail": "불러오기 실패"
+  },
+  "profile": {
+    "alt": "프로필",
+    "noIntro": "소개가 없습니다.",
+    "email": "이메일",
+    "tel": "전화",
+    "editProfile": "프로필 수정",
+    "editMbti": "MBTI 수정",
+    "title": "프로필 수정",
+    "field": {
+      "nickname": "닉네임",
+      "email": "이메일",
+      "tel": "전화",
+      "intro": "소개"
+    },
+    "placeholder": {
+      "nickname": "닉네임을 입력",
+      "email": "you@example.com",
+      "tel": "010-1234-5678",
+      "intro": "자기소개를 입력하세요."
+    },
+    "alert": {
+      "nickname": "닉네임을 입력하세요.",
+      "email": "이메일 형식이 올바르지 않습니다."
+    }
+  },
+  "account": {
+    "title": "계정 정보",
+    "field": {
+      "loginId": "로그인ID",
+      "nickname": "닉네임",
+      "email": "이메일",
+      "tel": "전화",
+      "mbti": "MBTI",
+      "role": "권한",
+      "createdAt": "가입일",
+      "lastLoginAt": "최근 로그인"
+    }
+  },
+  "board": {
+    "empty": "아직 작성한 글이 없습니다.",
+    "readMore": "자세히",
+    "pagination": {
+      "label": "페이지",
+      "prev": "이전 페이지",
+      "next": "다음 페이지"
+    }
+  },
+  "bookmark": {
+    "empty": "북마크가 없습니다.",
+    "label": "북마크",
+    "noTitle": "제목 없음"
+  },
+  "setting": {
+    "accountInfo": "계정 정보",
+    "report": "신고",
+    "support": "고객센터"
+  },
+  "notice": {
+    "list": {
+      "title": "공지사항",
+      "searchPH": "검색어를 입력하세요",
+      "searchLabel": "검색",
+      "searchBtn": "검색",
+      "empty": "공지사항이 없습니다.",
+      "writeBtn": "글쓰기"
+    },
+    "table": {
+      "label": "공지 목록",
+      "no": "번호",
+      "title": "제목",
+      "writer": "작성자",
+      "content": "내용",
+      "date": "작성일"
+    },
+    "edit": {
+      "title": "공지사항 수정",
+      "fieldTitle": "제목",
+      "fieldContent": "내용",
+      "saveBtn": "저장",
+      "cancelBtn": "취소",
+      "success": "수정이 완료되었습니다.",
+      "sampleTitle": "예시 제목입니다",
+      "sampleContent": "예시 내용입니다"
+    },
+    "detail": {
+      "notFound": "공지사항이 없습니다.",
+      "confirmDelete": "정말로 삭제하시겠습니까?",
+      "writer": "작성자",
+      "date": "작성일",
+      "editBtn": "수정",
+      "deleteBtn": "삭제",
+      "backBtn": "목록"
+    },
+    "delete": {
+      "title": "공지 삭제",
+      "confirm": "정말 이 공지사항을 삭제하시겠습니까?",
+      "deleteBtn": "삭제",
+      "cancelBtn": "취소",
+      "deleted": "삭제되었습니다."
+    },
+    "title": "공지사항",
+    "alert": { "fillAll": "제목과 내용을 모두 입력해주세요." },
+    "form": {
+      "titlePH": "제목",
+      "contentPH": "내용",
+      "titleLabel": "제목",
+      "contentLabel": "내용",
+      "submit": "등록"
+    },
+    "seed": {
+      "maintenanceTitle": "서버 점검 안내",
+      "maintenanceContent": "8월 8일 새벽 2시부터 서버 점검이 진행됩니다.",
+      "newFeatureTitle": "신규 기능 출시",
+      "newFeatureContent": "회원 통계 기능이 추가되었습니다."
+    },
+    "write": {
+      "title": "공지사항 글쓰기",
+      "fieldTitle": "제목",
+      "fieldWriter": "작성자",
+      "fieldContent": "내용",
+      "phTitle": "제목",
+      "phWriter": "작성자",
+      "phContent": "내용",
+      "saveBtn": "저장",
+      "backBtn": "목록",
+      "missingAddNotice": "공지 등록 함수를 찾을 수 없어요. 라우팅/props 전달을 확인해 주세요.",
+      "error": "등록 중 오류가 발생했어요. 콘솔을 확인해 주세요."
+    }
+  }
+}

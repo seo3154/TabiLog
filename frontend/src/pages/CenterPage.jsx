@@ -1,18 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/CenterPage.css";
+import { useTranslation } from "react-i18next";
 
 export default function CenterPage() {
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.title = t("center.title");
+    document.documentElement.lang = i18n.resolvedLanguage || "ja";
+  }, [t, i18n.resolvedLanguage]);
+
   const [activeTab, setActiveTab] = useState("all"); // all, mine, write, detail
   const [openFaq, setOpenFaq] = useState(null);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  // 초기 게시글을 상태로 보관 (작성/삭제가 반영되도록)
+  // 초기 게시글: status는 코드값으로 저장("processing" | "answered")
   const [posts, setPosts] = useState([
     {
       id: 1,
       name: "홍길동",
       title: "로그인 아이디 변경하고 싶어요.",
-      status: "응답완료",
+      status: "answered",
       date: "2025-08-10",
       content: "로그인 아이디 변경",
       answer: "처리중입니다.",
@@ -22,7 +30,7 @@ export default function CenterPage() {
       id: 2,
       name: "가길동",
       title: "패스워드 변경하고 싶어요.",
-      status: "응답완료",
+      status: "answered",
       date: "2025-08-09",
       content: "패스워드 변경",
       answer: "안내해 드렸습니다.",
@@ -32,7 +40,7 @@ export default function CenterPage() {
       id: 3,
       name: "나길동",
       title: "마길동이라는 사람이 욕했습니다.",
-      status: "처리중",
+      status: "processing",
       date: "2025-08-08",
       content: "마길동 신고",
       answer: "",
@@ -42,7 +50,7 @@ export default function CenterPage() {
       id: 4,
       name: "다길동",
       title: "닉넴 변경하고 싶어요.",
-      status: "처리중",
+      status: "processing",
       date: "2025-08-07",
       content: "닉넴 변경",
       answer: "",
@@ -52,7 +60,7 @@ export default function CenterPage() {
       id: 5,
       name: "라길동",
       title: "사진 업로드가 안됩니다.",
-      status: "처리중",
+      status: "processing",
       date: "2025-08-06",
       content: "사진 업로드 안됩니다.",
       answer: "",
@@ -60,7 +68,6 @@ export default function CenterPage() {
     },
   ]);
 
-  // 내가 쓴 글만 필터
   const myPosts = posts.filter((p) => p.isMine);
 
   const [formData, setFormData] = useState({
@@ -69,40 +76,6 @@ export default function CenterPage() {
     file: null,
     agree: false,
   });
-
-  const faqs = [
-    {
-      question: "혼자여도 괜찮습니까?",
-      answer: "혼자 여행하는 사람이 많으니까 괜찮아요.",
-    },
-    {
-      question: "저는 50대가 넘었습니다.",
-      answer: "여행에는 나이는 상관없습니다.",
-    },
-    {
-      question: "여행이 처음인데 걱정이 됩니다.",
-      answer: "이런 분은 커뮤니티에 물어보시면 됩니다.",
-    },
-    {
-      question: "얘기하는 것이 두렵습니다.",
-      answer: "모두가 상냥하므로 괜찮습니다.",
-    },
-    {
-      question: "I don't know Korean.",
-      answer: "It's OK. I don't know English.",
-    },
-    { question: "여행 이외에도 얘기해도 됩니까?", answer: "상관없습니다." },
-    {
-      question: "여기 사원이 되고 싶습니다.",
-      answer: "채용공지가 올라오면 확인하세요.",
-    },
-    {
-      question: "어째서 여행에 대해서 얘기를 하는 겁니까?",
-      answer: "여행은 즐거운 것이니까요.",
-    },
-    { question: "안 좋은 얘기를 쓴 글을 봤어요.", answer: "신고해주십시오." },
-    { question: "탈퇴하고 싶습니다.", answer: "탈퇴 이유를 들어보겠습니다." },
-  ];
 
   const toggleFaq = (idx) => setOpenFaq(openFaq === idx ? null : idx);
 
@@ -117,14 +90,14 @@ export default function CenterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.title.trim()) return alert("타이틀 입력");
-    if (!formData.agree) return alert("개인 정보 동의에 체크해 주세요.");
+    if (!formData.title.trim()) return alert(t("center.alert.needTitle"));
+    if (!formData.agree) return alert(t("center.alert.needAgree"));
 
     const newPost = {
       id: Date.now(),
       name: "닉넴",
       title: formData.title,
-      status: "처리중",
+      status: "processing",
       date: new Date().toISOString().split("T")[0],
       content: formData.content,
       answer: "",
@@ -132,16 +105,13 @@ export default function CenterPage() {
       file: formData.file || null,
     };
 
-    // 상태에 추가
     setPosts((prev) => [newPost, ...prev]);
-
-    // 폼 초기화 및 탭 전환
     setFormData({ title: "", content: "", file: null, agree: false });
     setActiveTab("mine");
   };
 
   const handleDelete = (id) => {
-    if (!window.confirm("정말 삭제합니까?")) return;
+    if (!window.confirm(t("center.alert.confirmDelete"))) return;
     setPosts((prev) => prev.filter((p) => p.id !== id));
     setSelectedPost(null);
     setActiveTab("mine");
@@ -149,9 +119,11 @@ export default function CenterPage() {
 
   return (
     <div className="center-page">
-      <br /><br />
-      <h1 style={{ textAlign: "center"}}>고객센터</h1>
-      <br /><br />
+      <br />
+      <br />
+      <h1 style={{ textAlign: "center" }}>{t("center.title")}</h1>
+      <br />
+      <br />
       <hr
         style={{
           border: "1px solid #c2c0c0",
@@ -165,13 +137,13 @@ export default function CenterPage() {
           className={`tab ${activeTab === "all" ? "active" : ""}`}
           onClick={() => setActiveTab("all")}
         >
-          모든 게시글
+          {t("center.tabs.all")}
         </div>
         <div
           className={`tab ${activeTab === "mine" ? "active" : ""}`}
           onClick={() => setActiveTab("mine")}
         >
-          내 글
+          {t("center.tabs.mine")}
         </div>
       </div>
 
@@ -179,35 +151,35 @@ export default function CenterPage() {
         {/* FAQ & 전체 게시글 */}
         {activeTab === "all" && (
           <>
-            <h2>항상 있는 질문(FAQ)</h2>
+            <h2>{t("center.faq.title")}</h2>
             <div className="faq-grid">
-              {faqs.map((faq, idx) => (
-                <div className="faq-item" key={idx}>
-                  <button onClick={() => toggleFaq(idx)}>
+              {Array.from({ length: 10 }, (_, i) => i + 1).map((n) => (
+                <div className="faq-item" key={n}>
+                  <button onClick={() => toggleFaq(n)}>
                     <span style={{ color: "red", marginRight: 5 }}>Q</span>
-                    {idx + 1}. {faq.question}
+                    {n}. {t(`center.faq.q${n}`)}
                   </button>
                   <div
                     className="faq-answer"
                     style={{
-                      maxHeight: openFaq === idx ? "150px" : "0",
-                      padding: openFaq === idx ? "10px" : "0",
+                      maxHeight: openFaq === n ? "150px" : "0",
+                      padding: openFaq === n ? "10px" : "0",
                     }}
                   >
-                    <p>{faq.answer}</p>
+                    <p>{t(`center.faq.a${n}`)}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <h2>유저의 질문들</h2>
+            <h2>{t("center.usersQuestions")}</h2>
             <table>
               <thead>
                 <tr>
-                  <th>닉네임</th>
-                  <th>제목</th>
-                  <th>답변상태</th>
-                  <th>날짜</th>
+                  <th>{t("center.table.nickname")}</th>
+                  <th>{t("center.table.title")}</th>
+                  <th>{t("center.table.status")}</th>
+                  <th>{t("center.table.date")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -215,7 +187,7 @@ export default function CenterPage() {
                   <tr key={p.id}>
                     <td>{p.name}</td>
                     <td>{p.title}</td>
-                    <td>{p.status}</td>
+                    <td>{t(`center.status.${p.status}`)}</td>
                     <td>{p.date}</td>
                   </tr>
                 ))}
@@ -225,7 +197,7 @@ export default function CenterPage() {
                       className="submit-btn"
                       onClick={() => setActiveTab("write")}
                     >
-                      1:1 상담하기
+                      {t("center.btn.consult")}
                     </button>
                   </td>
                 </tr>
@@ -237,13 +209,13 @@ export default function CenterPage() {
         {/* 내 게시글 */}
         {activeTab === "mine" && (
           <>
-            <h2>내 글</h2>
+            <h2>{t("center.tabs.mine")}</h2>
             <table>
               <thead>
                 <tr>
-                  <th>제목</th>
-                  <th>답변상태</th>
-                  <th>날짜</th>
+                  <th>{t("center.table.title")}</th>
+                  <th>{t("center.table.status")}</th>
+                  <th>{t("center.table.date")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -257,7 +229,7 @@ export default function CenterPage() {
                     }}
                   >
                     <td>{p.title}</td>
-                    <td>{p.status}</td>
+                    <td>{t(`center.status.${p.status}`)}</td>
                     <td>{p.date}</td>
                   </tr>
                 ))}
@@ -281,18 +253,19 @@ export default function CenterPage() {
               style={{ display: "flex", gap: "20px", marginTop: "20px" }}
             >
               <div style={{ flex: 1 }}>
-                <h3>내용</h3>
+                <h3>{t("center.detail.content")}</h3>
                 <p>{selectedPost.content}</p>
               </div>
               <div style={{ flex: 1 }}>
-                <h3>회답</h3>
-                <p>{selectedPost.answer || "아직 회답이 없습니다."}</p>
+                <h3>{t("center.detail.answer")}</h3>
+                <p>{selectedPost.answer || t("center.detail.noAnswer")}</p>
               </div>
             </div>
 
             {selectedPost.file && (
               <div style={{ marginTop: 12 }}>
-                <strong>첨부:</strong> {selectedPost.file.name || "파일"}
+                <strong>{t("center.detail.attach")}:</strong>{" "}
+                {selectedPost.file.name || t("center.detail.file")}
               </div>
             )}
 
@@ -304,19 +277,19 @@ export default function CenterPage() {
                 className="submit-btn"
                 onClick={() => setActiveTab("mine")}
               >
-                돌아가기
+                {t("center.btn.back")}
               </button>
               <button
                 className="submit-btn"
                 onClick={() => setActiveTab("write")}
               >
-                수정
+                {t("center.btn.edit")}
               </button>
               <button
                 className="submit-btn"
                 onClick={() => handleDelete(selectedPost.id)}
               >
-                삭제
+                {t("center.btn.delete")}
               </button>
             </div>
           </div>
@@ -325,7 +298,7 @@ export default function CenterPage() {
         {/* 1:1 작성폼 */}
         {activeTab === "write" && (
           <>
-            <h2>1:1 상담</h2>
+            <h2>{t("center.write.title")}</h2>
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <input
@@ -333,7 +306,7 @@ export default function CenterPage() {
                   name="title"
                   value={formData.title}
                   onChange={handleInputChange}
-                  placeholder="타이틀 입력"
+                  placeholder={t("center.write.phTitle")}
                 />
               </div>
               <div className="form-group">
@@ -342,7 +315,7 @@ export default function CenterPage() {
                     name="content"
                     value={formData.content}
                     onChange={handleInputChange}
-                    placeholder="내용 입력"
+                    placeholder={t("center.write.phContent")}
                   />
                   <div className="bottom-actions">
                     <input
@@ -358,9 +331,9 @@ export default function CenterPage() {
                         checked={formData.agree}
                         onChange={handleInputChange}
                       />
-                      <label htmlFor="agree">개인 정보에 동의합니다.</label>
+                      <label htmlFor="agree">{t("center.write.agree")}</label>
                       <button type="submit" className="submit-btn">
-                        작성하기
+                        {t("center.btn.write")}
                       </button>
                     </div>
                   </div>
@@ -370,7 +343,6 @@ export default function CenterPage() {
 
             <div id="submitted-posts">
               <ul>
-                {/* 최근 작성한 글만 미리보기 (isMine=true) */}
                 {posts
                   .filter((p) => p.isMine)
                   .slice(0, 5)

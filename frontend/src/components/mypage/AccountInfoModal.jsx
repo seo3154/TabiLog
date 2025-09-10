@@ -1,11 +1,21 @@
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function AccountInfoModal({ user, onClose }) {
+  const { t } = useTranslation();
+
   useEffect(() => {
     const onKey = (e) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [onClose]);
+
+  const row = (labelKey, value, fallback = "-") => (
+    <div className="modal-row">
+      <span className="modal-key">{t(labelKey)}</span>
+      <span className="modal-val">{value || fallback}</span>
+    </div>
+  );
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="presentation">
@@ -17,50 +27,30 @@ export default function AccountInfoModal({ user, onClose }) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="modal-header">
-          <h2 id="account-modal-title">계정 정보</h2>
-          <button className="modal-close" onClick={onClose} aria-label="닫기">
+          <h2 id="account-modal-title">{t("account.title")}</h2>
+          <button
+            className="modal-close"
+            onClick={onClose}
+            aria-label={t("common.close")}
+          >
             ×
           </button>
         </div>
 
         <div className="modal-body">
-          <div className="modal-row">
-            <span className="modal-key">로그인ID</span>
-            <span className="modal-val">{user.loginId || "-"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">닉네임</span>
-            <span className="modal-val">{user.nickname || "-"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">이메일</span>
-            <span className="modal-val">{user.email || "-"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">전화</span>
-            <span className="modal-val">{user.tel || "-"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">MBTI</span>
-            <span className="modal-val">{user.mbtiName || "-"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">권한</span>
-            <span className="modal-val">{user.role || "USER"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">가입일</span>
-            <span className="modal-val">{user.createdAt || "-"}</span>
-          </div>
-          <div className="modal-row">
-            <span className="modal-key">최근 로그인</span>
-            <span className="modal-val">{user.lastLoginAt || "-"}</span>
-          </div>
+          {row("account.field.loginId", user.loginId)}
+          {row("account.field.nickname", user.nickname)}
+          {row("account.field.email", user.email)}
+          {row("account.field.tel", user.tel)}
+          {row("account.field.mbti", user.mbtiName)}
+          {row("account.field.role", user.role || "USER")}
+          {row("account.field.createdAt", user.createdAt)}
+          {row("account.field.lastLoginAt", user.lastLoginAt)}
         </div>
 
         <div className="modal-footer">
           <button className="edit-btn" onClick={onClose}>
-            닫기
+            {t("common.close")}
           </button>
         </div>
       </div>

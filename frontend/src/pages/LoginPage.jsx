@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../apis/users";
 import "../styles/LoginPage.css";
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ loginId: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    document.title = t("auth.login.title");
+    document.documentElement.lang = i18n.resolvedLanguage || "ja";
+  }, [t, i18n.resolvedLanguage]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +36,7 @@ export default function Login() {
       navigate("/mainpage");
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "아이디/비밀번호를 확인해 주세요.");
+      alert(err?.response?.data?.message || t("auth.error.invalidCredentials"));
     } finally {
       setLoading(false);
     }
@@ -39,7 +46,7 @@ export default function Login() {
     <div className="login-container">
       <br />
       <br />
-      <h1 className="login-title">로그인</h1>
+      <h1 className="login-title">{t("auth.login.title")}</h1>
       <br />
       <br />
 
@@ -51,7 +58,7 @@ export default function Login() {
             <tbody>
               <tr>
                 <td className="login-label">
-                  <label htmlFor="userid">아이디</label>
+                  <label htmlFor="loginId">{t("auth.id")}</label>
                 </td>
                 <td className="login-field">
                   <input
@@ -63,6 +70,8 @@ export default function Login() {
                     value={form.loginId}
                     onChange={onChange}
                     autoComplete="username"
+                    placeholder={t("auth.id")}
+                    aria-label={t("auth.id")}
                   />
                 </td>
               </tr>
@@ -71,7 +80,7 @@ export default function Login() {
 
               <tr>
                 <td className="login-label">
-                  <label htmlFor="password">비밀번호</label>
+                  <label htmlFor="password">{t("auth.password")}</label>
                 </td>
                 <td className="login-field">
                   <input
@@ -83,6 +92,8 @@ export default function Login() {
                     value={form.password}
                     onChange={onChange}
                     autoComplete="current-password"
+                    placeholder={t("auth.password")}
+                    aria-label={t("auth.password")}
                   />
                 </td>
               </tr>
@@ -96,7 +107,7 @@ export default function Login() {
                     className="login-button"
                     disabled={loading}
                   >
-                    {loading ? "로그인 중..." : "로그인"}
+                    {loading ? t("auth.login.loading") : t("auth.login.submit")}
                   </button>
 
                   <button
@@ -104,7 +115,7 @@ export default function Login() {
                     className="signin-button"
                     onClick={() => navigate("/regpage")}
                   >
-                    회원가입
+                    {t("auth.signup.submit")}
                   </button>
                 </td>
               </tr>
