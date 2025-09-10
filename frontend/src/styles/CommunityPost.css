@@ -36,11 +36,24 @@
   opacity: 0.6;
 }
 
+.post-info .post-views{
+  display: inline-block;
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.post-info .post-views img{
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
+  vertical-align: bottom;
+}
+
 .post-date {
   margin-left: 10px;
 }
 
-.view-count {
+.post-views {
   margin-left: 10px;
 }
 
@@ -63,7 +76,7 @@
 /* 게시글 본문 */
 .post-content {
   width: 1000px;
-  height: 400px;
+  min-height: 400px;
   margin-top: 10px;
   font-size: 16px;
   line-height: 1.5;
@@ -72,6 +85,12 @@
 .post-content p{
   margin-top: 16px;
   margin-left: 16px;
+}
+
+.post-content .post-delete-btn{
+  position: relative;
+  top: 330px;
+  left: 900px;
 }
 
 
@@ -115,6 +134,7 @@ textarea {
 
 .comment-submit-btn {
   width: 8%;
+  height: 52px;
   margin: 10px 0 10xp 0;
   padding: 8px 16px;
   background-color: #000;
@@ -149,6 +169,7 @@ textarea {
 
 .comment-author{
   display: flex;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
   padding-left: 8px;
@@ -173,3 +194,8 @@ textarea {
   opacity: 0.6;
 }
 
+.delete_btn{
+  appearance: none;
+  border: none;
+  cursor: pointer;
+}

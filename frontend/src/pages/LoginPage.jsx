@@ -28,11 +28,16 @@ export default function Login() {
       setLoading(true);
       const me = await login(form.loginId.trim(), form.password);
 
-      // ✅ 로그인 성공 처리: 저장 + 전역 알림 + 이동
+      // ✅ 반드시 서버에서 id 포함
+      // { id: 1, loginId: 'asdf', nickname: '땃쥐', mbtiName: 'ISFP', mbtiUrl: '/MbtiProfileImg/ISFP.png' }
       localStorage.setItem("tabilog.user", JSON.stringify(me));
+      console.log("로그인 저장:", localStorage.getItem("tabilog.user"));
+
+      // 전역 이벤트 발송 (선택)
       window.dispatchEvent(
         new CustomEvent("tabilog:user-updated", { detail: me })
       );
+
       navigate("/mainpage");
     } catch (err) {
       console.error(err);
@@ -53,12 +58,13 @@ export default function Login() {
       <form onSubmit={handleSubmit}>
         <fieldset className="login-fieldset">
           <legend className="login-legend"></legend>
-
           <table className="login-table">
             <tbody>
               <tr>
                 <td className="login-label">
+
                   <label htmlFor="loginId">{t("auth.id")}</label>
+
                 </td>
                 <td className="login-field">
                   <input
@@ -75,9 +81,7 @@ export default function Login() {
                   />
                 </td>
               </tr>
-
               <br />
-
               <tr>
                 <td className="login-label">
                   <label htmlFor="password">{t("auth.password")}</label>
@@ -97,9 +101,7 @@ export default function Login() {
                   />
                 </td>
               </tr>
-
               <br />
-
               <tr>
                 <td className="login-actions" colSpan={2}>
                   <button
@@ -109,7 +111,6 @@ export default function Login() {
                   >
                     {loading ? t("auth.login.loading") : t("auth.login.submit")}
                   </button>
-
                   <button
                     type="button"
                     className="signin-button"

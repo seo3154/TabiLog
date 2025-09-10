@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -50,11 +51,15 @@ public class BoardController {
     }
 
     // 게시글 삭제
-    @DeleteMapping("/{boardId}")
-    public String deleteBoard(@PathVariable Long boardId) {
-        boardService.deleteBoard(boardId);
-        return "삭제 완료";
-    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBoard(@PathVariable Long id,
+                                        @RequestParam Long userId) {
+        boardService.deleteBoard(id, userId);
+        return ResponseEntity.ok().build();
+}
+
+
+
 
     // 댓글 생성
     @PostMapping("/{boardId}/comments")
@@ -78,9 +83,15 @@ public class BoardController {
     }
 
     // 댓글 삭제
-    @DeleteMapping("/comments/{commentId}")
-    public String deleteComment(@PathVariable Long commentId) {
+    @DeleteMapping("/comments/{commentId}")    
+    public ResponseEntity<String> deleteComment(@PathVariable Long commentId,
+                                                @RequestParam Long userId) {
+        Comment comment = boardService.getCommentById(commentId);
+        if(!comment.getUserId().equals(userId)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("삭제 권한이 없습니다.");
+        }
+
         boardService.deleteComment(commentId);
-        return "댓글 삭제 완료";
+        return ResponseEntity.ok("댓글 삭제 완료");
     }
 }

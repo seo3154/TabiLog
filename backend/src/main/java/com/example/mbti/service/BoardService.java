@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -97,9 +98,24 @@ public class BoardService {
         return toDto(updated);
     }
 
-    public void deleteBoard(Long boardId) {
-        boardRepository.deleteById(boardId);
+    
+    @Transactional
+    public void deleteBoard(Long boardId, Long userId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글이 없습니다."));
+
+        // 권한 체크: 작성자만 삭제 가능
+        if (!board.getUser().getId().equals(userId)) {
+            throw new IllegalArgumentException("삭제 권한이 없습니다.");
+        }
+
+        // 댓글 먼저 삭제 (FK 문제 방지)
+        commentRepository.deleteByBoard(board);
+
+        // 게시글 삭제
+        boardRepository.delete(board);
     }
+
 
     // ================= Comment =================
     public CommentDto createComment(Long boardId, CommentDto commentDto) {
@@ -159,6 +175,13 @@ public class BoardService {
         dto.setBoardId(comment.getBoard().getBoardID());
         dto.setUserId(comment.getUser().getId());
         dto.setNickname(comment.getUser().getNickname());
+
+        if(comment.getUser().getMbti() != null){
+            dto.setMbti(comment.getUser().getMbti().getName());
+            dto.setMbtiUrl(comment.getUser().getMbti().getUrl());
+        }
+
+        dto.setCreateAt(comment.getCreateAt());
 
         return dto;
     }
