@@ -1,88 +1,127 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, Route, Routes } from "react-router-dom";
+// src/pages/CommunityPage.jsx
+import React, { useEffect, useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
+
 import "../styles/CommunityBoard.css";
 import "../styles/CommunityPage.css";
+
 import Sidebar from "../components/SideBar";
-import WriteButton from "../components/Button";
+import Button from "../components/Button";
 import CommunityBoard from "../components/CommunityBoard";
-import CommunityWrite from "../components/CommunityWrite";
 
 export default function CommunityPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
-  const [selectedBoard, setSelectedBoard] = useState("전체 게시판");
+
+  // 카테고리(보이는 라벨은 i18n, 실제 필터 값은 한글 그대로 유지)
+  const CATEGORIES = useMemo(
+    () => ({
+      ALL: "전체 게시판",
+      REVIEW: "리뷰 게시판",
+      QNA: "QnA 게시판",
+    }),
+    []
+  );
+
+  const [selectedBoard, setSelectedBoard] = useState(CATEGORIES.ALL);
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // 게시글 가져오기
   useEffect(() => {
+    const controller = new AbortController();
+
+    async function fetchPosts() {
+      try {
+        setLoading(true);
+
+        const params =
+          selectedBoard === CATEGORIES.ALL
+            ? {} // 전체 게시판이면 필터 없이
+            : { searchWhat: "category", keyword: selectedBoard };
+
+        const res = await axios.get("http://localhost:8080/api/boards", {
+          params,
+          signal: controller.signal,
+        });
+
+        // 백엔드가 배열/페이지 둘 다 가능할 때 안전 처리
+        const data = Array.isArray(res.data)
+          ? res.data
+          : res.data?.content || [];
+
+        setPosts(data);
+      } catch (err) {
+        if (axios.isCancel(err)) return;
+        console.error("게시글 가져오기 실패", err);
+        setPosts([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     fetchPosts();
-  }, [selectedBoard]);
+    return () => controller.abort();
+  }, [selectedBoard, CATEGORIES.ALL]);
 
-  const fetchPosts = async () => {
-    try {
-      const res = await axios.get("http://localhost:8080/api/boards", {
-        params: {
-          searchWhat: "category",
-          keyword: selectedBoard === "전체 게시판" ? "" : selectedBoard,
-        },
-      });
-      setPosts(res.data.content);
-    } catch (err) {
-      console.error("게시글 가져오기 실패", err);
-    }
-  };
-
-  // 글 등록 함수
-  const AddPost = async (newPost) => {
-    try {
-      // JSON 키 이름을 DTO 필드와 맞춤
-      const postData = {
-        title: newPost.title,
-        content: newPost.content,
-        category: newPost.category,
-        mbti: newPost.mbti,
-        user_id: newPost.userId, // DTO에 맞춰 user_id
-        createdAt: newPost.createAt,
-      };
-
-      const res = await axios.post("http://localhost:8080/api/boards", postData);
-      setPosts([res.data, ...posts]);
-      alert("글이 등록되었습니다!");
-    } catch (err) {
-      console.error("글 등록 실패", err);
-      throw err;
-    }
-  };
-
+  // 사이드바 메뉴
   const menuItems = [
-    { key: "general", label: "전체 게시판", onClick: () => setSelectedBoard("전체 게시판") },
-    { key: "review", label: "리뷰 게시판", onClick: () => setSelectedBoard("리뷰 게시판") },
-    { key: "qna", label: "QnA 게시판", onClick: () => setSelectedBoard("QnA 게시판") },
+    {
+      key: "general",
+      label: t("community.board.all"), // "전체 게시판"
+      onClick: () => setSelectedBoard(CATEGORIES.ALL),
+    },
+    {
+      key: "review",
+      label: t("community.board.review"), // "리뷰 게시판"
+      onClick: () => setSelectedBoard(CATEGORIES.REVIEW),
+    },
+    {
+      key: "qna",
+      label: t("community.board.qna"), // "Q&A게시판"
+      onClick: () => setSelectedBoard(CATEGORIES.QNA),
+    },
   ];
+
+  const goWrite = () => {
+    const userRaw = localStorage.getItem("tabilog.user");
+    let user = null;
+    try {
+      user = userRaw ? JSON.parse(userRaw) : null;
+    } catch {
+      user = null;
+    }
+
+    if (!user) {
+      alert(t("auth.login.title") + " " + t("auth.error.invalidCredentials"));
+      navigate("/login");
+      return;
+    }
+    localStorage.setItem("userMbti", user.mbtiName || "");
+    navigate("/community/write");
+  };
 
   return (
     <div className="community-page">
       <Sidebar menuItems={menuItems} />
+
       <div className="wrap">
-        <WriteButton
+        <Button
           variant="black"
           className="WriteButton"
-          onClick={() => {
-            const user = JSON.parse(localStorage.getItem("tabilog.user"));
-            if (!user) {
-              alert("로그인이 필요합니다!");
-              navigate("/login");
-              return;
-            }
-            localStorage.setItem("userMbti", user.mbtiName || "");
-            navigate("/community/write");
-          }}
+          onClick={goWrite}
+          aria-label={t("community.board.all")}
         >
-          글 작성
-        </WriteButton>
+          {t("notice.list.writeBtn") /* "글쓰기" */}
+        </Button>
 
-        {/* 게시글 목록 */}
-        <CommunityBoard posts={posts} selectedBoard={selectedBoard} />
+        {loading ? (
+          <div className="board_loading">Loading…</div>
+        ) : (
+          <CommunityBoard posts={posts} selectedBoard={selectedBoard} />
+        )}
       </div>
     </div>
   );

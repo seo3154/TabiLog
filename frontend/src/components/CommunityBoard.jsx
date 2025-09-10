@@ -1,8 +1,12 @@
+// src/components/CommunityBoard.jsx
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../styles/CommunityBoard.css";
 
-export default function CommunityBoard({ posts, selectedBoard }) {
+export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
+  const { t, i18n } = useTranslation();
+
   const mbtiList = [
     "INFJ",
     "INFP",
@@ -26,19 +30,30 @@ export default function CommunityBoard({ posts, selectedBoard }) {
 
   const handleChange = (e) => setSelectedMbti(e.target.value);
 
+  // "전체 게시판/全体掲示板/all" 모두 인식
+  const allBoardLabel = t("community.board.all");
+  const isAllBoard =
+    selectedBoard === "all" ||
+    selectedBoard === allBoardLabel ||
+    selectedBoard === "전체 게시판" ||
+    selectedBoard === "全体掲示板";
+
   const filteredPosts = posts.filter(
     (post) =>
-      (selectedBoard === "전체 게시판" || post.category === selectedBoard) && 
+      (isAllBoard || post.category === selectedBoard) &&
       (selectedMbti === "" || post.mbti === selectedMbti)
   );
-
 
   return (
     <div className="board">
       <div>
-        <h2>{selectedBoard}</h2>
-        <select value={selectedMbti} onChange={handleChange}>
-          <option value="">MBTI ▼</option>
+        <h2>{isAllBoard ? allBoardLabel : selectedBoard}</h2>
+        <select
+          aria-label={t("community.filter.mbtiAria")}
+          value={selectedMbti}
+          onChange={handleChange}
+        >
+          <option value="">{t("community.filter.mbtiPlaceholder")}</option>
           {mbtiList.map((mbti) => (
             <option key={mbti} value={mbti}>
               {mbti}
@@ -46,14 +61,15 @@ export default function CommunityBoard({ posts, selectedBoard }) {
           ))}
         </select>
       </div>
-      <table className="board_table">
+
+      <table className="board_table" aria-label={t("community.board.all")}>
         <thead>
           <tr>
-            <th>NO</th>
-            <th>MBTI</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
+            <th>{t("community.table.no")}</th>
+            <th>{t("community.table.mbti")}</th>
+            <th>{t("community.table.title")}</th>
+            <th>{t("community.table.author")}</th>
+            <th>{t("community.table.date")}</th>
           </tr>
         </thead>
         <tbody>
@@ -82,14 +98,14 @@ export default function CommunityBoard({ posts, selectedBoard }) {
                 </td>
                 <td>
                   <Link to={`/community/post/${post.boardid}`}>
-                    {new Date(post.createAt).toLocaleDateString()}
+                    {new Date(post.createAt).toLocaleDateString(i18n.language)}
                   </Link>
                 </td>
               </tr>
             ))
           ) : (
             <tr>
-              <td colSpan="5">게시글이 없습니다.</td>
+              <td colSpan="5">{t("community.empty")}</td>
             </tr>
           )}
         </tbody>

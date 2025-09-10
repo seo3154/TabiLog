@@ -16,7 +16,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,11 +32,8 @@ public class BoardService {
     // ================= Board =================
     public Page<BoardDto> getBoards(String searchWhat, String keyword, Pageable pageable) {
 
-        Pageable sortedPageable = PageRequest.of(
-            pageable.getPageNumber(),
-            pageable.getPageSize(),
-            Sort.by("createAt").descending()
-        );
+        Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(),
+                Sort.by("createAt").descending());
 
 
         Page<Board> boards;
@@ -51,7 +48,7 @@ public class BoardService {
         } else {
             boards = boardRepository.findAll(sortedPageable);
         }
-        
+
         return boards.map(this::toDto);
     }
 
@@ -66,26 +63,27 @@ public class BoardService {
     }
 
     public BoardDto createBoard(BoardDto boardDto) {
-        try{
-        User user = userRepository.findById(boardDto.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
+        try {
+            User user = userRepository.findById(boardDto.getUserId())
+                    .orElseThrow(() -> new IllegalArgumentException("해당 유저가 없습니다."));
 
-        Board board = new Board();
-        board.setTitle(boardDto.getTitle());
-        board.setContent(boardDto.getContent());
-        board.setCategory(boardDto.getCategory());
-        board.setUser(user);
-        board.setViews(0);
+            Board board = new Board();
+            board.setTitle(boardDto.getTitle());
+            board.setContent(boardDto.getContent());
+            board.setCategory(boardDto.getCategory());
+            board.setUser(user);
+            board.setViews(0);
 
-        System.out.println("저장할 게시글: " + board.getTitle() + ", user=" + board.getUser().getId());
+            System.out
+                    .println("저장할 게시글: " + board.getTitle() + ", user=" + board.getUser().getId());
 
-        Board saved = boardRepository.save(board);
-        return toDto(saved);
-        }catch (Exception e) {
-        // 에러 로그 출력
-        e.printStackTrace();
-        throw e; // 혹은 RuntimeException으로 감싸서 던지기
-    }
+            Board saved = boardRepository.save(board);
+            return toDto(saved);
+        } catch (Exception e) {
+            // 에러 로그 출력
+            e.printStackTrace();
+            throw e; // 혹은 RuntimeException으로 감싸서 던지기
+        }
     }
 
     public BoardDto updateBoard(BoardDto boardDto) {
@@ -98,7 +96,7 @@ public class BoardService {
         return toDto(updated);
     }
 
-    
+
     @Transactional
     public void deleteBoard(Long boardId, Long userId) {
         Board board = boardRepository.findById(boardId)
@@ -148,8 +146,14 @@ public class BoardService {
         return toCommentDto(updated);
     }
 
-    public void deleteComment(Long commentId) {
+
+    public void deleteComment(Long commentId, Long userId) {
         commentRepository.deleteById(commentId);
+    }
+
+    public Comment getCommentById(Long commentId) {
+        return commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("댓글이 없습니다."));
     }
 
     // ================= DTO 변환 =================
@@ -161,11 +165,11 @@ public class BoardService {
         dto.setCategory(board.getCategory());
         dto.setUserId(board.getUser().getId());
         dto.setNickname(board.getUser().getNickname());
-        dto.setCreateAt(board.getCreateAt());           // 추가
+        dto.setCreateAt(board.getCreateAt()); // 추가
         dto.setViews(board.getViews());
         dto.setMbti(board.getUser().getMbti() != null ? board.getUser().getMbti().getName() : "");
         return dto;
-    }   
+    }
 
 
     private CommentDto toCommentDto(Comment comment) {
@@ -176,7 +180,7 @@ public class BoardService {
         dto.setUserId(comment.getUser().getId());
         dto.setNickname(comment.getUser().getNickname());
 
-        if(comment.getUser().getMbti() != null){
+        if (comment.getUser().getMbti() != null) {
             dto.setMbti(comment.getUser().getMbti().getName());
             dto.setMbtiUrl(comment.getUser().getMbti().getUrl());
         }
