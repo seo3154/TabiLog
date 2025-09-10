@@ -2,22 +2,21 @@ package com.example.mbti.controller;
 
 import com.example.mbti.dto.BoardDto;
 import com.example.mbti.dto.CommentDto;
+import com.example.mbti.model.Comment;
 import com.example.mbti.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/boards")
-@CrossOrigin(
-        origins = "http://localhost:3000",
-        allowedHeaders = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE}
-)
+@CrossOrigin(origins = "http://localhost:3000", allowedHeaders = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 public class BoardController {
 
     @Autowired
@@ -26,7 +25,7 @@ public class BoardController {
     // 게시글 목록 (페이징 + 검색)
     @GetMapping
     public Page<BoardDto> getBoards(@RequestParam(required = false) String searchWhat,
-                                    @RequestParam(required = false) String keyword, Pageable pageable) {
+            @RequestParam(required = false) String keyword, Pageable pageable) {
         return boardService.getBoards(searchWhat, keyword, pageable);
     }
 
@@ -52,19 +51,15 @@ public class BoardController {
 
     // 게시글 삭제
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBoard(@PathVariable Long id,
-                                        @RequestParam Long userId) {
+    public ResponseEntity<?> deleteBoard(@PathVariable Long id, @RequestParam Long userId) {
         boardService.deleteBoard(id, userId);
         return ResponseEntity.ok().build();
-}
-
-
-
+    }
 
     // 댓글 생성
     @PostMapping("/{boardId}/comments")
     public CommentDto createComment(@PathVariable Long boardId,
-                                    @RequestBody CommentDto commentDto) {
+            @RequestBody CommentDto commentDto) {
         return boardService.createComment(boardId, commentDto);
     }
 
@@ -77,21 +72,20 @@ public class BoardController {
     // 댓글 수정
     @PutMapping("/comments/{commentId}")
     public CommentDto updateComment(@PathVariable Long commentId,
-                                    @RequestBody CommentDto commentDto) {
+            @RequestBody CommentDto commentDto) {
         commentDto.setCommentID(commentId);
         return boardService.updateComment(commentDto);
     }
 
     // 댓글 삭제
-    @DeleteMapping("/comments/{commentId}")    
+    @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<String> deleteComment(@PathVariable Long commentId,
-                                                @RequestParam Long userId) {
-        Comment comment = boardService.getCommentById(commentId);
-        if(!comment.getUserId().equals(userId)) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("삭제 권한이 없습니다.");
-        }
-
-        boardService.deleteComment(commentId);
+            @RequestParam Long userId) {
+        // Comment comment = boardService.getCommentById(commentId);
+        // if (!comment.getUserId().equals(userId)) {
+        // return ResponseEntity.status(HttpStatus.FORBIDDEN).body("삭제 권한이 없습니다.");
+        // }
+        boardService.deleteComment(commentId, userId);
         return ResponseEntity.ok("댓글 삭제 완료");
     }
 }

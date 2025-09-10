@@ -1,55 +1,68 @@
-import React, { useState } from "react";
+// src/pages/CommunityWrite.jsx
+import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 import "../styles/CommunityWrite.css";
 import Button from "../components/Button";
 
 export default function CommunityWrite() {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
+  const me = useMemo(() => {
+    try {
+      return JSON.parse(localStorage.getItem("tabilog.user") || "null");
+    } catch {
+      return null;
+    }
+  }, []);
+
+  // 표시용 MBTI: 유저 정보 우선, 없으면 로컬 백업 키
+  const selectedMbti =
+    (me?.mbtiName && String(me.mbtiName).toUpperCase()) ||
+    localStorage.getItem("userMbti") ||
+    "";
+
+  // ⚠️ 서버가 기대하는 사용자 식별자 키가 환경마다 다를 수 있어 안전하게 병합
+  const writerId = me?.id ?? me?.userId ?? me?.loginId ?? null;
+
   const [title, setTitle] = useState("");
+  // 백엔드가 기대하는 한글 카테고리 값 유지
   const [category, setCategory] = useState("전체 게시판");
   const [content, setContent] = useState("");
 
-  // 로그인 정보 가져오기
-  const user = JSON.parse(localStorage.getItem("tabilog.user"));
-  const selectedMbti = localStorage.getItem("userMbti") || "";
-  const writerId = user?.id;
-
   const handleSubmit = async () => {
-    // 입력값 체크
-    if (!title || !content) {
-      alert("제목과 내용을 입력해주세요.");
+    if (!title.trim() || !content.trim()) {
+      alert(t("community.write.alert.needTitleContent"));
       return;
     }
-
-    // writerId 체크
     if (!writerId) {
-      alert("로그인이 필요합니다.");
+      alert(t("community.write.alert.loginRequired"));
       return;
     }
 
     const postData = {
-      title,
-      content,
-      category,
+      title: title.trim(),
+      content: content.trim(),
+      category, // 한글 값 그대로
       userId: writerId,
     };
 
     try {
-      const res = await axios.post("http://localhost:8080/api/boards", postData);
-      alert("글이 등록되었습니다!");
+      await axios.post("http://localhost:8080/api/boards", postData);
+      alert(t("community.write.alert.success"));
       navigate("/community");
     } catch (err) {
       console.error("게시글 등록 실패", err);
-      // 서버가 400/500 오류를 반환하면 err.response.data에 메시지가 있을 수 있음
-      const errorMessage =
-        err.response?.data?.message || "게시글 등록에 실패했습니다.";
-      alert(errorMessage);
+      const serverMsg =
+        err?.response?.data?.message || t("community.write.alert.fail");
+      alert(serverMsg);
     }
   };
 
   const handleCancel = () => {
-    if (window.confirm("작성을 취소하시겠습니까?")) {
+    if (window.confirm(t("community.write.alert.cancelConfirm"))) {
       navigate(-1);
     }
   };
@@ -57,7 +70,7 @@ export default function CommunityWrite() {
   return (
     <div className="wrap">
       <div className="mbti">
-        <input type="text" value={selectedMbti} disabled />
+        <input type="text" value={selectedMbti} disabled aria-label="MBTI" />
       </div>
 
       <div className="write_section">
@@ -65,26 +78,35 @@ export default function CommunityWrite() {
           <div className="title">
             <input
               type="text"
-              placeholder="제목을 입력해주세요."
+              placeholder={t("community.write.placeholder.title")}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+
           <div className="filter">
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
+              aria-label="category"
             >
-              <option value="전체 게시판">전체 게시판</option>
-              <option value="리뷰 게시판">리뷰 게시판</option>
-              <option value="QnA 게시판">QnA 게시판</option>
+              {/* 보이는 라벨은 다국어, 실제 값은 한글 유지 */}
+              <option value="전체 게시판">
+                {t("community.write.category.all")}
+              </option>
+              <option value="리뷰 게시판">
+                {t("community.write.category.review")}
+              </option>
+              <option value="QnA 게시판">
+                {t("community.write.category.qna")}
+              </option>
             </select>
           </div>
         </div>
 
         <div className="writebox">
           <textarea
-            placeholder="내용을 입력하세요."
+            placeholder={t("community.write.placeholder.content")}
             value={content}
             onChange={(e) => setContent(e.target.value)}
             style={{ resize: "none" }}
@@ -93,13 +115,13 @@ export default function CommunityWrite() {
 
         <div className="button">
           <Button variant="black" onClick={handleSubmit}>
-            등록
+            {t("community.write.button.submit")}
           </Button>
           <Button variant="white" onClick={handleCancel}>
-            삭제
+            {t("community.write.button.cancel")}
           </Button>
           <Button variant="white" onClick={() => navigate(-1)}>
-            목록
+            {t("community.write.button.list")}
           </Button>
         </div>
       </div>
