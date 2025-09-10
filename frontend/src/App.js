@@ -25,8 +25,8 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/notice/*" element={<NoticePage />} />
           <Route path="/recommend/*" element={<RecommendPage />} />
+          {/* CommunityPage 내부에서 write, board 등 라우팅 처리 */}
           <Route path="/community/*" element={<CommunityPage />} />
-          <Route path="/community/board" element={<CommunityBoard />} />
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route path="/community/post/:id" element={<CommunityPost />} />
           <Route path="/place/:id" element={<TravelDetailPage />} />
@@ -34,12 +34,12 @@ function App() {
           <Route path="/regpage" element={<SignIn />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<Navigate to="/" />} />
-          {/* 기타 Route 추가 */}
         </Routes>
       </div>
       <Footer />
     </div>
   );
 }
+
 
 export default App;

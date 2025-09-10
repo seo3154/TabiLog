@@ -1,65 +1,50 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/CommunityWrite.css";
 import Button from "../components/Button";
 
-export default function WritePage() {
-  const [title, setTitle] = useState("");
-  const [category, setCategory] = useState("전체게시판");
-  const [content, setContent] = useState("");
-  const [selectedMbti, setSelectedMbti] = useState(""); // 유저의 MBTI 값을 상태로 관리
+export default function CommunityWrite() {
   const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [category, setCategory] = useState("전체 게시판");
+  const [content, setContent] = useState("");
 
-  // 유저의 정보를 받아오는 useEffect
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userId = localStorage.getItem("userid");
-        if (userId) {
-          const response = await axios.get(
-            `http://localhost:8080/api/user/${userId}`
-          );
-          setSelectedMbti(response.data.mbti); // 유저의 MBTI 설정
-        }
-      } catch (error) {
-        console.error("유저 정보 가져오기 실패", error);
-      }
-    };
+  // 로그인 정보 가져오기
+  const user = JSON.parse(localStorage.getItem("tabilog.user"));
+  const selectedMbti = localStorage.getItem("userMbti") || "";
+  const writerId = user?.id;
 
-    fetchUserData();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
+    // 입력값 체크
     if (!title || !content) {
       alert("제목과 내용을 입력해주세요.");
       return;
     }
 
-    const newPost = {
+    // writerId 체크
+    if (!writerId) {
+      alert("로그인이 필요합니다.");
+      return;
+    }
+
+    const postData = {
       title,
       content,
       category,
-      mbti: selectedMbti, // 선택된 MBTI
-      writer: localStorage.getItem("userid"),
-      date: new Date().toISOString().split("T")[0],
+      userId: writerId,
     };
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/board/write",
-        newPost
-      );
-
-      if (response.status === 200) {
-        alert("글이 등록되었습니다!");
-        navigate("/community"); // 등록 후 목록 페이지로 이동
-      }
-    } catch (error) {
-      console.error("게시글 등록 중 오류:", error);
-      alert("게시글 등록에 실패했습니다.");
+      const res = await axios.post("http://localhost:8080/api/boards", postData);
+      alert("글이 등록되었습니다!");
+      navigate("/community");
+    } catch (err) {
+      console.error("게시글 등록 실패", err);
+      // 서버가 400/500 오류를 반환하면 err.response.data에 메시지가 있을 수 있음
+      const errorMessage =
+        err.response?.data?.message || "게시글 등록에 실패했습니다.";
+      alert(errorMessage);
     }
   };
 
@@ -68,6 +53,7 @@ export default function WritePage() {
       navigate(-1);
     }
   };
+
   return (
     <div className="wrap">
       <div className="mbti">
@@ -86,38 +72,30 @@ export default function WritePage() {
           </div>
           <div className="filter">
             <select
-              name="category"
-              id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
             >
-              <option value="전체게시판">전체 게시판</option>
-              <option value="리뷰게시판">리뷰 게시판</option>
-              <option value="질문게시판">Q&A 게시판</option>
+              <option value="전체 게시판">전체 게시판</option>
+              <option value="리뷰 게시판">리뷰 게시판</option>
+              <option value="QnA 게시판">QnA 게시판</option>
             </select>
           </div>
         </div>
+
         <div className="writebox">
           <textarea
-            name="content"
             placeholder="내용을 입력하세요."
             value={content}
             onChange={(e) => setContent(e.target.value)}
             style={{ resize: "none" }}
           />
         </div>
+
         <div className="button">
-          <input
-            className="submit"
-            type="button"
-            value="등록"
-            onClick={handleSubmit}
-          />
-          <Button
-            variant="white"
-            className="delete_button"
-            onClick={handleCancel}
-          >
+          <Button variant="black" onClick={handleSubmit}>
+            등록
+          </Button>
+          <Button variant="white" onClick={handleCancel}>
             삭제
           </Button>
           <Button variant="white" onClick={() => navigate(-1)}>

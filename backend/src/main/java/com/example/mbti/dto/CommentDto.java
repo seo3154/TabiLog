@@ -10,5 +10,6 @@ public class CommentDto {
     private Long boardId;
     private Long userId; // User PK
     private String userName; // User loginId
+    private String nickname;
     private String content;
 }
