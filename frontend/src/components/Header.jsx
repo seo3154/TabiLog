@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { Link, useNavigate } from "react-router-dom"; // 추가!
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Header.css";
 import "../styles/Button.css";
 import logo from "../assets/logo.png";
 import Button from "../components/Button.jsx";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next"; // ✅ 추가
 
 function readMe() {
   try {
@@ -15,12 +17,12 @@ function readMe() {
 }
 
 const Header = () => {
-  const navigate = useNavigate(); // ✅ 훅은 컴포넌트 내부에서!
+  const navigate = useNavigate();
   const [me, setMe] = useState(() => readMe());
+  const { t } = useTranslation(); // ✅ 추가
 
   useEffect(() => {
     const onUpdate = (e) => {
-      // 커스텀 이벤트로 들어온 필드 반영 + localStorage 최신본 보정
       const latest = readMe();
       setMe(latest ? { ...latest, ...(e.detail || {}) } : e.detail || null);
     };
@@ -42,21 +44,18 @@ const Header = () => {
 
   const loginpage = () => navigate("/login");
   const regpage = () => navigate("/regpage");
+  const mypage = () => navigate("/mypage");
 
-  // 추가: 마이페이지/로그아웃 핸들러
-  const mypage = () => navigate("/mypage"); // 라우트에 맞춰 경로 조정
   const logout = () => {
     try {
-      // 필요하면 백엔드 로그아웃 API 호출도 여기서
       window.localStorage.removeItem("tabilog.user");
-      // 전역에 상태 변경 알림
       window.dispatchEvent(
         new CustomEvent("tabilog:user-updated", { detail: null })
       );
-      navigate("/"); // 로그아웃 후 홈으로
+      navigate("/");
     } catch (e) {
       console.error(e);
-      alert("로그아웃 중 오류가 발생했습니다.");
+      alert(t("header.logoutError")); // ✅ 번역
     }
   };
 
@@ -64,45 +63,46 @@ const Header = () => {
     <header>
       <div className="logo">
         <Link to="/">
-          <img src={avatar} alt="프로필/로고" />
+          <img src={avatar} alt={t("header.profileOrLogoAlt")} />{" "}
+          {/* ✅ 번역 */}
           <h2>TABILOG</h2>
         </Link>
       </div>
 
       <ul className="menu">
         <li>
-          <Link to="/notice">공지사항</Link>
+          <Link to="/notice">{t("header.notice")}</Link> {/* ✅ 번역 */}
         </li>
         <li>
-          <Link to="/recommend">추천게시판</Link>
+          <Link to="/recommend">{t("header.recommendBoard")}</Link>{" "}
+          {/* ✅ 번역 */}
         </li>
         <li>
-          <Link to="/community">커뮤니티</Link>
+          <Link to="/community">{t("header.community")}</Link> {/* ✅ 번역 */}
         </li>
         <li>
-          <Link to="/contact">고객센터</Link>
+          <Link to="/contact">{t("header.center")}</Link> {/* ✅ 번역 */}
         </li>
+        <LanguageSwitcher />
         <li>
-          {/* me 없으면: 로그인/회원가입 */}
           {!me ? (
             <>
               <Button variant="white" onClick={loginpage}>
-                로그인
+                {t("header.login")} {/* ✅ 번역 */}
               </Button>
               &nbsp;&nbsp;&nbsp;
               <Button variant="black" onClick={regpage}>
-                회원가입
+                {t("header.signup")} {/* ✅ 번역 */}
               </Button>
             </>
           ) : (
-            // me 있으면: 마이페이지/로그아웃
             <>
               <Button variant="white" onClick={mypage}>
-                마이페이지
+                {t("header.mypage")} {/* ✅ 번역 */}
               </Button>
               &nbsp;&nbsp;&nbsp;
               <Button variant="black" onClick={logout}>
-                로그아웃
+                {t("header.logout")} {/* ✅ 번역 */}
               </Button>
             </>
           )}

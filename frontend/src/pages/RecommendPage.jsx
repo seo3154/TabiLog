@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useMemo, useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import places from "../assets/data/places.json";
 import "../styles/RecommendPage.css";
 
@@ -57,6 +58,7 @@ const PREFECTURES = [
 ];
 
 export default function RecommendPage() {
+  const { t } = useTranslation(["translation", "places"]);
   const { mbti: mbtiFromUrl } = useParams();
 
   const [userMbti, setUserMbti] = useState(() => {
@@ -162,6 +164,11 @@ export default function RecommendPage() {
     }
   }, [selectedPrefs]);
 
+  // i18n 표시 도우미
+  const nameT = (p) => t(`places.${p.id}.name`, { defaultValue: p.name_ko });
+  const prefT = (p) =>
+    t(`places.${p.id}.prefecture`, { defaultValue: p.prefecture });
+
   return (
     <main className="recommend-page-main">
       <br />
@@ -189,14 +196,12 @@ export default function RecommendPage() {
               <article className="recommend-page-article">
                 <img
                   src={pub(p?.hero?.image)}
-                  alt={p.name_ko}
+                  alt={nameT(p)}
                   className="recommend-page-img"
                 />
                 <div className="recommend-page-article-div">
-                  <div className="recommend-page-name">{p.name_ko}</div>
-                  <div className="recommend-page-prefecture">
-                    {p.prefecture}
-                  </div>
+                  <div className="recommend-page-name">{nameT(p)}</div>
+                  <div className="recommend-page-prefecture">{prefT(p)}</div>
                 </div>
               </article>
             </Link>
@@ -285,13 +290,13 @@ export default function RecommendPage() {
                     <article className="recommend-page-article">
                       <img
                         src={pub(p?.hero?.image)}
-                        alt={p.name_ko}
+                        alt={nameT(p)}
                         className="recommend-page-img"
                       />
                       <div className="recommend-page-article-div">
-                        <div className="recommend-page-name">{p.name_ko}</div>
+                        <div className="recommend-page-name">{nameT(p)}</div>
                         <div className="recommend-page-prefecture">
-                          {p.prefecture}
+                          {prefT(p)}
                         </div>
                       </div>
                     </article>
@@ -367,13 +372,13 @@ export default function RecommendPage() {
                     <article className="recommend-page-article">
                       <img
                         src={pub(p?.hero?.image)}
-                        alt={p.name_ko}
+                        alt={nameT(p)}
                         className="recommend-page-img"
                       />
                       <div className="recommend-page-article-div">
-                        <div className="recommend-page-name">{p.name_ko}</div>
+                        <div className="recommend-page-name">{nameT(p)}</div>
                         <div className="recommend-page-prefecture">
-                          {p.prefecture}
+                          {prefT(p)}
                         </div>
                       </div>
                     </article>

@@ -28,13 +28,28 @@ import right2 from "../assets/MainPagePictures/right2.png";
 import titleImage from "../assets/MainPagePictures/MBTINANI.png";
 
 import "../styles/MainPage.css";
+import { useTranslation } from "react-i18next"; // ✅ i18n
 
 const sliders = [
-  image1, image2, image3, image4, image5, image6, image7, image8,
-  image9, image10, image11, image12, image13, image14, image15, image16,
+  image1,
+  image2,
+  image3,
+  image4,
+  image5,
+  image6,
+  image7,
+  image8,
+  image9,
+  image10,
+  image11,
+  image12,
+  image13,
+  image14,
+  image15,
+  image16,
 ];
 
-const LEFT_ILLOS  = [left1, left2];
+const LEFT_ILLOS = [left1, left2];
 const RIGHT_ILLOS = [right1, right2];
 
 /* 그대로 유지: 스크롤을 ‘한 번이라도’ 했는지 (로드 직후엔 애니메이션 대기) */
@@ -97,19 +112,25 @@ function RevealToggle({ children, side = "left", threshold = 0.35 }) {
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate(); // [NEW]
+  const { t, i18n } = useTranslation(); // ✅ i18n
 
   useEffect(() => {
-    const t = setInterval(
+    // 문서 제목/언어 동기화(옵션)
+    document.documentElement.lang = i18n.resolvedLanguage || "ja";
+  }, [i18n.resolvedLanguage]);
+
+  useEffect(() => {
+    const tmr = setInterval(
       () => setCurrentIndex((i) => (i + 1) % sliders.length),
       5000
     );
-    return () => clearInterval(t);
+    return () => clearInterval(tmr);
   }, []);
 
   // [NEW] 상·하 테두리 위에서 등장할 이미지들(상단/하단 배치)
-  const topLeft     = LEFT_ILLOS[0];
-  const bottomLeft  = LEFT_ILLOS[1] || LEFT_ILLOS[0];
-  const topRight    = RIGHT_ILLOS[0];
+  const topLeft = LEFT_ILLOS[0];
+  const bottomLeft = LEFT_ILLOS[1] || LEFT_ILLOS[0];
+  const topRight = RIGHT_ILLOS[0];
   const bottomRight = RIGHT_ILLOS[1] || RIGHT_ILLOS[0];
 
   return (
@@ -120,7 +141,7 @@ export default function App() {
           <img
             key={index}
             src={src}
-            alt={`여행 사진 ${index + 1}`}
+            alt={t("main.sliderAlt", { index: index + 1 })} // ✅ 번역
             style={{
               opacity: index === currentIndex ? 1 : 0,
               objectPosition: "50% 0%", // 윗부분 우선 노출
@@ -133,11 +154,13 @@ export default function App() {
       {/* 본문 영역 */}
       <div className="main-content">
         {/* [CHANGED] 기존 H1 텍스트 제거, 이미지 타이틀로 교체 */}
-        <div className="title-image-wrap"> {/* [NEW] */}
+        <div className="title-image-wrap">
+          {" "}
+          {/* [NEW] */}
           <img
-            src={titleImage}            // [NEW]
-            alt="메인 타이틀"            // [NEW]
-            className="title-image"     // [NEW]
+            src={titleImage} // [NEW]
+            alt={t("main.heroImageAlt")} // ✅ 번역
+            className="title-image" // [NEW]
             loading="eager"
           />
         </div>
@@ -166,31 +189,38 @@ export default function App() {
             </div>
             <div className="band-rail bottom right">
               <RevealToggle side="right">
-                <img src={bottomRight} alt="right bottom" className="edge-illo" />
+                <img
+                  src={bottomRight}
+                  alt="right bottom"
+                  className="edge-illo"
+                />
               </RevealToggle>
             </div>
           </div>
 
           {/* 설명 + CTA */}
           <div className="band-content">
-            <h1 className="band-title">자신만의 MBTI로 여행을 떠나보세요!</h1>
-            <br/>
+            <h1 className="band-title">{t("main.band.title")}</h1>
+            <br />
             <div className="band-desc">
-              <p>MBTI는 성격 유형 검사의 일종으로, 내가 어떤 사람인지를 아는 데 기준이 될 수 있어요.</p>
-              <p>일본 여행을 계획 중이라면, 나에게 맞는 도시와 코스가 무엇인지 여기서 함께 찾아봐요.</p>
-              <p>커뮤니티에서 다양한 정보를 얻고, 내가 알고 있는 팁도 나눠 보세요!</p>
+              <p>{t("main.band.p1")}</p>
+              <p>{t("main.band.p2")}</p>
+              <p>{t("main.band.p3")}</p>
             </div>
 
-            <br/><br/>
+            <br />
+            <br />
 
             <button
               type="button"
               className="cta-join"
               onClick={() => navigate("/regpage")}
-              aria-label="회원가입 하러 가기"
+              aria-label={t("main.band.ctaAria")}
             >
-              가입하기
-              <span aria-hidden="true" className="cta-arrow">→</span>
+              {t("main.band.cta")}
+              <span aria-hidden="true" className="cta-arrow">
+                →
+              </span>
             </button>
           </div>
         </section>

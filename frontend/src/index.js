@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles/Notice.css";
 import "./styles/MyPage.css";
 import "./styles/Button.css";
+import "./i18n";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
