@@ -50,6 +50,7 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
   // "전체 게시판/全体掲示板/all" 모두 인식
   const allBoardLabel = t("community.board.all");
   const isAllBoard =
+    !selectedBoard ||
     selectedBoard === "all" ||
     selectedBoard === allBoardLabel ||
     selectedBoard === "전체 게시판" ||
