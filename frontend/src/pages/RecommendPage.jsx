@@ -354,7 +354,7 @@ export default function RecommendPage() {
         {selectedPrefs.length > 0 && (
           <div ref={regionResultRef} className="recommend-search-result">
             <div className="recommend-search-count">
-              {t("region.resultCount", { count: regionResults.length })}
+              {t("region.result", { count: regionResults.length })}
             </div>
 
             {regionResults.length === 0 ? (
