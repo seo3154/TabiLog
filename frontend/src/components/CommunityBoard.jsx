@@ -6,7 +6,11 @@ import "../styles/CommunityBoard.css";
 import Search from "../assets/search.png";
 import axios from "axios";
 
-export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
+export default function CommunityBoard({
+  posts = [],
+  selectedBoardLabel = "",
+  selectedCategoryValue = null,
+}) {
   const [boardPosts, setBoardPosts] = useState([]);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
@@ -49,18 +53,19 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
 
   // "전체 게시판/全体掲示板/all" 모두 인식
   const allBoardLabel = t("community.board.all");
-  const isAllBoard =
-    !selectedBoard ||
-    selectedBoard === "all" ||
-    selectedBoard === allBoardLabel ||
-    selectedBoard === "전체 게시판" ||
-    selectedBoard === "全体掲示板";
+  const isAllBoard = selectedCategoryValue == null;
 
-  const filteredPosts = boardPosts.filter(
-    (post) =>
-      (isAllBoard || post.category === selectedBoard) &&
-      (selectedMbti === "" || post.mbti === selectedMbti)
-  );
+  const source = posts && posts.length ? posts : boardPosts; // 부모 우선
+  const filteredPosts = source.filter((post) => {
+    const cat = (post?.category || "").trim();
+    const want =
+      selectedCategoryValue == null
+        ? null
+        : String(selectedCategoryValue).trim();
+    const passBoard = isAllBoard || cat === want;
+    const passMbti = selectedMbti === "" || post?.mbti === selectedMbti;
+    return passBoard && passMbti;
+  });
 
   const handleSearch = () => {
     setPage(0);
@@ -78,7 +83,7 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
   return (
     <div className="board">
       <div className="right-section">
-        <h2>{isAllBoard ? allBoardLabel : selectedBoard}</h2>
+        <h2>{isAllBoard ? allBoardLabel : selectedBoardLabel}</h2>
         <select
           aria-label={t("community.filter.mbtiAria")}
           value={selectedMbti}
@@ -146,7 +151,7 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
       <div className="pagination">
         <div className="prev">
           <button onClick={() => setPage(page - 1)} disabled={page === 0}>
-            ◀ 이전
+            ◀ {t("community.pagination.prev")}{" "}
           </button>
         </div>
 
@@ -167,7 +172,7 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
             onClick={() => setPage(page + 1)}
             disabled={page + 1 >= totalPages}
           >
-            다음 ▶
+            {t("community.pagination.next")} ▶
           </button>
         </div>
       </div>
@@ -179,7 +184,7 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder="검색어를 입력하세요."
+            placeholder={t("community.search.placeholder")}
           />
 
           <button onClick={handleSearch}>
@@ -192,9 +197,9 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
           onChange={(e) => setSearchWhat(e.target.value)}
           className="searchoption"
         >
-          <option value="title">제목</option>
-          <option value="content">내용</option>
-          <option value="user">작성자</option>
+          <option value="title">{t("community.search.title")}</option>
+          <option value="content">{t("community.search.content")}</option>
+          <option value="user">{t("community.search.user")}</option>
         </select>
       </div>
     </div>
