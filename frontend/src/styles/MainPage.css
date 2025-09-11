@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 /* ====== 상단 배너(슬라이더) ====== */

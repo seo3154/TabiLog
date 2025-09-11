@@ -1,5 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import "../styles/LanguageSwitcher.css";
+import Korea from "../assets/korea_flag.png"
+import Japan from "../assets/japan_flag.png"
+
 
 export default function LanguageSwitcher() {
   const { i18n } = useTranslation();
@@ -11,12 +15,12 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div style={{ display: "flex", gap: 8 }}>
+    <div className="switch_btn">
       <button onClick={switchTo("ja")} disabled={current === "ja"}>
-        日本語
+        <img src={Japan} />日本語
       </button>
       <button onClick={switchTo("ko")} disabled={current === "ko"}>
-        한국어
+        <img src={Korea} />한국어
       </button>
     </div>
   );

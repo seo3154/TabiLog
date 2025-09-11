@@ -83,7 +83,7 @@ const Header = () => {
         <li>
           <Link to="/contact">{t("header.center")}</Link> {/* ✅ 번역 */}
         </li>
-        <LanguageSwitcher />
+        {/* <LanguageSwitcher /> */}
         <li>
           {!me ? (
             <>

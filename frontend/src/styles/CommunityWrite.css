@@ -22,17 +22,17 @@ a {
 
 
 
-/* MBTI */
-
-
-
-
-/* 글 작성 */
+/* write_section */
 .write_section {
   width: 100%;
   max-width: 1000px;
   margin: 150px auto 0 auto;
   text-align: center;
+}
+
+.write_section .mbti{
+  text-align: left;
+  margin: 0 0 16px 96px;
 }
 
 
