@@ -194,59 +194,7 @@
       "top": "상단으로"
     }
   },
-  "community": {
-    "write": {
-      "category": {
-        "all": "전체 게시판",
-        "review": "리뷰 게시판",
-        "qna": "Q&A 게시판"
-      },
-      "placeholder": {
-        "title": "제목을 입력해주세요.",
-        "content": "내용을 입력하세요."
-      },
-      "button": {
-        "submit": "등록",
-        "cancel": "삭제",
-        "list": "목록"
-      },
-      "alert": {
-        "needTitleContent": "제목과 내용을 입력해주세요.",
-        "loginRequired": "로그인이 필요합니다.",
-        "success": "글이 등록되었습니다!",
-        "fail": "게시글 등록에 실패했습니다.",
-        "cancelConfirm": "작성을 취소하시겠습니까?"
-      }
-    },
-    "post": {
-      "loading": "불러오는 중...",
-      "views": "조회수",
-      "delete": "삭제",
-      "deleted": "게시글이 삭제되었습니다.",
-      "deleteConfirm": "정말 이 글을 삭제하시겠습니까?",
-      "deleteError": "삭제 중 오류가 발생했습니다.",
-      "commentPlaceholder": "댓글을 입력해주세요.",
-      "submit": "작성",
-      "loginRequired": "로그인이 필요합니다.",
-      "commentDeleteConfirm": "정말 이 댓글을 삭제하시겠습니까?",
-      "commentDeleteError": "삭제 중 오류가 발생했습니다."
-    },
-    "board": {
-      "all": "전체 게시판",
-      "review": "리뷰게시판",
-      "qna": "Q&A게시판",
-      "recommend": "추천 게시판"
-    },
-    "filter": { "mbtiPlaceholder": "MBTI ▼", "mbtiAria": "MBTI로 필터" },
-    "table": {
-      "no": "번호",
-      "mbti": "MBTI",
-      "title": "제목",
-      "author": "작성자",
-      "date": "작성일"
-    },
-    "empty": "게시글이 없습니다."
-  },
+
   "mbti": {
     "modal": {
       "title": "당신의 MBTI는 무엇인가요?",
@@ -486,5 +434,70 @@
     "selected": "선택: {{list}}",
     "result": "지역 결과: {{count}}건",
     "empty": "해당 지역의 등록된 관광지가 없습니다."
+  },
+  "community": {
+    "board": {
+      "all": "전체 게시판",
+      "review": "리뷰게시판",
+      "qna": "Q&A게시판",
+      "recommend": "추천 게시판"
+    },
+    "filter": { "mbtiPlaceholder": "MBTI ▼", "mbtiAria": "MBTI로 필터" },
+
+    "table": {
+      "no": "번호",
+      "mbti": "MBTI",
+      "title": "제목",
+      "author": "작성자",
+      "date": "작성일"
+    },
+    "pagination": {
+      "prev": "이전",
+      "next": "다음"
+    },
+    "search": {
+      "placeholder": "검색어를 입력하세요.",
+      "title": "제목",
+      "content": "내용",
+      "user": "작성자"
+    },
+    "write": {
+      "category": {
+        "all": "전체 게시판",
+        "review": "리뷰 게시판",
+        "qna": "Q&A 게시판"
+      },
+      "placeholder": {
+        "title": "제목을 입력해주세요.",
+        "content": "내용을 입력하세요."
+      },
+      "button": {
+        "submit": "등록",
+        "cancel": "삭제",
+        "list": "목록"
+      },
+      "alert": {
+        "needTitleContent": "제목과 내용을 입력해주세요.",
+        "loginRequired": "로그인이 필요합니다.",
+        "success": "글이 등록되었습니다!",
+        "fail": "게시글 등록에 실패했습니다.",
+        "cancelConfirm": "작성을 취소하시겠습니까?"
+      }
+    },
+    "post": {
+      "loading": "불러오는 중...",
+      "views": "조회수",
+      "delete": "삭제",
+      "deleted": "게시글이 삭제되었습니다.",
+      "deleteConfirm": "정말 이 글을 삭제하시겠습니까?",
+      "deleteError": "삭제 중 오류가 발생했습니다.",
+      "commentPlaceholder": "댓글을 입력해주세요.",
+      "submit": "작성",
+      "loginRequired": "로그인이 필요합니다.",
+      "commentDeleteConfirm": "정말 이 댓글을 삭제하시겠습니까?",
+      "commentDeleteError": "삭제 중 오류가 발생했습니다."
+    },
+
+    "empty": "게시글이 없습니다."
   }
 }

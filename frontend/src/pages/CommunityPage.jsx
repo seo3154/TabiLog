@@ -119,7 +119,16 @@ export default function CommunityPage() {
         ) : (
           <CommunityBoard
             posts={posts}
-            selectedBoardKey={selectedBoard} // 논리 키 전달
+            selectedBoardLabel={
+              selectedBoard === "ALL"
+                ? t("community.board.all")
+                : selectedBoard === "REVIEW"
+                ? t("community.board.review")
+                : selectedBoard === "QNA"
+                ? t("community.board.qna")
+                : t("community.board.all")
+            }
+            selectedCategoryValue={CATEGORIES[selectedBoard]} // null | "리뷰 게시판" | "QnA 게시판"
           />
         )}
       </div>

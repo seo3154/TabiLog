@@ -198,59 +198,7 @@
       "top": "トップへ"
     }
   },
-  "community": {
-    "write": {
-      "category": {
-        "all": "全体掲示板",
-        "review": "レビュー掲示板",
-        "qna": "Q&A掲示板"
-      },
-      "placeholder": {
-        "title": "タイトルを入力してください。",
-        "content": "内容を入力してください。"
-      },
-      "button": {
-        "submit": "登録",
-        "cancel": "削除",
-        "list": "一覧"
-      },
-      "alert": {
-        "needTitleContent": "タイトルと内容を入力してください。",
-        "loginRequired": "ログインが必要です。",
-        "success": "投稿が登録されました！",
-        "fail": "投稿の登録に失敗しました。",
-        "cancelConfirm": "作成を取り消しますか？"
-      }
-    },
-    "post": {
-      "loading": "読み込み中...",
-      "views": "閲覧数",
-      "delete": "削除",
-      "deleted": "投稿が削除されました。",
-      "deleteConfirm": "本当にこの投稿を削除しますか？",
-      "deleteError": "削除中にエラーが発生しました。",
-      "commentPlaceholder": "コメントを入力してください。",
-      "submit": "投稿",
-      "loginRequired": "ログインが必要です。",
-      "commentDeleteConfirm": "本当にこのコメントを削除しますか？",
-      "commentDeleteError": "削除中にエラーが発生しました。"
-    },
-    "board": {
-      "all": "全体掲示板",
-      "review": "レビュー掲示板",
-      "qna": "Q&A掲示板",
-      "recommend": "おすすめ掲示板"
-    },
-    "filter": { "mbtiPlaceholder": "MBTI ▼", "mbtiAria": "MBTIで絞り込み" },
-    "table": {
-      "no": "番号",
-      "mbti": "MBTI",
-      "title": "タイトル",
-      "author": "作成者",
-      "date": "作成日"
-    },
-    "empty": "投稿がありません。"
-  },
+
   "mbti": {
     "modal": {
       "title": "あなたのMBTIは？",
@@ -490,5 +438,68 @@
     "selected": "選択：{{list}}",
     "result": "地域結果：{{count}}件",
     "empty": "該当地域の観光地がありません。"
+  },
+  "community": {
+    "write": {
+      "category": {
+        "all": "全体掲示板",
+        "review": "レビュー掲示板",
+        "qna": "Q&A掲示板"
+      },
+      "placeholder": {
+        "title": "タイトルを入力してください。",
+        "content": "内容を入力してください。"
+      },
+      "button": {
+        "submit": "登録",
+        "cancel": "削除",
+        "list": "一覧"
+      },
+      "alert": {
+        "needTitleContent": "タイトルと内容を入力してください。",
+        "loginRequired": "ログインが必要です。",
+        "success": "投稿が登録されました！",
+        "fail": "投稿の登録に失敗しました。",
+        "cancelConfirm": "作成を取り消しますか？"
+      }
+    },
+    "post": {
+      "loading": "読み込み中...",
+      "views": "閲覧数",
+      "delete": "削除",
+      "deleted": "投稿が削除されました。",
+      "deleteConfirm": "本当にこの投稿を削除しますか？",
+      "deleteError": "削除中にエラーが発生しました。",
+      "commentPlaceholder": "コメントを入力してください。",
+      "submit": "投稿",
+      "loginRequired": "ログインが必要です。",
+      "commentDeleteConfirm": "本当にこのコメントを削除しますか？",
+      "commentDeleteError": "削除中にエラーが発生しました。"
+    },
+    "board": {
+      "all": "全体掲示板",
+      "review": "レビュー掲示板",
+      "qna": "Q&A掲示板",
+      "recommend": "おすすめ掲示板"
+    },
+    "filter": { "mbtiPlaceholder": "MBTI ▼", "mbtiAria": "MBTIで絞り込み" },
+    "table": {
+      "no": "番号",
+      "mbti": "MBTI",
+      "title": "タイトル",
+      "author": "作成者",
+      "date": "作成日"
+    },
+    "empty": "投稿がありません。",
+    "pagination": {
+      "prev": "前へ",
+      "next": "次へ"
+    },
+    "search": {
+      "placeholder": "キーワードを入力してください。",
+      "title": "タイトル",
+      "content": "内容",
+      "user": "投稿者"
+    }
   }
 }
