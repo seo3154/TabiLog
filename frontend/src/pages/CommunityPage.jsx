@@ -1,4 +1,3 @@
-// src/pages/CommunityPage.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,17 +14,17 @@ export default function CommunityPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  // 카테고리(보이는 라벨은 i18n, 실제 필터 값은 한글 그대로 유지)
+  // 상태에는 논리 키만 저장
   const CATEGORIES = useMemo(
     () => ({
-      ALL: "전체 게시판",
-      REVIEW: "리뷰 게시판",
+      ALL: null, // 전체면 필터 없이
+      REVIEW: "리뷰 게시판", // 백엔드 필터용 실제 값(한글)
       QNA: "QnA 게시판",
     }),
     []
   );
 
-  const [selectedBoard, setSelectedBoard] = useState(CATEGORIES.ALL);
+  const [selectedBoard, setSelectedBoard] = useState("ALL"); // 논리 키
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,21 +36,19 @@ export default function CommunityPage() {
       try {
         setLoading(true);
 
-        const params =
-          selectedBoard === CATEGORIES.ALL
-            ? {} // 전체 게시판이면 필터 없이
-            : { searchWhat: "category", keyword: selectedBoard };
+        const categoryValue = CATEGORIES[selectedBoard]; // null | "리뷰 게시판" | "QnA 게시판"
+        const params = categoryValue
+          ? { searchWhat: "category", keyword: categoryValue }
+          : {};
 
         const res = await axios.get("http://localhost:8080/api/boards", {
           params,
           signal: controller.signal,
         });
 
-        // 백엔드가 배열/페이지 둘 다 가능할 때 안전 처리
         const data = Array.isArray(res.data)
           ? res.data
           : res.data?.content || [];
-
         setPosts(data);
       } catch (err) {
         if (axios.isCancel(err)) return;
@@ -64,24 +61,24 @@ export default function CommunityPage() {
 
     fetchPosts();
     return () => controller.abort();
-  }, [selectedBoard, CATEGORIES.ALL]);
+  }, [selectedBoard, CATEGORIES]);
 
-  // 사이드바 메뉴
+  // 사이드바 메뉴 (라벨은 번역, 값은 키)
   const menuItems = [
     {
       key: "general",
-      label: t("community.board.all"), // "전체 게시판"
-      onClick: () => setSelectedBoard(CATEGORIES.ALL),
+      label: t("community.board.all"),
+      onClick: () => setSelectedBoard("ALL"),
     },
     {
       key: "review",
-      label: t("community.board.review"), // "리뷰 게시판"
-      onClick: () => setSelectedBoard(CATEGORIES.REVIEW),
+      label: t("community.board.review"),
+      onClick: () => setSelectedBoard("REVIEW"),
     },
     {
       key: "qna",
-      label: t("community.board.qna"), // "Q&A게시판"
-      onClick: () => setSelectedBoard(CATEGORIES.QNA),
+      label: t("community.board.qna"),
+      onClick: () => setSelectedBoard("QNA"),
     },
   ];
 
@@ -114,13 +111,16 @@ export default function CommunityPage() {
           onClick={goWrite}
           aria-label={t("community.board.all")}
         >
-          {t("notice.list.writeBtn") /* "글쓰기" */}
+          {t("notice.list.writeBtn")}
         </Button>
 
         {loading ? (
           <div className="board_loading">Loading…</div>
         ) : (
-          <CommunityBoard posts={posts} selectedBoard={selectedBoard} />
+          <CommunityBoard
+            posts={posts}
+            selectedBoardKey={selectedBoard} // 논리 키 전달
+          />
         )}
       </div>
     </div>

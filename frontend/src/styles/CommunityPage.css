@@ -1,8 +1,8 @@
 @charset "utf-8";
 
-.WriteButton{
-    position: relative;
-    top: 74px;
-    left: 450px;
-    cursor: pointer;
+.WriteButton {
+  position: relative;
+  top: 74px;
+  left: 450px;
+  cursor: pointer;
 }

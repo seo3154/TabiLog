@@ -1,10 +1,12 @@
-// src/components/CommunityBoard.jsx
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../styles/CommunityBoard.css";
 
-export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
+export default function CommunityBoard({
+  posts = [],
+  selectedBoardKey = "ALL",
+}) {
   const { t, i18n } = useTranslation();
 
   const mbtiList = [
@@ -27,27 +29,41 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
   ];
 
   const [selectedMbti, setSelectedMbti] = useState("");
-
   const handleChange = (e) => setSelectedMbti(e.target.value);
 
-  // "전체 게시판/全体掲示板/all" 모두 인식
-  const allBoardLabel = t("community.board.all");
-  const isAllBoard =
-    selectedBoard === "all" ||
-    selectedBoard === allBoardLabel ||
-    selectedBoard === "전체 게시판" ||
-    selectedBoard === "全体掲示板";
+  // 키→표시 라벨(번역)
+  const boardLabelMap = useMemo(
+    () => ({
+      ALL: t("community.board.all"),
+      REVIEW: t("community.board.review"),
+      QNA: t("community.board.qna"),
+    }),
+    [t]
+  );
+
+  // 키→백엔드 실제 카테고리 값(한글)
+  const boardValueMap = useMemo(
+    () => ({
+      REVIEW: "리뷰 게시판",
+      QNA: "QnA 게시판",
+    }),
+    []
+  );
+
+  const isAllBoard = selectedBoardKey === "ALL";
+  const heading = boardLabelMap[selectedBoardKey] || boardLabelMap.ALL;
 
   const filteredPosts = posts.filter(
     (post) =>
-      (isAllBoard || post.category === selectedBoard) &&
+      (isAllBoard || post.category === boardValueMap[selectedBoardKey]) &&
       (selectedMbti === "" || post.mbti === selectedMbti)
   );
 
   return (
     <div className="board">
       <div>
-        <h2>{isAllBoard ? allBoardLabel : selectedBoard}</h2>
+        <h2>{heading}</h2>
+
         <select
           aria-label={t("community.filter.mbtiAria")}
           value={selectedMbti}
@@ -62,7 +78,7 @@ export default function CommunityBoard({ posts = [], selectedBoard = "" }) {
         </select>
       </div>
 
-      <table className="board_table" aria-label={t("community.board.all")}>
+      <table className="board_table" aria-label={heading}>
         <thead>
           <tr>
             <th>{t("community.table.no")}</th>

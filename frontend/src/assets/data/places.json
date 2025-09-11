@@ -4,12 +4,7 @@
     "prefecture": "홋카이도",
     "name_ko": "후라노 / 비에이",
     "name_jp": "富良野 / 美瑛",
-    "mbti": [
-      "INTP",
-      "ISFP",
-      "ESFP",
-      "ENFP"
-    ],
+    "mbti": ["INTP", "ISFP", "ESFP", "ENFP"],
     "hero": {
       "image": "/Place/1.Hokkaido_1.jpg",
       "subtitle": "라벤더 밭과 구릉 풍경"
@@ -77,12 +72,7 @@
     "prefecture": "아오모리현",
     "name_ko": "히로사키 성",
     "name_jp": "弘前城",
-    "mbti": [
-      "ISFJ",
-      "INFJ",
-      "ISTJ",
-      "ESFJ"
-    ],
+    "mbti": ["ISFJ", "INFJ", "ISTJ", "ESFJ"],
     "hero": {
       "image": "/Place/2.Aomori_1.jpg",
       "subtitle": "벚꽃과 성곽"
@@ -137,12 +127,7 @@
     "prefecture": "아키타현",
     "name_ko": "가쿠노다테",
     "name_jp": "角館",
-    "mbti": [
-      "INFJ",
-      "ISFJ",
-      "INFP",
-      "ENFJ"
-    ],
+    "mbti": ["INFJ", "ISFJ", "INFP", "ENFJ"],
     "hero": {
       "image": "/Place/3.Akita_1.jpg",
       "subtitle": "무사 마을과 온천"
@@ -151,10 +136,7 @@
       "summary": "가쿠노다테는 ‘작은 교토’로 불리는 전통 무사 마을입니다.",
       "detail": "사무라이 거리를 거닐다 보면 당시 생활 도구와 가구가 전시된 공간을 통해 옛 시대의 삶을 엿볼 수 있습니다."
     },
-    "gallery": [
-      "/Place/3.Akita_2.jpg",
-      "/Place/3.Akita_3.jpg"
-    ],
+    "gallery": ["/Place/3.Akita_2.jpg", "/Place/3.Akita_3.jpg"],
     "extraintro": {
       "summary": "가쿠노다테 여행을 마친 뒤에는 근처 다자와코에서 호수의 고요함을 감상해 보세요.",
       "detail": "눈 덮인 뉴토 온천에서 설경을 바라보면서, 따뜻한 온천욕을 즐기며 여행의 피로를 풀어보시기 바랍니다."
@@ -205,12 +187,7 @@
     "prefecture": "이와테현",
     "name_ko": "모리오카",
     "name_jp": "盛岡",
-    "mbti": [
-      "INTP",
-      "INFP",
-      "ENTP",
-      "ENTJ"
-    ],
+    "mbti": ["INTP", "INFP", "ENTP", "ENTJ"],
     "hero": {
       "image": "/Place/4.Iwate_1.jpg",
       "subtitle": "이와테산과 도시 산책"
@@ -269,12 +246,7 @@
     "prefecture": "야마가타현",
     "name_ko": "긴잔 온천",
     "name_jp": "銀山温泉",
-    "mbti": [
-      "INFP",
-      "ISFJ",
-      "ENTJ",
-      "ENFJ"
-    ],
+    "mbti": ["INFP", "ISFJ", "ENTJ", "ENFJ"],
     "hero": {
       "image": "/Place/5.Yamagata_1.jpg",
       "subtitle": "가스등과 목조 여관 거리"
@@ -329,12 +301,7 @@
     "prefecture": "미야기현",
     "name_ko": "자오 여우 마을",
     "name_jp": "蔵王キツネ村",
-    "mbti": [
-      "ENFJ",
-      "ESFJ",
-      "ISFJ",
-      "INFP"
-    ],
+    "mbti": ["ENFJ", "ESFJ", "ISFJ", "INFP"],
     "hero": {
       "image": "/Place/6.Miyagi_1.jpg",
       "subtitle": "자연형 여우 보호구역"
@@ -352,10 +319,7 @@
       "summary": "마을을 둘러본 뒤 시간이 남으신다면, 자오산 정상 부근의 자오 오카마를 방문해 보시길 추천드립니다.",
       "detail": "날씨에 따라 색이 미묘하게 변하는 신비로운 풍경이 매력적입니다. 봄부터 가을까지는 드라이브 코스로도 인기가 높으며, 단풍과 함께 보면 더욱 아름답습니다."
     },
-    "extragallery": [
-      "/Place/6.Miyagi_5.jpg",
-      "/Place/6.Miyagi_6.jpg"
-    ],
+    "extragallery": ["/Place/6.Miyagi_5.jpg", "/Place/6.Miyagi_6.jpg"],
     "foods": [
       {
         "name": "굴",
@@ -401,12 +365,7 @@
     "prefecture": "후쿠시마현",
     "name_ko": "오우치주쿠",
     "name_jp": "大内宿",
-    "mbti": [
-      "ISFJ",
-      "INFJ",
-      "ISTJ",
-      "ESFJ"
-    ],
+    "mbti": ["ISFJ", "INFJ", "ISTJ", "ESFJ"],
     "hero": {
       "image": "/Place/7.Fukushima_1.jpg",
       "subtitle": "초가집 역참 마을"
@@ -461,12 +420,7 @@
     "prefecture": "군마현",
     "name_ko": "쿠사츠 온천",
     "name_jp": "草津温泉",
-    "mbti": [
-      "ISTJ",
-      "ISFP",
-      "ESTJ",
-      "ESFP"
-    ],
+    "mbti": ["ISTJ", "ISFP", "ESTJ", "ESFP"],
     "hero": {
       "image": "/Place/8.Gunma_1.jpg",
       "subtitle": "유바타케와 온천 마을"
@@ -521,12 +475,7 @@
     "prefecture": "도치기현",
     "name_ko": "닛코 동조궁",
     "name_jp": "日光東照宮",
-    "mbti": [
-      "INFP",
-      "INTJ",
-      "ISTP",
-      "ENFJ"
-    ],
+    "mbti": ["INFP", "INTJ", "ISTP", "ENFJ"],
     "hero": {
       "image": "/Place/9.Tochigi_1.jpg",
       "subtitle": "세 마리 원숭이와 화려한 장식"
@@ -590,12 +539,7 @@
     "prefecture": "이바라키현",
     "name_ko": "국영 히타치 해변 공원",
     "name_jp": "国営ひたち海浜公園",
-    "mbti": [
-      "INFJ",
-      "ESFJ",
-      "INTJ",
-      "ESTP"
-    ],
+    "mbti": ["INFJ", "ESFJ", "INTJ", "ESTP"],
     "hero": {
       "image": "/Place/10.Ibaraki_1.jpg",
       "subtitle": "네모필라와 코키아 언덕"
@@ -650,12 +594,7 @@
     "prefecture": "치바현",
     "name_ko": "나리타산 신쇼지",
     "name_jp": "成田山新勝寺",
-    "mbti": [
-      "ISFP",
-      "ESFP",
-      "ISTP",
-      "INFP"
-    ],
+    "mbti": ["ISFP", "ESFP", "ISTP", "INFP"],
     "hero": {
       "image": "/Place/11.Chiba_1.jpg",
       "subtitle": "대본당과 삼중탑"
@@ -711,12 +650,7 @@
     "prefecture": "사이타마현",
     "name_ko": "철도박물관",
     "name_jp": "鉄道博物館",
-    "mbti": [
-      "INTP",
-      "ISTP",
-      "ENTJ",
-      "ESTJ"
-    ],
+    "mbti": ["INTP", "ISTP", "ENTJ", "ESTJ"],
     "hero": {
       "image": "/Place/12.Saitama_1.jpg",
       "subtitle": "실차 전시와 시뮬레이터"
@@ -771,12 +705,7 @@
     "prefecture": "도쿄도",
     "name_ko": "오다이바",
     "name_jp": "お台場",
-    "mbti": [
-      "ENTP",
-      "ENFP",
-      "ESFP",
-      "ESTP"
-    ],
+    "mbti": ["ENTP", "ENFP", "ESFP", "ESTP"],
     "hero": {
       "image": "/Place/13.Tokyo_1.jpg",
       "subtitle": "레인보우 브리지와 야경"
@@ -831,12 +760,7 @@
     "prefecture": "가나가와현",
     "name_ko": "요코하마",
     "name_jp": "横浜",
-    "mbti": [
-      "ESFJ",
-      "ISFP",
-      "ENTP",
-      "ESTP"
-    ],
+    "mbti": ["ESFJ", "ISFP", "ENTP", "ESTP"],
     "hero": {
       "image": "/Place/14.Kanagawa_1.jpg",
       "subtitle": "미나토미라이와 항구 도시"
@@ -895,12 +819,7 @@
     "prefecture": "니가타현",
     "name_ko": "나가오카 불꽃 축제",
     "name_jp": "長岡まつり大花火大会",
-    "mbti": [
-      "ESFJ",
-      "ENFJ",
-      "ISFJ",
-      "INFJ"
-    ],
+    "mbti": ["ESFJ", "ENFJ", "ISFJ", "INFJ"],
     "hero": {
       "image": "/Place/15.Niigata_1.jpg",
       "subtitle": "페닉스 불꽃"
@@ -922,7 +841,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 37.4549, 
+      "lat": 37.4549,
       "lng": 138.8392
     },
     "nearbyRestaurants": [
@@ -951,12 +870,7 @@
     "prefecture": "도야마현",
     "name_ko": "다테야마",
     "name_jp": "立山",
-    "mbti": [
-      "ISTJ",
-      "ESTJ",
-      "INTJ",
-      "ENTJ"
-    ],
+    "mbti": ["ISTJ", "ESTJ", "INTJ", "ENTJ"],
     "hero": {
       "image": "/Place/16.Toyama_1.jpg",
       "subtitle": "유키노 오타니와 알펜 루트"
@@ -982,7 +896,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 36.5766, 
+      "lat": 36.5766,
       "lng": 137.5915
     },
     "nearbyRestaurants": [
@@ -1011,12 +925,7 @@
     "prefecture": "이시카와현",
     "name_ko": "가나자와",
     "name_jp": "金沢",
-    "mbti": [
-      "INFP",
-      "ENFP",
-      "ISFP",
-      "ESFP"
-    ],
+    "mbti": ["INFP", "ENFP", "ISFP", "ESFP"],
     "hero": {
       "image": "/Place/17.Ishikawa_1.jpg",
       "subtitle": "츠즈미몬과 겐로쿠엔"
@@ -1034,10 +943,7 @@
       "summary": "현대 예술을 감상할 수 있는 21세기 미술관은 독창적인 전시와 체험형 작품들로 많은 관광객들의 사랑을 받고 있습니다.",
       "detail": "가나자와는 도시 곳곳이 산책하기 좋게 연결되어 있어, 하루 동안에도 전통과 현대를 넘나드는 다양한 경험을 할 수 있습니다."
     },
-    "extragallery": [
-      "/Place/17.Ishikawa_5.jpg",
-      "/Place/17.Ishikawa_6.jpg"
-    ],
+    "extragallery": ["/Place/17.Ishikawa_5.jpg", "/Place/17.Ishikawa_6.jpg"],
     "foods": [
       {
         "name": "가나자와 카레",
@@ -1050,7 +956,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 36.5623, 
+      "lat": 36.5623,
       "lng": 136.6626
     },
     "nearbyRestaurants": [
@@ -1079,12 +985,7 @@
     "prefecture": "후쿠이현",
     "name_ko": "후쿠이현 공룡 박물관",
     "name_jp": "福井県立恐竜博物館",
-    "mbti": [
-      "ISTP",
-      "INTJ",
-      "ENTP",
-      "ESTJ"
-    ],
+    "mbti": ["ISTP", "INTJ", "ENTP", "ESTJ"],
     "hero": {
       "image": "/Place/18.Fukui_1.jpg",
       "subtitle": "실물 크기 공룡 전시"
@@ -1106,7 +1007,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 36.0849, 
+      "lat": 36.0849,
       "lng": 136.5084
     },
     "nearbyRestaurants": [
@@ -1135,12 +1036,7 @@
     "prefecture": "시즈오카현",
     "name_ko": "니혼다이라",
     "name_jp": "日本平",
-    "mbti": [
-      "ESTP",
-      "ENTP",
-      "ISFP",
-      "INFJ"
-    ],
+    "mbti": ["ESTP", "ENTP", "ISFP", "INFJ"],
     "hero": {
       "image": "/Place/19.Shizuoka_1.jpg",
       "subtitle": "후지산 전망과 로프웨이"
@@ -1167,7 +1063,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.9740, 
+      "lat": 34.974,
       "lng": 138.4659
     },
     "nearbyRestaurants": [
@@ -1196,12 +1092,7 @@
     "prefecture": "야마나시현",
     "name_ko": "후지요시다",
     "name_jp": "富士吉田",
-    "mbti": [
-      "ENFP",
-      "ESFP",
-      "ISFP",
-      "INTP"
-    ],
+    "mbti": ["ENFP", "ESFP", "ISFP", "INTP"],
     "hero": {
       "image": "/Place/20.Yamanashi_1.jpg",
       "subtitle": "가와구치호와 오중탑 전망"
@@ -1231,7 +1122,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 35.5016, 
+      "lat": 35.5016,
       "lng": 138.8016
     },
     "nearbyRestaurants": [
@@ -1260,12 +1151,7 @@
     "prefecture": "나가노현",
     "name_ko": "가미코치",
     "name_jp": "上高地",
-    "mbti": [
-      "INFJ",
-      "INFP",
-      "ISFJ",
-      "INTJ"
-    ],
+    "mbti": ["INFJ", "INFP", "ISFJ", "INTJ"],
     "hero": {
       "image": "/Place/21.Nagano_1.jpg",
       "subtitle": "아즈사강과 호타카 연봉"
@@ -1283,10 +1169,7 @@
       "summary": "가미코치 여행과 함께 나가노현의 상징적인 역사 유적지인 마쓰모토성을 방문해 보시는 것도 좋습니다.",
       "detail": "일본에서 가장 오래된 5층 6층 구조의 천수각을 가진 국보 성으로, 검은 외벽이 ‘까마귀 성’이라 불릴 만큼 인상적입니다."
     },
-    "extragallery": [
-      "/Place/21.Nagano_5.jpg",
-      "/Place/21.Nagano_6.jpg"
-    ],
+    "extragallery": ["/Place/21.Nagano_5.jpg", "/Place/21.Nagano_6.jpg"],
     "foods": [
       {
         "name": "와사비",
@@ -1295,7 +1178,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 36.2569, 
+      "lat": 36.2569,
       "lng": 137.6372
     },
     "nearbyRestaurants": [
@@ -1324,12 +1207,7 @@
     "prefecture": "기후현",
     "name_ko": "시라카와고",
     "name_jp": "白川郷",
-    "mbti": [
-      "ISFJ",
-      "INFJ",
-      "INFP",
-      "ENFJ"
-    ],
+    "mbti": ["ISFJ", "INFJ", "INFP", "ENFJ"],
     "hero": {
       "image": "/Place/22.Gifu_1.jpg",
       "subtitle": "합장조 초가집 마을"
@@ -1355,7 +1233,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 36.2584, 
+      "lat": 36.2584,
       "lng": 136.9062
     },
     "nearbyRestaurants": [
@@ -1384,12 +1262,7 @@
     "prefecture": "아이치현",
     "name_ko": "나고야항 수족관",
     "name_jp": "名古屋港水族館",
-    "mbti": [
-      "ESFP",
-      "ESTP",
-      "ENTP",
-      "ENFP"
-    ],
+    "mbti": ["ESFP", "ESTP", "ENTP", "ENFP"],
     "hero": {
       "image": "/Place/23.Aichi_1.jpg",
       "subtitle": "범고래·돌고래 쇼"
@@ -1419,7 +1292,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 35.0906, 
+      "lat": 35.0906,
       "lng": 136.8784
     },
     "nearbyRestaurants": [
@@ -1448,12 +1321,7 @@
     "prefecture": "미에현",
     "name_ko": "이세 신궁",
     "name_jp": "伊勢神宮",
-    "mbti": [
-      "INTP",
-      "INFP",
-      "ISTJ",
-      "ENTJ"
-    ],
+    "mbti": ["INTP", "INFP", "ISTJ", "ENTJ"],
     "hero": {
       "image": "/Place/24.Mie_1.jpg",
       "subtitle": "삼나무 숲의 성지"
@@ -1475,7 +1343,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.4555, 
+      "lat": 34.4555,
       "lng": 136.7254
     },
     "nearbyRestaurants": [
@@ -1504,12 +1372,7 @@
     "prefecture": "시가현",
     "name_ko": "비와호",
     "name_jp": "琵琶湖",
-    "mbti": [
-      "INTP",
-      "ISFP",
-      "ENTP",
-      "ESFP"
-    ],
+    "mbti": ["INTP", "ISFP", "ENTP", "ESFP"],
     "hero": {
       "image": "/Place/25.Shiga_1.jpg",
       "subtitle": "호반 레저와 전망"
@@ -1535,7 +1398,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 35.0113, 
+      "lat": 35.0113,
       "lng": 135.8679
     },
     "nearbyRestaurants": [
@@ -1564,12 +1427,7 @@
     "prefecture": "와카야마현",
     "name_ko": "나치 폭포",
     "name_jp": "那智の滝",
-    "mbti": [
-      "INFJ",
-      "INTJ",
-      "ISFJ",
-      "ENFJ"
-    ],
+    "mbti": ["INFJ", "INTJ", "ISFJ", "ENFJ"],
     "hero": {
       "image": "/Place/26.Wakayama_1.jpg",
       "subtitle": "높이 133m 직하 폭포"
@@ -1587,10 +1445,7 @@
       "summary": "나치 폭포 근처 기슈카쓰우라 지역에는 바다를 마주한 호텔 우라시마가 있으며, 특히 해식동굴 안에 자리한 온천 ‘보케이도’가 유명합니다.",
       "detail": "파도 소리를 들으며 온천욕을 즐기는 특별한 경험은 여행의 피로를 말끔히 씻어줍니다."
     },
-    "extragallery": [
-      "/Place/26.Wakayama_5.jpg",
-      "/Place/26.Wakayama_6.jpg"
-    ],
+    "extragallery": ["/Place/26.Wakayama_5.jpg", "/Place/26.Wakayama_6.jpg"],
     "foods": [
       {
         "name": "마구로",
@@ -1607,7 +1462,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.6756, 
+      "lat": 33.6756,
       "lng": 135.8876
     },
     "nearbyRestaurants": [
@@ -1636,12 +1491,7 @@
     "prefecture": "교토부",
     "name_ko": "후시미 이나리 신사",
     "name_jp": "伏見稲荷大社",
-    "mbti": [
-      "ENFP",
-      "INFP",
-      "ESFP",
-      "ISFP"
-    ],
+    "mbti": ["ENFP", "INFP", "ESFP", "ISFP"],
     "hero": {
       "image": "/Place/27.Kyoto_1.jpg",
       "subtitle": "센본토리이"
@@ -1667,7 +1517,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.9679, 
+      "lat": 34.9679,
       "lng": 135.7791
     },
     "nearbyRestaurants": [
@@ -1696,12 +1546,7 @@
     "prefecture": "나라현",
     "name_ko": "나라 공원",
     "name_jp": "奈良公園",
-    "mbti": [
-      "ISFJ",
-      "ESFP",
-      "ENFP",
-      "INFP"
-    ],
+    "mbti": ["ISFJ", "ESFP", "ENFP", "INFP"],
     "hero": {
       "image": "/Place/28.Nara_1.jpg",
       "subtitle": "사슴과 세계유산"
@@ -1727,7 +1572,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.6854, 
+      "lat": 34.6854,
       "lng": 135.8429
     },
     "nearbyRestaurants": [
@@ -1756,12 +1601,7 @@
     "prefecture": "오사카부",
     "name_ko": "신세카이",
     "name_jp": "新世界",
-    "mbti": [
-      "ESFP",
-      "ESTP",
-      "ENTP",
-      "ENFP"
-    ],
+    "mbti": ["ESFP", "ESTP", "ENTP", "ENFP"],
     "hero": {
       "image": "/Place/29.Osaka_1.jpg",
       "subtitle": "쓰텐카쿠와 레트로 거리"
@@ -1820,12 +1660,7 @@
     "prefecture": "효고현",
     "name_ko": "히메지 성",
     "name_jp": "姫路城",
-    "mbti": [
-      "ISTP",
-      "INTJ",
-      "ESTP",
-      "ENTJ"
-    ],
+    "mbti": ["ISTP", "INTJ", "ESTP", "ENTJ"],
     "hero": {
       "image": "/Place/30.Hyogo_1.jpg",
       "subtitle": "백로성"
@@ -1851,7 +1686,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.8396, 
+      "lat": 34.8396,
       "lng": 134.6938
     },
     "nearbyRestaurants": [
@@ -1880,12 +1715,7 @@
     "prefecture": "오카야마현",
     "name_ko": "구라시키 미관지구",
     "name_jp": "倉敷美観地区",
-    "mbti": [
-      "ENFP",
-      "INFJ",
-      "INTP",
-      "ENFJ"
-    ],
+    "mbti": ["ENFP", "INFJ", "INTP", "ENFJ"],
     "hero": {
       "image": "/Place/31.Okayama_1.jpg",
       "subtitle": "운하와 흰 벽의 창고"
@@ -1907,7 +1737,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.5958, 
+      "lat": 34.5958,
       "lng": 133.7717
     },
     "nearbyRestaurants": [
@@ -1936,12 +1766,7 @@
     "prefecture": "히로시마현",
     "name_ko": "미야지마",
     "name_jp": "宮島",
-    "mbti": [
-      "INFP",
-      "ISFP",
-      "ENFP",
-      "INFJ"
-    ],
+    "mbti": ["INFP", "ISFP", "ENFP", "INFJ"],
     "hero": {
       "image": "/Place/32.Hiroshima_1.jpg",
       "subtitle": "이쓰쿠시마"
@@ -1967,7 +1792,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.2962, 
+      "lat": 34.2962,
       "lng": 132.3198
     },
     "nearbyRestaurants": [
@@ -1996,12 +1821,7 @@
     "prefecture": "돗토리현",
     "name_ko": "돗토리 사구",
     "name_jp": "鳥取砂丘",
-    "mbti": [
-      "ESFJ",
-      "ESTJ",
-      "ESFP",
-      "ISFP"
-    ],
+    "mbti": ["ESFJ", "ESTJ", "ESFP", "ISFP"],
     "hero": {
       "image": "/Place/33.Tottori_1.jpg",
       "subtitle": "바다와 맞닿은 모래사구"
@@ -2027,7 +1847,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 35.5439, 
+      "lat": 35.5439,
       "lng": 134.2365
     },
     "nearbyRestaurants": [
@@ -2056,12 +1876,7 @@
     "prefecture": "시마네현",
     "name_ko": "이즈모 타이샤",
     "name_jp": "出雲大社",
-    "mbti": [
-      "ESFJ",
-      "ENFJ",
-      "ESTJ",
-      "ENFP"
-    ],
+    "mbti": ["ESFJ", "ENFJ", "ESTJ", "ENFP"],
     "hero": {
       "image": "/Place/34.Shimane_1.jpg",
       "subtitle": "거대한 시메나와"
@@ -2083,7 +1898,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 35.4020, 
+      "lat": 35.402,
       "lng": 132.6854
     },
     "nearbyRestaurants": [
@@ -2112,12 +1927,7 @@
     "prefecture": "야마구치현",
     "name_ko": "시모노세키",
     "name_jp": "下関",
-    "mbti": [
-      "ESTJ",
-      "ENTJ",
-      "ISTJ",
-      "INTJ"
-    ],
+    "mbti": ["ESTJ", "ENTJ", "ISTJ", "INTJ"],
     "hero": {
       "image": "/Place/35.Yamaguchi_1.jpg",
       "subtitle": "간몬 해협의 항구 도시"
@@ -2143,7 +1953,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.9567, 
+      "lat": 33.9567,
       "lng": 130.9458
     },
     "nearbyRestaurants": [
@@ -2172,12 +1982,7 @@
     "prefecture": "카가와현",
     "name_ko": "섬과 소도시 여행",
     "name_jp": "直島・豊島・小豆島",
-    "mbti": [
-      "INFP",
-      "ENFP",
-      "ENTP",
-      "ENFJ"
-    ],
+    "mbti": ["INFP", "ENFP", "ENTP", "ENFJ"],
     "hero": {
       "image": "/Place/36.Kagawa_1.jpg",
       "subtitle": "현대미술과 올리브 섬"
@@ -2207,7 +2012,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.3542, 
+      "lat": 34.3542,
       "lng": 134.0487
     },
     "nearbyRestaurants": [
@@ -2236,12 +2041,7 @@
     "prefecture": "도쿠시마현",
     "name_ko": "아와오도리 회관",
     "name_jp": "阿波おどり会館",
-    "mbti": [
-      "ESFP",
-      "ENFP",
-      "ISFP",
-      "ENTP"
-    ],
+    "mbti": ["ESFP", "ENFP", "ISFP", "ENTP"],
     "hero": {
       "image": "/Place/37.Tokushima_1.jpg",
       "subtitle": "전통 춤 공연·체험"
@@ -2267,7 +2067,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 34.0702, 
+      "lat": 34.0702,
       "lng": 134.5449
     },
     "nearbyRestaurants": [
@@ -2296,12 +2096,7 @@
     "prefecture": "에히메현",
     "name_ko": "도고 온천",
     "name_jp": "道後温泉",
-    "mbti": [
-      "ISFJ",
-      "INFJ",
-      "ESFP",
-      "INFP"
-    ],
+    "mbti": ["ISFJ", "INFJ", "ESFP", "INFP"],
     "hero": {
       "image": "/Place/38.Ehime_1.jpg",
       "subtitle": "목조 본관과 온천 마을"
@@ -2327,7 +2122,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.8521, 
+      "lat": 33.8521,
       "lng": 132.7864
     },
     "nearbyRestaurants": [
@@ -2356,12 +2151,7 @@
     "prefecture": "고치현",
     "name_ko": "가쓰라하마",
     "name_jp": "桂浜",
-    "mbti": [
-      "ISFJ",
-      "ESFP",
-      "ENFJ",
-      "INFP"
-    ],
+    "mbti": ["ISFJ", "ESFP", "ENFJ", "INFP"],
     "hero": {
       "image": "/Place/39.Kochi_1.jpg",
       "subtitle": "태평양 전망 해변"
@@ -2383,7 +2173,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.4976, 
+      "lat": 33.4976,
       "lng": 133.5748
     },
     "nearbyRestaurants": [
@@ -2412,12 +2202,7 @@
     "prefecture": "후쿠오카현",
     "name_ko": "후쿠오카 시내",
     "name_jp": "福岡（キャナルシティ・中洲屋台）",
-    "mbti": [
-      "ENTP",
-      "ESTP",
-      "ESFP",
-      "ENFP"
-    ],
+    "mbti": ["ENTP", "ESTP", "ESFP", "ENFP"],
     "hero": {
       "image": "/Place/40.Fukuoka_1.jpg",
       "subtitle": "쇼핑과 야경·포장마차"
@@ -2447,7 +2232,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.5898, 
+      "lat": 33.5898,
       "lng": 130.4109
     },
     "nearbyRestaurants": [
@@ -2476,12 +2261,7 @@
     "prefecture": "사가현",
     "name_ko": "아리타",
     "name_jp": "有田",
-    "mbti": [
-      "ISTJ",
-      "ENTJ",
-      "INFJ",
-      "ENFJ"
-    ],
+    "mbti": ["ISTJ", "ENTJ", "INFJ", "ENFJ"],
     "hero": {
       "image": "/Place/41.Saga_1.jpg",
       "subtitle": "아리타야키 도자기 마을"
@@ -2507,7 +2287,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.1893, 
+      "lat": 33.1893,
       "lng": 129.8991
     },
     "nearbyRestaurants": [
@@ -2536,12 +2316,7 @@
     "prefecture": "나가사키현",
     "name_ko": "평화공원",
     "name_jp": "平和公園",
-    "mbti": [
-      "INFJ",
-      "INTP",
-      "ISFP",
-      "ENFP"
-    ],
+    "mbti": ["INFJ", "INTP", "ISFP", "ENFP"],
     "hero": {
       "image": "/Place/42.Nagasaki_1.jpg",
       "subtitle": "평화 기념상과 자료관"
@@ -2596,12 +2371,7 @@
     "prefecture": "오이타현",
     "name_ko": "벳부 지옥 순례",
     "name_jp": "別府地獄めぐり",
-    "mbti": [
-      "ESFP",
-      "ENFP",
-      "ISFP",
-      "INFP"
-    ],
+    "mbti": ["ESFP", "ENFP", "ISFP", "INFP"],
     "hero": {
       "image": "/Place/43.Oita_1.jpg",
       "subtitle": "다채로운 색의 온천 지옥"
@@ -2627,7 +2397,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 33.3159, 
+      "lat": 33.3159,
       "lng": 131.4696
     },
     "nearbyRestaurants": [
@@ -2656,12 +2426,7 @@
     "prefecture": "구마모토현",
     "name_ko": "아소산",
     "name_jp": "阿蘇山",
-    "mbti": [
-      "ISTJ",
-      "ESTJ",
-      "ISFJ",
-      "ESFJ"
-    ],
+    "mbti": ["ISTJ", "ESTJ", "ISFJ", "ESFJ"],
     "hero": {
       "image": "/Place/44.Kumamoto_1.jpg",
       "subtitle": "거대한 칼데라와 초원"
@@ -2683,7 +2448,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 32.9255, 
+      "lat": 32.9255,
       "lng": 131.0777
     },
     "nearbyRestaurants": [
@@ -2712,12 +2477,7 @@
     "prefecture": "미야자키현",
     "name_ko": "아오시마",
     "name_jp": "青島",
-    "mbti": [
-      "ISFP",
-      "ENTJ",
-      "ENFP",
-      "INFP"
-    ],
+    "mbti": ["ISFP", "ENTJ", "ENFP", "INFP"],
     "hero": {
       "image": "/Place/45.Miyazaki_1.jpg",
       "subtitle": "악마의 세탁판과 신사"
@@ -2743,7 +2503,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 31.8048, 
+      "lat": 31.8048,
       "lng": 131.4749
     },
     "nearbyRestaurants": [
@@ -2772,12 +2532,7 @@
     "prefecture": "가고시마현",
     "name_ko": "사쿠라지마",
     "name_jp": "桜島",
-    "mbti": [
-      "INFJ",
-      "ESTP",
-      "INTP",
-      "ENTJ"
-    ],
+    "mbti": ["INFJ", "ESTP", "INTP", "ENTJ"],
     "hero": {
       "image": "/Place/46.Kagoshima_1.jpg",
       "subtitle": "살아 있는 활화산"
@@ -2807,7 +2562,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 31.5964, 
+      "lat": 31.5964,
       "lng": 130.5628
     },
     "nearbyRestaurants": [
@@ -2836,12 +2591,7 @@
     "prefecture": "오키나와현",
     "name_ko": "슈리 성",
     "name_jp": "首里城",
-    "mbti": [
-      "ENFP",
-      "ESFP",
-      "ESFJ",
-      "INFP"
-    ],
+    "mbti": ["ENFP", "ESFP", "ESFJ", "INFP"],
     "hero": {
       "image": "/Place/47.Okinawa_1.jpg",
       "subtitle": "류큐 왕국의 상징"
@@ -2871,7 +2621,7 @@
     ],
     "map": {
       "embedUrl": "",
-      "lat": 26.2172, 
+      "lat": 26.2172,
       "lng": 127.7194
     },
     "nearbyRestaurants": [

@@ -6,59 +6,8 @@ import "../styles/RecommendPage.css";
 
 const pub = (p) => `${process.env.PUBLIC_URL}${p || ""}`;
 
-// 47개 도도부현(한국어 표기)
-const PREFECTURES = [
-  "홋카이도",
-  "아오모리현",
-  "이와테현",
-  "미야기현",
-  "아키타현",
-  "야마가타현",
-  "후쿠시마현",
-  "이바라키현",
-  "도치기현",
-  "군마현",
-  "사이타마현",
-  "치바현",
-  "도쿄도",
-  "가나가와현",
-  "니가타현",
-  "도야마현",
-  "이시카와현",
-  "후쿠이현",
-  "시즈오카현",
-  "야마나시현",
-  "나가노현",
-  "기후현",
-  "아이치현",
-  "미에현",
-  "시가현",
-  "교토부",
-  "오사카부",
-  "효고현",
-  "나라현",
-  "와카야마현",
-  "돗토리현",
-  "시마네현",
-  "오카야마현",
-  "히로시마현",
-  "야마구치현",
-  "도쿠시마현",
-  "카가와현",
-  "에히메현",
-  "고치현",
-  "후쿠오카현",
-  "사가현",
-  "나가사키현",
-  "구마모토현",
-  "오이타현",
-  "미야자키현",
-  "가고시마현",
-  "오키나와현",
-];
-
 export default function RecommendPage() {
-  const { t } = useTranslation(["translation", "places"]);
+  const { t, i18n } = useTranslation(["translation", "places"]);
   const { mbti: mbtiFromUrl } = useParams();
 
   const [userMbti, setUserMbti] = useState(() => {
@@ -69,6 +18,17 @@ export default function RecommendPage() {
       return "";
     }
   });
+
+  // 다국어 도도부현 목록 (안전하게 배열로 보장)
+  const PREFECTURES = useMemo(() => {
+    const arr = t("prefectures", {
+      ns: "translation",
+      returnObjects: true,
+      // 키가 비어있거나 로딩 전일 때 안전하게 빈 배열
+      defaultValue: [],
+    });
+    return Array.isArray(arr) ? arr : [];
+  }, [t, i18n.resolvedLanguage]);
 
   useEffect(() => {
     const onUserUpdated = (e) => {
@@ -89,10 +49,10 @@ export default function RecommendPage() {
   ).toUpperCase();
 
   const mbtiSource = mbtiFromUrl
-    ? "URL 지정"
+    ? t("recommend.mbtiSource.url")
     : userMbti
-    ? "내 MBTI"
-    : "임시(INFP)";
+    ? t("recommend.mbtiSource.mine")
+    : t("recommend.mbtiSource.temp", { mbti: "INFP" });
 
   const mbtiList = useMemo(
     () =>
@@ -123,12 +83,41 @@ export default function RecommendPage() {
 
   // 검색용 텍스트 구성
   const buildContentText = (p) => {
-    const name = `${p?.name_ko || ""} ${p?.name_jp || ""}`.trim();
-    const intro = `${p?.intro?.summary || ""} ${p?.intro?.detail || ""}`.trim();
-    const extra = `${p?.extraintro?.summary || ""} ${
-      p?.extraintro?.detail || ""
-    }`.trim();
-    return { name, content: `${intro} ${extra}`.trim() };
+    const isJA = (i18n.resolvedLanguage || i18n.language || "ja").startsWith(
+      "ja"
+    );
+    // 이름은 이미 nameT로 표시하지만, 검색에도 동일 언어 텍스트가 반영되도록 처리
+    const name = isJA
+      ? t(`places:${p.id}.name`, {
+          defaultValue: `${p?.name_jp || p?.name_ko || ""}`,
+        })
+      : p?.name_ko || p?.name_jp || "";
+
+    // 소개/추가소개는 JA 리소스가 있으면 그걸로, 없으면 KO 원본 폴백
+    const introSummary = isJA
+      ? t(`places:${p.id}.intro.summary`, {
+          defaultValue: p?.intro?.summary || "",
+        })
+      : p?.intro?.summary || "";
+    const introDetail = isJA
+      ? t(`places:${p.id}.intro.detail`, {
+          defaultValue: p?.intro?.detail || "",
+        })
+      : p?.intro?.detail || "";
+    const extraSummary = isJA
+      ? t(`places:${p.id}.extra.summary`, {
+          defaultValue: p?.extraintro?.summary || "",
+        })
+      : p?.extraintro?.summary || "";
+    const extraDetail = isJA
+      ? t(`places:${p.id}.extra.detail`, {
+          defaultValue: p?.extraintro?.detail || "",
+        })
+      : p?.extraintro?.detail || "";
+
+    const intro = `${introSummary} ${introDetail}`.trim();
+    const extra = `${extraSummary} ${extraDetail}`.trim();
+    return { name: name.trim(), content: `${intro} ${extra}`.trim() };
   };
 
   // 검색 대상: scope에 따라
@@ -145,7 +134,7 @@ export default function RecommendPage() {
       const inContent = content.toLowerCase().includes(q);
       return inName || inContent;
     });
-  }, [query, mode, searchTarget]);
+  }, [query, mode, searchTarget, i18n.resolvedLanguage]);
 
   // 지역 결과(다중 선택된 prefecture의 합집합, MBTI/검색 무시)
   const regionResults = useMemo(() => {
@@ -165,17 +154,23 @@ export default function RecommendPage() {
   }, [selectedPrefs]);
 
   // i18n 표시 도우미
-  const nameT = (p) => t(`places.${p.id}.name`, { defaultValue: p.name_ko });
+  // const nameT = (p) => t(`places.${p.id}.name`, { defaultValue: p.name_ko });
+  // const prefT = (p) =>
+  //   t(`places.${p.id}.prefecture`, { defaultValue: p.prefecture });
+  const nameT = (p) => t(`places:${p.id}.name`, { defaultValue: p.name_ko });
   const prefT = (p) =>
-    t(`places.${p.id}.prefecture`, { defaultValue: p.prefecture });
+    t(`places:${p.id}.prefecture`, { defaultValue: p.prefecture });
 
   return (
     <main className="recommend-page-main">
       <br />
       <br />
       <h1 align="center">
-        {TARGET_MBTI} 추천 여행지{" "}
-        <span className="recommend-mbti-chip" title="MBTI 출처">
+        {t("recommend.title", { mbti: TARGET_MBTI })}{" "}
+        <span
+          className="recommend-mbti-chip"
+          title={t("recommend.mbtiSource.title")}
+        >
           {mbtiSource}
         </span>{" "}
       </h1>
@@ -184,7 +179,7 @@ export default function RecommendPage() {
 
       {/* 지정 MBTI 카드 */}
       {mbtiList.length === 0 ? (
-        <p>해당 MBTI에 맞는 추천 여행지가 없습니다.</p>
+        <p>{t("recommend.emptyMbti")}</p>
       ) : (
         <div className="recommend-page-grid">
           {mbtiList.map((p) => (
@@ -211,28 +206,33 @@ export default function RecommendPage() {
 
       {/* ===== 검색 섹션 ===== */}
       <section className="recommend-search">
-        <h2 className="recommend-search-title">검색</h2>
+        <h2 className="recommend-search-title">{t("search.title")}</h2>
 
         <div className="recommend-search-bar">
           {/* 검색어 */}
           <input
             type="text"
             className="recommend-search-input"
-            placeholder="검색어를 입력하세요 (예: 미야지마, 벚꽃, 온천...)"
+            placeholder={t("search.placeholder")}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            aria-label="검색어"
+            aria-label={t("search.aria.input")}
           />
 
           {/* 드롭다운: 검색 모드 */}
-          <label className="recommend-select-wrap" aria-label="검색 모드 선택">
+          <label
+            className="recommend-select-wrap"
+            aria-label={t("search.aria.mode")}
+          >
             <select
               className="recommend-select"
               value={mode}
               onChange={(e) => setMode(e.target.value)}
             >
-              <option value="name">관광지명</option>
-              <option value="name+content">관광지명 + 내용</option>
+              <option value="name">{t("search.mode.name")}</option>
+              <option value="name+content">
+                {t("search.mode.nameContent")}
+              </option>
             </select>
           </label>
 
@@ -240,7 +240,7 @@ export default function RecommendPage() {
           <div
             className="recommend-scope-radios"
             role="radiogroup"
-            aria-label="검색 범위"
+            aria-label={t("search.aria.scope")}
           >
             <label className="recommend-radio">
               <input
@@ -260,7 +260,7 @@ export default function RecommendPage() {
                 checked={scope === "all"}
                 onChange={(e) => setScope(e.target.value)}
               />
-              전체 목록
+              {t("search.scope.all")}
             </label>
           </div>
         </div>
@@ -269,16 +269,16 @@ export default function RecommendPage() {
         {query.trim() && (
           <div className="recommend-search-result">
             <div className="recommend-search-count">
-              검색 결과: <b>{results.length}</b>건
+              {t("search.resultCount", { count: results.length })}
               <span className="recommend-search-scope-chip">
-                {scope === "all" ? "전체 목록" : `${TARGET_MBTI} 내`}
+                {scope === "all"
+                  ? t("search.scopeChip.all")
+                  : t("search.scopeChip.withinMbti", { mbti: TARGET_MBTI })}
               </span>
             </div>
 
             {results.length === 0 ? (
-              <div className="recommend-search-empty">
-                검색 결과가 없습니다.
-              </div>
+              <div className="recommend-search-empty">{t("search.empty")}</div>
             ) : (
               <div className="recommend-page-grid recommend-search-grid">
                 {results.map((p) => (
@@ -310,7 +310,7 @@ export default function RecommendPage() {
 
       {/* ===== 지역으로 찾기(다중 선택) ===== */}
       <section className="recommend-pref">
-        <h2 className="recommend-search-title">지역으로 찾기</h2>
+        <h2 className="recommend-search-title">{t("region.title")}</h2>
 
         <div className="recommend-pref-grid">
           {PREFECTURES.map((pref) => {
@@ -333,8 +333,8 @@ export default function RecommendPage() {
         <div className="pref-actions">
           <div className="pref-selected-summary">
             {selectedPrefs.length > 0
-              ? `선택: ${selectedPrefs.join(", ")}`
-              : "선택된 지역 없음"}
+              ? t("region.selected", { list: selectedPrefs.join(", ") })
+              : t("region.none")}
           </div>
 
           <div className="pref-action-buttons">
@@ -343,9 +343,9 @@ export default function RecommendPage() {
               className="pref-clear"
               onClick={clearPrefs}
               disabled={selectedPrefs.length === 0}
-              title="지역 선택 해제"
+              title={t("region.clear")}
             >
-              전체 해제
+              {t("region.clear")}
             </button>
           </div>
         </div>
@@ -354,13 +354,11 @@ export default function RecommendPage() {
         {selectedPrefs.length > 0 && (
           <div ref={regionResultRef} className="recommend-search-result">
             <div className="recommend-search-count">
-              지역 결과: <b>{regionResults.length}</b>건
+              {t("region.resultCount", { count: regionResults.length })}
             </div>
 
             {regionResults.length === 0 ? (
-              <div className="recommend-search-empty">
-                해당 지역의 등록된 관광지가 없습니다.
-              </div>
+              <div className="recommend-search-empty">{t("region.empty")}</div>
             ) : (
               <div className="recommend-page-grid recommend-search-grid">
                 {regionResults.map((p) => (

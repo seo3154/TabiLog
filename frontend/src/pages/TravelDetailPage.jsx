@@ -75,7 +75,7 @@ export default function TravelDetailPage() {
   };
 
   /* ===== 표기 텍스트(i18n) ===== */
-  const ns = place ? `places.${place.id}` : "";
+  const ns = place ? `places:${place.id}` : "";
   const displayName = place
     ? t(`${ns}.name`, { defaultValue: place.name_ko })
     : "";
@@ -101,15 +101,24 @@ export default function TravelDetailPage() {
     ? t(`${ns}.intro.detail`, { defaultValue: place?.intro?.detail || "" })
     : "";
 
+  // const extraSummary = place
+  //   ? t(`${ns}.extra.summary`, {
+  //       defaultValue: place?.extraintro?.summary || "",
+  //     })
+  //   : "";
+  // const extraDetail = place
+  //   ? t(`${ns}.extra.detail`, {
+  //       defaultValue: place?.extraintro?.detail || "",
+  //     })
+  //   : "";
+
   const extraSummary = place
     ? t(`${ns}.extra.summary`, {
         defaultValue: place?.extraintro?.summary || "",
       })
     : "";
   const extraDetail = place
-    ? t(`${ns}.extra.detail`, {
-        defaultValue: place?.extraintro?.detail || "",
-      })
+    ? t(`${ns}.extra.detail`, { defaultValue: place?.extraintro?.detail || "" })
     : "";
   const hasExtraIntro = !!(extraSummary || extraDetail);
 

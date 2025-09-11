@@ -1,0 +1,1558 @@
+[
+  {
+    "id": "hokkaido-furano-biei",
+    "prefecture": "北海道",
+    "name_ko": "후라노 / 비에이",
+    "name_jp": "富良野 / 美瑛",
+    "mbti": ["INTP", "ISFP", "ESFP", "ENFP"],
+    "hero": {
+      "image": "/Place/1.Hokkaido_1.jpg",
+      "subtitle": "ラベンダー畑と丘陵風景"
+    },
+    "intro": {
+      "summary": "富良野と美瑛は北海道の中心部にある絵のように美しい町で、四季折々の色彩と香りに包まれています。",
+      "detail": "夏の紫に染まるラベンダーや美瑛のパッチワークの丘、冬の雪景色とスキーなど、自然と写真スポットが豊富です。"
+    },
+    "gallery": [
+      "/Place/1.Hokkaido_2.jpg",
+      "/Place/1.Hokkaido_3.jpg",
+      "/Place/1.Hokkaido_4.jpg"
+    ],
+    "extraintro": {
+      "summary": "富良野は広大なラベンダー畑や花畑が続くパノラマロード、ファーム富田で有名で、6〜8月にはラベンダーの香りが街を包みます。",
+      "detail": "近隣の美瑛は「パッチワークの路」や「青い池」で知られ、季節ごとに色を変える丘と畑が写真家に愛されています。"
+    },
+    "extragallery": [
+      "/Place/1.Hokkaido_5.jpg",
+      "/Place/1.Hokkaido_6.jpg",
+      "/Place/1.Hokkaido_7.jpg"
+    ],
+    "foods": [
+      { "name": "夕張メロン", "image": "/Place/1.Hokkaido_8.jpg" },
+      { "name": "スープカレー", "image": "/Place/1.Hokkaido_9.jpg" },
+      {
+        "name": "ラベンダーアイスクリーム",
+        "image": "/Place/1.Hokkaido_10.jpg"
+      }
+    ],
+    "map": { "lat": 43.5317, "lng": 142.4653, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "aomori-hirosaki-castle",
+    "prefecture": "青森県",
+    "name_ko": "히로사키 성",
+    "name_jp": "弘前城",
+    "mbti": ["ISFJ", "INFJ", "ISTJ", "ESFJ"],
+    "hero": { "image": "/Place/2.Aomori_1.jpg", "subtitle": "桜と城郭" },
+    "intro": {
+      "summary": "弘前城は日本有数の桜の名所として知られる歴史深い城です。",
+      "detail": "外濠と城郭を彩る桜、夏祭り、秋の紅葉、冬の雪景色まで、四季の景観が見事です。"
+    },
+    "gallery": [
+      "/Place/2.Aomori_2.jpg",
+      "/Place/2.Aomori_3.jpg",
+      "/Place/2.Aomori_4.jpg"
+    ],
+    "foods": [
+      { "name": "りんご", "image": "/Place/2.Aomori_5.jpg" },
+      { "name": "アップルパイ", "image": "/Place/2.Aomori_6.jpg" }
+    ],
+    "map": { "lat": 40.6081, "lng": 140.4636, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "akita-kakunodate",
+    "prefecture": "秋田県",
+    "name_ko": "가쿠노다테",
+    "name_jp": "角館",
+    "mbti": ["INFJ", "ISFJ", "INFP", "ENFJ"],
+    "hero": {
+      "image": "/Place/3.Akita_1.jpg",
+      "subtitle": "武家屋敷の町と温泉"
+    },
+    "intro": {
+      "summary": "角館は「小京都」と呼ばれる伝統的な武家屋敷の町です。",
+      "detail": "武家屋敷通りを歩けば、当時の生活道具や家具の展示を通して往時の暮らしを垣間見ることができます。"
+    },
+    "gallery": ["/Place/3.Akita_2.jpg", "/Place/3.Akita_3.jpg"],
+    "extraintro": {
+      "summary": "角館観光の後は、近くの田沢湖で湖の静けさを感じてみましょう。",
+      "detail": "雪に覆われた乳頭温泉で雪景色を眺めながら、温泉に浸かって旅の疲れを癒やせます。"
+    },
+    "extragallery": [
+      "/Place/3.Akita_4.jpg",
+      "/Place/3.Akita_5.jpg",
+      "/Place/3.Akita_6.jpg"
+    ],
+    "foods": [
+      { "name": "きりたんぽ", "image": "/Place/3.Akita_7.jpg" },
+      { "name": "きりたんぽ", "image": "/Place/3.Akita_8.jpg" }
+    ],
+    "map": { "lat": 39.5994, "lng": 140.5617, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "iwate-morioka",
+    "prefecture": "岩手県",
+    "name_ko": "모리오카",
+    "name_jp": "盛岡",
+    "mbti": ["INTP", "INFP", "ENTP", "ENTJ"],
+    "hero": { "image": "/Place/4.Iwate_1.jpg", "subtitle": "岩手山と街歩き" },
+    "intro": {
+      "summary": "盛岡は岩手県の中心都市で、雄大な岩手山を背景に美しい景観と都市の魅力が共存します。",
+      "detail": "城跡公園や川沿いの遊歩道、季節の祭りとともに、名物の三大麺を味わえます。"
+    },
+    "gallery": [
+      "/Place/4.Iwate_2.jpg",
+      "/Place/4.Iwate_3.jpg",
+      "/Place/4.Iwate_4.jpg"
+    ],
+    "foods": [
+      { "name": "盛岡冷麺", "image": "/Place/4.Iwate_5.jpg" },
+      { "name": "わんこそば", "image": "/Place/4.Iwate_6.jpg" },
+      { "name": "盛岡じゃじゃ麺", "image": "/Place/4.Iwate_7.jpg" }
+    ],
+    "map": { "lat": 39.7048, "lng": 141.1381, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "yamagata-ginzan-onsen",
+    "prefecture": "山形県",
+    "name_ko": "긴잔 온천",
+    "name_jp": "銀山温泉",
+    "mbti": ["INFP", "ISFJ", "ENTJ", "ENFJ"],
+    "hero": {
+      "image": "/Place/5.Yamagata_1.jpg",
+      "subtitle": "ガス灯と木造旅館街"
+    },
+    "intro": {
+      "summary": "銀山温泉は大正ロマン漂う伝統の温泉街。夜にはガス灯が通りを照らし、雪景色と相まって幻想的です。",
+      "detail": "築100年を超える木造旅館や足湯、川沿いの散策路が温泉街の風情を伝えます。"
+    },
+    "gallery": [
+      "/Place/5.Yamagata_2.jpg",
+      "/Place/5.Yamagata_3.jpg",
+      "/Place/5.Yamagata_4.jpg"
+    ],
+    "foods": [
+      { "name": "さくらんぼ", "image": "/Place/5.Yamagata_5.jpg" },
+      { "name": "フルーツ", "image": "/Place/5.Yamagata_6.jpg" }
+    ],
+    "map": { "lat": 38.5706, "lng": 140.5301, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "miyagi-zao-fox-village",
+    "prefecture": "宮城県",
+    "name_ko": "자오 여우 마을",
+    "name_jp": "蔵王キツネ村",
+    "mbti": ["ENFJ", "ESFJ", "ISFJ", "INFP"],
+    "hero": {
+      "image": "/Place/6.Miyagi_1.jpg",
+      "subtitle": "自然型のキツネ保護区"
+    },
+    "intro": {
+      "summary": "蔵王キツネ村は宮城県・蔵王山の麓にある特別な動物パークで、",
+      "detail": "100匹以上のキツネが自然に近い環境で自由に過ごす様子を間近で観察できます。"
+    },
+    "gallery": [
+      "/Place/6.Miyagi_2.jpg",
+      "/Place/6.Miyagi_3.jpg",
+      "/Place/6.Miyagi_4.jpg"
+    ],
+    "extraintro": {
+      "summary": "見学後に時間があれば、蔵王山頂付近の御釜（おかま）もおすすめです。",
+      "detail": "天候により色合いが微妙に変わる神秘的な火口湖。春から秋はドライブコースとして人気で、紅葉の時期はさらに美しさが増します。"
+    },
+    "extragallery": ["/Place/6.Miyagi_5.jpg", "/Place/6.Miyagi_6.jpg"],
+    "foods": [
+      { "name": "牡蠣", "image": "/Place/6.Miyagi_7.jpg" },
+      { "name": "牛たん", "image": "/Place/6.Miyagi_8.jpg" },
+      { "name": "ずんだシェイク", "image": "/Place/6.Miyagi_9.jpg" }
+    ],
+    "map": { "lat": 38.0414, "lng": 140.5298, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "fukushima-ouchijuku",
+    "prefecture": "福島県",
+    "name_ko": "오우치주쿠",
+    "name_jp": "大内宿",
+    "mbti": ["ISFJ", "INFJ", "ISTJ", "ESFJ"],
+    "hero": {
+      "image": "/Place/7.Fukushima_1.jpg",
+      "subtitle": "茅葺きの宿場町"
+    },
+    "intro": {
+      "summary": "大内宿は江戸時代の茅葺き家屋と石畳が残る伝統的な街並みです。",
+      "detail": "冬の雪景色と夏の清流が調和し、伝統工芸や郷土料理も楽しめます。"
+    },
+    "gallery": [
+      "/Place/7.Fukushima_2.jpg",
+      "/Place/7.Fukushima_3.jpg",
+      "/Place/7.Fukushima_4.jpg"
+    ],
+    "foods": [
+      { "name": "ねぎそば", "image": "/Place/7.Fukushima_5.jpg" },
+      { "name": "喜多方ラーメン", "image": "/Place/7.Fukushima_6.jpg" }
+    ],
+    "map": { "lat": 37.331, "lng": 139.8604, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "gunma-kusatsu-onsen",
+    "prefecture": "群馬県",
+    "name_ko": "쿠사츠 온천",
+    "name_jp": "草津温泉",
+    "mbti": ["ISTJ", "ISFP", "ESTJ", "ESFP"],
+    "hero": { "image": "/Place/8.Gunma_1.jpg", "subtitle": "湯畑と温泉街" },
+    "intro": {
+      "summary": "草津温泉は日本三名泉の一つ。強い酸性の湯と豊富な湧出量が特徴です.",
+      "detail": "伝統旅館や露天風呂、夜間ライトアップで彩られる湯畑など、温泉街の魅力が詰まっています。"
+    },
+    "gallery": [
+      "/Place/8.Gunma_2.jpg",
+      "/Place/8.Gunma_3.jpg",
+      "/Place/8.Gunma_4.jpg"
+    ],
+    "foods": [
+      { "name": "饅頭", "image": "/Place/8.Gunma_5.jpg" },
+      { "name": "プリン", "image": "/Place/8.Gunma_6.jpg" }
+    ],
+    "map": { "lat": 36.623, "lng": 138.5967, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "tochigi-nikko-toshogu",
+    "prefecture": "栃木県",
+    "name_ko": "닛코 동조궁",
+    "name_jp": "日光東照宮",
+    "mbti": ["INFP", "INTJ", "ISTP", "ENFJ"],
+    "hero": {
+      "image": "/Place/9.Tochigi_1.jpg",
+      "subtitle": "三猿と豪華絢爛な装飾"
+    },
+    "intro": {
+      "summary": "日光東照宮は徳川家康を祀る華麗な神社で、精巧な彫刻と金箔装飾が見どころです。",
+      "detail": "「見ざる・言わざる・聞かざる」の三猿の彫刻が特に有名で、日本建築美の粋を感じられます。"
+    },
+    "gallery": [
+      "/Place/9.Tochigi_2.jpg",
+      "/Place/9.Tochigi_3.jpg",
+      "/Place/9.Tochigi_4.jpg"
+    ],
+    "extraintro": {
+      "summary": "参拝後は日本三名瀑の一つ・華厳の滝へ。落差約97mの直瀑で、四季折々に異なる魅力を見せます。",
+      "detail": "特に紅葉の季節には周辺が赤や黄に染まり、壮観です。"
+    },
+    "extragallery": [
+      "/Place/9.Tochigi_5.jpg",
+      "/Place/9.Tochigi_6.jpg",
+      "/Place/9.Tochigi_7.jpg"
+    ],
+    "foods": [
+      { "name": "餃子", "image": "/Place/9.Tochigi_8.jpg" },
+      { "name": "いちご", "image": "/Place/9.Tochigi_9.jpg" }
+    ],
+    "map": { "lat": 36.7586, "lng": 139.5986, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "ibaraki-hitachi-seaside-park",
+    "prefecture": "茨城県",
+    "name_ko": "국영 히타치 해변 공원",
+    "name_jp": "国営ひたち海浜公園",
+    "mbti": ["INFJ", "ESFJ", "INTJ", "ESTP"],
+    "hero": {
+      "image": "/Place/10.Ibaraki_1.jpg",
+      "subtitle": "ネモフィラとコキアの丘"
+    },
+    "intro": {
+      "summary": "季節ごとに異なる花々が壮観な大規模フラワーパークです。",
+      "detail": "レンタサイクルで広い園内を巡り、海沿いのドライブで海景も一緒に楽しめます。"
+    },
+    "gallery": [
+      "/Place/10.Ibaraki_2.jpg",
+      "/Place/10.Ibaraki_3.jpg",
+      "/Place/10.Ibaraki_4.jpg"
+    ],
+    "foods": [
+      { "name": "メロン", "image": "/Place/10.Ibaraki_5.jpg" },
+      { "name": "納豆", "image": "/Place/10.Ibaraki_6.jpg" }
+    ],
+    "map": { "lat": 36.4064, "lng": 140.5964, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "chiba-naritasan-shinshoji",
+    "prefecture": "千葉県",
+    "name_ko": "나리타산 신쇼지",
+    "name_jp": "成田山新勝寺",
+    "mbti": ["ISFP", "ESFP", "ISTP", "INFP"],
+    "hero": { "image": "/Place/11.Chiba_1.jpg", "subtitle": "大本堂と三重塔" },
+    "intro": {
+      "summary": "千年の歴史を持つ大寺院で、初詣でも有名です。",
+      "detail": "境内公園の散策や、表参道の商店街で伝統のグルメや土産を楽しめます。"
+    },
+    "gallery": [
+      "/Place/11.Chiba_2.jpg",
+      "/Place/11.Chiba_3.jpg",
+      "/Place/11.Chiba_4.jpg",
+      "/Place/11.Chiba_5.jpg"
+    ],
+    "foods": [
+      { "name": "落花生", "image": "/Place/11.Chiba_6.jpg" },
+      { "name": "ミルクアイスクリーム", "image": "/Place/11.Chiba_7.jpg" }
+    ],
+    "map": { "lat": 35.7863, "lng": 140.3182, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "saitama-railway-museum",
+    "prefecture": "埼玉県",
+    "name_ko": "철도박물관",
+    "name_jp": "鉄道博物館",
+    "mbti": ["INTP", "ISTP", "ENTJ", "ESTJ"],
+    "hero": {
+      "image": "/Place/12.Saitama_1.jpg",
+      "subtitle": "実車展示とシミュレーター"
+    },
+    "intro": {
+      "summary": "日本の鉄道史を一望できる体験型ミュージアムです。",
+      "detail": "蒸気機関車から新幹線まで展示され、屋上から実際の列車運行も眺められます。"
+    },
+    "gallery": [
+      "/Place/12.Saitama_2.jpg",
+      "/Place/12.Saitama_3.jpg",
+      "/Place/12.Saitama_4.jpg"
+    ],
+    "foods": [
+      { "name": "大宮ナポリタン", "image": "/Place/12.Saitama_5.jpg" },
+      { "name": "だんご", "image": "/Place/12.Saitama_6.jpg" }
+    ],
+    "map": { "lat": 35.9216, "lng": 139.6179, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "tokyo-odaiba",
+    "prefecture": "東京都",
+    "name_ko": "오다이바",
+    "name_jp": "お台場",
+    "mbti": ["ENTP", "ENFP", "ESFP", "ESTP"],
+    "hero": {
+      "image": "/Place/13.Tokyo_1.jpg",
+      "subtitle": "レインボーブリッジと夜景"
+    },
+    "intro": {
+      "summary": "東京湾の人工島で、ショッピング・展示・レジャーを一度に楽しめます。",
+      "detail": "チームラボなどのデジタルアートや夜景スポットが多く、夜の散歩コースとしても人気です。"
+    },
+    "gallery": [
+      "/Place/13.Tokyo_2.jpg",
+      "/Place/13.Tokyo_3.jpg",
+      "/Place/13.Tokyo_4.jpg"
+    ],
+    "foods": [
+      { "name": "もんじゃ焼き", "image": "/Place/13.Tokyo_6.jpg" },
+      { "name": "もんじゃ焼き", "image": "/Place/13.Tokyo_7.jpg" }
+    ],
+    "map": { "lat": 35.628, "lng": 139.7718, "embedUrl": "" },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "kanagawa-yokohama",
+    "prefecture": "神奈川県",
+    "name_ko": "요코하마",
+    "name_jp": "横浜",
+    "mbti": ["ESFJ", "ISFP", "ENTP", "ESTP"],
+    "hero": {
+      "image": "/Place/14.Kanagawa_1.jpg",
+      "subtitle": "みなとみらいと港町"
+    },
+    "intro": {
+      "summary": "近代開港の歴史と国際的な雰囲気が共存する港町です。",
+      "detail": "日本最大級の中華街「横浜中華街」で多彩な中華料理を楽しめます。"
+    },
+    "gallery": [
+      "/Place/14.Kanagawa_2.jpg",
+      "/Place/14.Kanagawa_3.jpg",
+      "/Place/14.Kanagawa_4.jpg"
+    ],
+    "foods": [
+      { "name": "中華街", "image": "/Place/14.Kanagawa_5.jpg" },
+      { "name": "中華料理", "image": "/Place/14.Kanagawa_6.jpg" },
+      { "name": "小籠包", "image": "/Place/14.Kanagawa_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 35.4553, "lng": 139.6369 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "niigata-nagaoka-fireworks",
+    "prefecture": "新潟県",
+    "name_ko": "나가오카 불꽃 축제",
+    "name_jp": "長岡まつり大花火大会",
+    "mbti": ["ESFJ", "ENFJ", "ISFJ", "INFJ"],
+    "hero": {
+      "image": "/Place/15.Niigata_1.jpg",
+      "subtitle": "フェニックス花火"
+    },
+    "intro": {
+      "summary": "日本三大花火の一つ。川面を彩る壮大なスケールに圧倒されます。",
+      "detail": "戦後復興と平和への祈りを込めたメッセージとともに、夏の夜の感動旅を演出します。"
+    },
+    "gallery": [
+      "/Place/15.Niigata_2.jpg",
+      "/Place/15.Niigata_3.jpg",
+      "/Place/15.Niigata_4.jpg"
+    ],
+    "foods": [{ "name": "日本酒", "image": "/Place/15.Niigata_5.jpg" }],
+    "map": { "embedUrl": "", "lat": 37.4549, "lng": 138.8392 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "toyama-tateyama",
+    "prefecture": "富山県",
+    "name_ko": "다테야마",
+    "name_jp": "立山",
+    "mbti": ["ISTJ", "ESTJ", "INTJ", "ENTJ"],
+    "hero": {
+      "image": "/Place/16.Toyama_1.jpg",
+      "subtitle": "雪の大谷とアルペンルート"
+    },
+    "intro": {
+      "summary": "北アルプスの山岳観光地で、四季折々の絶景が広がります。",
+      "detail": "室堂高原から黒部ダムへ続くルートで、トレッキングとパノラマを満喫します。"
+    },
+    "gallery": [
+      "/Place/16.Toyama_2.jpg",
+      "/Place/16.Toyama_3.jpg",
+      "/Place/16.Toyama_4.jpg"
+    ],
+    "foods": [
+      { "name": "ホタルイカ", "image": "/Place/16.Toyama_6.jpg" },
+      { "name": "富山ブラックラーメン", "image": "/Place/16.Toyama_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 36.5766, "lng": 137.5915 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "ishikawa-kanazawa",
+    "prefecture": "石川県",
+    "name_ko": "가나자와",
+    "name_jp": "金沢",
+    "mbti": ["INFP", "ENFP", "ISFP", "ESFP"],
+    "hero": { "image": "/Place/17.Ishikawa_1.jpg", "subtitle": "鼓門と兼六園" },
+    "intro": {
+      "summary": "金沢は江戸の風情と現代的感性が調和する街で、歴史・芸術・美食がバランスよく楽しめます。",
+      "detail": "金沢駅の象徴・鼓門をはじめ、茶屋街の東茶屋、三名園の一つ・兼六園、雄大な金沢城が市内に点在します。"
+    },
+    "gallery": [
+      "/Place/17.Ishikawa_2.jpg",
+      "/Place/17.Ishikawa_3.jpg",
+      "/Place/17.Ishikawa_4.jpg"
+    ],
+    "extraintro": {
+      "summary": "21世紀美術館では独創的な展示や体験型作品が人気で、現代アートを気軽に満喫できます。",
+      "detail": "街全体が歩きやすく、1日でも伝統と現代を行き来する多彩な体験が可能です。"
+    },
+    "extragallery": ["/Place/17.Ishikawa_5.jpg", "/Place/17.Ishikawa_6.jpg"],
+    "foods": [
+      { "name": "金沢カレー", "image": "/Place/17.Ishikawa_7.jpg" },
+      { "name": "金箔アイス", "image": "/Place/17.Ishikawa_8.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 36.5623, "lng": 136.6626 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "fukui-dinosaur-museum",
+    "prefecture": "福井県",
+    "name_ko": "후쿠이현 공룡 박물관",
+    "name_jp": "福井県立恐竜博物館",
+    "mbti": ["ISTP", "INTJ", "ENTP", "ESTJ"],
+    "hero": {
+      "image": "/Place/18.Fukui_1.jpg",
+      "subtitle": "実物大の恐竜展示"
+    },
+    "intro": {
+      "summary": "世界三大恐竜博物館の一つで、日本最大級の恐竜専門博物館。子どもから大人まで楽しめます。",
+      "detail": "フクイサウルスなど地域で発見された化石を通じ、古生物学を分かりやすく学べます。"
+    },
+    "gallery": [
+      "/Place/18.Fukui_2.jpg",
+      "/Place/18.Fukui_3.jpg",
+      "/Place/18.Fukui_4.jpg"
+    ],
+    "foods": [{ "name": "越前ガニ", "image": "/Place/18.Fukui_5.jpg" }],
+    "map": { "embedUrl": "", "lat": 36.0849, "lng": 136.5084 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "shizuoka-nihondaira",
+    "prefecture": "静岡県",
+    "name_ko": "니혼다이라",
+    "name_jp": "日本平",
+    "mbti": ["ESTP", "ENTP", "ISFP", "INFJ"],
+    "hero": {
+      "image": "/Place/19.Shizuoka_1.jpg",
+      "subtitle": "富士山展望とロープウェイ"
+    },
+    "intro": {
+      "summary": "標高約300mの展望名所で、富士山と駿河湾の眺望が秀逸です。",
+      "detail": "ロープウェイで久能山東照宮へアクセスし、近隣の三保松原では海と富士のコラボが楽しめます。"
+    },
+    "gallery": [
+      "/Place/19.Shizuoka_2.jpg",
+      "/Place/19.Shizuoka_3.jpg",
+      "/Place/19.Shizuoka_4.jpg",
+      "/Place/19.Shizuoka_5.jpg"
+    ],
+    "foods": [
+      { "name": "緑茶", "image": "/Place/19.Shizuoka_7.jpg" },
+      { "name": "さわやかハンバーグ", "image": "/Place/19.Shizuoka_8.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.974, "lng": 138.4659 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "yamanashi-fujiyoshida",
+    "prefecture": "山梨県",
+    "name_ko": "후지요시다",
+    "name_jp": "富士吉田",
+    "mbti": ["ENFP", "ESFP", "ISFP", "INTP"],
+    "hero": {
+      "image": "/Place/20.Yamanashi_1.jpg",
+      "subtitle": "河口湖と五重塔ビュー"
+    },
+    "intro": {
+      "summary": "富士山展望の代表的な街で、湖・塔・市街の至る所から富士を楽しめます。",
+      "detail": "春の桜、秋の紅葉、冬の雪景色とともに多様なアウトドアが可能です。"
+    },
+    "gallery": [
+      "/Place/20.Yamanashi_2.jpg",
+      "/Place/20.Yamanashi_3.jpg",
+      "/Place/20.Yamanashi_4.jpg"
+    ],
+    "foods": [
+      { "name": "ぶどう", "image": "/Place/20.Yamanashi_5.jpg" },
+      { "name": "もも", "image": "/Place/20.Yamanashi_6.jpg" },
+      { "name": "ほうとう", "image": "/Place/20.Yamanashi_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 35.5016, "lng": 138.8016 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "nagano-kamikochi",
+    "prefecture": "長野県",
+    "name_ko": "가미코치",
+    "name_jp": "上高地",
+    "mbti": ["INFJ", "INFP", "ISFJ", "INTJ"],
+    "hero": { "image": "/Place/21.Nagano_1.jpg", "subtitle": "梓川と穂高連峰" },
+    "intro": {
+      "summary": "上高地は長野県にある日本アルプスを代表する山岳リゾート。清流の梓川と雄大な穂高連峰の絶景で有名です。",
+      "detail": "春から秋は新緑や紅葉が季節ごとに異なる魅力を見せ、冬は雪景色が神秘的な雰囲気を醸します。"
+    },
+    "gallery": [
+      "/Place/21.Nagano_2.jpg",
+      "/Place/21.Nagano_3.jpg",
+      "/Place/21.Nagano_4.jpg"
+    ],
+    "extraintro": {
+      "summary": "上高地と合わせて、長野県を象徴する歴史遺産・松本城の訪問もおすすめです。",
+      "detail": "日本最古の五層六階の天守をもつ国宝の城で、黒い外壁から「烏城」とも呼ばれます。"
+    },
+    "extragallery": ["/Place/21.Nagano_5.jpg", "/Place/21.Nagano_6.jpg"],
+    "foods": [{ "name": "わさび", "image": "/Place/21.Nagano_8.jpg" }],
+    "map": { "embedUrl": "", "lat": 36.2569, "lng": 137.6372 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "gifu-shirakawago",
+    "prefecture": "岐阜県",
+    "name_ko": "시라카와고",
+    "name_jp": "白川郷",
+    "mbti": ["ISFJ", "INFJ", "INFP", "ENFJ"],
+    "hero": {
+      "image": "/Place/22.Gifu_1.jpg",
+      "subtitle": "合掌造りの茅葺き集落"
+    },
+    "intro": {
+      "summary": "白川郷は山間にある世界文化遺産の村で、伝統的な合掌造りの家屋が往時の姿で保存されています。",
+      "detail": "民家園や囲炉裏体験を通して、昔ながらの生活文化に触れられます。"
+    },
+    "gallery": [
+      "/Place/22.Gifu_2.jpg",
+      "/Place/22.Gifu_3.jpg",
+      "/Place/22.Gifu_4.jpg"
+    ],
+    "foods": [
+      { "name": "囲炉裏料理", "image": "/Place/22.Gifu_6.jpg" },
+      { "name": "飛騨牛", "image": "/Place/22.Gifu_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 36.2584, "lng": 136.9062 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "aichi-nagoya-aquarium",
+    "prefecture": "愛知県",
+    "name_ko": "나고야항 수족관",
+    "name_jp": "名古屋港水族館",
+    "mbti": ["ESFP", "ESTP", "ENTP", "ENFP"],
+    "hero": {
+      "image": "/Place/23.Aichi_1.jpg",
+      "subtitle": "シャチ・イルカショー"
+    },
+    "intro": {
+      "summary": "南館・北館に分かれる大規模水族館で、海洋生態を幅広く紹介します。",
+      "detail": "見学後は港湾エリアの散策やショッピングを楽しみ、「食の街」名古屋の名物を味わえます。"
+    },
+    "gallery": [
+      "/Place/23.Aichi_2.jpg",
+      "/Place/23.Aichi_3.jpg",
+      "/Place/23.Aichi_4.jpg"
+    ],
+    "foods": [
+      { "name": "ひつまぶし", "image": "/Place/23.Aichi_5.jpg" },
+      { "name": "味噌カツ", "image": "/Place/23.Aichi_6.jpg" },
+      { "name": "台湾ラーメン", "image": "/Place/23.Aichi_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 35.0906, "lng": 136.8784 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "mie-ise-jingu",
+    "prefecture": "三重県",
+    "name_ko": "이세 신궁",
+    "name_jp": "伊勢神宮",
+    "mbti": ["INTP", "INFP", "ISTJ", "ENTJ"],
+    "hero": {
+      "image": "/Place/24.Mie_1.jpg",
+      "subtitle": "杉木立に囲まれた聖域"
+    },
+    "intro": {
+      "summary": "日本神道の総本山。外宮・内宮の荘厳な建築が心を洗います。",
+      "detail": "おかげ横丁で伝統の街並み散策と郷土グルメを楽しめます。"
+    },
+    "gallery": [
+      "/Place/24.Mie_2.jpg",
+      "/Place/24.Mie_3.jpg",
+      "/Place/24.Mie_4.jpg"
+    ],
+    "foods": [{ "name": "伊勢海老", "image": "/Place/24.Mie_5.jpg" }],
+    "map": { "embedUrl": "", "lat": 34.4555, "lng": 136.7254 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "shiga-lake-biwa",
+    "prefecture": "滋賀県",
+    "name_ko": "비와호",
+    "name_jp": "琵琶湖",
+    "mbti": ["INTP", "ISFP", "ENTP", "ESFP"],
+    "hero": {
+      "image": "/Place/25.Shiga_1.jpg",
+      "subtitle": "湖畔レジャーと展望"
+    },
+    "intro": {
+      "summary": "日本最大の湖で、ボート・カヤック・サイクリングなどレジャーが多彩。",
+      "detail": "びわ湖テラスでパノラマを楽しみ、四季で移ろう湖景を満喫。"
+    },
+    "gallery": [
+      "/Place/25.Shiga_2.jpg",
+      "/Place/25.Shiga_3.jpg",
+      "/Place/25.Shiga_4.jpg"
+    ],
+    "foods": [
+      { "name": "鮎", "image": "/Place/25.Shiga_5.jpg" },
+      { "name": "鮒寿司", "image": "/Place/25.Shiga_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 35.0113, "lng": 135.8679 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "wakayama-nachi-falls",
+    "prefecture": "和歌山県",
+    "name_ko": "나치 폭포",
+    "name_jp": "那智の滝",
+    "mbti": ["INFJ", "INTJ", "ISFJ", "ENFJ"],
+    "hero": {
+      "image": "/Place/26.Wakayama_1.jpg",
+      "subtitle": "落差133mの直瀑"
+    },
+    "intro": {
+      "summary": "那智の滝は日本三名瀑の一つ。落差133mの豪快な水流で知られます。",
+      "detail": "近くには那智山青岸渡寺と那智大社があり、滝と三重塔が一枚に収まる絶景が写真スポットとして人気です。"
+    },
+    "gallery": [
+      "/Place/26.Wakayama_2.jpg",
+      "/Place/26.Wakayama_3.jpg",
+      "/Place/26.Wakayama_4.jpg"
+    ],
+    "extraintro": {
+      "summary": "近隣の紀伊勝浦には海を望むホテル浦島があり、特に海食洞にある温泉「忘帰洞」が有名です。",
+      "detail": "波音を聞きながら浸かる特別な温泉体験は、旅の疲れをすっきり癒やしてくれます。"
+    },
+    "extragallery": ["/Place/26.Wakayama_5.jpg", "/Place/26.Wakayama_6.jpg"],
+    "foods": [
+      { "name": "まぐろ", "image": "/Place/26.Wakayama_7.jpg" },
+      { "name": "めはり寿司", "image": "/Place/26.Wakayama_8.jpg" },
+      { "name": "梅干し", "image": "/Place/26.Wakayama_9.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 33.6756, "lng": 135.8876 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "kyoto-fushimi-inari",
+    "prefecture": "京都府",
+    "name_ko": "후시미 이나리 신사",
+    "name_jp": "伏見稲荷大社",
+    "mbti": ["ENFP", "INFP", "ESFP", "ISFP"],
+    "hero": { "image": "/Place/27.Kyoto_1.jpg", "subtitle": "千本鳥居" },
+    "intro": {
+      "summary": "赤い鳥居が連なる「千本鳥居」で有名。商売繁盛を祈る参道が続きます。",
+      "detail": "鳥居の隙間から差す光と京都市内の眺望が印象的です。"
+    },
+    "gallery": [
+      "/Place/27.Kyoto_2.jpg",
+      "/Place/27.Kyoto_3.jpg",
+      "/Place/27.Kyoto_4.jpg"
+    ],
+    "foods": [
+      { "name": "抹茶", "image": "/Place/27.Kyoto_5.jpg" },
+      { "name": "懐石料理", "image": "/Place/27.Kyoto_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.9679, "lng": 135.7791 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "nara-nara-park",
+    "prefecture": "奈良県",
+    "name_ko": "나라 공원",
+    "name_jp": "奈良公園",
+    "mbti": ["ISFJ", "ESFP", "ENFP", "INFP"],
+    "hero": { "image": "/Place/28.Nara_1.jpg", "subtitle": "鹿と世界遺産" },
+    "intro": {
+      "summary": "鹿が自由に歩く公園で、東大寺・春日大社など世界遺産が集まります。",
+      "detail": "四季の桜や紅葉が彩り、歴史散策に最適です。"
+    },
+    "gallery": [
+      "/Place/28.Nara_2.jpg",
+      "/Place/28.Nara_3.jpg",
+      "/Place/28.Nara_4.jpg"
+    ],
+    "foods": [
+      { "name": "奈良漬け", "image": "/Place/28.Nara_5.jpg" },
+      { "name": "柿の葉寿司", "image": "/Place/28.Nara_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.6854, "lng": 135.8429 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "osaka-shinsekai",
+    "prefecture": "大阪府",
+    "name_ko": "신세카이",
+    "name_jp": "新世界",
+    "mbti": ["ESFP", "ESTP", "ENTP", "ENFP"],
+    "hero": {
+      "image": "/Place/29.Osaka_1.jpg",
+      "subtitle": "通天閣とレトロ街"
+    },
+    "intro": {
+      "summary": "ネオンと昭和レトロが共存する、大阪らしさ満点の繁華街。",
+      "detail": "路地の食堂で大阪グルメを味わい、夜の活気を満喫できます。"
+    },
+    "gallery": [
+      "/Place/29.Osaka_2.jpg",
+      "/Place/29.Osaka_3.jpg",
+      "/Place/29.Osaka_4.jpg"
+    ],
+    "foods": [
+      { "name": "お好み焼き", "image": "/Place/29.Osaka_5.jpg" },
+      { "name": "たこ焼き", "image": "/Place/29.Osaka_6.jpg" },
+      { "name": "串カツ", "image": "/Place/29.Osaka_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.6516, "lng": 135.5059 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "hyogo-himeji-castle",
+    "prefecture": "兵庫県",
+    "name_ko": "히메지 성",
+    "name_jp": "姫路城",
+    "mbti": ["ISTP", "INTJ", "ESTP", "ENTJ"],
+    "hero": { "image": "/Place/30.Hyogo_1.jpg", "subtitle": "白鷺城" },
+    "intro": {
+      "summary": "姫路市にある日本で最も美しく保存状態の良い城の一つ。「白鷺城」の愛称で親しまれます。",
+      "detail": "城内と周辺は四季を通じて表情が豊かで、特に春の満開の桜が城の美しさを引き立てます。"
+    },
+    "gallery": [
+      "/Place/30.Hyogo_2.jpg",
+      "/Place/30.Hyogo_3.jpg",
+      "/Place/30.Hyogo_4.jpg"
+    ],
+    "foods": [
+      { "name": "神戸牛", "image": "/Place/30.Hyogo_6.jpg" },
+      { "name": "明石焼き", "image": "/Place/30.Hyogo_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.8396, "lng": 134.6938 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "okayama-kurashiki-bikan",
+    "prefecture": "岡山県",
+    "name_ko": "구라시키 미관지구",
+    "name_jp": "倉敷美観地区",
+    "mbti": ["ENFP", "INFJ", "INTP", "ENFJ"],
+    "hero": {
+      "image": "/Place/31.Okayama_1.jpg",
+      "subtitle": "運河と白壁の蔵"
+    },
+    "intro": {
+      "summary": "倉敷美観地区は、伝統的な蔵造りの建物と運河が調和する風情ある街並みです。",
+      "detail": "美術館や工芸体験に加え、夕暮れ時の運河の夜景がひときわ美しいです。"
+    },
+    "gallery": [
+      "/Place/31.Okayama_2.jpg",
+      "/Place/31.Okayama_3.jpg",
+      "/Place/31.Okayama_4.jpg"
+    ],
+    "foods": [
+      {
+        "name": "デニムストリートの青いフード",
+        "image": "/Place/31.Okayama_5.jpg"
+      }
+    ],
+    "map": { "embedUrl": "", "lat": 34.5958, "lng": 133.7717 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "hiroshima-miyajima",
+    "prefecture": "広島県",
+    "name_ko": "미야지마",
+    "name_jp": "宮島",
+    "mbti": ["INFP", "ISFP", "ENFP", "INFJ"],
+    "hero": { "image": "/Place/32.Hiroshima_1.jpg", "subtitle": "厳島" },
+    "intro": {
+      "summary": "宮島は広島県にある美しい島で、正式名称は厳島。神の島と呼ばれる厳かな地で、海に浮かぶような大鳥居と由緒ある厳島神社が有名です。",
+      "detail": "鹿が自由に歩く街並み、ロープウェイで望む絶景、写真映えするスポットが魅力。特に紅葉の季節と夕暮れは最高の景観です。"
+    },
+    "gallery": [
+      "/Place/32.Hiroshima_2.jpg",
+      "/Place/32.Hiroshima_3.jpg",
+      "/Place/32.Hiroshima_4.jpg"
+    ],
+    "foods": [
+      { "name": "もみじ饅頭", "image": "/Place/32.Hiroshima_5.jpg" },
+      { "name": "牡蠣料理", "image": "/Place/32.Hiroshima_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.2962, "lng": 132.3198 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "tottori-sand-dunes",
+    "prefecture": "鳥取県",
+    "name_ko": "돗토리 사구",
+    "name_jp": "鳥取砂丘",
+    "mbti": ["ESFJ", "ESTJ", "ESFP", "ISFP"],
+    "hero": { "image": "/Place/33.Tottori_1.jpg", "subtitle": "海に迫る砂丘" },
+    "intro": {
+      "summary": "日本最大級の砂丘で、天候や風により砂紋が刻々と変わります。",
+      "detail": "サンドボードやパラグライダーなどのアクティビティ、砂の美術館の鑑賞も楽しめます。"
+    },
+    "gallery": [
+      "/Place/33.Tottori_2.jpg",
+      "/Place/33.Tottori_3.jpg",
+      "/Place/33.Tottori_4.jpg"
+    ],
+    "foods": [
+      { "name": "二十世紀梨", "image": "/Place/33.Tottori_5.jpg" },
+      { "name": "カニ", "image": "/Place/33.Tottori_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 35.5439, "lng": 134.2365 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "shimane-izumo-taisha",
+    "prefecture": "島根県",
+    "name_ko": "이즈모 타이샤",
+    "name_jp": "出雲大社",
+    "mbti": ["ESFJ", "ENFJ", "ESTJ", "ENFP"],
+    "hero": { "image": "/Place/34.Shimane_1.jpg", "subtitle": "巨大なしめ縄" },
+    "intro": {
+      "summary": "縁結びの神を祀る、日本でも由緒ある神社です。",
+      "detail": "静かな境内散策と、周辺の伝統的な商店街めぐりが魅力。"
+    },
+    "gallery": [
+      "/Place/34.Shimane_2.jpg",
+      "/Place/34.Shimane_3.jpg",
+      "/Place/34.Shimane_4.jpg"
+    ],
+    "foods": [{ "name": "出雲そば", "image": "/Place/34.Shimane_5.jpg" }],
+    "map": { "embedUrl": "", "lat": 35.402, "lng": 132.6854 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "yamaguchi-shimonoseki",
+    "prefecture": "山口県",
+    "name_ko": "시모노세키",
+    "name_jp": "下関",
+    "mbti": ["ESTJ", "ENTJ", "ISTJ", "INTJ"],
+    "hero": {
+      "image": "/Place/35.Yamaguchi_1.jpg",
+      "subtitle": "関門海峡の港町"
+    },
+    "intro": {
+      "summary": "本州と九州の玄関口となる港町で、海沿いの景観が美しい。",
+      "detail": "ふく（フグ）の刺身や鍋などの郷土料理、唐戸市場の寿司を手頃に楽しめます。"
+    },
+    "gallery": [
+      "/Place/35.Yamaguchi_2.jpg",
+      "/Place/35.Yamaguchi_3.jpg",
+      "/Place/35.Yamaguchi_4.jpg"
+    ],
+    "foods": [
+      { "name": "唐戸市場の寿司", "image": "/Place/35.Yamaguchi_5.jpg" },
+      { "name": "ふぐ", "image": "/Place/35.Yamaguchi_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 33.9567, "lng": 130.9458 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "kagawa-island-trip",
+    "prefecture": "香川県",
+    "name_ko": "섬과 소도시 여행",
+    "name_jp": "直島・豊島・小豆島",
+    "mbti": ["INFP", "ENFP", "ENTP", "ENFJ"],
+    "hero": {
+      "image": "/Place/36.Kagawa_1.jpg",
+      "subtitle": "現代アートとオリーブの島"
+    },
+    "intro": {
+      "summary": "直島の世界的な美術館とアートプロジェクト、豊島の海岸風景、小豆島のオリーブ文化が魅力です。",
+      "detail": "島ならではのゆったりした時間の中で、海・芸術・自然を同時に満喫できます。"
+    },
+    "gallery": [
+      "/Place/36.Kagawa_2.jpg",
+      "/Place/36.Kagawa_3.jpg",
+      "/Place/36.Kagawa_4.jpg"
+    ],
+    "foods": [
+      { "name": "讃岐うどん", "image": "/Place/36.Kagawa_5.jpg" },
+      { "name": "讃岐うどん", "image": "/Place/36.Kagawa_6.jpg" },
+      { "name": "讃岐うどん", "image": "/Place/36.Kagawa_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.3542, "lng": 134.0487 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "tokushima-awa-odori-kaikan",
+    "prefecture": "徳島県",
+    "name_ko": "아와오도리 회관",
+    "name_jp": "阿波おどり会館",
+    "mbti": ["ESFP", "ENFP", "ISFP", "ENTP"],
+    "hero": {
+      "image": "/Place/37.Tokushima_1.jpg",
+      "subtitle": "伝統舞踊の公演・体験"
+    },
+    "intro": {
+      "summary": "一年中、阿波おどりの観覧・体験ができる文化施設です。",
+      "detail": "展示で歴史や衣装を学び、展望台から徳島市街と吉野川を一望できます。"
+    },
+    "gallery": [
+      "/Place/37.Tokushima_2.jpg",
+      "/Place/37.Tokushima_3.jpg",
+      "/Place/37.Tokushima_4.jpg"
+    ],
+    "foods": [
+      { "name": "すだち", "image": "/Place/37.Tokushima_5.jpg" },
+      { "name": "徳島ラーメン", "image": "/Place/37.Tokushima_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 34.0702, "lng": 134.5449 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "ehime-dogo-onsen",
+    "prefecture": "愛媛県",
+    "name_ko": "도고 온천",
+    "name_jp": "道後温泉",
+    "mbti": ["ISFJ", "INFJ", "ESFP", "INFP"],
+    "hero": {
+      "image": "/Place/38.Ehime_1.jpg",
+      "subtitle": "木造本館と温泉街"
+    },
+    "intro": {
+      "summary": "日本最古級の温泉の一つで、伝統的な木造建築の美しさが際立ちます。",
+      "detail": "温泉街の散策やショッピング、冬のぬくもりある温泉情緒が魅力です。"
+    },
+    "gallery": [
+      "/Place/38.Ehime_2.jpg",
+      "/Place/38.Ehime_3.jpg",
+      "/Place/38.Ehime_4.jpg"
+    ],
+    "foods": [
+      { "name": "みかん", "image": "/Place/38.Ehime_5.jpg" },
+      { "name": "鯛めし", "image": "/Place/38.Ehime_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 33.8521, "lng": 132.7864 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "kochi-katsurahama",
+    "prefecture": "高知県",
+    "name_ko": "가쓰라하마",
+    "name_jp": "桂浜",
+    "mbti": ["ISFJ", "ESFP", "ENFJ", "INFP"],
+    "hero": {
+      "image": "/Place/39.Kochi_1.jpg",
+      "subtitle": "太平洋を望む海浜"
+    },
+    "intro": {
+      "summary": "海辺の遊歩道と松林が美しい景勝地で、坂本龍馬像が有名です。",
+      "detail": "展望台や博物館もあり、日帰りコースでも充実して楽しめます。"
+    },
+    "gallery": [
+      "/Place/39.Kochi_2.jpg",
+      "/Place/39.Kochi_3.jpg",
+      "/Place/39.Kochi_4.jpg"
+    ],
+    "foods": [{ "name": "鰹のたたき", "image": "/Place/39.Kochi_6.jpg" }],
+    "map": { "embedUrl": "", "lat": 33.4976, "lng": 133.5748 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "fukuoka-canalcity-nakasu",
+    "prefecture": "福岡県",
+    "name_ko": "후쿠오카 시내",
+    "name_jp": "福岡（キャナルシティ・中洲屋台）",
+    "mbti": ["ENTP", "ESTP", "ESFP", "ENFP"],
+    "hero": {
+      "image": "/Place/40.Fukuoka_1.jpg",
+      "subtitle": "ショッピングと夜景・屋台"
+    },
+    "intro": {
+      "summary": "九州の玄関口となる都市で、複合ショッピングモールや噴水ショー、夜景を楽しめます。",
+      "detail": "夜は中洲の川沿い屋台で、地元グルメを温かな雰囲気とともにどうぞ。"
+    },
+    "gallery": [
+      "/Place/40.Fukuoka_2.jpg",
+      "/Place/40.Fukuoka_3.jpg",
+      "/Place/40.Fukuoka_4.jpg"
+    ],
+    "foods": [
+      { "name": "もつ鍋", "image": "/Place/40.Fukuoka_5.jpg" },
+      { "name": "博多ラーメン", "image": "/Place/40.Fukuoka_6.jpg" },
+      { "name": "明太子", "image": "/Place/40.Fukuoka_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 33.5898, "lng": 130.4109 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "saga-arita",
+    "prefecture": "佐賀県",
+    "name_ko": "아리타",
+    "name_jp": "有田",
+    "mbti": ["ISTJ", "ENTJ", "INFJ", "ENFJ"],
+    "hero": {
+      "image": "/Place/41.Saga_1.jpg",
+      "subtitle": "有田焼の陶磁器の町"
+    },
+    "intro": {
+      "summary": "400年の伝統を誇る陶磁器の産地。ショップ・ギャラリー・博物館が集まっています。",
+      "detail": "春の「有田陶器市」や窯元体験で、器の魅力を深く味わえます。"
+    },
+    "gallery": [
+      "/Place/41.Saga_2.jpg",
+      "/Place/41.Saga_3.jpg",
+      "/Place/41.Saga_4.jpg"
+    ],
+    "foods": [
+      { "name": "餃子", "image": "/Place/41.Saga_5.jpg" },
+      { "name": "羊羹", "image": "/Place/41.Saga_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 33.1893, "lng": 129.8991 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "nagasaki-peace-park",
+    "prefecture": "長崎県",
+    "name_ko": "평화공원",
+    "name_jp": "平和公園",
+    "mbti": ["INFJ", "INTP", "ISFP", "ENFP"],
+    "hero": {
+      "image": "/Place/42.Nagasaki_1.jpg",
+      "subtitle": "平和祈念像と資料館"
+    },
+    "intro": {
+      "summary": "原爆犠牲者を悼み、恒久平和を願う公園です。",
+      "detail": "周辺の大浦天主堂など歴史ある教会群と併せ、宗教史的な意義を振り返れます。"
+    },
+    "gallery": [
+      "/Place/42.Nagasaki_2.jpg",
+      "/Place/42.Nagasaki_3.jpg",
+      "/Place/42.Nagasaki_4.jpg"
+    ],
+    "foods": [
+      { "name": "長崎ちゃんぽん", "image": "/Place/42.Nagasaki_5.jpg" },
+      { "name": "カステラ", "image": "/Place/42.Nagasaki_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 32.7765, "lng": 129.8636 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "oita-beppu-hells",
+    "prefecture": "大分県",
+    "name_ko": "벳부 지옥 순례",
+    "name_jp": "別府地獄めぐり",
+    "mbti": ["ESFP", "ENFP", "ISFP", "INFP"],
+    "hero": {
+      "image": "/Place/43.Oita_1.jpg",
+      "subtitle": "多彩な色の地獄温泉"
+    },
+    "intro": {
+      "summary": "8か所の地獄温泉を巡る、個性派の温泉観光コースです。",
+      "detail": "足湯や地獄蒸し体験で、ユニークな温泉文化を楽しめます。"
+    },
+    "gallery": [
+      "/Place/43.Oita_2.jpg",
+      "/Place/43.Oita_3.jpg",
+      "/Place/43.Oita_4.jpg"
+    ],
+    "foods": [
+      { "name": "とり天", "image": "/Place/43.Oita_5.jpg" },
+      { "name": "地獄蒸し", "image": "/Place/43.Oita_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 33.3159, "lng": 131.4696 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "kumamoto-mt-aso",
+    "prefecture": "熊本県",
+    "name_ko": "아소산",
+    "name_jp": "阿蘇山",
+    "mbti": ["ISTJ", "ESTJ", "ISFJ", "ESFJ"],
+    "hero": {
+      "image": "/Place/44.Kumamoto_1.jpg",
+      "subtitle": "巨大カルデラと草原"
+    },
+    "intro": {
+      "summary": "活火山の地形と大パノラマの草原が織りなす、雄大な自然を体感できます。",
+      "detail": "乗馬・ハイキング・ドライブなど、アウトドアが多彩。"
+    },
+    "gallery": [
+      "/Place/44.Kumamoto_2.jpg",
+      "/Place/44.Kumamoto_3.jpg",
+      "/Place/44.Kumamoto_4.jpg"
+    ],
+    "foods": [{ "name": "馬刺し", "image": "/Place/44.Kumamoto_5.jpg" }],
+    "map": { "embedUrl": "", "lat": 32.9255, "lng": 131.0777 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "miyazaki-aoshima",
+    "prefecture": "宮崎県",
+    "name_ko": "아오시마",
+    "name_jp": "青島",
+    "mbti": ["ISFP", "ENTJ", "ENFP", "INFP"],
+    "hero": {
+      "image": "/Place/45.Miyazaki_1.jpg",
+      "subtitle": "鬼の洗濯板と神社"
+    },
+    "intro": {
+      "summary": "規則的な岩盤が取り囲む亜熱帯の島で、エキゾチックな景観が魅力。",
+      "detail": "島の中央にある青島神社への参拝や、海辺の散策・写真撮影に最適です。"
+    },
+    "gallery": [
+      "/Place/45.Miyazaki_2.jpg",
+      "/Place/45.Miyazaki_3.jpg",
+      "/Place/45.Miyazaki_4.jpg"
+    ],
+    "foods": [
+      { "name": "マンゴー", "image": "/Place/45.Miyazaki_5.jpg" },
+      { "name": "チキン南蛮", "image": "/Place/45.Miyazaki_6.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 31.8048, "lng": 131.4749 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "kagoshima-sakurajima",
+    "prefecture": "鹿児島県",
+    "name_ko": "사쿠라지마",
+    "name_jp": "桜島",
+    "mbti": ["INFJ", "ESTP", "INTP", "ENTJ"],
+    "hero": {
+      "image": "/Place/46.Kagoshima_1.jpg",
+      "subtitle": "生きる活火山"
+    },
+    "intro": {
+      "summary": "現在も断続的な噴火活動を続ける火山島で、迫力ある自然を体感できます。",
+      "detail": "展望所・溶岩遊歩道・温泉を通じて、錦江湾の景観を満喫します。"
+    },
+    "gallery": [
+      "/Place/46.Kagoshima_2.jpg",
+      "/Place/46.Kagoshima_3.jpg",
+      "/Place/46.Kagoshima_4.jpg"
+    ],
+    "foods": [
+      { "name": "さつまいも", "image": "/Place/46.Kagoshima_5.jpg" },
+      { "name": "黒豚", "image": "/Place/46.Kagoshima_6.jpg" },
+      { "name": "白くま", "image": "/Place/46.Kagoshima_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 31.5964, "lng": 130.5628 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  },
+  {
+    "id": "okinawa-shurijo",
+    "prefecture": "沖縄県",
+    "name_ko": "슈리 성",
+    "name_jp": "首里城",
+    "mbti": ["ENFP", "ESFP", "ESFJ", "INFP"],
+    "hero": {
+      "image": "/Place/47.Okinawa_1.jpg",
+      "subtitle": "琉球王国の象徴"
+    },
+    "intro": {
+      "summary": "中国・日本・琉球の様式が調和した独特の城で、世界遺産に登録。",
+      "detail": "一部エリアは復元中ですが、歴史と文化を体感できる名所です。"
+    },
+    "gallery": [
+      "/Place/47.Okinawa_2.jpg",
+      "/Place/47.Okinawa_3.jpg",
+      "/Place/47.Okinawa_4.jpg"
+    ],
+    "foods": [
+      { "name": "沖縄そば", "image": "/Place/47.Okinawa_5.jpg" },
+      { "name": "タコライス", "image": "/Place/47.Okinawa_6.jpg" },
+      { "name": "紅いもデザート", "image": "/Place/47.Okinawa_7.jpg" }
+    ],
+    "map": { "embedUrl": "", "lat": 26.2172, "lng": 127.7194 },
+    "nearbyRestaurants": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ],
+    "nearbyHotels": [
+      { "name": "", "image": "" },
+      { "name": "", "image": "" }
+    ]
+  }
+]
