@@ -14,6 +14,7 @@ import SignIn from "./pages/RegPage";
 import Contact from "./pages/CenterPage";
 import Footer from "./components/Footer";
 import "./styles/App.css";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 function App() {
   return (
@@ -25,7 +26,6 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/notice/*" element={<NoticePage />} />
           <Route path="/recommend/*" element={<RecommendPage />} />
-          {/* CommunityPage 내부에서 write, board 등 라우팅 처리 */}
           <Route path="/community/*" element={<CommunityPage />} />
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route path="/community/post/:id" element={<CommunityPost />} />
@@ -37,6 +37,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
+      <LanguageSwitcher/>
     </div>
   );
 }

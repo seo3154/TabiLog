@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+.switch_btn{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    text-align: center;
+}
+
+.switch_btn button{
+    display: flex;
+    align-items: center;
+    appearance: none;
+    width: 90px;
+    height: 36px;
+    border: 2px solid #000;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-bottom: 8px;
+    background-color: #fff;
+}
+
+.switch_btn button img{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    margin-right: 4px;
+}
