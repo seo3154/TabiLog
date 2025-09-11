@@ -69,11 +69,11 @@ export default function CommunityWrite() {
 
   return (
     <div className="wrap">
-      <div className="mbti">
-        <input type="text" value={selectedMbti} disabled aria-label="MBTI" />
-      </div>
-
       <div className="write_section">
+        <div className="mbti">
+          <span>{selectedMbti}</span>
+        </div>
+
         <div className="selection">
           <div className="title">
             <input
