@@ -4,6 +4,7 @@ import axios from "axios";
 const client = axios.create({
   baseURL: "/api",
   timeout: 10000,
+  withCredentials: true,
   // 쿠키/세션 안 쓰면 OFF. 켜면 서버 CORS도 allowCredentials=true + Origin 고정 필요
   // withCredentials: true,
 });

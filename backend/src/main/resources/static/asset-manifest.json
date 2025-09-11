@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.078a1680.css",
+    "main.js": "/static/js/main.6de9d406.js",
+    "static/media/Group 16.jpg": "/static/media/Group 16.32cfd4ca421fde260f76.jpg",
+    "static/media/Group 8.jpg": "/static/media/Group 8.b8549ba63400d1ca4523.jpg",
+    "static/media/Group 15.jpg": "/static/media/Group 15.9eb1ac0873b1034599d3.jpg",
+    "static/media/Group 10.jpg": "/static/media/Group 10.4840bbb6b1435cec6bd2.jpg",
+    "static/media/Group 9.jpg": "/static/media/Group 9.51a930ed036354101e66.jpg",
+    "static/media/Group 13.jpg": "/static/media/Group 13.d716944ac6ca5538934d.jpg",
+    "static/media/Group 5.jpg": "/static/media/Group 5.a37749cb5f88d45c9379.jpg",
+    "static/media/Group 2.jpg": "/static/media/Group 2.ac4d56b8a25c4338d81d.jpg",
+    "static/media/Group 1.jpg": "/static/media/Group 1.7c2d42294be9f53a540b.jpg",
+    "static/media/Group 7.jpg": "/static/media/Group 7.f19d66a3b7dc7830f031.jpg",
+    "static/media/Group 14.jpg": "/static/media/Group 14.b5930d589348cc732f59.jpg",
+    "static/media/Group 12.jpg": "/static/media/Group 12.949e978f3c9603b1e240.jpg",
+    "static/media/Group 4.jpg": "/static/media/Group 4.978d53f1c13f6fc44801.jpg",
+    "static/media/Group 3.jpg": "/static/media/Group 3.88ccc7b0972baca7ab5b.jpg",
+    "static/media/Group 6.jpg": "/static/media/Group 6.32f28826df2abce5dfe6.jpg",
+    "static/media/Group 11.jpg": "/static/media/Group 11.cf7860d99a615540f457.jpg",
+    "static/media/left1.png": "/static/media/left1.d0ddbb8a3a0105111212.png",
+    "static/media/left2.png": "/static/media/left2.3e30e5425cd9902f4279.png",
+    "static/media/right2.png": "/static/media/right2.ffaaab26ee5c293453e6.png",
+    "static/media/right1.png": "/static/media/right1.b3612afa485a2edc1da0.png",
+    "static/media/korea_flag.png": "/static/media/korea_flag.5b9f88c2e825782df574.png",
+    "static/media/japan_flag.png": "/static/media/japan_flag.c2921fd718a9cdac2058.png",
+    "static/media/MBTINANI.png": "/static/media/MBTINANI.6b2ddfbf272d290786c7.png",
+    "index.html": "/index.html",
+    "main.078a1680.css.map": "/static/css/main.078a1680.css.map",
+    "main.6de9d406.js.map": "/static/js/main.6de9d406.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.078a1680.css",
+    "static/js/main.6de9d406.js"
+  ]
+}
